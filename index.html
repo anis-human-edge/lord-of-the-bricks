@@ -1211,6 +1211,100 @@ section { padding-block: var(--section-y); position: relative; }
   background: var(--white);
 }
 
+/* Founding sponsors empty-state panel */
+.founding {
+  margin-top: clamp(3rem, 5vw, 4rem);
+  border: 1px solid var(--ink);
+  background: var(--bone);
+  padding: clamp(1.75rem, 3.5vw, 2.5rem);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.founding::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 6px;
+  background: var(--red);
+}
+@media (max-width: 720px) {
+  .founding { grid-template-columns: 1fr; }
+}
+.founding .eyebrow {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+.founding .eyebrow::before {
+  content: "";
+  width: 8px; height: 8px;
+  background: var(--red);
+  border-radius: 999px;
+  box-shadow: 0 0 0 4px rgba(200,16,46,0.18);
+  animation: founding-pulse 1.8s ease-in-out infinite;
+}
+@keyframes founding-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(200,16,46,0.18); }
+  50%      { box-shadow: 0 0 0 8px rgba(200,16,46,0.0); }
+}
+.founding h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.6rem;
+}
+.founding p {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin: 0;
+  max-width: 56ch;
+}
+.founding .slots-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  min-width: 280px;
+}
+@media (max-width: 720px) {
+  .founding .slots-grid { grid-template-columns: repeat(5, 1fr); width: 100%; }
+}
+.founding .slot {
+  border: 1px dashed var(--rule-strong);
+  background: var(--white);
+  padding: 0.7rem 0.5rem 0.55rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  display: grid;
+  gap: 0.25rem;
+  align-content: center;
+}
+.founding .slot strong {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--ink);
+  font-weight: 700;
+}
+.founding .slot.is-title { border-color: var(--red); color: var(--red); }
+.founding .slot.is-title strong { color: var(--red); }
+
 /* Sponsor form */
 .sponsor-form {
   margin-top: clamp(3rem, 5vw, 4rem);
@@ -1449,7 +1543,7 @@ footer.site-footer .base {
         <div class="kit-slider" id="kitSlider">
           <img class="kit-img" src="https://jqpwucwzacqrpeazqbmd.supabase.co/storage/v1/object/public/public-assets/LOFB/Images/LOFB-Team.jpg" alt="Lord of the Bricks — UK National Knockout Champions 2026 in team kit" />
           <div class="kit-clip">
-            <img class="kit-img" src="https://jqpwucwzacqrpeazqbmd.supabase.co/storage/v1/object/public/public-assets/LOFB/Images/LOFB-Team%20in%20RAF.png" alt="Lord of the Bricks in Royal Air Force Team GB sponsored kit" />
+            <img class="kit-img" src="https://jqpwucwzacqrpeazqbmd.supabase.co/storage/v1/object/public/public-assets/LOFB/Images/LOFB-Team%20in%20RAF.png" alt="Mockup: Lord of the Bricks in sponsor-branded Team GB kit (illustrative — no sponsor confirmed yet)" />
           </div>
           <span class="kit-label kit-label--left">Today</span>
           <span class="kit-label kit-label--right">With Sponsor</span>
@@ -2270,8 +2364,11 @@ footer.site-footer .base {
           and a relationship with a team that will keep building long after Mexico.
         </p>
         <p class="body">
-          Past partners include the Royal Air Force, Content Guru, Numbots, and Bosch.
-          We are now opening five new partnership tiers.
+          We were confirmed for the World Finals this morning. This page is hour one of our
+          sponsor outreach &mdash; we have not signed a sponsor yet.
+          Previous UK teams at FLL Worlds have been backed by the Royal Air Force,
+          Content Guru, Numbots, and Bosch. That is the calibre of partner we are
+          now opening conversations with.
         </p>
       </div>
     </div>
@@ -2346,13 +2443,22 @@ footer.site-footer .base {
       </article>
     </div>
 
-    <div class="partners reveal">
-      <div class="lbl">Already with us</div>
-      <div class="partner-row">
-        <span class="partner-logo">Royal Air Force</span>
-        <span class="partner-logo">Content Guru</span>
-        <span class="partner-logo">Numbots</span>
-        <span class="partner-logo">Bosch</span>
+    <div class="founding reveal">
+      <div>
+        <div class="eyebrow">Hour one &middot; All slots open</div>
+        <h3>Founding sponsors &mdash; your name here.</h3>
+        <p>
+          We were confirmed for the World Finals this morning. We have not signed a sponsor yet
+          &mdash; every tier is open and every slot is unclaimed. Be the first to back the UK at
+          FLL Worlds 2026, and we will tell that story for you.
+        </p>
+      </div>
+      <div class="slots-grid" aria-label="Sponsorship tiers, all open">
+        <div class="slot is-title"><strong>Title</strong>1 slot</div>
+        <div class="slot"><strong>Platinum</strong>2 slots</div>
+        <div class="slot"><strong>Gold</strong>4 slots</div>
+        <div class="slot"><strong>Silver</strong>8 slots</div>
+        <div class="slot"><strong>Friends</strong>Open</div>
       </div>
     </div>
 
