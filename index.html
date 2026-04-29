@@ -299,6 +299,66 @@ section { padding-block: var(--section-y); position: relative; }
 .hero-photo {
   margin-top: clamp(2.5rem, 5vw, 4rem);
 }
+.hero-photo .frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21/10;
+  overflow: hidden;
+  background: var(--navy-deep);
+  border: 1px solid var(--rule-strong);
+  isolation: isolate;
+}
+.hero-photo .frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 32%;
+  display: block;
+  transform-origin: 52% 38%;
+  animation: hero-photo-drift 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.hero-photo .frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(6,20,52,0) 60%, rgba(6,20,52,0.45) 100%),
+    radial-gradient(120% 80% at 50% 50%, transparent 65%, rgba(0,0,0,0.28) 100%);
+  z-index: 1;
+}
+.hero-photo .stamp {
+  position: absolute;
+  left: 18px; bottom: 18px;
+  z-index: 3;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--white);
+  padding: 0.5rem 0.8rem;
+  background: rgba(10,31,68,0.78);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.hero-photo .stamp--right {
+  left: auto; right: 18px;
+  background: rgba(200,16,46,0.9);
+  border-color: rgba(255,255,255,0.25);
+}
+@keyframes hero-photo-drift {
+  0%   { transform: scale(1.04) translate(0, 0); }
+  50%  { transform: scale(1.08) translate(-1.2%, -0.8%); }
+  100% { transform: scale(1.05) translate(1%, 0.4%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo .frame img { animation: none; transform: scale(1.02); }
+}
 
 /* =========================================================
    KIT SLIDER — Today vs With Sponsor (before/after)
@@ -1408,14 +1468,10 @@ footer.site-footer .base {
 
     <!-- Hero wide photo -->
     <div class="hero-photo reveal">
-      <div class="ph" data-ratio="hero">
-        <span class="ph-tag">Hero · Wide</span>
-        <div class="ph-body">
-          <div class="label">15-second Loop OR Wide Team Shot</div>
-          <div class="desc">Robot mission run &rarr; cut to KAS AI on screen &rarr; cut to nine kids cheering at Nationals. Or static wide-angle group shot in matching kit.</div>
-          <div class="filename">images/hero-wide.jpg &middot; videos/hero-loop.mp4</div>
-        </div>
-        <span class="ph-meta">REPLACE</span>
+      <div class="frame">
+        <img src="https://jqpwucwzacqrpeazqbmd.supabase.co/storage/v1/object/public/public-assets/LOFB/Images/Team%20Photo%20Back.png" alt="Lord of the Bricks team — wide group shot" />
+        <span class="stamp">Lord of the Bricks &middot; Kent, UK</span>
+        <span class="stamp stamp--right">Worlds 2026 &middot; Guadalajara</span>
       </div>
     </div>
 
