@@ -295,29 +295,134 @@ section { padding-block: var(--section-y); position: relative; }
   margin-top: 2.25rem;
   display: flex; flex-wrap: wrap; gap: 0.75rem;
 }
-.hero-tagline {
+/* Hero chapter mark — matches the chapter-index pattern on the rest of the page */
+.hero-mark {
+  display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
+  font-weight: 700;
   letter-spacing: 0.22em;
-  color: var(--ink-muted);
   text-transform: uppercase;
-  font-weight: 600;
-  margin: 0 0 1.2rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
+  color: var(--red);
+  margin-bottom: 1.2rem;
+  position: relative;
+  padding-left: 36px;
 }
-.hero-tagline::before {
+.hero-mark::before {
   content: "";
-  width: 28px; height: 1px; background: var(--red);
+  position: absolute;
+  left: 0; top: 50%;
+  width: 28px; height: 1px;
+  background: var(--red);
+  transform: translateY(-50%);
 }
+
+/* Tagline demoted to billing line under the headline — movie-poster placement */
+.hero-billing {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+  letter-spacing: 0.005em;
+  color: var(--ink-muted);
+  margin: 1.2rem 0 0;
+  max-width: 38ch;
+}
+
+/* Promise line — italic display, anchored below the lede */
 .hero-promise {
-  margin-top: 1.5rem;
+  margin-top: 1.8rem;
   font-weight: 600;
   font-style: italic;
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-size: clamp(1.2rem, 1.85vw, 1.55rem);
+  line-height: 1.2;
+  max-width: 36ch;
+}
+
+/* Em-line — hand-set red rule that draws in under emphasised phrases.
+   Already used on the partners deck cover; reusing here for cohesion. */
+.em-line {
+  position: relative;
+  display: inline-block;
+  color: var(--red);
+}
+.em-line::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -0.16em;
+  height: 3px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s var(--ease) 1.1s;
+}
+.reveal.is-in .em-line::after,
+.is-in .em-line::after { transform: scaleX(1); }
+
+/* Promise underline gets its own draw-in 1.6s after page load — a beat later than the headline */
+.hero-promise .em-line::after {
+  height: 2px;
+  bottom: -0.18em;
+  transition-delay: 1.6s;
+  background: color-mix(in oklab, var(--red) 70%, var(--ink) 30%);
+}
+.hero-promise .em-line { color: var(--ink); }
+
+/* Hero CTA refinement — primary filled, secondary ghost-red with inline T-20 chip */
+.btn-lg {
+  padding-block: 1.05rem;
+  padding-inline: 1.6rem;
+  font-size: 1rem;
+}
+.btn-ghost-red {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.2rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.005em;
+  color: var(--red);
+  background: transparent;
+  border: 1px solid color-mix(in oklab, var(--red) 35%, transparent);
+  text-decoration: none;
+  transition: color .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
+}
+.btn-ghost-red:hover {
+  color: var(--white);
+  background: var(--red);
+  border-color: var(--red);
+}
+.btn-ghost-red:hover .tminus-inline {
+  background: rgba(255,255,255,0.18);
+  color: var(--white);
+}
+.btn-ghost-red .arrow { transition: transform .25s var(--ease); }
+.btn-ghost-red:hover .arrow { transform: translateX(3px); }
+
+.tminus-inline {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  padding: 0.18rem 0.42rem;
+  background: rgba(200,16,46,0.12);
+  color: var(--red);
+  border-radius: 2px;
+  margin-left: 0.4rem;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+
+.hero-fineprint {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  color: var(--ink-muted);
+  max-width: 40ch;
 }
 
 /* Sign-off — letter close */
@@ -1661,7 +1766,7 @@ footer.site-footer .base {
       <a href="#sponsor">Sponsor</a>
     </div>
     <a href="#sponsor" class="btn btn-red nav-cta">
-      Sponsor the team <span class="arrow">&rarr;</span>
+      Back us <span class="arrow">&rarr;</span>
     </a>
   </div>
 </nav>
@@ -1674,30 +1779,32 @@ footer.site-footer .base {
 
     <div class="hero-grid">
       <div>
+        <span class="hero-mark reveal">Chapter 00 &middot; Hello</span>
         <div class="hero-meta reveal">
           <span class="flag">UK &middot; Croydon &amp; Wallington</span>
           <span>FLL Worlds &middot; Guadalajara &middot; 27&ndash;30 May 2026</span>
         </div>
-        <p class="hero-tagline reveal">Nine kids &middot; One robot &middot; One AI live in production</p>
         <h1 class="h-display reveal">
           Hi.<br>
-          We&rsquo;re <span class="accent">nine kids</span><br>
+          We&rsquo;re <span class="em-line">nine kids</span><br>
           from Croydon and Wallington.
         </h1>
+        <p class="hero-billing reveal">Nine kids. One robot. One AI live in production.</p>
         <p class="lede hero-sub reveal">
           We come from different schools. We meet every Sunday.
           Three years ago we didn&rsquo;t know anything about robotics or coding.
           Now we&rsquo;re flying to Mexico to represent the UK at the FIRST LEGO League World Finals.
         </p>
-        <p class="body-lg reveal hero-promise">
-          This is the story of how that happened.
-        </p>
+        <p class="body-lg reveal hero-promise"><span class="em-line">This is the story of how that happened.</span></p>
         <div class="hero-cta reveal">
-          <a href="#origin" class="btn btn-primary">Start at the beginning <span class="arrow">&rarr;</span></a>
-          <a href="https://links.vibe-site.com/widget/booking/ccqEDkAYzZT5WnDZMoAg" target="_blank" rel="noopener" class="btn btn-red">Or: back us today <span class="arrow">&rarr;</span></a>
+          <a href="#origin" class="btn btn-primary btn-lg">Start at the beginning <span class="arrow">&rarr;</span></a>
+          <a href="https://links.vibe-site.com/widget/booking/ccqEDkAYzZT5WnDZMoAg" target="_blank" rel="noopener" class="btn btn-ghost-red">
+            Back us today <span class="arrow">&rarr;</span>
+            <span class="tminus tminus-inline" aria-label="20 days remaining">T&#8722;20</span>
+          </a>
         </div>
-        <p class="reveal" style="margin-top: 1.2rem; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.14em; color: var(--ink-muted);">
-          <span class="tminus">T&#8722;20 DAYS</span> &middot; Funding window closes once we book flights &amp; kit
+        <p class="reveal hero-fineprint">
+          Funding window closes once we book flights &amp; kit.
         </p>
       </div>
       <div class="hero-side reveal">
@@ -1743,8 +1850,8 @@ footer.site-footer .base {
           <div class="label">Hours of work this season</div>
         </div>
         <div class="stat">
-          <div class="num"><span data-count="200">0</span><span class="suffix">+</span></div>
-          <div class="label">Robot test runs</div>
+          <div class="num"><span data-count="0">0</span></div>
+          <div class="label">Sundays missed in 3 seasons</div>
         </div>
         <div class="stat">
           <div class="num"><span data-count="10000">0</span></div>
