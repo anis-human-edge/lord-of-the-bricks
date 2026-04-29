@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="theme-color" content="#0A1F44" />
 <title>Lord of the Bricks — Representing the UK at the FIRST LEGO League World Finals, Mexico 2026</title>
-<meta name="description" content="Nine kids. One robot. One AI live in production. Lord of the Bricks — UK National Knockout Champions 2026 — heading to Guadalajara for the FIRST LEGO League International Open Championship." />
+<meta name="description" content="We're nine kids from Croydon and Wallington. Three years ago we didn't know anything about robotics or coding. Now we're flying to Mexico to represent the UK at the FIRST LEGO League World Finals. This is the story of how that happened." />
 
 <!-- Favicons -->
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -295,6 +295,86 @@ section { padding-block: var(--section-y); position: relative; }
   margin-top: 2.25rem;
   display: flex; flex-wrap: wrap; gap: 0.75rem;
 }
+.hero-tagline {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.22em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0 0 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.hero-tagline::before {
+  content: "";
+  width: 28px; height: 1px; background: var(--red);
+}
+.hero-promise {
+  margin-top: 1.5rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+}
+
+/* Sign-off — letter close */
+.signoff {
+  padding-block: clamp(4rem, 8vw, 7rem);
+  border-top: 1px solid var(--rule);
+}
+.signoff-inner {
+  max-width: 56ch;
+  margin: 0 auto;
+  text-align: center;
+}
+.signoff-body {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  margin: 0 0 1.5rem;
+}
+.signoff-team {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: var(--red);
+  letter-spacing: -0.005em;
+  line-height: 1.5;
+  margin: 0 0 0.5rem;
+}
+.signoff-coaches {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+/* Chapter 1 — Origin */
+.origin {
+  position: relative;
+  padding-block: clamp(4rem, 8vw, 7rem) clamp(4rem, 8vw, 7rem);
+}
+.origin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+@media (max-width: 880px) {
+  .origin-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+.origin h2.h-section .accent { color: var(--red); font-style: italic; }
+.origin .rule-thick { margin-top: 1.4rem; }
+.origin-body p { max-width: 52ch; }
+.origin-body p + p { margin-top: 1rem; }
 .hero-side {
   position: relative;
   align-self: stretch;
@@ -1595,23 +1675,26 @@ footer.site-footer .base {
     <div class="hero-grid">
       <div>
         <div class="hero-meta reveal">
-          <span class="flag">UK · Kent</span>
-          <span>FLL Worlds · Guadalajara · 27&ndash;30 May 2026</span>
+          <span class="flag">UK &middot; Croydon &amp; Wallington</span>
+          <span>FLL Worlds &middot; Guadalajara &middot; 27&ndash;30 May 2026</span>
         </div>
+        <p class="hero-tagline reveal">Nine kids &middot; One robot &middot; One AI live in production</p>
         <h1 class="h-display reveal">
-          Nine kids. One robot. <span class="accent">One AI</span> live in production.
+          Hi.<br>
+          We&rsquo;re <span class="accent">nine kids</span><br>
+          from Croydon and Wallington.
         </h1>
         <p class="lede hero-sub reveal">
-          Now representing the UK at the FIRST LEGO League World Finals in Mexico.
+          We come from different schools. We meet every Sunday.
+          Three years ago we didn&rsquo;t know anything about robotics or coding.
+          Now we&rsquo;re flying to Mexico to represent the UK at the FIRST LEGO League World Finals.
         </p>
-        <p class="body-lg reveal" style="margin-top:1.5rem;">
-          Lord of the Bricks. Three-year-old self-made team from Kent.
-          UK National Knockout Champions 2026. Heading to Guadalajara, May 27&ndash;30.
+        <p class="body-lg reveal hero-promise">
+          This is the story of how that happened.
         </p>
         <div class="hero-cta reveal">
-          <a href="https://links.vibe-site.com/widget/booking/ccqEDkAYzZT5WnDZMoAg" target="_blank" rel="noopener" class="btn btn-red">Book a 20-min call <span class="arrow">&rarr;</span></a>
-          <a href="#sponsor" class="btn btn-primary">Sponsorship tiers <span class="arrow">&rarr;</span></a>
-          <a href="#robot" class="btn btn-ghost">See the work</a>
+          <a href="#origin" class="btn btn-primary">Start at the beginning <span class="arrow">&rarr;</span></a>
+          <a href="https://links.vibe-site.com/widget/booking/ccqEDkAYzZT5WnDZMoAg" target="_blank" rel="noopener" class="btn btn-red">Or: back us today <span class="arrow">&rarr;</span></a>
         </div>
         <p class="reveal" style="margin-top: 1.2rem; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.14em; color: var(--ink-muted);">
           <span class="tminus">T&#8722;20 DAYS</span> &middot; Funding window closes once we book flights &amp; kit
@@ -1644,7 +1727,7 @@ footer.site-footer .base {
     <div class="hero-photo reveal">
       <div class="frame">
         <img src="https://jqpwucwzacqrpeazqbmd.supabase.co/storage/v1/object/public/public-assets/LOFB/Images/Team%20Photo%20Back.png" alt="Lord of the Bricks team — wide group shot" />
-        <span class="stamp">Lord of the Bricks &middot; Kent, UK</span>
+        <span class="stamp">Croydon &amp; Wallington &middot; UK</span>
         <span class="stamp stamp--right">Worlds 2026 &middot; Guadalajara</span>
       </div>
     </div>
@@ -1669,12 +1752,51 @@ footer.site-footer .base {
         </div>
         <div class="stat">
           <div class="num"><span data-count="1">0</span></div>
-          <div class="label">AI live on a real client's website</div>
+          <div class="label">AI live on a real partner's website</div>
         </div>
         <div class="stat">
           <div class="num"><span data-count="3">0</span></div>
           <div class="label">Years from FLL Explore to Worlds</div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     CHAPTER 01 — WHERE IT STARTED
+     ========================================================= -->
+<section id="origin" class="origin section-bone">
+  <span class="section-index">Chapter 01 / Where it started</span>
+  <div class="shell">
+    <div class="origin-grid">
+      <div>
+        <span class="eyebrow reveal">Three years ago</span>
+        <h2 class="h-section reveal">
+          We didn&rsquo;t know <span class="accent">anything</span> about robotics or coding.
+        </h2>
+        <div class="rule-thick is-accent reveal"></div>
+      </div>
+      <div class="origin-body reveal">
+        <p class="body-lg">
+          The only LEGO we knew was the kind you stepped on at 6am.
+        </p>
+        <p class="body-lg">
+          Two of our parents &mdash; <strong>Loge</strong>, a doctor, and <strong>Karthic</strong>,
+          an IT specialist &mdash; showed us a thing called FIRST LEGO League Explore.
+          It&rsquo;s a game where you build robots out of LEGO and they have to do tasks on a board.
+        </p>
+        <p class="body-lg">
+          We thought it sounded easier than maths homework.
+        </p>
+        <p class="body-lg" style="font-weight:600; color: var(--ink);">
+          We were wrong about that. But we kept going.
+        </p>
+        <p class="body" style="margin-top:1.6rem; color: var(--ink-muted);">
+          Three years and a lot of failed robots later, we are the team now.
+          Esha, Anaisa, Guhan, Arvin, Sakthi, Flossie, Toby, Elliot, Aliaa.
+          Still coached by Loge and Karthic. Still meeting every Sunday.
+        </p>
       </div>
     </div>
   </div>
@@ -1802,7 +1924,7 @@ footer.site-footer .base {
       </svg>
       <div class="legend">
         <span><i style="background:#0a1f44"></i>Competing countries</span>
-        <span><i style="background:#c8102e"></i>Lord of the Bricks &middot; Kent &rarr; Guadalajara</span>
+        <span><i style="background:#c8102e"></i>Lord of the Bricks &middot; UK &rarr; Guadalajara</span>
       </div>
     </div>
   </div>
@@ -1932,14 +2054,14 @@ footer.site-footer .base {
       </article>
       <article class="member">
         <div class="ph" data-ratio="4x5">
-          <span class="ph-tag">09 / Aliya</span>
+          <span class="ph-tag">09 / Aliaa</span>
           <div class="ph-body">
-            <div class="label">Aliya</div>
+            <div class="label">Aliaa</div>
             <div class="desc">Portrait, eye-line camera, neutral background.</div>
             <div class="filename">images/team/09-aliya.jpg</div>
           </div>
         </div>
-        <div class="meta"><div class="name">Aliya</div><div class="role">Outreach &amp; Presentation Lead</div></div>
+        <div class="meta"><div class="name">Aliaa</div><div class="role">Outreach &amp; Presentation Lead</div></div>
       </article>
     </div>
 
@@ -2111,7 +2233,7 @@ footer.site-footer .base {
       </article>
       <article class="persona">
         <div class="num">03</div>
-        <h3>Aliya<span class="role">The Student</span></h3>
+        <h3>Aliaa<span class="role">The Student</span></h3>
         <p>Makes Kent's history simple, fun, engaging. Includes a Surprise Button.</p>
       </article>
     </div>
@@ -2589,6 +2711,23 @@ footer.site-footer .base {
 </section>
 
 <!-- =========================================================
+     SIGN-OFF — letter-close from the team
+     ========================================================= -->
+<section class="signoff section-bone">
+  <div class="shell">
+    <div class="signoff-inner reveal">
+      <p class="signoff-body">
+        We&rsquo;ll write back from Mexico either way.
+      </p>
+      <p class="signoff-team">
+        &mdash; Esha, Anaisa, Guhan, Arvin, Sakthi, Flossie, Toby, Elliot, Aliaa
+      </p>
+      <p class="signoff-coaches">Coached by Loge &amp; Karthic</p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
      FOOTER
      ========================================================= -->
 <footer class="site-footer">
@@ -2600,8 +2739,8 @@ footer.site-footer .base {
         <span class="pip" aria-hidden="true"></span>
       </div>
       <p>
-        Three-year-old self-made FLL team from Kent.
-        UK National Knockout Champions 2026.
+        Nine kids from Croydon &amp; Wallington, UK. Three FLL seasons in.
+        Kent Regional Champions 2026. UK National Knockout Champions 2026.
         Representing the UK at the FIRST LEGO League International Open Championship Mexico 2026.
       </p>
     </div>
