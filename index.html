@@ -1484,6 +1484,38 @@ footer.site-footer .base {
   opacity: 1; transform: translateY(0) scale(1); pointer-events: auto;
 }
 .float-cta:hover { background: var(--red-deep); transform: translateY(-2px); }
+
+/* T-minus urgency badge */
+.tminus {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--red);
+  color: var(--white);
+  padding: 0.22rem 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  margin-right: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+.tminus::before {
+  content: "";
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 0 0 0 rgba(255,255,255,0.6);
+  animation: tminus-pulse 1.6s ease-in-out infinite;
+}
+@keyframes tminus-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.6); }
+  60%      { box-shadow: 0 0 0 7px rgba(255,255,255,0); }
+}
+.section-navy .tminus { background: var(--white); color: var(--red); }
+.section-navy .tminus::before { background: var(--red); box-shadow: 0 0 0 0 rgba(200,16,46,0.6); animation: tminus-pulse-red 1.6s ease-in-out infinite; }
+@keyframes tminus-pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200,16,46,0.6); }
+  60%      { box-shadow: 0 0 0 7px rgba(200,16,46,0); }
+}
 @media (max-width: 540px) {
   .float-cta {
     padding: 0.7rem 0.95rem;
@@ -1577,10 +1609,13 @@ footer.site-footer .base {
           UK National Knockout Champions 2026. Heading to Guadalajara, May 27&ndash;30.
         </p>
         <div class="hero-cta reveal">
-          <a href="#robot" class="btn btn-primary">See the work <span class="arrow">&rarr;</span></a>
-          <a href="#sponsor" class="btn btn-red">Sponsor the team <span class="arrow">&rarr;</span></a>
-          <a href="#journey" class="btn btn-ghost">Watch the journey</a>
+          <a href="https://links.vibe-site.com/widget/booking/ccqEDkAYzZT5WnDZMoAg" target="_blank" rel="noopener" class="btn btn-red">Book a 20-min call <span class="arrow">&rarr;</span></a>
+          <a href="#sponsor" class="btn btn-primary">Sponsorship tiers <span class="arrow">&rarr;</span></a>
+          <a href="#robot" class="btn btn-ghost">See the work</a>
         </div>
+        <p class="reveal" style="margin-top: 1.2rem; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.14em; color: var(--ink-muted);">
+          <span class="tminus">T&#8722;20 DAYS</span> &middot; Funding window closes once we book flights &amp; kit
+        </p>
       </div>
       <div class="hero-side reveal">
         <span class="badge">Worlds 2026</span>
@@ -2382,9 +2417,12 @@ footer.site-footer .base {
     </p>
 
     <div class="hero-cta reveal" style="margin-top: 2.25rem;">
-      <a href="#sponsor" class="btn btn-red">See sponsorship options <span class="arrow">&rarr;</span></a>
-      <a href="#" class="btn btn-ghost is-light">Download sponsor pack (PDF)</a>
+      <a href="https://links.vibe-site.com/widget/booking/ccqEDkAYzZT5WnDZMoAg" target="_blank" rel="noopener" class="btn btn-red">Book a 20-minute call <span class="arrow">&rarr;</span></a>
+      <a href="#sponsor" class="btn btn-ghost is-light">See sponsorship tiers</a>
     </div>
+    <p class="reveal" style="margin-top: 1.4rem; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.14em; color: rgba(255,255,255,0.78);">
+      <span class="tminus">T&#8722;20 DAYS</span> &middot; Funding window closes once we book flights &amp; kit
+    </p>
   </div>
 </section>
 

@@ -1357,6 +1357,28 @@ h1.deck-h.huge {
   letter-spacing: 0.16em;
   color: var(--ink-muted);
 }
+.tminus {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--red);
+  color: var(--white);
+  padding: 0.22rem 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  margin-right: 0.3rem;
+}
+.tminus::before {
+  content: "";
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 0 0 0 rgba(255,255,255,0.6);
+  animation: tminus-pulse 1.6s ease-in-out infinite;
+}
+@keyframes tminus-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.6); }
+  60%      { box-shadow: 0 0 0 7px rgba(255,255,255,0); }
+}
 .slide--ask footer {
   margin-top: clamp(3rem, 6vh, 5rem);
   padding-top: 1.4rem;
@@ -2177,10 +2199,10 @@ h1.deck-h.huge {
     </p>
 
     <div class="cta-row r-up">
-      <a href="mailto:team@lordofthebricks.co.uk?subject=Title%20Partner%20enquiry%20%E2%80%93%20Lord%20of%20the%20Bricks%20FLL%20Worlds%202026" class="btn btn--red">Book a 20-minute call <span class="arr">→</span></a>
+      <a href="https://links.vibe-site.com/widget/booking/ccqEDkAYzZT5WnDZMoAg" target="_blank" rel="noopener" class="btn btn--red">Book a 20-minute call <span class="arr">→</span></a>
       <a href="mailto:team@lordofthebricks.co.uk?subject=Sponsorship%20enquiry%20%E2%80%93%20Lord%20of%20the%20Bricks" class="btn">Email us <span class="arr">→</span></a>
     </div>
-    <p class="small-row r-fade">Title Partner and Platinum slot enquiries answered within 24 hours.</p>
+    <p class="small-row r-fade"><span class="tminus">T&#8722;20 DAYS</span> &middot; Funding window closes once we book flights and kit. Title Partner enquiries answered within 24 hours.</p>
 
     <footer class="r-fade">
       Lord of the Bricks · UK National Knockout Champions 2026<br>
