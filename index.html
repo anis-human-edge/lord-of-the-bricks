@@ -234,6 +234,21 @@ section { padding-block: var(--section-y); position: relative; }
 @media (max-width: 880px) {
   .nav-links { display: none; }
 }
+@media (max-width: 540px) {
+  .nav-row { gap: 0.6rem; padding-block: 0.7rem; grid-template-columns: auto 1fr auto; }
+  .brand .brand-text { display: none; }
+  .brand .pip { width: 7px; height: 7px; }
+  .nav-cta.btn {
+    padding: 0.7rem 0.85rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+  .nav-cta.btn .arrow { margin-left: 0.1rem; }
+}
+@media (max-width: 380px) {
+  /* Last-resort: shorten the CTA copy via pseudo content */
+  .nav-cta.btn { font-size: 0.74rem; padding: 0.65rem 0.7rem; }
+}
 
 /* =========================================================
    HERO
@@ -351,6 +366,15 @@ section { padding-block: var(--section-y); position: relative; }
   left: auto; right: 18px;
   background: rgba(200,16,46,0.9);
   border-color: rgba(255,255,255,0.25);
+}
+@media (max-width: 600px) {
+  .hero-photo .stamp {
+    font-size: 0.6rem;
+    padding: 0.4rem 0.6rem;
+    letter-spacing: 0.14em;
+  }
+  /* Hide the left subtitle stamp on mobile to prevent overlap */
+  .hero-photo .stamp:not(.stamp--right) { display: none; }
 }
 @keyframes hero-photo-drift {
   0%   { transform: scale(1.04) translate(0, 0); }
@@ -640,6 +664,18 @@ section { padding-block: var(--section-y); position: relative; }
   font-size: 0.72rem;
   color: var(--ink-muted);
   letter-spacing: 0.04em;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+/* Hide overflowing placeholder body content on narrow placeholders */
+@media (max-width: 480px) {
+  .ph .ph-body {
+    padding: 0.7rem;
+    overflow: hidden;
+  }
+  .ph .ph-body .filename { display: none; }
+  .ph .ph-body .desc { font-size: 0.78rem; }
+  .ph .ph-tag, .ph .ph-meta { font-size: 0.62rem; padding: 0.22rem 0.45rem; }
 }
 /* Dark variant */
 .section-navy .ph {
@@ -1448,6 +1484,14 @@ footer.site-footer .base {
   opacity: 1; transform: translateY(0) scale(1); pointer-events: auto;
 }
 .float-cta:hover { background: var(--red-deep); transform: translateY(-2px); }
+@media (max-width: 540px) {
+  .float-cta {
+    padding: 0.7rem 0.95rem;
+    font-size: 0.8rem;
+    bottom: 0.85rem; right: 0.85rem;
+    box-shadow: 0 8px 22px rgba(200,16,46,.35);
+  }
+}
 
 /* =========================================================
    UTILITIES
@@ -1493,7 +1537,7 @@ footer.site-footer .base {
   <div class="shell nav-row">
     <a href="#top" class="brand" aria-label="Lord of the Bricks home">
       <span class="mark" aria-hidden="true"></span>
-      Lord of the Bricks
+      <span class="brand-text">Lord of the Bricks</span>
       <span class="pip" aria-hidden="true"></span>
     </a>
     <div class="nav-links" role="navigation">
