@@ -255,7 +255,25 @@ h1.deck-h, h2.deck-h {
   letter-spacing: -0.035em;
   margin: 0 0 1.4rem;
   color: var(--white);
+  text-wrap: balance;
 }
+.sub-h, .body-l, .body-m, .body-s, p { text-wrap: pretty; }
+h1.deck-h .em-line {
+  position: relative;
+  display: inline-block;
+}
+h1.deck-h .em-line::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -0.18em;
+  height: 4px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.1s var(--ease) 1.2s;
+}
+.slide.is-active h1.deck-h .em-line::after,
+.slide.is-active h1.kinetic.is-in .em-line::after { transform: scaleX(1); }
 h1.deck-h.huge {
   font-size: clamp(2.8rem, 7vw, 6.4rem);
 }
@@ -432,6 +450,58 @@ h1.deck-h.huge {
 @keyframes arr-bob {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(4px); }
+}
+
+/* Cover signature elements — title-card framing */
+.slide--cover .vertical-mark {
+  position: absolute;
+  left: clamp(1rem, 2.4vw, 2rem);
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: center;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.5em;
+  color: rgba(255,255,255,0.42);
+  white-space: nowrap;
+  z-index: 4;
+  pointer-events: none;
+}
+.slide--cover .vertical-mark::before,
+.slide--cover .vertical-mark::after {
+  content: "";
+  display: inline-block;
+  width: 32px; height: 1px;
+  background: rgba(255,255,255,0.35);
+  vertical-align: middle;
+}
+.slide--cover .vertical-mark::before { margin-right: 0.8rem; }
+.slide--cover .vertical-mark::after  { margin-left: 0.8rem; background: var(--red); }
+@media (max-width: 760px) { .slide--cover .vertical-mark { display: none; } }
+
+.slide--cover .cover-mark {
+  position: absolute;
+  bottom: clamp(4rem, 7vh, 5rem);
+  right: clamp(1.5rem, 4vw, 4rem);
+  z-index: 4;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  color: rgba(255,255,255,0.55);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  pointer-events: none;
+}
+.slide--cover .cover-mark::before {
+  content: "";
+  width: 38px; height: 1px; background: var(--red);
+}
+@media (max-width: 540px) {
+  .slide--cover .cover-mark { bottom: 3.5rem; right: 1rem; font-size: 0.6rem; letter-spacing: 0.22em; }
+  .slide--cover .cover-mark::before { width: 22px; }
 }
 
 /* =========================================================
@@ -772,8 +842,40 @@ h1.deck-h.huge {
   color: var(--ink-muted);
   line-height: 1.4;
 }
-.stat-cell.is-hero { background: linear-gradient(135deg, rgba(200,16,46,0.18), transparent 70%); }
+.stat-cell.is-hero {
+  background:
+    radial-gradient(80% 60% at 30% 40%, rgba(200,16,46,0.28), transparent 70%),
+    linear-gradient(135deg, rgba(200,16,46,0.18), transparent 70%);
+  position: relative;
+}
+.stat-cell.is-hero::before {
+  content: "Hero number";
+  position: absolute;
+  top: 14px; right: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
 .stat-cell.is-hero .num { color: var(--red); }
+@media (min-width: 720px) {
+  .slide--robot .stats-grid .stat-cell.is-hero {
+    grid-column: span 2;
+    grid-row: span 2;
+    padding: clamp(2rem, 4vw, 3rem);
+  }
+  .slide--robot .stats-grid .stat-cell.is-hero .num {
+    font-size: clamp(4rem, 9.5vw, 8rem);
+    letter-spacing: -0.04em;
+  }
+  .slide--robot .stats-grid .stat-cell.is-hero .lbl {
+    font-size: 0.84rem;
+    margin-top: 1.2rem;
+    max-width: 22ch;
+  }
+}
 
 .score-arc {
   position: relative;
@@ -1074,9 +1176,32 @@ h1.deck-h.huge {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.005em;
 }
+.tiers-table tr.is-title {
+  background: var(--red);
+  position: relative;
+  outline: 2px solid var(--red);
+  outline-offset: -2px;
+  box-shadow: 0 18px 40px rgba(200,16,46,0.32);
+}
+.tiers-table tr.is-title td {
+  color: var(--white);
+  border-bottom-color: rgba(255,255,255,0.18);
+  border-top: 1px solid rgba(255,255,255,0.18);
+}
 .tiers-table tr.is-title .name,
-.tiers-table tr.is-title .price { color: var(--red); }
-.tiers-table tr.is-title { background: rgba(200,16,46,0.06); }
+.tiers-table tr.is-title .price { color: var(--white); }
+.tiers-table tr.is-title .name {
+  display: flex; flex-direction: column; gap: 0.25rem;
+}
+.tiers-table tr.is-title .name::after {
+  content: "★ Lead the pitch — be in every Mexico photo";
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.92);
+}
 @media (max-width: 720px) {
   .tiers-table thead { display: none; }
   .tiers-table, .tiers-table tbody, .tiers-table tr, .tiers-table td { display: block; width: 100%; }
@@ -1163,18 +1288,21 @@ h1.deck-h.huge {
 }
 .cost-table tr.total td {
   border-bottom: 0;
-  border-top: 2px solid var(--red);
-  padding-top: 1.2rem;
-  padding-bottom: 0.4rem;
+  border-top: 3px solid var(--red);
+  padding-top: 1.6rem;
+  padding-bottom: 0.6rem;
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 1.55rem;
   font-weight: 700;
   color: var(--white);
+  letter-spacing: -0.015em;
 }
 .cost-table tr.total td.num {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: clamp(2rem, 4vw, 3rem);
   color: var(--red);
+  letter-spacing: -0.03em;
+  text-shadow: 0 0 32px rgba(200,16,46,0.35);
 }
 
 .cost-row-anim { opacity: 0; transform: translateX(-12px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
@@ -1276,18 +1404,19 @@ h1.deck-h.huge {
     <img src="https://jqpwucwzacqrpeazqbmd.supabase.co/storage/v1/object/public/public-assets/LOFB/Images/LOFB-Team.jpg" alt="" />
   </div>
   <span class="top-meta r-fade">Partnership Proposal · 2026</span>
+  <span class="vertical-mark r-fade">Confidential · For Prospective Partners</span>
   <div class="cover-content">
-    <h1 class="kinetic">
+    <h1 class="kinetic deck-h">
       <span class="w" style="--i:0">The</span> <span class="w" style="--i:1">UK</span>
       <span class="w" style="--i:2">won</span> <span class="w" style="--i:3">the</span>
       <span class="w" style="--i:4">World</span> <span class="w" style="--i:5">Finals</span>
       <span class="w" style="--i:6">last</span> <span class="w" style="--i:7">year.</span>
       <br>
-      <span class="w" style="--i:8;color:var(--red)">We're</span>
+      <span class="em-line"><span class="w" style="--i:8;color:var(--red)">We're</span>
       <span class="w" style="--i:9;color:var(--red)">how</span>
       <span class="w" style="--i:10;color:var(--red)">it</span>
       <span class="w" style="--i:11;color:var(--red)">happens</span>
-      <span class="w" style="--i:12;color:var(--red)">again.</span>
+      <span class="w" style="--i:12;color:var(--red)">again.</span></span>
     </h1>
     <p class="sub-h r-up">Will your brand be on the shirt?</p>
     <div class="bottom-row r-fade">
@@ -1298,6 +1427,7 @@ h1.deck-h.huge {
       <span class="scroll-cta">Scroll <span class="arr">↓</span></span>
     </div>
   </div>
+  <span class="cover-mark r-fade">LOFB · MMXXVI</span>
 </section>
 
 <!-- =====================================================
@@ -1725,7 +1855,21 @@ h1.deck-h.huge {
               <path d="M 380 115 Q 280 60 170 195"/>
             </g>
 
-            <text x="170" y="223" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#fff" letter-spacing="2">GUADALAJARA</text>
+            <!-- Country labels next to source dots -->
+            <g font-family="JetBrains Mono, monospace" font-size="7" font-weight="700" fill="rgba(255,255,255,0.65)" letter-spacing="1.4" text-anchor="start">
+              <text x="328" y="111">UK</text>
+              <text x="438" y="131">CHN</text>
+              <text x="508" y="156">JPN</text>
+              <text x="188" y="131">USA</text>
+              <text x="60"  y="131" text-anchor="end">CAN</text>
+              <text x="518" y="266">AUS</text>
+              <text x="228" y="276">BRA</text>
+              <text x="328" y="236">RSA</text>
+              <text x="388" y="166">IND</text>
+              <text x="388" y="111">RUS</text>
+            </g>
+            <text x="170" y="225" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#fff" letter-spacing="2.4">GUADALAJARA</text>
+            <text x="170" y="238" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6.5" font-weight="600" fill="#C8102E" letter-spacing="1.6">★ DESTINATION</text>
           </svg>
           <span class="city-tag">27–30 May 2026</span>
         </div>
