@@ -490,31 +490,76 @@ h1.deck-h.huge {
   width: 100%; height: 100%;
   object-fit: cover; object-position: center 30%;
 }
-.photo-card .placeholder {
+/* YouTube facade — click-to-load (saves bandwidth on mobile) */
+.yt-facade {
   position: absolute; inset: 0;
-  display: grid;
-  place-items: center;
+  width: 100%; height: 100%;
+  border: 0; padding: 0;
+  background: var(--navy-darker);
+  cursor: pointer;
+  display: block;
+  overflow: hidden;
+}
+.yt-facade img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  transition: transform .6s var(--ease), filter .6s var(--ease);
+}
+.yt-facade:hover img,
+.yt-facade:focus-visible img {
+  transform: scale(1.04);
+  filter: brightness(1.1);
+}
+.yt-facade::before {
+  content: "";
+  position: absolute; inset: 0;
   background:
-    repeating-linear-gradient(135deg, transparent 0 14px, rgba(255,255,255,0.04) 14px 15px),
-    radial-gradient(80% 60% at 50% 40%, rgba(200,16,46,0.16), transparent 70%);
-  color: var(--ink-muted);
+    radial-gradient(60% 40% at 50% 50%, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.4) 100%),
+    linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.25) 70%, rgba(6,20,52,0.85) 100%);
+  z-index: 1;
+  pointer-events: none;
 }
-.photo-card .placeholder .trophy {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  line-height: 1;
-  color: var(--gold);
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.02em;
+.yt-play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px; height: 56px;
+  display: grid; place-items: center;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.0);
+  z-index: 2;
+  transition: transform .3s var(--ease-bounce);
+  filter: drop-shadow(0 14px 30px rgba(200,16,46,0.5));
 }
-.photo-card .placeholder small {
+.yt-facade:hover .yt-play,
+.yt-facade:focus-visible .yt-play {
+  transform: translate(-50%, -50%) scale(1.12);
+}
+.yt-play svg { width: 100%; height: 100%; display: block; }
+.yt-tag {
+  position: absolute;
+  left: 14px; top: 14px;
+  z-index: 2;
   font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-size: 0.68rem;
-  color: var(--ink-dim);
+  color: var(--white);
+  padding: 0.4rem 0.6rem;
+  background: rgba(200,16,46,0.92);
+  border: 1px solid rgba(255,255,255,0.2);
 }
+.photo-card iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+  display: block;
+  z-index: 4;
+}
+.photo-card.is-playing::after { display: none; }
+.photo-card.is-playing .pcap { display: none; }
 .photo-card::after {
   content: "";
   position: absolute; inset: 0;
@@ -1309,13 +1354,14 @@ h1.deck-h.huge {
 
     <div class="photo-pair r-fade">
       <div class="photo-card">
-        <div class="placeholder">
-          <div style="text-align:center">
-            <div class="trophy">★ 2025</div>
-            <small>RealTech Bot · UK · World Champions</small>
-          </div>
-        </div>
-        <div class="pcap"><strong>2025 ·</strong> The trophy went home to Britain</div>
+        <button class="yt-facade" type="button" data-yt="jXr7zXLAN80" aria-label="Play: RealTech Bot — UK winning the 2025 FLL World Festival">
+          <img src="https://i.ytimg.com/vi/jXr7zXLAN80/maxresdefault.jpg" alt="RealTech Bot — UK winners, 2025 FLL World Festival" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/jXr7zXLAN80/hqdefault.jpg'" />
+          <span class="yt-tag">Watch &middot; 2025 UK World Championship</span>
+          <span class="yt-play" aria-hidden="true">
+            <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74 0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z" fill="#C8102E"/><path d="M45 24L26 14v20z" fill="#fff"/></svg>
+          </span>
+        </button>
+        <div class="pcap"><strong>2025 ·</strong> RealTech Bot &middot; UK World Champions</div>
       </div>
       <div class="photo-card">
         <img src="https://jqpwucwzacqrpeazqbmd.supabase.co/storage/v1/object/public/public-assets/LOFB/Images/LOFB-Team.jpg" alt="Lord of the Bricks at UK Nationals 2026" />
@@ -2076,6 +2122,26 @@ if (map) {
   }, { threshold: 0.4 });
   mapObs.observe(document.querySelector('.slide--comp'));
 }
+
+/* =========================================================
+   YouTube facade — click loads iframe with autoplay
+   ========================================================= */
+document.querySelectorAll('.yt-facade').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.dataset.yt;
+    if (!id) return;
+    const card = btn.closest('.photo-card');
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+    iframe.title = btn.getAttribute('aria-label') || 'Video player';
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    btn.replaceWith(iframe);
+    if (card) card.classList.add('is-playing');
+  });
+});
 
 /* =========================================================
    Keyboard: arrow keys / page down navigates between slides
