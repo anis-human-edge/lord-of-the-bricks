@@ -258,15 +258,17 @@ section { padding-block: var(--section-y); position: relative; }
 /* =========================================================
    HERO
    ========================================================= */
-.hero { padding-top: clamp(8rem, 16vw, 13rem); padding-bottom: 0; }
+.hero { padding-top: clamp(6rem, 11vw, 9rem); padding-bottom: 0; }
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
+  grid-template-columns: 1.1fr 1fr;
   gap: clamp(2.5rem, 5vw, 5rem);
-  align-items: end;
+  align-items: center;
+  min-height: calc(100vh - clamp(6rem, 11vw, 9rem) - 5rem);
+  min-height: calc(100dvh - clamp(6rem, 11vw, 9rem) - 5rem);
 }
 @media (max-width: 960px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+  .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; min-height: 0; }
 }
 .hero-meta {
   display: flex;
@@ -293,58 +295,66 @@ section { padding-block: var(--section-y); position: relative; }
     var(--navy);
   border: 1px solid var(--rule);
 }
-.hero h1 { margin: 0 0 1.75rem; }
+.hero h1 { margin: 0 0 1.4rem; }
 .hero h1 .accent { color: var(--red); }
-.hero-sub { margin-top: 1.4rem; }
+.hero-sub { margin-top: 0; }
 .hero-cta {
-  margin-top: 2.75rem;
-  display: flex; flex-wrap: wrap; gap: 0.85rem;
+  margin-top: 1.8rem;
+  display: flex; flex-wrap: wrap; gap: 0.75rem;
   align-items: center;
 }
 /* Hero chapter mark — matches the chapter-index pattern on the rest of the page */
-.hero-mark {
-  display: inline-block;
+/* Hero eyebrow — single top line: real Union Jack SVG + "Nine kids from Croydon & Wallington" */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 1.6rem;
-  position: relative;
-  padding-left: 40px;
+  color: var(--ink);
+  margin-bottom: 1.8rem;
 }
-.hero-mark::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 50%;
-  width: 28px; height: 1px;
-  background: var(--red);
-  transform: translateY(-50%);
+.hero-eyebrow .uk-flag {
+  width: 28px;
+  height: 14px;
+  display: block;
+  flex-shrink: 0;
+  border: 1px solid var(--rule-strong);
 }
 
-/* Tagline demoted to billing line under the headline — movie-poster placement */
+/* Date strip below promise — small mono billing for venue/dates */
 .hero-billing {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-style: italic;
-  font-size: clamp(0.92rem, 1vw, 1rem);
-  letter-spacing: 0.005em;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   color: var(--ink-muted);
-  margin: 1.5rem 0 0;
-  max-width: 36ch;
+  margin: 1.6rem 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.hero-billing::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--red);
 }
 
-/* Promise line — italic display, anchored below the lede */
+/* Promise line — italic display, anchored below the lede, tighter to fit one screen */
 .hero-promise {
-  margin-top: 2.2rem;
+  margin-top: 1.6rem;
   font-weight: 600;
   font-style: italic;
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
   line-height: 1.3;
-  max-width: 32ch;
+  max-width: 30ch;
 }
 
 /* Em-line — hand-set red rule that draws in under emphasised phrases.
@@ -1797,23 +1807,29 @@ footer.site-footer .base {
 
     <div class="hero-grid">
       <div>
-        <span class="hero-mark reveal">Chapter 00 &middot; Hello</span>
-        <div class="hero-meta reveal">
-          <span class="flag">UK &middot; Croydon &amp; Wallington</span>
-          <span>FLL Worlds &middot; Guadalajara &middot; 27&ndash;30 May 2026</span>
-        </div>
+        <span class="hero-eyebrow reveal">
+          <svg class="uk-flag" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" aria-label="Flag of the United Kingdom" role="img">
+            <clipPath id="ujt"><rect width="60" height="30"/></clipPath>
+            <clipPath id="ujs"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath>
+            <g clip-path="url(#ujt)">
+              <rect width="60" height="30" fill="#012169"/>
+              <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+              <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#ujs)" stroke="#C8102E" stroke-width="4"/>
+              <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
+              <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/>
+            </g>
+          </svg>
+          Nine kids from Croydon &amp; Wallington
+        </span>
         <h1 class="h-display reveal">
-          Hi.<br>
-          We&rsquo;re <span class="em-line">nine kids</span><br>
-          from Croydon and Wallington.
+          We&rsquo;re flying to <span class="em-line">Mexico.</span>
         </h1>
-        <p class="hero-billing reveal">Nine kids. One robot. One AI live in production.</p>
         <p class="lede hero-sub reveal">
-          We come from different schools. We meet every Sunday.
-          Three years ago we didn&rsquo;t know anything about robotics or coding.
-          Now we&rsquo;re flying to Mexico to represent the UK at the FIRST LEGO League World Finals.
+          We meet every Sunday. Three years ago we didn&rsquo;t know anything about robotics or coding.
+          Now we&rsquo;re going to compete at the FIRST LEGO League World Finals.
         </p>
-        <p class="body-lg reveal hero-promise"><span class="em-line">This is the story of how that happened.</span></p>
+        <p class="body-lg reveal hero-promise">This is the story of how that happened.</p>
+        <p class="hero-billing reveal">FLL Worlds &middot; Guadalajara &middot; 27&ndash;30 May 2026</p>
         <div class="hero-cta reveal">
           <a href="#origin" class="btn btn-primary btn-lg">Start at the beginning <span class="arrow">&rarr;</span></a>
           <a href="https://links.vibe-site.com/widget/booking/ccqEDkAYzZT5WnDZMoAg" target="_blank" rel="noopener" class="btn btn-ghost-red">
@@ -1821,9 +1837,6 @@ footer.site-footer .base {
             <span class="tminus tminus-inline" aria-label="20 days remaining">T&#8722;20</span>
           </a>
         </div>
-        <p class="reveal hero-fineprint">
-          Funding window closes once we book flights &amp; kit.
-        </p>
       </div>
       <div class="hero-side reveal">
         <span class="badge">Worlds 2026</span>
