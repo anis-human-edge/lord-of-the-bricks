@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#0A1F44" />
+<meta name="robots" content="noindex, nofollow, noarchive" />
+<title>Mission Control · Lord of the Bricks · Korea Open Invitational 2026</title>
+<meta name="description" content="Internal kit for the FLL Korea Open Invitational, Jeonju 3–5 July 2026. Working notes, presentation decks, judge psychology, Q&A bank." />
+
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" />
+<link rel="stylesheet" href="_shared/base.css" />
+
+<style>
+/* Hub-specific layout */
+
+.hub-hero {
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+.hub-hero .h-display { max-width: 22ch; margin-bottom: 0.6rem; }
+.hub-hero .h-sub { max-width: 56ch; }
+.hub-hero .meta {
+  margin-top: 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.hub-hero .meta strong { color: var(--ink); font-weight: 700; }
+
+/* 10-module status strip */
+.module-strip {
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+  padding: 1.2rem 0;
+  margin-top: 2rem;
+}
+.module-strip .module-strip-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+}
+.module-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+@media (max-width: 860px) { .module-strip-grid { grid-template-columns: repeat(2, 1fr); } }
+.module-pill {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--rule);
+  background: var(--white);
+  transition: border-color .2s var(--ease), transform .2s var(--ease);
+}
+.module-pill:hover { border-color: var(--ink); transform: translateY(-1px); }
+.module-pill .module-num {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--red);
+}
+.module-pill .module-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.94rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.module-pill .status { font-size: 0.6rem; padding: 0.14rem 0.4rem; }
+
+/* 4 brick cards */
+.bricks-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-top: 0;
+}
+@media (max-width: 760px) { .bricks-grid { grid-template-columns: 1fr; } }
+.brick-card {
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.6rem 1.6rem 1.4rem;
+  position: relative;
+  transition: border-color .2s var(--ease), transform .2s var(--ease), box-shadow .2s var(--ease);
+}
+.brick-card:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(10,31,68,0.08);
+}
+.brick-card .brick-num {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--red);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.brick-card .brick-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: 1.05;
+  letter-spacing: -0.018em;
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+}
+.brick-card p {
+  margin: 0 0 1.1rem;
+  color: var(--ink-2);
+  font-size: 0.96rem;
+  line-height: 1.55;
+  max-width: 50ch;
+}
+.brick-card .brick-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--rule);
+  padding-top: 0.85rem;
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.brick-card .brick-foot .arrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--ink);
+  transition: transform .25s var(--ease);
+}
+.brick-card:hover .brick-foot .arrow { transform: translateX(4px); }
+
+/* Sub-section header */
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 0.6rem;
+}
+.section-head .h-section { font-size: clamp(1.3rem, 2.2vw, 1.7rem); }
+
+/* Reference + show + prep card grids */
+.cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85rem; }
+.cards-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
+.cards-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.85rem; }
+@media (max-width: 860px) {
+  .cards-3, .cards-4 { grid-template-columns: repeat(2, 1fr); }
+  .cards-2 { grid-template-columns: 1fr; }
+}
+@media (max-width: 540px) {
+  .cards-3, .cards-4, .cards-2 { grid-template-columns: 1fr; }
+}
+
+.mini-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 1.1rem;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  transition: border-color .2s var(--ease), transform .2s var(--ease);
+}
+.mini-card:hover { border-color: var(--ink); transform: translateY(-1px); }
+.mini-card .mini-tag {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--red);
+}
+.mini-card .mini-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.mini-card .mini-desc {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--ink-muted);
+  margin-top: 0.25rem;
+}
+.mini-card .mini-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* Final share callout */
+.weaponise {
+  background: var(--navy);
+  color: var(--white);
+  padding: 2rem clamp(1.5rem, 4vw, 2.5rem);
+  margin-top: 2rem;
+  border-left: 0;
+}
+.weaponise h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+  letter-spacing: -0.014em;
+  margin: 0 0 0.6rem;
+  color: var(--white);
+}
+.weaponise p { color: rgba(255,255,255,0.82); margin: 0 0 0.9rem; max-width: 60ch; }
+.weaponise .eyebrow { color: rgba(255,255,255,0.6); margin-bottom: 0.8rem; }
+.weaponise .eyebrow::before { background: var(--red); }
+.weaponise a {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red);
+  border-bottom: 1px solid var(--red);
+  padding-bottom: 2px;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="kit-header">
+  <div class="kit-header-row">
+    <div class="kit-crumbs">
+      <span class="kit-mark"><span></span><span></span><span></span><span></span></span>
+      <span class="here">Mission Control</span>
+    </div>
+    <div class="kit-meta">
+      <span><span class="lock-dot"></span>Internal kit</span>
+      <span class="tminus" data-tminus>T−DAYS</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="shell hub-hero">
+  <span class="eyebrow is-red reveal">Lord of the Bricks · Korea Open Invitational</span>
+  <h1 class="h-display reveal" style="margin-top:1.1rem;">Mission Control for Jeonju.</h1>
+  <p class="h-sub reveal">
+    Four bricks, ten modules, one weekend. This is the team's working space —
+    every script, every artefact, every Q&amp;A response, every behavioural beat
+    that wins the four FLL ranks: Robot Game, Innovation Project, Robot Design,
+    and the one that runs through them all — Core Values.
+  </p>
+  <div class="meta reveal">
+    <span><strong>Jeonju, South Korea</strong></span>
+    <span>3–5 July 2026</span>
+    <span>FIRST LEGO League Korea Open Invitational</span>
+    <span>UK delegation · 9 kids</span>
+  </div>
+</section>
+
+<!-- 10-MODULE STATUS STRIP -->
+<section class="shell" style="padding-block: 0;">
+  <div class="module-strip">
+    <div class="module-strip-head">
+      <span class="eyebrow is-red">The 10 modules · live status</span>
+      <span class="note">Click any tile to jump in</span>
+    </div>
+    <div class="module-strip-grid">
+      <a class="module-pill" href="bricks/1-robot-game.html">
+        <span class="module-num">M1</span>
+        <span class="module-name">Robot Game · match day playbook</span>
+        <span class="status is-review">In review</span>
+      </a>
+      <a class="module-pill" href="bricks/2-innovation.html">
+        <span class="module-num">M2</span>
+        <span class="module-name">Innovation Project · 5-min script</span>
+        <span class="status is-review">In review</span>
+      </a>
+      <a class="module-pill" href="bricks/3-robot-design.html">
+        <span class="module-num">M3</span>
+        <span class="module-name">Robot Design · 5-min script</span>
+        <span class="status is-review">In review</span>
+      </a>
+      <a class="module-pill" href="bricks/4-core-values.html">
+        <span class="module-num">M4</span>
+        <span class="module-name">Core Values · evidence kit</span>
+        <span class="status is-review">In review</span>
+      </a>
+      <a class="module-pill" href="show/final-share.html">
+        <span class="module-num">M5</span>
+        <span class="module-name">Final Share · 8-min script</span>
+        <span class="status is-draft">Draft</span>
+      </a>
+      <a class="module-pill" href="prep/gracious-pro.html">
+        <span class="module-num">M6</span>
+        <span class="module-name">Gracious Professionalism playbook</span>
+        <span class="status is-draft">Draft</span>
+      </a>
+      <a class="module-pill" href="prep/judge-psychology.html">
+        <span class="module-num">M7</span>
+        <span class="module-name">Judge psychology &amp; Exceeds triggers</span>
+        <span class="status is-draft">Draft</span>
+      </a>
+      <a class="module-pill" href="prep/timing.html">
+        <span class="module-num">M8</span>
+        <span class="module-name">Timing rehearsal protocol</span>
+        <span class="status is-draft">Draft</span>
+      </a>
+      <a class="module-pill" href="prep/qa-bank.html">
+        <span class="module-num">M9</span>
+        <span class="module-name">Q&amp;A response bank</span>
+        <span class="status is-draft">Draft</span>
+      </a>
+      <a class="module-pill" href="show/welcome.html">
+        <span class="module-num">M10</span>
+        <span class="module-name">Team welcome &amp; icebreaker</span>
+        <span class="status is-draft">Draft</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 4 BRICKS -->
+<section class="shell">
+  <div class="section-head">
+    <h2 class="h-section">The four bricks.</h2>
+    <span class="note">Each brick weaves into the others.</span>
+  </div>
+
+  <div class="bricks-grid">
+    <a class="brick-card reveal" href="bricks/1-robot-game.html">
+      <span class="brick-num">Brick 01 · Performance</span>
+      <h3 class="brick-name">Robot Game</h3>
+      <p>Pure mission points from up to three matches. Highest match counts. Robot performance only — no judging, no theatre. Mission plan, run order, contingency strategy.</p>
+      <div class="brick-foot">
+        <span>1 module · M1</span>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a class="brick-card reveal" href="bricks/2-innovation.html">
+      <span class="brick-num">Brick 02 · Innovation</span>
+      <h3 class="brick-name">Innovation Project</h3>
+      <p>5-minute presentation. Sum of 10 scores (1–4) on the IP rubric: Identify, Design, Create, Iterate, Communicate. Five of those criteria also feed Core Values.</p>
+      <div class="brick-foot">
+        <span>2 modules · M2 + Q&amp;A</span>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a class="brick-card reveal" href="bricks/3-robot-design.html">
+      <span class="brick-num">Brick 03 · Robot Design</span>
+      <h3 class="brick-name">Robot Design</h3>
+      <p>5-minute explanation. Sum of 10 scores (1–4) on the RD rubric. Same five-section structure. Five of those criteria also feed Core Values.</p>
+      <div class="brick-foot">
+        <span>2 modules · M3 + Q&amp;A</span>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a class="brick-card reveal" href="bricks/4-core-values.html">
+      <span class="brick-num">Brick 04 · The weave</span>
+      <h3 class="brick-name">Core Values</h3>
+      <p>Not a separate session. Observed and scored through IP + RD presentations, plus volunteer interactions, pit behaviour, table behaviour, and team conduct across the whole event.</p>
+      <div class="brick-foot">
+        <span>3 modules · M4 + M6 + M10</span>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- PRESENT TO JUDGES -->
+<section class="shell">
+  <div class="section-head">
+    <h2 class="h-section">Show pages — what judges see.</h2>
+    <span class="note">Press F to fullscreen · arrows to advance</span>
+  </div>
+  <div class="cards-4">
+    <a class="mini-card" href="show/welcome.html">
+      <span class="mini-tag">First 2 min</span>
+      <span class="mini-title">Team Welcome</span>
+      <span class="mini-desc">Sets the tone. Before judges open their pens.</span>
+      <div class="mini-foot"><span>10 slides · est.</span><span>→</span></div>
+    </a>
+    <a class="mini-card" href="show/innovation.html">
+      <span class="mini-tag">5 min</span>
+      <span class="mini-title">Innovation Project</span>
+      <span class="mini-desc">Identify · Design · Create · Iterate · Communicate.</span>
+      <div class="mini-foot"><span>12 slides · est.</span><span>→</span></div>
+    </a>
+    <a class="mini-card" href="show/robot-design.html">
+      <span class="mini-tag">5 min</span>
+      <span class="mini-title">Robot Design</span>
+      <span class="mini-desc">Strategy, build, code, iteration, teamwork.</span>
+      <div class="mini-foot"><span>12 slides · est.</span><span>→</span></div>
+    </a>
+    <a class="mini-card" href="show/final-share.html">
+      <span class="mini-tag">8 min · the killer</span>
+      <span class="mini-title">Final Share</span>
+      <span class="mini-desc">Where most teams collapse. Where we cement Core Values.</span>
+      <div class="mini-foot"><span>14 slides · est.</span><span>→</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- WEAPONISE THE FINAL SHARE -->
+<section class="shell">
+  <div class="weaponise reveal">
+    <span class="eyebrow">Two non-obvious leverage points</span>
+    <h2>The Exceeds column needs a written judge comment. The Final Share is where most teams collapse.</h2>
+    <p>We engineer artefacts so judges <em>can't help</em> writing the Exceeds comment.
+       We script the 8-minute Final Share so it cements Core Values and Gracious Professionalism in the moment that decides the room.</p>
+    <a href="prep/judge-psychology.html">Judge psychology &amp; Exceeds-trigger artefacts →</a>
+  </div>
+</section>
+
+<!-- INTERNAL PREP -->
+<section class="shell">
+  <div class="section-head">
+    <h2 class="h-section">Internal prep.</h2>
+    <span class="note">For the team — not for judges</span>
+  </div>
+  <div class="cards-4">
+    <a class="mini-card" href="prep/qa-bank.html">
+      <span class="mini-tag">M9</span>
+      <span class="mini-title">Q&amp;A response bank</span>
+      <span class="mini-desc">Every script question pre-answered, by criterion.</span>
+      <div class="mini-foot"><span>Working doc</span><span>→</span></div>
+    </a>
+    <a class="mini-card" href="prep/judge-psychology.html">
+      <span class="mini-tag">M7</span>
+      <span class="mini-title">Judge psychology</span>
+      <span class="mini-desc">Exceeds-trigger artefacts. The leverage map.</span>
+      <div class="mini-foot"><span>Working doc</span><span>→</span></div>
+    </a>
+    <a class="mini-card" href="prep/gracious-pro.html">
+      <span class="mini-tag">M6</span>
+      <span class="mini-title">Gracious Professionalism</span>
+      <span class="mini-desc">Pit, tables, peer teams, volunteer interactions.</span>
+      <div class="mini-foot"><span>Working doc</span><span>→</span></div>
+    </a>
+    <a class="mini-card" href="prep/timing.html">
+      <span class="mini-tag">M8</span>
+      <span class="mini-title">Timing rehearsal</span>
+      <span class="mini-desc">5+5+8 minutes. The protocol that makes it land.</span>
+      <div class="mini-foot"><span>Working doc</span><span>→</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- REFERENCE -->
+<section class="shell">
+  <div class="section-head">
+    <h2 class="h-section">Reference.</h2>
+    <span class="note">Read this once, refer back forever</span>
+  </div>
+  <div class="cards-2">
+    <a class="mini-card" href="rubric.html">
+      <span class="mini-tag">The four engines</span>
+      <span class="mini-title">How scoring really works</span>
+      <span class="mini-desc">The four ranks. The dual-marked criteria. The Core Values weave map. The Exceeds column. The non-obvious leverage points.</span>
+      <div class="mini-foot"><span>Reference</span><span>→</span></div>
+    </a>
+    <a class="mini-card" href="schedule.html">
+      <span class="mini-tag">3–5 July 2026</span>
+      <span class="mini-title">Event timeline</span>
+      <span class="mini-desc">Jeonju, South Korea. Hour-by-hour skeleton. Pre-event, on-day, post-event.</span>
+      <div class="mini-foot"><span>Reference</span><span>→</span></div>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="kit-footer">
+  <span>Lord of the Bricks · Internal kit · Don't share publicly</span>
+  <span><a href="../index.html">← Back to public site</a></span>
+</footer>
+
+<script src="_shared/base.js"></script>
+</body>
+</html>

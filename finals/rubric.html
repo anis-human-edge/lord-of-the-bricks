@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#0A1F44" />
+<meta name="robots" content="noindex, nofollow, noarchive" />
+<title>Reference · How scoring really works · Lord of the Bricks</title>
+
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" />
+<link rel="stylesheet" href="_shared/base.css" />
+
+<style>
+.engine {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  gap: 1.5rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+.engine:last-child { border-bottom: 0; }
+@media (max-width: 720px) { .engine { grid-template-columns: 1fr; gap: 0.5rem; } }
+.engine-tag {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.engine-tag .num { color: var(--ink); margin-right: 0.5rem; }
+.engine h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: -0.014em;
+  margin: 0 0 0.5rem;
+}
+.engine p { margin: 0; color: var(--ink-2); max-width: 60ch; line-height: 1.6; }
+.engine .deet {
+  margin-top: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-muted);
+}
+
+.leverage {
+  background: var(--navy);
+  color: var(--white);
+  padding: 2rem clamp(1.5rem, 4vw, 2.5rem);
+  margin-top: 2rem;
+}
+.leverage h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin: 0 0 0.6rem;
+  color: var(--white);
+}
+.leverage p { color: rgba(255,255,255,0.82); margin: 0 0 1rem; max-width: 62ch; line-height: 1.6; }
+.leverage .eyebrow { color: rgba(255,255,255,0.6); margin-bottom: 0.8rem; }
+.leverage .eyebrow::before { background: var(--red); }
+.leverage strong.hot { color: var(--red); font-weight: 700; }
+
+.weave-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+@media (max-width: 760px) { .weave-grid { grid-template-columns: 1fr; } }
+.weave-col {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.2rem;
+}
+.weave-col h4 {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin: 0 0 0.85rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--ink);
+}
+.weave-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+.weave-col li {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  padding-left: 1rem;
+  position: relative;
+}
+.weave-col li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--red);
+  font-weight: 700;
+  font-size: 1.3em;
+  line-height: 1;
+}
+</style>
+</head>
+<body>
+
+<header class="kit-header">
+  <div class="kit-header-row">
+    <div class="kit-crumbs">
+      <span class="kit-mark"><span></span><span></span><span></span><span></span></span>
+      <a href="index.html">Mission Control</a>
+      <span class="sep">/</span>
+      <span class="here">Reference · Rubric</span>
+    </div>
+    <div class="kit-meta">
+      <span><span class="lock-dot"></span>Internal kit</span>
+      <span class="tminus" data-tminus>T−DAYS</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="shell" style="padding-top: clamp(2.5rem, 5vw, 4rem);">
+  <span class="eyebrow is-red">Reference · How scoring really works</span>
+  <h1 class="h-display" style="margin-top:1rem; max-width: 22ch;">The four engines and what they actually score.</h1>
+  <p class="h-sub">Read this once. Refer back forever. Every artefact we build, every line we rehearse, every hand we shake should map back to one of these four engines.</p>
+</section>
+
+<section class="shell">
+  <div class="section-head">
+    <h2 class="h-section">The four ranks.</h2>
+    <span class="note">Verbatim from the official rubric structure</span>
+  </div>
+
+  <div class="engine reveal">
+    <span class="engine-tag"><span class="num">01</span>Robot Game Rank</span>
+    <div>
+      <h3>Pure mission points.</h3>
+      <p>Up to 3 matches, highest match counts. Robot performance only. <strong>No judging.</strong> No theatre, no rubric, no charm. Either the robot does the missions or it doesn't.</p>
+      <div class="deet">→ Brick 01 · Performance — see <a href="bricks/1-robot-game.html">mission plan</a></div>
+    </div>
+  </div>
+
+  <div class="engine reveal">
+    <span class="engine-tag"><span class="num">02</span>Innovation Project Rank</span>
+    <div>
+      <h3>10 scores (1–4) on the IP rubric.</h3>
+      <p>Five sections: <strong>Identify, Design, Create, Iterate, Communicate.</strong> Each section has two criteria. Sum gives the IP rank. <strong>Five of those ten criteria also feed Core Values</strong> — they are dual-marked.</p>
+      <div class="deet">→ Brick 02 · Innovation — see <a href="bricks/2-innovation.html">presentation hub</a></div>
+    </div>
+  </div>
+
+  <div class="engine reveal">
+    <span class="engine-tag"><span class="num">03</span>Robot Design Rank</span>
+    <div>
+      <h3>10 scores (1–4) on the RD rubric.</h3>
+      <p>Same five-section structure as IP. Sum gives the RD rank. <strong>Another five of those ten criteria also feed Core Values</strong> — also dual-marked.</p>
+      <div class="deet">→ Brick 03 · Robot Design — see <a href="bricks/3-robot-design.html">presentation hub</a></div>
+    </div>
+  </div>
+
+  <div class="engine reveal">
+    <span class="engine-tag"><span class="num">04</span>Core Values Rank</span>
+    <div>
+      <h3>The weave.</h3>
+      <p>Five dual-marked criteria from IP + five dual-marked criteria from RD + three Gracious Professionalism scores.
+        <strong>Core Values is not a separate session.</strong> It is observed and scored through:</p>
+      <ul style="margin: 0.6rem 0 0; padding-left: 1.2rem; color: var(--ink-2); line-height: 1.7;">
+        <li>The IP and RD presentations</li>
+        <li>Volunteer interactions throughout the event</li>
+        <li>Pit behaviour</li>
+        <li>Table behaviour</li>
+        <li>Team conduct across the whole weekend</li>
+      </ul>
+      <div class="deet">→ Brick 04 · Core Values — see <a href="bricks/4-core-values.html">weave map</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- LEVERAGE -->
+<section class="shell">
+  <div class="section-head">
+    <h2 class="h-section">Two non-obvious leverage points.</h2>
+  </div>
+
+  <div class="leverage reveal">
+    <span class="eyebrow">Leverage 01 · The Exceeds column</span>
+    <h3>Score 4 requires a written judge comment.</h3>
+    <p>So every row needs a quotable line or visible artefact from us that makes it easy for the judge to write that comment.
+       <strong class="hot">No artefact = no Exceeds.</strong></p>
+    <p>Action: every rubric criterion gets a paired artefact in our kit — a printed card, a one-liner in the script, a visible thing on the table.
+       See <a href="prep/judge-psychology.html" style="color:var(--red);border-bottom:1px solid var(--red);">judge psychology &amp; Exceeds-trigger artefacts</a>.</p>
+  </div>
+
+  <div class="leverage reveal" style="margin-top: 1rem;">
+    <span class="eyebrow">Leverage 02 · The Final Share &amp; Feedback slot</span>
+    <h3>Up to 8 minutes — where most teams collapse.</h3>
+    <p>It's also where Core Values and Gracious Professionalism get cemented in the judges' minds.
+       <strong class="hot">We will weaponise this slot.</strong></p>
+    <p>Action: a fully-scripted, fully-rehearsed Final Share. See <a href="show/final-share.html" style="color:var(--red);border-bottom:1px solid var(--red);">Final Share script</a>.</p>
+  </div>
+</section>
+
+<!-- WEAVE MAP -->
+<section class="shell">
+  <div class="section-head">
+    <h2 class="h-section">The Core Values weave map.</h2>
+    <span class="note">5 from IP + 5 from RD + 3 GP scores</span>
+  </div>
+
+  <p class="body-lg" style="margin-bottom: 0.5rem;">
+    Core Values rank = (5 dual-marked criteria from IP) + (5 dual-marked criteria from RD) + (3 Gracious Professionalism scores observed across the event).
+    The exact criteria depend on the season's official rubric — fill the column lists below from the FLL rubric document. This page is the single source of truth.
+  </p>
+
+  <div class="weave-grid">
+    <div class="weave-col">
+      <h4>5 dual-marked criteria — from IP</h4>
+      <ul>
+        <li><span class="dim">[ Add: IP criterion → CV mark ]</span></li>
+        <li><span class="dim">[ Add: IP criterion → CV mark ]</span></li>
+        <li><span class="dim">[ Add: IP criterion → CV mark ]</span></li>
+        <li><span class="dim">[ Add: IP criterion → CV mark ]</span></li>
+        <li><span class="dim">[ Add: IP criterion → CV mark ]</span></li>
+      </ul>
+    </div>
+    <div class="weave-col">
+      <h4>5 dual-marked criteria — from RD</h4>
+      <ul>
+        <li><span class="dim">[ Add: RD criterion → CV mark ]</span></li>
+        <li><span class="dim">[ Add: RD criterion → CV mark ]</span></li>
+        <li><span class="dim">[ Add: RD criterion → CV mark ]</span></li>
+        <li><span class="dim">[ Add: RD criterion → CV mark ]</span></li>
+        <li><span class="dim">[ Add: RD criterion → CV mark ]</span></li>
+      </ul>
+    </div>
+    <div class="weave-col">
+      <h4>3 Gracious Professionalism scores</h4>
+      <ul>
+        <li><span class="dim">[ Add: GP1 — what / when / observed by ]</span></li>
+        <li><span class="dim">[ Add: GP2 — what / when / observed by ]</span></li>
+        <li><span class="dim">[ Add: GP3 — what / when / observed by ]</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="note" style="margin-top: 1.4rem;">
+    Once filled, this map drives the IP/RD scripts and the Gracious Pro playbook directly.
+    Every dual-marked criterion gets a single sentence in the script designed to score it twice.
+  </p>
+</section>
+
+</main>
+
+<footer class="kit-footer">
+  <span><a href="index.html">← Mission Control</a></span>
+  <span>Reference · Source of truth</span>
+</footer>
+
+<script src="_shared/base.js"></script>
+</body>
+</html>

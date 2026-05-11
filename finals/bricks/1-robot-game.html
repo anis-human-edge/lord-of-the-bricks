@@ -1,0 +1,1456 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#0A1F44" />
+<meta name="robots" content="noindex, nofollow, noarchive" />
+<title>Brick 01 · Robot Game Match Day Playbook · Lord of the Bricks</title>
+
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" />
+<link rel="stylesheet" href="../_shared/base.css" />
+
+<style>
+/* ---------- HERO ---------- */
+.brick-hero { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: clamp(1rem, 2vw, 2rem); }
+.brick-hero .crumb-num { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.2em; color: var(--red); }
+.brick-hero h1 { margin-top: 1rem; max-width: 18ch; }
+.hero-meta {
+  margin-top: 1.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  align-items: baseline;
+}
+.hero-meta strong { color: var(--ink); font-weight: 700; }
+.hero-meta .red { color: var(--red); }
+
+.gap-strip {
+  margin-top: 1.4rem;
+  background: var(--navy);
+  color: var(--white);
+  padding: 1.4rem clamp(1.4rem, 3vw, 2rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+@media (max-width: 760px) { .gap-strip { grid-template-columns: 1fr; gap: 0.8rem; } }
+.gap-stat {
+  text-align: left;
+}
+.gap-stat .num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--white);
+}
+.gap-stat .lab {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+.gap-stat.is-gap .num { color: var(--red); }
+.gap-stat .arrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--red);
+  margin: 0 0.5rem;
+}
+
+/* ---------- IN-PAGE NAV ---------- */
+.in-page-nav {
+  position: sticky; top: 49px; z-index: 40;
+  background: rgba(250, 248, 244, 0.96);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--rule);
+  border-top: 1px solid var(--ink);
+}
+.in-page-nav-row {
+  max-width: var(--max-w); margin: 0 auto; padding: 0.65rem var(--gutter);
+  display: flex; gap: 0.4rem; overflow-x: auto; scrollbar-width: none;
+}
+.in-page-nav-row::-webkit-scrollbar { display: none; }
+.in-page-nav a {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-muted);
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--rule);
+  background: var(--white);
+  transition: border-color .2s var(--ease), color .2s var(--ease);
+  white-space: nowrap;
+}
+.in-page-nav a:hover { color: var(--ink); border-color: var(--ink); }
+.in-page-nav a.is-active { color: var(--white); background: var(--ink); border-color: var(--ink); }
+
+/* ---------- SECTIONS ---------- */
+.sec { padding-block: clamp(2.5rem, 4vw, 4rem); scroll-margin-top: 100px; }
+.sec + .sec { border-top: 1px solid var(--rule); }
+.sec-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 0.6rem;
+  gap: 1rem; flex-wrap: wrap;
+}
+.sec-head h2 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  letter-spacing: -0.018em; margin: 0;
+}
+.sec-head .sec-meta {
+  font-family: var(--font-mono); font-size: 0.74rem;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted);
+}
+.sec-lede {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.4; color: var(--ink-muted);
+  max-width: 64ch; margin: 0 0 2rem;
+  text-wrap: pretty;
+}
+.sec-lede strong { color: var(--ink); }
+
+/* ---------- 8-RUN TABLE ---------- */
+.runs-table th { white-space: nowrap; }
+.runs-table .num-col { text-align: center; width: 3rem; font-family: var(--font-mono); color: var(--red); font-weight: 700; }
+.runs-table .ph { color: var(--ink-faint); font-style: italic; font-family: var(--font-mono); font-size: 0.86rem; }
+.runs-table .conf-col, .runs-table .pts-col, .runs-table .time-col {
+  text-align: right; font-family: var(--font-mono);
+  font-size: 0.86rem; white-space: nowrap; width: 5rem;
+}
+.runs-table .conf-100 { color: #1a8a52; font-weight: 700; }
+.runs-table .conf-90 { color: #e08a18; font-weight: 700; }
+.runs-table tr.total td {
+  border-top: 2px solid var(--ink);
+  font-family: var(--font-mono); font-weight: 700;
+  color: var(--ink); text-transform: uppercase;
+  font-size: 0.78rem; letter-spacing: 0.14em;
+}
+
+.run-strategy {
+  margin-top: 1.4rem;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.4rem clamp(1.4rem, 3vw, 2rem);
+}
+.run-strategy h3 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.15rem; letter-spacing: -0.012em;
+  margin: 0 0 0.7rem;
+}
+.run-strategy h3 .tag {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.16em; color: var(--white);
+  background: var(--red); padding: 0.16rem 0.45rem;
+  margin-right: 0.6rem; vertical-align: 3px;
+  text-transform: uppercase;
+}
+.run-strategy ul {
+  margin: 0.4rem 0 0; padding-left: 1.2rem;
+  color: var(--ink-2); line-height: 1.65; font-size: 0.94rem;
+}
+.run-strategy li { margin-bottom: 0.4rem; }
+.run-strategy .alert {
+  margin-top: 0.9rem;
+  padding: 0.7rem 1rem;
+  background: var(--paper);
+  border-left: 0;
+  border-top: 1px solid var(--red);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+.run-strategy .alert strong { color: var(--red); }
+
+/* ---------- 3-MATCH STRATEGY ---------- */
+.matches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+@media (max-width: 860px) { .matches { grid-template-columns: 1fr; } }
+.match-card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.5rem 1.5rem;
+  display: flex; flex-direction: column; gap: 0.7rem;
+}
+.match-card .m-num {
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--red);
+  text-transform: uppercase;
+}
+.match-card h3 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.2rem; letter-spacing: -0.012em;
+  margin: 0;
+}
+.match-card .approach {
+  color: var(--ink-2); line-height: 1.55; font-size: 0.94rem;
+  margin: 0;
+}
+.match-card .meta {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--rule);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;
+}
+.match-card .meta-cell .lab {
+  display: block;
+  font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-faint); margin-bottom: 0.2rem;
+}
+.match-card .meta-cell .val {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 0.96rem; color: var(--ink);
+}
+.match-card .meta-cell .val.target {
+  color: var(--red);
+}
+
+.math-strip {
+  margin-top: 1.2rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 1rem 1.2rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+@media (max-width: 760px) { .math-strip { grid-template-columns: 1fr; } }
+.math-strip .formula {
+  font-family: var(--font-mono); font-size: 0.86rem;
+  color: var(--ink-2); line-height: 1.6;
+}
+.math-strip .formula strong { color: var(--red); font-size: 1.1em; }
+
+.discipline {
+  margin-top: 1rem;
+  background: var(--navy); color: var(--white);
+  padding: 1rem 1.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.86rem; line-height: 1.5;
+}
+.discipline strong { color: var(--red); }
+
+/* ---------- TABLE ROLES (quadrant) ---------- */
+.roles { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+@media (max-width: 760px) { .roles { grid-template-columns: 1fr; } }
+.role {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.3rem 1.4rem;
+  display: flex; flex-direction: column;
+}
+.role .r-tag {
+  font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.16em; color: var(--red); text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.role h3 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.2rem; letter-spacing: -0.012em;
+  margin: 0 0 0.6rem;
+}
+.role .resp {
+  color: var(--ink-2); line-height: 1.55; font-size: 0.94rem;
+  margin: 0 0 1rem;
+}
+.role .who {
+  margin-top: auto;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--rule);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;
+  font-family: var(--font-mono);
+}
+.role .who .lab {
+  display: block;
+  font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.16em; color: var(--ink-faint);
+  text-transform: uppercase; margin-bottom: 0.2rem;
+}
+.role .who .name {
+  font-size: 0.88rem; font-weight: 700; color: var(--ink);
+}
+.role .who .name.tbd { color: var(--ink-faint); font-style: italic; }
+
+.support-note {
+  margin-top: 1rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 1rem 1.2rem;
+  font-size: 0.92rem;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+.support-note strong { color: var(--ink); }
+.support-note .key-rule {
+  display: block;
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  color: var(--red);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Voice commands */
+.voice-commands {
+  margin-top: 1.4rem;
+}
+.voice-commands h3 {
+  font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--ink); text-transform: uppercase;
+  margin: 0 0 0.7rem;
+}
+.voice-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); gap: 0.6rem;
+}
+@media (max-width: 860px) { .voice-grid { grid-template-columns: repeat(2, 1fr); } }
+.voice {
+  background: var(--ink); color: var(--white);
+  padding: 0.85rem 1rem;
+  display: flex; flex-direction: column; gap: 0.3rem;
+}
+.voice .word {
+  font-family: var(--font-mono); font-size: 0.92rem; font-weight: 700;
+  color: var(--red); letter-spacing: 0.08em;
+}
+.voice .meaning {
+  font-size: 0.78rem; color: rgba(255,255,255,0.78); line-height: 1.4;
+}
+.voice-rule {
+  margin-top: 0.8rem;
+  font-family: var(--font-mono); font-size: 0.84rem;
+  color: var(--ink-2);
+}
+.voice-rule strong { color: var(--red); }
+
+/* ---------- DECISION TREE (signature) ---------- */
+.tree-intro {
+  background: var(--ink); color: var(--white);
+  padding: 1.4rem clamp(1.4rem, 3vw, 2rem);
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.tree-intro .head {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  letter-spacing: -0.014em;
+}
+.tree-intro .clock {
+  font-family: var(--font-mono); font-size: 0.86rem;
+  font-weight: 700; letter-spacing: 0.18em;
+  color: var(--red); text-transform: uppercase;
+}
+
+.tree {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.85rem;
+}
+@media (max-width: 1100px) { .tree { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .tree { grid-template-columns: 1fr; } }
+
+.branch {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.2rem 1.3rem;
+  display: flex; flex-direction: column;
+}
+.branch .b-num {
+  font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--red);
+  text-transform: uppercase;
+}
+.branch h3 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1rem; letter-spacing: -0.008em;
+  margin: 0.4rem 0 0.4rem;
+  line-height: 1.2;
+}
+.branch .desc {
+  font-size: 0.84rem; color: var(--ink-muted);
+  line-height: 1.4;
+  margin: 0 0 0.85rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--rule);
+}
+.branch .conditions {
+  display: grid; gap: 0.6rem;
+}
+.condition {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.2rem;
+}
+.condition .if {
+  font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700;
+  color: var(--ink); letter-spacing: 0.04em;
+}
+.condition .then {
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  width: fit-content;
+  padding: 0.22rem 0.55rem;
+}
+.condition .then.retry { background: #e08a18; color: var(--white); }
+.condition .then.skip { background: var(--red); color: var(--white); }
+.condition .then.always-skip { background: var(--ink); color: var(--white); }
+.condition .then.retrieve { background: var(--accent); color: var(--white); }
+.condition .then::before {
+  content: "→";
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+.condition .note {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  color: var(--ink-muted); margin-top: 0.1rem;
+}
+
+.cardinal-rule {
+  margin-top: 1.4rem;
+  background: var(--red); color: var(--white);
+  padding: 1.2rem clamp(1.4rem, 3vw, 2rem);
+  display: flex; align-items: baseline; gap: 1rem;
+  flex-wrap: wrap;
+}
+.cardinal-rule .lab {
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  white-space: nowrap;
+}
+.cardinal-rule .text {
+  font-family: var(--font-display); font-style: italic; font-weight: 500;
+  font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+  line-height: 1.3; color: var(--white);
+  margin: 0;
+}
+
+/* ---------- PRE-MATCH TIMELINE ---------- */
+.timeline { display: grid; gap: 0.6rem; }
+.t-step {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.1rem 1.4rem;
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 1.2rem;
+  align-items: baseline;
+}
+@media (max-width: 640px) { .t-step { grid-template-columns: 1fr; gap: 0.4rem; } }
+.t-step .when {
+  font-family: var(--font-mono); font-size: 0.86rem; font-weight: 700;
+  letter-spacing: 0.12em; color: var(--red);
+}
+.t-step .what {
+  display: grid; gap: 0.5rem;
+}
+.t-step .what h3 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1rem; letter-spacing: -0.008em;
+  margin: 0;
+}
+.t-step .what ul {
+  margin: 0.2rem 0 0; padding-left: 1.1rem;
+  color: var(--ink-2); line-height: 1.6; font-size: 0.92rem;
+}
+.t-step .what li { margin-bottom: 0.3rem; }
+.t-step.is-final {
+  background: var(--ink); color: var(--white);
+  border-color: var(--ink);
+}
+.t-step.is-final .when { color: var(--red); }
+.t-step.is-final h3 { color: var(--white); }
+.t-step.is-final ul, .t-step.is-final p { color: rgba(255,255,255,0.8); }
+
+/* ---------- BETWEEN-MATCH ---------- */
+.between-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+@media (max-width: 760px) { .between-grid { grid-template-columns: 1fr; } }
+.between-card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.4rem 1.5rem;
+}
+.between-card h3 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.05rem; letter-spacing: -0.01em;
+  margin: 0 0 0.5rem;
+}
+.between-card h3 .tag {
+  display: block;
+  font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--red);
+  text-transform: uppercase; margin-bottom: 0.25rem;
+}
+.between-card ul, .between-card ol {
+  margin: 0.4rem 0 0; padding-left: 1.2rem;
+  color: var(--ink-2); line-height: 1.65; font-size: 0.92rem;
+}
+.between-card li { margin-bottom: 0.3rem; }
+.between-card.is-warning { border-color: var(--red); border-width: 2px; }
+.between-card.is-warning h3 .tag { color: var(--red); }
+.between-card.is-warning li { color: var(--ink); }
+
+/* ---------- KOREA VARIABLES ---------- */
+.korea-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); gap: 0.85rem;
+}
+@media (max-width: 1000px) { .korea-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .korea-grid { grid-template-columns: 1fr; } }
+.korea-card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.2rem 1.3rem;
+}
+.korea-card .num {
+  font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--red);
+  display: block; margin-bottom: 0.4rem;
+}
+.korea-card h3 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1rem; letter-spacing: -0.008em;
+  margin: 0 0 0.5rem;
+}
+.korea-card p {
+  margin: 0; color: var(--ink-2); font-size: 0.88rem; line-height: 1.55;
+}
+.korea-card p strong { color: var(--ink); font-weight: 700; }
+
+/* ---------- EQUIPMENT MANIFEST ---------- */
+.kit-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+@media (max-width: 760px) { .kit-grid { grid-template-columns: 1fr; } }
+.kit {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.4rem 1.5rem;
+}
+.kit.is-primary { border-color: var(--red); border-width: 2px; }
+.kit h3 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.05rem; letter-spacing: -0.01em;
+  margin: 0 0 0.4rem;
+}
+.kit .who-carries {
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 0.8rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.kit ul {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 0.4rem;
+}
+.kit li {
+  position: relative; padding-left: 1.2rem;
+  font-size: 0.92rem; color: var(--ink-2); line-height: 1.5;
+}
+.kit li::before {
+  content: "▢";
+  position: absolute; left: 0;
+  color: var(--ink-faint);
+  font-size: 0.85em;
+}
+.kit li strong { color: var(--ink); font-weight: 700; }
+
+/* ---------- MENTAL PREP ---------- */
+.habits {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); gap: 0.85rem;
+}
+@media (max-width: 1100px) { .habits { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .habits { grid-template-columns: 1fr; } }
+.habit {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.2rem 1.3rem;
+}
+.habit .num {
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--red);
+  display: block; margin-bottom: 0.5rem;
+}
+.habit h3 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1rem; letter-spacing: -0.008em;
+  margin: 0 0 0.5rem; line-height: 1.2;
+}
+.habit p {
+  margin: 0; color: var(--ink-2); font-size: 0.86rem; line-height: 1.5;
+}
+.habit p strong { color: var(--ink); font-weight: 700; }
+
+/* ---------- SCORE LADDER ---------- */
+.ladder {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 1.5rem clamp(1.4rem, 3vw, 2rem);
+}
+.tier {
+  display: grid;
+  grid-template-columns: 6rem 9rem 1fr;
+  gap: 1.2rem;
+  align-items: baseline;
+  padding: 0.95rem 0;
+  border-top: 1px solid var(--rule);
+}
+.tier:first-of-type { border-top: 0; padding-top: 0; }
+@media (max-width: 640px) { .tier { grid-template-columns: 1fr; gap: 0.4rem; padding-bottom: 0.85rem; } }
+.tier .t-label {
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.tier .t-score {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  line-height: 1; letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.tier .t-meaning {
+  color: var(--ink-2); font-size: 0.94rem; line-height: 1.55;
+}
+.tier.is-floor .t-label { color: var(--ink-muted); }
+.tier.is-stretch .t-label, .tier.is-stretch .t-score { color: #e08a18; }
+.tier.is-strong .t-label, .tier.is-strong .t-score { color: var(--red); }
+.tier.is-ceiling { background: var(--ink); margin: 0.4rem calc(-1 * clamp(1.4rem, 3vw, 2rem)) -1.5rem; padding-left: clamp(1.4rem, 3vw, 2rem); padding-right: clamp(1.4rem, 3vw, 2rem); border-top: 0; }
+.tier.is-ceiling .t-label, .tier.is-ceiling .t-score, .tier.is-ceiling .t-meaning {
+  color: var(--white);
+}
+.tier.is-ceiling .t-label { color: var(--red); }
+.tier.is-ceiling .t-score { font-size: clamp(2rem, 3.2vw, 2.8rem); }
+.tier.is-ceiling .t-meaning { color: rgba(255,255,255,0.85); }
+
+.targeting-insight {
+  margin-top: 1.4rem;
+  background: var(--navy); color: var(--white);
+  padding: 1.4rem clamp(1.4rem, 3vw, 2rem);
+}
+.targeting-insight h3 {
+  color: var(--white); font-family: var(--font-display); font-weight: 700;
+  font-size: 1.15rem; margin: 0 0 0.6rem; letter-spacing: -0.012em;
+}
+.targeting-insight p {
+  color: rgba(255,255,255,0.82); margin: 0 0 0.5rem; line-height: 1.6;
+}
+.targeting-insight ul {
+  margin: 0.5rem 0 0.8rem; padding-left: 1.2rem;
+  color: rgba(255,255,255,0.82); line-height: 1.7; font-size: 0.96rem;
+}
+.targeting-insight strong { color: var(--white); }
+.targeting-insight .hot { color: var(--red); }
+.targeting-insight .closer-line {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 1.1rem; color: var(--white);
+  margin-top: 0.5rem;
+}
+
+/* ---------- OUTSTANDING ---------- */
+.todo-list {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 0.6rem;
+}
+.todo-list li {
+  background: var(--white); border: 1px solid var(--rule);
+  padding: 1rem 1.2rem;
+  display: grid; grid-template-columns: 2.5rem 1fr;
+  gap: 1rem; align-items: baseline;
+}
+.todo-list .num {
+  font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--red);
+}
+.todo-list .what { color: var(--ink); font-size: 0.94rem; line-height: 1.55; }
+.todo-list .what strong { color: var(--red); font-weight: 700; }
+.todo-list .what em { color: var(--ink-muted); font-style: italic; }
+
+/* ---------- THE CLOSER ---------- */
+.closer-block {
+  background: var(--navy); color: var(--white);
+  padding: 2rem clamp(1.6rem, 3.5vw, 2.5rem);
+}
+.closer-block h3 {
+  color: var(--white); font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  margin: 0 0 1rem; letter-spacing: -0.014em;
+}
+.closer-block p { color: rgba(255,255,255,0.85); margin: 0 0 0.8rem; max-width: 60ch; line-height: 1.6; }
+.closer-block strong { color: var(--white); }
+.closer-block .hot { color: var(--red); }
+.closer-block ul {
+  margin: 0.6rem 0 0; padding-left: 1.2rem;
+  color: rgba(255,255,255,0.85); line-height: 1.7; font-size: 0.96rem;
+}
+.closer-block .closer-line {
+  margin-top: 1.4rem; padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  font-family: var(--font-display); font-style: italic;
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  color: var(--white); max-width: 60ch;
+}
+</style>
+</head>
+<body>
+
+<header class="kit-header">
+  <div class="kit-header-row">
+    <div class="kit-crumbs">
+      <span class="kit-mark"><span></span><span></span><span></span><span></span></span>
+      <a href="../index.html">Mission Control</a>
+      <span class="sep">/</span>
+      <span>Brick 01</span>
+      <span class="sep">/</span>
+      <span class="here">Robot Game · Match Day Playbook</span>
+    </div>
+    <div class="kit-meta">
+      <span><span class="lock-dot"></span>Internal kit</span>
+      <a class="outstanding-pill" href="#open">Outstanding · <span class="count">9</span></a>
+      <span class="tminus" data-tminus>T−DAYS</span>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="shell brick-hero">
+  <span class="crumb-num">Brick 01 · Robot Game Match Day Playbook · Korea Edition</span>
+  <h1 class="h-display">Robot Game.</h1>
+  <p class="h-sub" style="margin-top: 1rem;">
+    The robot is championship-grade. The 8-run strategy is sound. The hardware is iterated.
+    <strong>This brick is about converting capability into outcome under pressure.</strong>
+    3 matches × 2:30. Highest score counts.
+  </p>
+  <div class="hero-meta">
+    <span><span class="red">Matches —</span> <strong>3 × 2:30</strong></span>
+    <span><span class="red">Ceiling —</span> <strong>545 pts</strong></span>
+    <span><span class="red">Regionals —</span> <strong>435 pts · 80% of ceiling</strong></span>
+    <span><span class="red">Goal —</span> <strong>close the 110-pt gap</strong></span>
+  </div>
+
+  <div class="gap-strip">
+    <div class="gap-stat">
+      <span class="num">435</span>
+      <span class="lab">Regionals · actual</span>
+    </div>
+    <div class="gap-stat is-gap" style="text-align: center;">
+      <span class="num">+110</span>
+      <span class="lab">The gap to close</span>
+    </div>
+    <div class="gap-stat" style="text-align: right;">
+      <span class="num">545</span>
+      <span class="lab">Ceiling · theoretical</span>
+    </div>
+  </div>
+</section>
+</main>
+
+<nav class="in-page-nav" id="ipNav">
+  <div class="in-page-nav-row">
+    <div class="nav-cluster">
+      <a href="#frame">Frame</a>
+      <a href="#runs">8-run plan</a>
+      <a href="#matches">3-match math</a>
+    </div>
+    <span class="nav-sep" aria-hidden="true"></span>
+    <div class="nav-cluster">
+      <a href="#roles">Table roles</a>
+      <a href="#tree">Decision tree</a>
+      <a href="#prematch">Pre-match T−30</a>
+      <a href="#between">Between matches</a>
+    </div>
+    <span class="nav-sep" aria-hidden="true"></span>
+    <div class="nav-cluster">
+      <a href="#korea">Korea variables</a>
+      <a href="#kit">Equipment</a>
+      <a href="#mental">Mental prep</a>
+      <a href="#targets">Score targets</a>
+    </div>
+    <span class="nav-sep" aria-hidden="true"></span>
+    <div class="nav-cluster">
+      <a href="#open">Open items</a>
+      <a href="#closer">Final note</a>
+    </div>
+    <span class="nav-position" id="navPosition"><span class="pos-current">01</span><span class="pos-divider">/</span><span class="pos-total">13</span></span>
+  </div>
+</nav>
+
+<main>
+<div class="shell">
+
+<!-- ============ FRAME ============ -->
+<section class="sec" id="frame">
+  <div class="sec-head">
+    <h2>Strategic frame.</h2>
+    <span class="sec-meta">110-pt gap = match execution problem, not robot problem</span>
+  </div>
+  <p class="sec-lede">UK Robot Performance already won. The 110-pt gap between 545 (theoretical) and 435 (Regionals actual)
+    is <strong>not a robot problem</strong>. It is a <strong>match execution problem</strong>.</p>
+
+  <div class="kit-grid">
+    <div class="kit">
+      <h3>Specific failure modes — what costs points under pressure</h3>
+      <span class="who-carries">Diagnosed</span>
+      <ul>
+        <li>A run fails mid-execution and the team loses 60+ seconds deciding what to do</li>
+        <li>A "90%" run hits its 10% on the day that matters</li>
+        <li>Battery or temperature shifts behaviour in subtle ways</li>
+        <li>Korean mat texture or paint differs from UK mat</li>
+        <li>Team makes timing errors under pressure (resets too slow, panics, restarts unnecessarily)</li>
+      </ul>
+    </div>
+    <div class="kit is-primary">
+      <h3>What this playbook does</h3>
+      <span class="who-carries">The fix</span>
+      <ul>
+        <li><strong>Tighter table-side roles</strong> — Operator / Resetter / Spotter / Time-caller</li>
+        <li><strong>Failure decision tree</strong> the Operator can execute in 3 seconds</li>
+        <li><strong>Pre-match routine</strong> that locks focus from T−30 to T−0</li>
+        <li><strong>Between-match discipline</strong> that resists "one more change"</li>
+        <li><strong>Mental preparation</strong> that converts capability into outcome</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8-RUN PLAN ============ -->
+<section class="sec" id="runs">
+  <div class="sec-head">
+    <h2>The 8-run game plan.</h2>
+    <span class="sec-meta">Placeholder — fill with mission-to-run mapping</span>
+  </div>
+  <p class="sec-lede">Each run targets a cluster of missions, executed with a specific attachment or mechanism.
+    Total run-time should sum to ~2:30. Confidence rates per run drive the run-order strategy below.</p>
+
+  <table class="t runs-table">
+    <thead>
+      <tr><th>#</th><th>Missions</th><th>Attachment / mechanism</th><th>Time</th><th>Confidence</th><th>Points</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="num-col">1</td><td class="ph">[ missions ]</td><td class="ph">[ mechanism ]</td><td class="time-col ph">~[time]</td><td class="conf-col conf-90">90%</td><td class="pts-col ph">[ pts ]</td></tr>
+      <tr><td class="num-col">2</td><td class="ph">[ missions ]</td><td class="ph">[ mechanism ]</td><td class="time-col ph">~[time]</td><td class="conf-col conf-100">100%</td><td class="pts-col ph">[ pts ]</td></tr>
+      <tr><td class="num-col">3</td><td class="ph">[ missions ]</td><td class="ph">[ mechanism ]</td><td class="time-col ph">~[time]</td><td class="conf-col conf-90">90%</td><td class="pts-col ph">[ pts ]</td></tr>
+      <tr><td class="num-col">4</td><td class="ph">[ missions ]</td><td class="ph">[ mechanism ]</td><td class="time-col ph">~[time]</td><td class="conf-col conf-90">90%</td><td class="pts-col ph">[ pts ]</td></tr>
+      <tr><td class="num-col">5</td><td class="ph">[ missions ]</td><td class="ph">[ mechanism ]</td><td class="time-col ph">~[time]</td><td class="conf-col conf-100">100%</td><td class="pts-col ph">[ pts ]</td></tr>
+      <tr><td class="num-col">6</td><td class="ph">[ missions ]</td><td class="ph">[ mechanism ]</td><td class="time-col ph">~[time]</td><td class="conf-col conf-100">100%</td><td class="pts-col ph">[ pts ]</td></tr>
+      <tr><td class="num-col">7</td><td class="ph">[ missions ]</td><td class="ph">[ mechanism ]</td><td class="time-col ph">~[time]</td><td class="conf-col conf-100">100%</td><td class="pts-col ph">[ pts ]</td></tr>
+      <tr><td class="num-col">8</td><td class="ph">[ missions ]</td><td class="ph">[ mechanism ]</td><td class="time-col ph">~[time]</td><td class="conf-col conf-90">90%</td><td class="pts-col ph">[ pts ]</td></tr>
+      <tr class="total"><td colspan="3">Total</td><td class="time-col">~2:30</td><td></td><td class="pts-col">545</td></tr>
+    </tbody>
+  </table>
+
+  <div class="run-strategy">
+    <h3><span class="tag">Run order</span>High-risk first, high-confidence last.</h3>
+    <ul>
+      <li><strong>Batteries are freshest at the start.</strong> 90%-consistency runs benefit most from fresh motors.</li>
+      <li><strong>If a 90% run fails early, you have time to recover.</strong> If it fails at 2:00, you don't.</li>
+      <li><strong>Banking high-confidence runs (2 / 5 / 6 / 7) at the end</strong> locks in a floor score even if everything else has gone wrong.</li>
+    </ul>
+    <div class="alert"><strong>Action —</strong> the current Q&amp;A doc suggests Run 1 (angler artifacts) is risky. Confirm whether the current order front-loads or back-loads the 90% runs. <strong>If back-loaded, swap.</strong></div>
+  </div>
+</section>
+
+<!-- ============ 3-MATCH STRATEGY ============ -->
+<section class="sec" id="matches">
+  <div class="sec-head">
+    <h2>3-match strategy.</h2>
+    <span class="sec-meta">Highest score counts</span>
+  </div>
+  <p class="sec-lede">3 matches. Highest score counts. The math on consistency is in our favour — but we still need to <em>hit the runs we can hit</em>.</p>
+
+  <div class="math-strip">
+    <div class="formula">Per-run at 95% × 8 runs = 0.95<sup>8</sup> = <strong>66%</strong> chance of clean 545 in a single match.</div>
+    <div class="formula">Across 3 matches = 1 − (0.34)<sup>3</sup> = <strong>~96%</strong> chance of at least one near-clean run.</div>
+  </div>
+
+  <div class="matches" style="margin-top: 1.4rem;">
+    <div class="match-card">
+      <span class="m-num">Match 01 · baseline</span>
+      <h3>Full strategy. No deviations.</h3>
+      <p class="approach">Establish baseline. Watch what fails. Conservative on retries — if a 90% run fails, skip to next.</p>
+      <div class="meta">
+        <div class="meta-cell"><span class="lab">Floor</span><span class="val">435</span></div>
+        <div class="meta-cell"><span class="lab">Ceiling</span><span class="val">545</span></div>
+      </div>
+    </div>
+    <div class="match-card">
+      <span class="m-num">Match 02 · adjust</span>
+      <h3>Apply Match 1 observations.</h3>
+      <p class="approach">Adjust starting positions, motor angles, anything that drifted. Standard risk. Retry one risky run if time allows.</p>
+      <div class="meta">
+        <div class="meta-cell"><span class="lab">Target</span><span class="val target">480+</span></div>
+        <div class="meta-cell"><span class="lab">Risk</span><span class="val">Standard</span></div>
+      </div>
+    </div>
+    <div class="match-card">
+      <span class="m-num">Match 03 · push</span>
+      <h3>Push the ceiling.</h3>
+      <p class="approach">If a high score is banked, take calculated risks. Aggressive — retry the missions worth most points if they fail.</p>
+      <div class="meta">
+        <div class="meta-cell"><span class="lab">Target</span><span class="val target">545</span></div>
+        <div class="meta-cell"><span class="lab">Risk</span><span class="val">Aggressive</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="discipline">
+    <strong>The hidden discipline —</strong> do not change tactics mid-match. Mid-match changes cause cascading errors. Adjust between matches only.
+  </div>
+</section>
+
+<!-- ============ TABLE ROLES ============ -->
+<section class="sec" id="roles">
+  <div class="sec-head">
+    <h2>Table-side team roles.</h2>
+    <span class="sec-meta">4 named roles · rotate across matches</span>
+  </div>
+  <p class="sec-lede">FLL allows up to 2 (sometimes 4) members at the table. <strong>Roles are not formal in rules, but the team needs them clear to execute under pressure.</strong></p>
+
+  <div class="roles">
+    <div class="role">
+      <span class="r-tag">Role 01</span>
+      <h3>Operator</h3>
+      <p class="resp">Drives the robot. Presses start. Calls "go". <strong>Final voice on every decision during the run.</strong></p>
+      <div class="who">
+        <div><span class="lab">Recommended</span><span class="name tbd">[ TBD ]</span></div>
+        <div><span class="lab">Backup</span><span class="name tbd">[ TBD ]</span></div>
+      </div>
+    </div>
+    <div class="role">
+      <span class="r-tag">Role 02</span>
+      <h3>Resetter</h3>
+      <p class="resp">Swaps attachments. Places robot in launch area. Hands aligners to Operator.</p>
+      <div class="who">
+        <div><span class="lab">Recommended</span><span class="name tbd">[ TBD ]</span></div>
+        <div><span class="lab">Backup</span><span class="name tbd">[ TBD ]</span></div>
+      </div>
+    </div>
+    <div class="role">
+      <span class="r-tag">Role 03</span>
+      <h3>Spotter</h3>
+      <p class="resp">Watches the robot during run. Calls failures. Reads the table.</p>
+      <div class="who">
+        <div><span class="lab">Recommended</span><span class="name tbd">[ TBD ]</span></div>
+        <div><span class="lab">Backup</span><span class="name tbd">[ TBD ]</span></div>
+      </div>
+    </div>
+    <div class="role">
+      <span class="r-tag">Role 04</span>
+      <h3>Time / score caller</h3>
+      <p class="resp">Tracks 2:30 countdown. Calls remaining time. Mental-tracks points scored.</p>
+      <div class="who">
+        <div><span class="lab">Recommended</span><span class="name tbd">[ TBD ]</span></div>
+        <div><span class="lab">Backup</span><span class="name tbd">[ TBD ]</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="support-note">
+    <strong>The other 5 team members</strong> support from the side: <strong>cheering only</strong> (positive, no negative commentary), reading the score sheet, prepping mental encouragement.
+    <span class="key-rule">Rule of one voice — during a run, only the Operator speaks. Cross-talk under pressure is the single biggest cause of timing errors.</span>
+  </div>
+
+  <div class="voice-commands">
+    <h3>Communication protocol — during the run</h3>
+    <div class="voice-grid">
+      <div class="voice"><span class="word">"Go"</span><span class="meaning">Operator initiates run</span></div>
+      <div class="voice"><span class="word">"Clear"</span><span class="meaning">Spotter confirms run completed successfully</span></div>
+      <div class="voice"><span class="word">"Fail"</span><span class="meaning">Spotter calls a failed mission</span></div>
+      <div class="voice"><span class="word">"Skip"</span><span class="meaning">Operator decides to abandon current run</span></div>
+      <div class="voice"><span class="word">"Retry [N]"</span><span class="meaning">Operator decides to repeat run N via custom menu</span></div>
+    </div>
+    <p class="voice-rule"><strong>No other words during the 2:30.</strong> Save talking for between matches.</p>
+  </div>
+</section>
+
+<!-- ============ DECISION TREE (signature) ============ -->
+<section class="sec" id="tree">
+  <div class="sec-head">
+    <h2>Failure decision tree.</h2>
+    <span class="sec-meta">Operator decides under 3 seconds</span>
+  </div>
+
+  <div class="tree-intro">
+    <span class="head">When a run fails — this is the tree.</span>
+    <span class="clock">Decide in 3 sec</span>
+  </div>
+
+  <div class="tree">
+    <div class="branch">
+      <span class="b-num">Branch 01</span>
+      <h3>Failed at launch.</h3>
+      <p class="desc">Robot didn't leave home area cleanly.</p>
+      <div class="conditions">
+        <div class="condition">
+          <span class="if">If TIME &gt; 1:00</span>
+          <span class="then retry">Retry</span>
+          <span class="note">Cost ~10 sec.</span>
+        </div>
+        <div class="condition">
+          <span class="if">If TIME &lt; 1:00</span>
+          <span class="then skip">Skip</span>
+          <span class="note">Move to next run.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch">
+      <span class="b-num">Branch 02</span>
+      <h3>Failed mid-run.</h3>
+      <p class="desc">Mission missed but robot continued.</p>
+      <div class="conditions">
+        <div class="condition">
+          <span class="if">Run worth &gt; 60 pts &amp; TIME &gt; 45 sec</span>
+          <span class="then retry">Retry</span>
+        </div>
+        <div class="condition">
+          <span class="if">Run worth &gt; 60 pts &amp; TIME &lt; 45 sec</span>
+          <span class="then skip">Skip</span>
+        </div>
+        <div class="condition">
+          <span class="if">Run worth &lt; 60 pts</span>
+          <span class="then skip">Skip</span>
+          <span class="note">Don't waste time.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch">
+      <span class="b-num">Branch 03</span>
+      <h3>Failed late-run.</h3>
+      <p class="desc">Last mission missed but earlier missions scored.</p>
+      <div class="conditions">
+        <div class="condition">
+          <span class="if">Always</span>
+          <span class="then always-skip">Always skip</span>
+          <span class="note">Don't redo. Earlier missions banked.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch">
+      <span class="b-num">Branch 04</span>
+      <h3>Robot stuck or off-table.</h3>
+      <p class="desc">Mechanical hang-up or out of bounds.</p>
+      <div class="conditions">
+        <div class="condition">
+          <span class="if">Touch penalty acceptable</span>
+          <span class="then retrieve">Retrieve</span>
+          <span class="note">Place in home, retry current run.</span>
+        </div>
+        <div class="condition">
+          <span class="if">TIME &lt; 30 sec</span>
+          <span class="then skip">Penalty + safest run</span>
+          <span class="note">Take retrieve penalty, attempt safest remaining run.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cardinal-rule">
+    <span class="lab">Cardinal rule</span>
+    <p class="text">"When in doubt, <strong style="color:var(--white)">SKIP</strong>. Sunk cost is real but expensive. Move forward."</p>
+  </div>
+</section>
+
+<!-- ============ PRE-MATCH ============ -->
+<section class="sec" id="prematch">
+  <div class="sec-head">
+    <h2>Pre-match routine.</h2>
+    <span class="sec-meta">T−30 → T−0 · countdown discipline</span>
+  </div>
+
+  <div class="timeline">
+    <div class="t-step">
+      <span class="when">T−30 min</span>
+      <div class="what">
+        <h3>Equipment check.</h3>
+        <ul>
+          <li>Robot charged to 100%, last drained &lt; 4 hours ago</li>
+          <li>All 8 attachments in starting positions</li>
+          <li>Aligners and jigs in carry bag</li>
+          <li>Custom menu screen loads correctly</li>
+          <li>Backup batteries charged</li>
+          <li>Spare bricks (most failure-prone pieces) packed</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="t-step">
+      <span class="when">T−20 min</span>
+      <div class="what">
+        <h3>Mental calibration.</h3>
+        <ul>
+          <li>Whole team huddle. <strong>2 minutes max.</strong></li>
+          <li>Operator states: "Run order today is [X]. Failure protocol: skip when in doubt."</li>
+          <li>Everyone confirms.</li>
+          <li><strong>L! O! T! B!</strong> Lord of the Bricks chant.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="t-step">
+      <span class="when">T−15 min</span>
+      <div class="what">
+        <h3>Approach to table area.</h3>
+        <ul>
+          <li>Walk together. Slowly. No rushing.</li>
+          <li>Avoid bumping into other teams' tables.</li>
+          <li>Greet referees by name (read name tag).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="t-step">
+      <span class="when">T−10 min</span>
+      <div class="what">
+        <h3>Practice table — if available.</h3>
+        <ul>
+          <li>One quick alignment test.</li>
+          <li>Test the gyro on a straight-line run.</li>
+          <li><strong>Do NOT run full sequences.</strong> You'll waste battery and burn timing memory.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="t-step">
+      <span class="when">T−3 min</span>
+      <div class="what">
+        <h3>At the competition table.</h3>
+        <ul>
+          <li>Operator and Resetter at the table.</li>
+          <li>Spotter and Time-caller flanking.</li>
+          <li>Other 5 members 6 feet back, silent.</li>
+          <li>Operator places robot in launch position.</li>
+          <li>Eyes up. Breath in. Breath out.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="t-step is-final">
+      <span class="when">T−0</span>
+      <div class="what">
+        <h3>Match starts.</h3>
+        <ul>
+          <li>Referee says go.</li>
+          <li>Operator: <strong>"Go."</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BETWEEN-MATCH ============ -->
+<section class="sec" id="between">
+  <div class="sec-head">
+    <h2>Between-match routine.</h2>
+    <span class="sec-meta">First 5 min · 15-60 min · what to fix</span>
+  </div>
+
+  <div class="between-grid">
+    <div class="between-card">
+      <h3><span class="tag">First 5 minutes</span>Immediately after match.</h3>
+      <ul>
+        <li><strong>All 9 huddle.</strong> No phones, no parents.</li>
+        <li>One round: each person says <strong>one observation</strong>. Just observations, no judgments.</li>
+        <li>Operator (or coach) decides: <strong>one change for the next match. One only.</strong> Not two, not three.</li>
+      </ul>
+    </div>
+
+    <div class="between-card">
+      <h3><span class="tag">15 to 60 min</span>Pit work + recovery.</h3>
+      <ul>
+        <li>Robot back to pit. Charge if needed (rarely needed for a 2:30 run).</li>
+        <li>Inspect attachments for damage. Most common failure: <em>pin loosening on Run [TBD]</em>.</li>
+        <li>Hydrate. Eat something light (banana, biscuit). Not sugary drinks.</li>
+        <li>Use the bathroom in plenty of time before the next call.</li>
+      </ul>
+    </div>
+
+    <div class="between-card">
+      <h3><span class="tag">What to fix</span>Yes — these only.</h3>
+      <ul>
+        <li><strong>Mechanical:</strong> yes (loose pin, slipped rubber band).</li>
+        <li><strong>Code:</strong> only if a specific bug was clearly visible, AND the fix is verified-safe.</li>
+        <li><strong>Strategy:</strong> no. Don't change run order mid-event.</li>
+      </ul>
+    </div>
+
+    <div class="between-card is-warning">
+      <h3><span class="tag">What NOT to fix</span>The temptations to resist.</h3>
+      <ul>
+        <li><em>"We could try X instead"</em> → no. Stick to the plan.</li>
+        <li><em>"Let me just rewrite this line"</em> → no. <strong>Untested code on match day is catastrophic.</strong></li>
+        <li><em>"What if we add a sensor"</em> → no. You go with what got you here.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KOREA-SPECIFIC ============ -->
+<section class="sec" id="korea">
+  <div class="sec-head">
+    <h2>Korea-specific variables.</h2>
+    <span class="sec-meta">6 things that don't exist at UK Nationals</span>
+  </div>
+
+  <div class="korea-grid">
+    <div class="korea-card">
+      <span class="num">Variable 01</span>
+      <h3>Mat differences.</h3>
+      <p>Friction, age, paint imperfections may differ. <strong>Plan —</strong> arrive early on practice day, run all 8 runs once, note distance-per-rotation differences, recalibrate if needed.</p>
+    </div>
+    <div class="korea-card">
+      <span class="num">Variable 02</span>
+      <h3>Battery + temperature.</h3>
+      <p>Motor behaviour shifts with venue temperature. <strong>Plan —</strong> at least one full-match simulation in the venue temperature before competing.</p>
+    </div>
+    <div class="korea-card">
+      <span class="num">Variable 03</span>
+      <h3>Time zone + sleep.</h3>
+      <p>Korea is 9 hours ahead of UK. Jet lag is real. <strong>Plan —</strong> land at least 2 days before. Sleep schedule adjusted by 2 hours per day starting 5 days before departure.</p>
+    </div>
+    <div class="korea-card">
+      <span class="num">Variable 04</span>
+      <h3>Foreign noise environment.</h3>
+      <p>Louder venue, more languages, more energy. Robot is unaffected — team focus may drop. <strong>Plan —</strong> practice runs at home with loud music or chatter. Build noise immunity.</p>
+    </div>
+    <div class="korea-card">
+      <span class="num">Variable 05</span>
+      <h3>Referee variation.</h3>
+      <p>Touch penalties + line-side rulings may be interpreted differently. <strong>Plan —</strong> at registration, the coach asks 2 specific edge-case questions. <strong>Get written confirmation if possible.</strong></p>
+    </div>
+    <div class="korea-card">
+      <span class="num">Variable 06</span>
+      <h3>Equipment damage in transit.</h3>
+      <p>The robot may shift in transit. <strong>Plan —</strong> rebuild any loose connection on arrival. Test all 8 runs on Day 1. <strong>Do not assume the robot survived the flight intact.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EQUIPMENT ============ -->
+<section class="sec" id="kit">
+  <div class="sec-head">
+    <h2>Equipment manifest.</h2>
+    <span class="sec-meta">What goes to Korea · who carries</span>
+  </div>
+
+  <div class="kit-grid">
+    <div class="kit is-primary">
+      <h3>Primary kit</h3>
+      <span class="who-carries">Karthic / designated coach · carries on flight</span>
+      <ul>
+        <li><strong>World Dominator robot</strong>, in custom-fit hard case</li>
+        <li>All <strong>8 attachments</strong>, in labelled compartments</li>
+        <li>Mechanical aligners + starting jigs</li>
+        <li>Charged battery + <strong>2 spare batteries</strong></li>
+        <li>Charging cable + UK-to-Korea plug adapter (Type F)</li>
+      </ul>
+    </div>
+
+    <div class="kit">
+      <h3>Secondary kit</h3>
+      <span class="who-carries">Parent / team member · cabin or checked</span>
+      <ul>
+        <li>Spare LEGO Technic parts (most failure-prone, identified by Toby)</li>
+        <li>Engineering journal</li>
+        <li>Resources folder</li>
+        <li>Prompt engineering printout (Innovation Project)</li>
+        <li>KAS newsletter printout</li>
+        <li>Blueprint one-pager</li>
+        <li><strong>40% → 95% consistency curve</strong> printout</li>
+        <li>Animated mission map (or static version)</li>
+        <li>List of all coding (printout)</li>
+        <li>List of 50+ changes (printout)</li>
+      </ul>
+    </div>
+
+    <div class="kit">
+      <h3>Team kit</h3>
+      <span class="who-carries">Each member · personal carry</span>
+      <ul>
+        <li>Team uniform</li>
+        <li>UK gift items (pins, postcards · for the GP playbook)</li>
+        <li>Personal water bottle</li>
+        <li>Notebook + pen for between-match notes</li>
+      </ul>
+    </div>
+
+    <div class="kit">
+      <h3>Backup kit</h3>
+      <span class="who-carries">Locked in hotel room · NOT at venue</span>
+      <ul>
+        <li>Spare robot hub (if available)</li>
+        <li>Spare full set of attachments</li>
+        <li>Spare uniforms</li>
+        <li>Printed copies of all scripts</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENTAL PREP ============ -->
+<section class="sec" id="mental">
+  <div class="sec-head">
+    <h2>Mental preparation.</h2>
+    <span class="sec-meta">The 110-pt gap is mostly mental</span>
+  </div>
+  <p class="sec-lede">Train these habits in the next weeks. They're how capability becomes outcome under pressure.</p>
+
+  <div class="habits">
+    <div class="habit">
+      <span class="num">Habit 01</span>
+      <h3>The 3-second rule.</h3>
+      <p>When something goes wrong, the team has 3 seconds to decide and act. <strong>Train by simulating failures during practice</strong> — knock a piece, mis-align — see how fast the team adjusts.</p>
+    </div>
+    <div class="habit">
+      <span class="num">Habit 02</span>
+      <h3>The "no replay" rule.</h3>
+      <p>After a run, no replaying what happened. <strong>Observe, decide one fix, move on.</strong> End every practice with the same protocol: huddle, one observation each, one fix decided.</p>
+    </div>
+    <div class="habit">
+      <span class="num">Habit 03</span>
+      <h3>The L-O-T-B reset.</h3>
+      <p>When tension builds, anyone says <em>"L-O-T-B"</em> quietly. The rest respond <em>"Lord of the Bricks."</em> <strong>Resets focus. Builds team rhythm under stress.</strong></p>
+    </div>
+    <div class="habit">
+      <span class="num">Habit 04</span>
+      <h3>The breath.</h3>
+      <p>Operator takes <strong>3 slow breaths</strong> before pressing start. Every match, every time. <strong>This is not optional.</strong></p>
+    </div>
+    <div class="habit">
+      <span class="num">Habit 05</span>
+      <h3>Win or lose, chant together.</h3>
+      <p>Regardless of outcome, after the final match the team does the full closing chant together. <strong>Builds identity that survives results.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCORE TARGETS ============ -->
+<section class="sec" id="targets">
+  <div class="sec-head">
+    <h2>Score targeting framework.</h2>
+    <span class="sec-meta">The strategic insight — match-by-match, not match-perfect</span>
+  </div>
+
+  <div class="ladder">
+    <div class="tier is-floor">
+      <span class="t-label">Floor</span>
+      <span class="t-score">435</span>
+      <span class="t-meaning">What you hit at Regionals. <strong>The non-negotiable baseline.</strong></span>
+    </div>
+    <div class="tier is-stretch">
+      <span class="t-label">Stretch</span>
+      <span class="t-score">480</span>
+      <span class="t-meaning">What a clean Match 1 should deliver.</span>
+    </div>
+    <div class="tier is-strong">
+      <span class="t-label">Strong</span>
+      <span class="t-score">510</span>
+      <span class="t-meaning">What a clean Match 2 with one retry should deliver.</span>
+    </div>
+    <div class="tier is-ceiling">
+      <span class="t-label">Ceiling</span>
+      <span class="t-score">545</span>
+      <span class="t-meaning">A perfect Match 3. <strong style="color:var(--red)">This is the goal.</strong></span>
+    </div>
+  </div>
+
+  <div class="targeting-insight">
+    <h3>The strategic insight.</h3>
+    <p>You do not need to hit 545. You need to <strong>maximise the highest of 3 matches.</strong> That means the goal in each match is different:</p>
+    <ul>
+      <li><strong>Match 1 —</strong> clear the floor (435+)</li>
+      <li><strong>Match 2 —</strong> lift to strong (480+)</li>
+      <li><strong>Match 3 —</strong> swing for ceiling (520+)</li>
+    </ul>
+    <p>A score of 510 across all 3 matches is better than one 545 followed by two 380s.</p>
+    <p class="closer-line"><strong class="hot">Consistency wins.</strong></p>
+  </div>
+</section>
+
+<!-- ============ OPEN ITEMS ============ -->
+<section class="sec" id="open">
+  <div class="sec-head">
+    <h2>Open items.</h2>
+    <span class="sec-meta">9 placeholders to lock</span>
+  </div>
+
+  <ol class="todo-list">
+    <li><span class="num">01</span><span class="what"><strong>The 8-run table.</strong> Mission-to-run mapping with point values per run. Strategy is clear; specifics aren't.</span></li>
+    <li><span class="num">02</span><span class="what"><strong>Per-run time budget.</strong> Sum should be ~2:30. Confirm.</span></li>
+    <li><span class="num">03</span><span class="what"><strong>Per-run consistency rates.</strong> Q&amp;A doc says runs 2, 5, 6, 7 are ~100% and others ~90%. Confirm or update.</span></li>
+    <li><span class="num">04</span><span class="what"><strong>UK Nationals score.</strong> Documents say Regionals = 435. <em>What did you score at Nationals?</em></span></li>
+    <li><span class="num">05</span><span class="what"><strong>Table roles.</strong> Who is your current Operator, Resetter, Spotter, Time-caller? Or is it different per match?</span></li>
+    <li><span class="num">06</span><span class="what"><strong>Backup hardware.</strong> Spare hub? Spare attachments? Full backup robot?</span></li>
+    <li><span class="num">07</span><span class="what"><strong>Practice day access in Korea.</strong> Is there a practice day at the venue before competition? <em>If yes, the Day-1-full-simulation plan kicks in.</em></span></li>
+    <li><span class="num">08</span><span class="what"><strong>Custom menu specifics.</strong> Q&amp;A doc says menu auto-increments and allows manual selection. Confirm the manual selection logic — when you press X, which run loads?</span></li>
+    <li><span class="num">09</span><span class="what"><strong>Common failure modes from Regionals.</strong> Which runs failed at Regionals, at what stage? <em>This will sharpen the failure decision tree above.</em></span></li>
+  </ol>
+</section>
+
+<!-- ============ CLOSER ============ -->
+<section class="sec" id="closer">
+  <div class="sec-head">
+    <h2>Final note.</h2>
+  </div>
+  <div class="closer-block">
+    <h3>The robot is championship-grade. Match 3 in Korea is what it's been built for.</h3>
+    <p>The 8-run strategy is sound. The hardware is iterated. The team has 4 years of accumulated skill. <strong>Under pressure, none of that matters if execution wobbles.</strong></p>
+    <p>The 110-pt gap is closed by:</p>
+    <ul>
+      <li><strong>Tighter table-side roles</strong></li>
+      <li>A <strong>failure decision tree</strong> the Operator can execute in 3 seconds</li>
+      <li>A <strong>pre-match routine</strong> that locks focus</li>
+      <li>A <strong>between-match discipline</strong> that resists "one more change"</li>
+      <li><strong>Mental preparation</strong> that converts capability into outcome</li>
+    </ul>
+    <p class="closer-line">With this playbook drilled, <strong class="hot">Match 3 in Korea earns Lord of the Bricks the Robot Performance championship at international level.</strong></p>
+  </div>
+  <p class="note" style="margin-top: 1rem;">
+    <strong>Brick 01 status —</strong> Framework complete. Ready for placeholders on the 8-run details and table roles. Once those are in, this brick is operational.
+    Next bricks queued: Brick 05 · Final Share polish · Brick 06 · GP playbook operationalised · Brick 09 · Q&amp;A response bank · Brick 10 · Team welcome &amp; icebreaker.
+  </p>
+</section>
+
+</div>
+</main>
+
+<footer class="kit-footer">
+  <span><a href="../index.html">← Mission Control</a></span>
+  <span>Brick 01 · Robot Game Match Day Playbook · Korea Edition</span>
+</footer>
+
+<script src="../_shared/base.js"></script>
+</body>
+</html>

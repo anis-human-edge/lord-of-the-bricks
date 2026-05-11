@@ -1,0 +1,556 @@
+/* =========================================================
+   LORD OF THE BRICKS — FINALS KIT — BASE TOKENS
+   Light editorial. Same palette + type as the public site.
+   No gradients, no glassmorphism, no left-stripe accents.
+   ========================================================= */
+
+:root {
+  /* Palette — committed in /.impeccable.md, do not invent new colors */
+  --white: #ffffff;
+  --bone:  #faf8f4;
+  --paper: #fbfaf6;          /* slightly lighter bone for working surfaces */
+  --rule:  #e6e4dd;
+  --rule-strong: #c9c6bd;
+  --ink:        #0a0a0a;
+  --ink-2:      #1f2937;
+  --ink-muted:  #6b7280;
+  --ink-faint:  #9ba3af;
+  --navy:       #0a1f44;
+  --navy-deep:  #061434;
+  --red:        #c8102e;
+  --red-deep:   #98101f;
+  --accent:     #1b4fe5;     /* team blue — IP / weave callouts */
+  --accent-deep:#0c2db8;
+
+  /* Status semantics */
+  --status-draft:  #9ba3af;
+  --status-review: #c8102e;
+  --status-locked: #0a1f44;
+
+  /* Type */
+  --font-display: "Space Grotesk", "Inter Tight", system-ui, -apple-system, sans-serif;
+  --font-body:    "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Spacing */
+  --gutter: clamp(1.25rem, 3.5vw, 3rem);
+  --section-y: clamp(3.5rem, 7vw, 6.5rem);
+  --max-w: 1240px;
+
+  /* Motion */
+  --ease: cubic-bezier(.2,.7,.2,1);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bone);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+/* =========================================================
+   TYPE SCALE — slightly tighter than the public site
+   (this is a working kit, not a memoir)
+   ========================================================= */
+.h-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 5vw, 4.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+  margin: 0;
+}
+.h-section {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.016em;
+  text-wrap: balance;
+  margin: 0;
+}
+.h-sub {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: var(--ink-muted);
+  margin: 0;
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+.body-lg { font-size: clamp(1rem, 1.05vw, 1.06rem); line-height: 1.7; max-width: 62ch; color: var(--ink-2); text-wrap: pretty; }
+.body { color: var(--ink-2); max-width: 64ch; line-height: 1.7; text-wrap: pretty; }
+.note { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.06em; color: var(--ink-muted); }
+.mono { font-family: var(--font-mono); }
+
+/* Eyebrow — same component as the public site */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--ink-2);
+}
+.eyebrow.is-red::before { background: var(--red); }
+.eyebrow.is-accent::before { background: var(--accent); }
+.eyebrow.is-red { color: var(--red); }
+.eyebrow.is-accent { color: var(--accent); }
+
+/* Rule */
+.rule { height: 1px; background: var(--rule); width: 100%; }
+.rule-thick { height: 4px; background: var(--ink); width: 80px; margin: 0; }
+.rule-thick.is-red { background: var(--red); }
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+.shell { width: 100%; max-width: var(--max-w); margin: 0 auto; padding-inline: var(--gutter); }
+section { padding-block: var(--section-y); position: relative; }
+.section-paper { background: var(--paper); }
+.section-bone { background: var(--bone); }
+
+/* =========================================================
+   KIT HEADER — appears on every page (hub + bricks + prep + reference)
+   Slim, mono-typed, breadcrumb on left, T-minus + lock state on right
+   ========================================================= */
+.kit-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 248, 244, 0.94);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
+.kit-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.75rem var(--gutter);
+  max-width: var(--max-w);
+  margin: 0 auto;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.kit-crumbs { display: flex; align-items: center; gap: 0.55rem; color: var(--ink-muted); flex-wrap: wrap; }
+.kit-crumbs a { color: var(--ink-muted); transition: color .2s var(--ease); }
+.kit-crumbs a:hover { color: var(--ink); }
+.kit-crumbs .sep { color: var(--ink-faint); }
+.kit-crumbs .here { color: var(--ink); font-weight: 700; }
+.kit-mark {
+  width: 18px; height: 18px;
+  background: var(--red);
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1px;
+  padding: 3px;
+  margin-right: 0.5rem;
+  vertical-align: -3px;
+}
+.kit-mark span { background: var(--bone); }
+.kit-meta { display: flex; align-items: center; gap: 0.85rem; color: var(--ink-muted); }
+.kit-meta .lock-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); display: inline-block; margin-right: 0.4rem; }
+
+/* T-minus badge (lifted from public site) */
+.tminus {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--red);
+  color: var(--white);
+  padding: 0.22rem 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+.tminus::before {
+  content: "";
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 0 0 0 rgba(255,255,255,0.6);
+  animation: tminus-pulse 1.6s ease-in-out infinite;
+}
+@keyframes tminus-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.6); }
+  60%      { box-shadow: 0 0 0 7px rgba(255,255,255,0); }
+}
+
+/* =========================================================
+   STATUS BADGE — the only new component
+   draft (grey) / in review (red outline) / locked (red filled)
+   ========================================================= */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.5rem;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+.status::before {
+  content: "";
+  width: 5px; height: 5px; border-radius: 50%;
+  background: currentColor;
+}
+.status.is-draft  { color: var(--status-draft); }
+.status.is-review { color: var(--red); border-color: var(--red); }
+.status.is-locked { color: var(--white); background: var(--navy); border-color: var(--navy); }
+.status.is-locked::before { background: var(--red); }
+
+/* =========================================================
+   GATE — single-passphrase UI overlay
+   (Acknowledged theatre: passphrase is in the JS file. Deters casual
+    visitors only. Real strategy belongs nowhere we wouldn't share.)
+   ========================================================= */
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--bone);
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+}
+.gate-card {
+  max-width: 420px;
+  width: 100%;
+  text-align: left;
+}
+.gate-card .eyebrow { margin-bottom: 1.2rem; }
+.gate-card h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  line-height: 1.05;
+  letter-spacing: -0.018em;
+  margin: 0 0 0.85rem;
+  text-wrap: balance;
+}
+.gate-card p {
+  color: var(--ink-muted);
+  margin: 0 0 1.6rem;
+  line-height: 1.55;
+}
+.gate-form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 0.9rem 0;
+}
+.gate-form input {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  padding: 0.4rem 0;
+  outline: none;
+}
+.gate-form input::placeholder { color: var(--ink-faint); }
+.gate-form button {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--ink);
+  padding: 0.55rem 0.9rem;
+  transition: background .2s var(--ease);
+}
+.gate-form button:hover { background: var(--red); }
+.gate-error {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--red);
+  margin-top: 0.85rem;
+  letter-spacing: 0.04em;
+  min-height: 1.1em;
+}
+.gate-foot {
+  margin-top: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+body.is-locked { overflow: hidden; }
+body.is-locked .kit-header,
+body.is-locked main,
+body.is-locked footer { visibility: hidden; }
+
+/* =========================================================
+   FOOTER — internal notice
+   ========================================================= */
+.kit-footer {
+  border-top: 1px solid var(--rule);
+  padding: 1.5rem var(--gutter);
+  margin-top: var(--section-y);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: var(--max-w);
+  margin-left: auto;
+  margin-right: auto;
+}
+.kit-footer a { color: var(--ink-muted); }
+.kit-footer a:hover { color: var(--ink); }
+
+/* =========================================================
+   REVEAL — gentle lift only (no opacity hide)
+   On a working surface, content should always render.
+   The IO in base.js still fires .is-in for the lift transition,
+   but we never hide content waiting for a scroll event.
+   ========================================================= */
+.reveal { transform: translateY(8px); transition: transform .6s var(--ease); }
+.reveal.is-in { transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { transform: none; } }
+
+/* =========================================================
+   IN-PAGE NAV — cluster + separator + position counter
+   Augments the per-page nav with visual grouping and a
+   live "N of N" position indicator.
+   ========================================================= */
+.nav-cluster {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  align-items: center;
+}
+.nav-sep {
+  flex-shrink: 0;
+  width: 1px;
+  align-self: stretch;
+  background: var(--rule-strong);
+  margin: 0.25rem 0.4rem;
+}
+.nav-position {
+  flex-shrink: 0;
+  margin-left: auto;
+  padding-left: 0.85rem;
+  border-left: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--red);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.nav-position .pos-current { color: var(--ink); }
+.nav-position .pos-divider { color: var(--ink-faint); }
+
+/* =========================================================
+   OUTSTANDING PILL — sticky badge in kit-header
+   Always-visible blocker count. Click jumps to the open list.
+   ========================================================= */
+.outstanding-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  border: 1px solid var(--red);
+  padding: 0.22rem 0.55rem;
+  transition: background .2s var(--ease), color .2s var(--ease);
+  white-space: nowrap;
+}
+.outstanding-pill:hover { background: var(--red); color: var(--white); }
+.outstanding-pill .count { font-weight: 700; }
+.outstanding-pill::before {
+  content: "";
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--red);
+}
+
+/* =========================================================
+   ROW-SPEAKER — promoted speaker label for Brick 4 row bars
+   Lives in .row-bar-right next to the cv-chip. Compact,
+   so a kid scanning 10 cards can find their own card fast.
+   ========================================================= */
+.row-speaker {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.row-speaker::before {
+  content: "→";
+  opacity: 0.55;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95em;
+}
+
+/* =========================================================
+   SHARED CARD COMPONENTS
+   ========================================================= */
+.cards { display: grid; gap: 1rem; }
+.card {
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.4rem 1.5rem;
+  transition: border-color .2s var(--ease), transform .2s var(--ease), box-shadow .2s var(--ease);
+}
+.card:hover {
+  border-color: var(--ink);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(10,31,68,0.06);
+}
+.card-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.4rem;
+}
+.card-num {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--red);
+}
+.card-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  margin: 0.2rem 0 0.3rem;
+  line-height: 1.2;
+}
+.card p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* Pull quote */
+.pull {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 1.5rem 0;
+  padding-left: 2rem;
+  position: relative;
+  max-width: 56ch;
+}
+.pull::before {
+  content: "\201C";
+  position: absolute;
+  left: 0;
+  top: -0.4em;
+  font-size: 3em;
+  line-height: 1;
+  color: var(--red);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* Tables */
+.t {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.t th, .t td {
+  text-align: left;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.t th {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  border-bottom: 1px solid var(--ink);
+}
+.t tbody tr:hover { background: var(--paper); }
+
+/* Tag chip — for criterion labels etc. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--rule-strong);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.chip.is-red { color: var(--red); border-color: var(--red); }
+.chip.is-accent { color: var(--accent); border-color: var(--accent); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  html { scroll-behavior: auto; }
+}

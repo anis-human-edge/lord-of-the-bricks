@@ -1,0 +1,1653 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#0A1F44" />
+<meta name="robots" content="noindex, nofollow, noarchive" />
+<title>Brick 04 · Core Values Evidence Kit · Lord of the Bricks</title>
+
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" />
+<link rel="stylesheet" href="../_shared/base.css" />
+
+<style>
+/* ---------- HERO ---------- */
+.brick-hero { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: clamp(1rem, 2vw, 2rem); }
+.brick-hero .crumb-num {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--red);
+}
+.brick-hero h1 { margin-top: 1rem; max-width: 18ch; }
+.team-line {
+  margin-top: 1.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  align-items: baseline;
+}
+.team-line .label { color: var(--red); }
+.team-line .name { color: var(--ink); font-weight: 700; }
+.team-line .coach { margin-left: auto; }
+
+/* ---------- IN-PAGE NAV ---------- */
+.in-page-nav {
+  position: sticky;
+  top: 49px; /* sits below kit-header */
+  z-index: 40;
+  background: rgba(250, 248, 244, 0.96);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--rule);
+  border-top: 1px solid var(--ink);
+}
+.in-page-nav-row {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0.65rem var(--gutter);
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.in-page-nav-row::-webkit-scrollbar { display: none; }
+.in-page-nav a {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--rule);
+  background: var(--white);
+  transition: border-color .2s var(--ease), color .2s var(--ease);
+  white-space: nowrap;
+}
+.in-page-nav a:hover { color: var(--ink); border-color: var(--ink); }
+.in-page-nav a.is-active { color: var(--white); background: var(--ink); border-color: var(--ink); }
+
+/* ---------- SECTION HEADERS ---------- */
+.sec {
+  padding-block: clamp(2.5rem, 4vw, 4rem);
+  scroll-margin-top: 100px;
+}
+.sec + .sec { border-top: 1px solid var(--rule); }
+.sec-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 0.6rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.sec-head h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  letter-spacing: -0.018em;
+  margin: 0;
+}
+.sec-head .sec-meta {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.sec-lede {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.4;
+  color: var(--ink-muted);
+  max-width: 64ch;
+  margin: 0 0 2rem;
+  text-wrap: pretty;
+}
+
+/* ---------- SCORING FORMULA ---------- */
+.formula {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+@media (max-width: 760px) { .formula { grid-template-columns: 1fr; } }
+.formula-card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.5rem 1.6rem;
+}
+.formula-card h3 {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin: 0 0 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--ink);
+}
+.formula-eq {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 1.7vw, 1.4rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.8rem;
+  color: var(--ink);
+}
+.formula-eq .plus { color: var(--red); margin: 0 0.35em; }
+.formula-eq .eq { color: var(--red); margin: 0 0.35em; }
+.formula-card p { margin: 0; color: var(--ink-2); line-height: 1.6; font-size: 0.95rem; max-width: 50ch; }
+.formula-card p + p { margin-top: 0.6rem; }
+.formula-card strong { color: var(--ink); }
+
+/* ---------- THE 10 ROWS ---------- */
+.rows-intro { margin-bottom: 1.8rem; }
+.rows { display: grid; gap: 1rem; }
+.row {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 0;
+  scroll-margin-top: 110px;
+}
+.row-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1.4rem;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.row-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+.row-num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--red);
+}
+.row-area {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+.row-area .dot { color: var(--ink-faint); margin: 0 0.4em; }
+.row-bar-right { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+
+.row-body { padding: 1.6rem clamp(1.4rem, 3vw, 2rem); }
+.row-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.1vw, 1.7rem);
+  line-height: 1.1;
+  letter-spacing: -0.014em;
+  margin: 0 0 1.4rem;
+  color: var(--ink);
+  max-width: 30ch;
+}
+
+.exceeds {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 1rem 1.2rem;
+  margin: 0 0 1.4rem;
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  gap: 1rem;
+  align-items: baseline;
+}
+@media (max-width: 640px) { .exceeds { grid-template-columns: 1fr; gap: 0.4rem; } }
+.exceeds-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.exceeds-text {
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0;
+  max-width: 65ch;
+}
+.exceeds-text strong { color: var(--red); }
+
+.row-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.4rem;
+  margin-bottom: 1.4rem;
+}
+@media (max-width: 760px) { .row-grid { grid-template-columns: 1fr; } }
+
+.row-block h4 {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 0 0 0.7rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--rule);
+}
+.evidence { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.4rem; }
+.evidence li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.92rem;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+.evidence li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--red);
+  font-weight: 700;
+  font-size: 1.4em;
+  line-height: 1;
+  top: -0.05em;
+}
+.evidence li strong { color: var(--ink); font-weight: 700; }
+
+.who-what { display: grid; gap: 1rem; }
+.who-what .label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.who-what .body {
+  font-size: 0.92rem;
+  color: var(--ink);
+  line-height: 1.5;
+  margin: 0;
+}
+.who-what .body em { color: var(--ink-muted); font-style: normal; font-size: 0.88em; }
+
+.exact-line {
+  background: var(--bone);
+  padding: 1.4rem clamp(1.2rem, 2.4vw, 1.8rem);
+  border-top: 1px solid var(--ink);
+  position: relative;
+}
+.exact-line .label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  display: block;
+  margin-bottom: 0.6rem;
+}
+.exact-line blockquote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.45;
+  color: var(--ink);
+  margin: 0;
+  padding-left: 1.6rem;
+  position: relative;
+  max-width: 70ch;
+  text-wrap: pretty;
+}
+.exact-line blockquote::before {
+  content: "\201C";
+  position: absolute;
+  left: 0;
+  top: -0.3em;
+  font-size: 2.4em;
+  line-height: 1;
+  color: var(--red);
+  font-style: normal;
+  font-weight: 700;
+}
+.exact-line blockquote strong { font-style: normal; font-weight: 700; color: var(--red); }
+
+/* CV chip — bold, distinct */
+.cv-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.55rem;
+  background: var(--accent);
+  color: var(--white);
+  white-space: nowrap;
+}
+.cv-chip::before { content: "CV"; opacity: 0.65; font-weight: 700; }
+
+.row-bar-right .hero-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.55rem;
+  background: var(--red);
+  color: var(--white);
+  white-space: nowrap;
+}
+
+/* HERO row variant */
+.row.is-hero { border: 2px solid var(--red); }
+.row.is-hero .row-bar { background: var(--navy); border-bottom-color: var(--navy); }
+.row.is-hero .row-bar .row-num,
+.row.is-hero .row-bar .row-area { color: var(--white); }
+.row.is-hero .row-bar .row-area .dot { color: rgba(255,255,255,0.5); }
+
+/* ---------- GP PLAYBOOK / FINAL SHARE / ETC ---------- */
+.callout {
+  background: var(--navy);
+  color: var(--white);
+  padding: 1.6rem clamp(1.4rem, 3vw, 2.2rem);
+  margin: 1.2rem 0;
+}
+.callout h3 {
+  color: var(--white);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin: 0 0 0.6rem;
+  letter-spacing: -0.012em;
+}
+.callout p { color: rgba(255,255,255,0.82); margin: 0 0 0.8rem; max-width: 64ch; line-height: 1.6; }
+.callout strong.hot { color: var(--red); }
+.callout .eyebrow { color: rgba(255,255,255,0.6); margin-bottom: 0.7rem; }
+.callout .eyebrow::before { background: var(--red); }
+
+.plays { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 760px) { .plays { grid-template-columns: 1fr; } }
+.play {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.4rem 1.5rem;
+}
+.play h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--ink);
+}
+.play h3 .tag {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--red);
+  margin-right: 0.6rem;
+  display: block;
+  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+}
+.play ol, .play ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--ink-2);
+  line-height: 1.65;
+  font-size: 0.94rem;
+}
+.play li { margin-bottom: 0.4rem; }
+
+/* Korean phrases */
+.phrases {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 0.5rem;
+}
+.phrases .phr {
+  display: grid;
+  grid-template-columns: 7rem 1fr 1fr;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+  font-size: 0.95rem;
+}
+.phrases .phr:last-child { border-bottom: 0; }
+@media (max-width: 540px) { .phrases .phr { grid-template-columns: 1fr; gap: 0.2rem; padding-bottom: 0.7rem; } }
+.phrases .phr .han {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 1.05rem;
+}
+.phrases .phr .romaji {
+  font-family: var(--font-mono);
+  color: var(--red);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+}
+.phrases .phr .gloss { color: var(--ink-2); }
+
+/* ---------- FINAL SHARE ---------- */
+.fs-block {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.4rem clamp(1.4rem, 3vw, 2rem);
+  margin-bottom: 0.8rem;
+}
+.fs-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+  flex-wrap: wrap;
+}
+.fs-bar .fs-num {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--red);
+}
+.fs-bar .fs-time {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+.fs-bar .fs-speaker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.fs-block h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: -0.012em;
+  margin: 0 0 1rem;
+  color: var(--ink);
+}
+.fs-block blockquote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1rem, 1.25vw, 1.12rem);
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0;
+  padding-left: 1.5rem;
+  position: relative;
+  max-width: 72ch;
+  text-wrap: pretty;
+}
+.fs-block blockquote::before {
+  content: "\201C";
+  position: absolute;
+  left: 0;
+  top: -0.25em;
+  font-size: 2.3em;
+  line-height: 1;
+  color: var(--red);
+  font-style: normal;
+  font-weight: 700;
+}
+.fs-block blockquote strong { font-style: normal; font-weight: 700; color: var(--red); }
+
+/* ---------- IDENTITY TABLE ---------- */
+.id-table th { white-space: nowrap; }
+.id-table td.element { font-weight: 700; color: var(--ink); }
+
+/* ---------- STORY BANK ---------- */
+.qa-pair {
+  border-top: 1px solid var(--rule);
+  padding: 1.1rem 0;
+}
+.qa-pair:first-of-type { border-top: 1px solid var(--ink); }
+.qa-pair .q {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.008em;
+  color: var(--ink);
+  margin: 0 0 0.4rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.qa-pair .q::before {
+  content: "Q";
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--red);
+  background: var(--paper);
+  border: 1px solid var(--red);
+  padding: 0.1rem 0.4rem;
+}
+.qa-pair .a {
+  margin: 0 0 0 1.7rem;
+  color: var(--ink-2);
+  line-height: 1.6;
+  max-width: 70ch;
+  font-size: 0.94rem;
+}
+
+/* ---------- ARTEFACT MAP ---------- */
+.art-map {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 860px) { .art-map { grid-template-columns: 1fr; } }
+.art-col {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1.4rem 1.5rem;
+}
+.art-col.is-primary { border: 2px solid var(--red); }
+.art-col h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.008em;
+  margin: 0 0 0.4rem;
+}
+.art-col h3 .tag {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--red);
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+}
+.art-col ol, .art-col ul {
+  margin: 0.7rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--ink-2);
+  line-height: 1.55;
+  font-size: 0.92rem;
+}
+.art-col li { margin-bottom: 0.35rem; }
+.art-col li strong { color: var(--ink); }
+.art-col p {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  margin: 0.6rem 0 0;
+  text-transform: uppercase;
+}
+
+/* ---------- OUTSTANDING ---------- */
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+.todo-list li {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 1rem 1.2rem;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 1rem;
+  align-items: baseline;
+}
+.todo-list .num {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--red);
+}
+.todo-list .what { color: var(--ink); font-size: 0.96rem; line-height: 1.55; }
+.todo-list .what em { color: var(--ink-muted); font-style: italic; font-size: 0.88em; display: block; margin-top: 0.2rem; }
+
+/* ---------- THE MATH ---------- */
+.math {
+  background: var(--navy);
+  color: var(--white);
+  padding: 2rem clamp(1.6rem, 3.5vw, 2.5rem);
+}
+.math h3 {
+  color: var(--white);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  margin: 0 0 1rem;
+  letter-spacing: -0.014em;
+}
+.math .math-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem; }
+@media (max-width: 760px) { .math .math-grid { grid-template-columns: 1fr; } }
+.math p { color: rgba(255,255,255,0.85); margin: 0 0 0.8rem; max-width: 56ch; line-height: 1.6; }
+.math strong { color: var(--white); }
+.math .hot { color: var(--red); }
+.math ul {
+  margin: 0.6rem 0 0;
+  padding-left: 1.2rem;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.7;
+  font-size: 0.96rem;
+}
+.math .closer {
+  margin-top: 1.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  color: var(--white);
+  max-width: 60ch;
+}
+
+/* ---------- CV chip backgrounds (one per Core Value) ---------- */
+.cv-chip.cv-discovery { background: var(--accent); }
+.cv-chip.cv-teamwork  { background: #6b3fc4; }
+.cv-chip.cv-innovation { background: var(--red); }
+.cv-chip.cv-impact    { background: #1a8a52; }
+.cv-chip.cv-fun       { background: #e08a18; }
+.cv-chip.cv-inclusion { background: var(--navy); }
+</style>
+</head>
+<body>
+
+<header class="kit-header">
+  <div class="kit-header-row">
+    <div class="kit-crumbs">
+      <span class="kit-mark"><span></span><span></span><span></span><span></span></span>
+      <a href="../index.html">Mission Control</a>
+      <span class="sep">/</span>
+      <span>Brick 04</span>
+      <span class="sep">/</span>
+      <span class="here">Core Values · Evidence Kit</span>
+    </div>
+    <div class="kit-meta">
+      <span><span class="lock-dot"></span>Internal kit</span>
+      <a class="outstanding-pill" href="#outstanding">Outstanding · <span class="count">5</span></a>
+      <span class="tminus" data-tminus>T−DAYS</span>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<main>
+<section class="shell brick-hero">
+  <span class="crumb-num">Brick 04 · Core Values Evidence Kit</span>
+  <h1 class="h-display">Core Values.</h1>
+  <p class="h-sub" style="margin-top: 1rem;">
+    Not a separate session. Scored on <strong>10 dual-marked rows</strong> hidden inside Innovation Project and Robot Design,
+    plus <strong>3 Gracious Professionalism scores</strong> observed across the whole event.
+    25% of the Champion's Score. Half earned in the rooms. Half earned in real time.
+  </p>
+  <div class="team-line">
+    <span class="label">Team —</span>
+    <span class="name">Esha</span><span class="name">Arvin</span><span class="name">Flossie</span>
+    <span class="name">Alia</span><span class="name">Anaisa</span><span class="name">Guhan</span>
+    <span class="name">Sakthi</span><span class="name">Elliot</span><span class="name">Toby</span>
+    <span class="coach"><span class="label">Coach —</span> <span class="name">Akash</span></span>
+  </div>
+</section>
+</main>
+
+<!-- In-page nav -->
+<nav class="in-page-nav" id="ipNav">
+  <div class="in-page-nav-row">
+    <div class="nav-cluster">
+      <a href="#scoring">Scoring</a>
+      <a href="#rows">10 dual-marked rows</a>
+      <a href="#gp">3 GP scores</a>
+    </div>
+    <span class="nav-sep" aria-hidden="true"></span>
+    <div class="nav-cluster">
+      <a href="#playbook">GP playbook · Korea</a>
+      <a href="#finalshare">Final Share · 8 min</a>
+    </div>
+    <span class="nav-sep" aria-hidden="true"></span>
+    <div class="nav-cluster">
+      <a href="#identity">Team identity</a>
+      <a href="#stories">Story bank</a>
+      <a href="#artefacts">Artefact map</a>
+    </div>
+    <span class="nav-sep" aria-hidden="true"></span>
+    <div class="nav-cluster">
+      <a href="#outstanding">Outstanding</a>
+      <a href="#math">The math</a>
+    </div>
+    <span class="nav-position" id="navPosition"><span class="pos-current">01</span><span class="pos-divider">/</span><span class="pos-total">10</span></span>
+  </div>
+</nav>
+
+<main>
+<div class="shell">
+
+<!-- ============ THE SCORING SURFACE ============ -->
+<section class="sec" id="scoring">
+  <div class="sec-head">
+    <h2>The scoring surface.</h2>
+    <span class="sec-meta">25% of Champion's Score</span>
+  </div>
+  <p class="sec-lede">Champion's Score = the sum of four area ranks. Lowest total wins.
+    A perfect tournament is rank 1 in all four — a score of 4. Core Values is the brick that compounds across the other two presentation ranks.</p>
+
+  <div class="formula">
+    <div class="formula-card">
+      <h3>Champion's Score · the formula</h3>
+      <p class="formula-eq">IP <span class="plus">+</span> CV <span class="plus">+</span> RD <span class="plus">+</span> RG <span class="eq">=</span> Champion's Score</p>
+      <p><strong>Lowest total wins.</strong> Target: rank 1 in all four = score of 4.</p>
+    </div>
+    <div class="formula-card">
+      <h3>Core Values · how it composes</h3>
+      <p><strong>10 dual-marked rows</strong> — 5 hidden inside the IP rubric, 5 inside RD. Each scored 1–4.</p>
+      <p><strong>3 GP scores</strong> — observed by volunteers across pit, table, common areas.</p>
+      <p>Half is earned <strong>inside the IP and RD presentations</strong>. The other half is earned <strong>in real time at the event</strong>. Tell the pay-it-forward story to the judges and you get nothing for it. The team has to <em>do</em> it visibly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE 10 DUAL-MARKED ROWS ============ -->
+<section class="sec" id="rows">
+  <div class="sec-head">
+    <h2>The 10 dual-marked rows.</h2>
+    <span class="sec-meta">Row by row · evidence · exact lines</span>
+  </div>
+  <p class="sec-lede rows-intro">
+    Each row below specifies the rubric criterion, the Exceeds trigger
+    (what gets the judge to tick box 4 and write the comment), the team's evidence,
+    the speaker, the artefact, and the exact line — so delivery is consistent across every kid in the room.
+  </p>
+
+  <div class="rows">
+
+    <!-- Row 1 -->
+    <article class="row" id="row-01">
+      <div class="row-bar">
+        <div class="row-bar-left">
+          <span class="row-num">Row 01</span>
+          <span class="row-area">IP <span class="dot">·</span> Identify <span class="dot">·</span> Research from a variety of sources</span>
+        </div>
+        <div class="row-bar-right">
+          <span class="row-speaker">Alia · Anaisa · Arvin</span>
+          <span class="cv-chip cv-discovery">Discovery</span>
+        </div>
+      </div>
+      <div class="row-body">
+        <h3 class="row-title">Research from a variety of sources.</h3>
+
+        <div class="exceeds">
+          <span class="exceeds-label">Exceeds when —</span>
+          <p class="exceeds-text">judges see <strong>more than 3 distinct source types</strong> AND see that each <strong>meaningfully shaped the final solution</strong>.</p>
+        </div>
+
+        <div class="row-grid">
+          <div class="row-block">
+            <h4>Evidence</h4>
+            <ul class="evidence">
+              <li><strong>9 individual PowerPoint presentations</strong> on archaeology — every team member did one</li>
+              <li><strong>8 hours with Ken</strong>, retired archaeologist</li>
+              <li><strong>3+ meetings with Kent Archaeological Society</strong> (Jacob Scott, Andy Ward, Craig)</li>
+              <li><strong>10,000+ pages</strong> on the KAS website</li>
+              <li><em>Archaeologia Cantiana</em> journal (150 years of publication)</li>
+              <li>Internet + YouTube research on prompt engineering, RAG, AGUI</li>
+              <li>Croydon Museum visit · Bath trip · Maidstone Museum planned</li>
+              <li>AI expert parent (taught RAG and AGUI)</li>
+            </ul>
+          </div>
+          <div class="row-block who-what">
+            <div>
+              <span class="label">Speaker</span>
+              <p class="body"><strong>Alia / Anaisa / Arvin</strong> — one of the new members. <em>Signals Inclusion at the same time.</em></p>
+            </div>
+            <div>
+              <span class="label">Artefact</span>
+              <p class="body"><strong>Resources folder</strong> — one printout listing all 5 source types, with one bullet under each on what was learned.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="exact-line">
+        <span class="label">The exact line</span>
+        <blockquote>None of us knew archaeology when we started. So each of the nine of us did individual research and presented to the team. Then we spent <strong>8 hours with Ken</strong>, a retired archaeologist. Then we met the <strong>Kent Archaeological Society three times</strong> before we even picked a problem. Five source types, all in our research folder.</blockquote>
+      </div>
+    </article>
+
+    <!-- Row 2 -->
+    <article class="row" id="row-02">
+      <div class="row-bar">
+        <div class="row-bar-left">
+          <span class="row-num">Row 02</span>
+          <span class="row-area">IP <span class="dot">·</span> Design <span class="dot">·</span> Development process involved all team members</span>
+        </div>
+        <div class="row-bar-right">
+          <span class="row-speaker">Alia</span>
+          <span class="cv-chip cv-teamwork">Teamwork</span>
+        </div>
+      </div>
+      <div class="row-body">
+        <h3 class="row-title">Development process involved all team members.</h3>
+
+        <div class="exceeds">
+          <span class="exceeds-label">Exceeds when —</span>
+          <p class="exceeds-text">every one of <strong>9 has a visible, named contribution</strong>. Not "the team did X" but <strong>"Alia did X, Guhan did Y."</strong></p>
+        </div>
+
+        <div class="row-grid">
+          <div class="row-block">
+            <h4>Evidence</h4>
+            <ul class="evidence">
+              <li><strong>3 sub-groups</strong>, each with 2 experienced + 1 new member</li>
+              <li>Stage 1: 3 new members <strong>led archaeology research</strong> and fronted early KAS meetings</li>
+              <li>Stage 2: experts mentored new members through 10–20 weeks of technical build</li>
+              <li><strong>Notion</strong> for shared planning · <strong>WhatsApp</strong> for daily updates</li>
+              <li>Sundays in person · Wednesdays + Thursdays after school</li>
+            </ul>
+          </div>
+          <div class="row-block who-what">
+            <div>
+              <span class="label">Speaker</span>
+              <p class="body"><strong>Alia</strong> — already has the team-organising slot in the current script.</p>
+            </div>
+            <div>
+              <span class="label">Artefact</span>
+              <p class="body"><strong>Single-page sub-group diagram</strong> — all 9 names, the 3 groups, what each owned.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="exact-line">
+        <span class="label">The exact line</span>
+        <blockquote>Three sub-groups. Two experts and one new member in each. The new members started the year leading our archaeology research, so by the technical phase <strong>every one of the nine of us already owned a piece</strong>. No one was added to the team. Everyone was central to it.</blockquote>
+      </div>
+    </article>
+
+    <!-- Row 3 -->
+    <article class="row" id="row-03">
+      <div class="row-bar">
+        <div class="row-bar-left">
+          <span class="row-num">Row 03</span>
+          <span class="row-area">IP <span class="dot">·</span> Create <span class="dot">·</span> Innovation in solution</span>
+        </div>
+        <div class="row-bar-right">
+          <span class="row-speaker">Guhan + Anaisa</span>
+          <span class="cv-chip cv-innovation">Innovation</span>
+        </div>
+      </div>
+      <div class="row-body">
+        <h3 class="row-title">Innovation in solution.</h3>
+
+        <div class="exceeds">
+          <span class="exceeds-label">Exceeds when —</span>
+          <p class="exceeds-text">explicit articulation of <strong>WHY it is innovative</strong>, with <strong>named technical components</strong> and a <strong>comparison to alternatives</strong>.</p>
+        </div>
+
+        <div class="row-grid">
+          <div class="row-block">
+            <h4>Evidence</h4>
+            <ul class="evidence">
+              <li><strong>RAG system</strong> — data integrity, fetches only from KAS sources</li>
+              <li><strong>AGUI module</strong> — response speed, eliminates blank-screen waits</li>
+              <li><strong>3 personas</strong> — Public, Professional Archaeologist, Kids (up to age 16)</li>
+              <li><strong>4-part prompt structure</strong> — Persona, Scope, Guardrails, Chain of Thought</li>
+              <li>Vibe Coding pipeline (Gemini extends prompts, applied in Claude)</li>
+              <li><strong>Live deployment</strong> on a real client website (not a prototype)</li>
+              <li>Generic <strong>Source Code blueprint</strong> any historical society can adapt</li>
+              <li>Integration with G-Develop games + Figma materials</li>
+            </ul>
+          </div>
+          <div class="row-block who-what">
+            <div>
+              <span class="label">Speakers</span>
+              <p class="body"><strong>Guhan</strong> — attachments + led prompt engineering with Arvin. <strong>Anaisa</strong> — lands the blueprint angle.</p>
+            </div>
+            <div>
+              <span class="label">Artefact</span>
+              <p class="body"><strong>Prompt engineering printout</strong> (Persona / Scope / Guardrails / Chain of Thought). <strong>Blueprint one-pager.</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="exact-line">
+        <span class="label">The exact line</span>
+        <blockquote>Our innovation is not just an AI chatbot. <strong>It is a blueprint.</strong> We structured the prompts and architecture so that any historical society can adapt it. Three personas. RAG to lock answers to KAS sources only. AGUI to eliminate blank-screen waits. That is why KAS featured us in their newsletter.</blockquote>
+      </div>
+    </article>
+
+    <!-- Row 4 -->
+    <article class="row" id="row-04">
+      <div class="row-bar">
+        <div class="row-bar-left">
+          <span class="row-num">Row 04</span>
+          <span class="row-area">IP <span class="dot">·</span> Communicate <span class="dot">·</span> Solution's impact on others</span>
+        </div>
+        <div class="row-bar-right">
+          <span class="row-speaker">Esha</span>
+          <span class="cv-chip cv-impact">Impact</span>
+        </div>
+      </div>
+      <div class="row-body">
+        <h3 class="row-title">Solution's impact on others.</h3>
+
+        <div class="exceeds">
+          <span class="exceeds-label">Exceeds when —</span>
+          <p class="exceeds-text"><strong>measurable, real-world impact</strong>, with <strong>named recipients</strong> and <strong>direct quotes</strong>.</p>
+        </div>
+
+        <div class="row-grid">
+          <div class="row-block">
+            <h4>Evidence</h4>
+            <ul class="evidence">
+              <li><strong>Live on KAS website now</strong></li>
+              <li><strong>10,000 visitors per month</strong> on KAS site</li>
+              <li><strong>Jacob Scott, KAS Digital Manager</strong> — officially proud, featured the team in the newsletter</li>
+              <li><strong>Andy Ward, KAS Curator</strong> — "powerful reminder that archaeology is not just about the past"</li>
+              <li><strong>Ken's written endorsement</strong> — "no mere computer game, but a serious piece of work"</li>
+              <li><strong>3 free pilots</strong> committed to smaller societies</li>
+              <li>Last season: microplastics reached <strong>3,000 people</strong>, presented at <strong>UK Parliament</strong> + <strong>Croydon AI Summit</strong></li>
+              <li>Aliya presented at school for child user feedback</li>
+            </ul>
+          </div>
+          <div class="row-block who-what">
+            <div>
+              <span class="label">Speaker</span>
+              <p class="body"><strong>Esha</strong> — opens, also closes the impact arc. Lands the recipient quotes.</p>
+            </div>
+            <div>
+              <span class="label">Artefact</span>
+              <p class="body"><strong>KAS newsletter printout</strong> with Jacob Scott + Andy Ward quotes highlighted. <strong>Ken's letter.</strong> <strong>Screenshot of the live website.</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="exact-line">
+        <span class="label">The exact line</span>
+        <blockquote>This is not a prototype. It is <strong>live on the Kent Archaeological Society website, serving 10,000 visitors a month</strong>. The KAS Digital Manager called the results mind-boggling and featured us in their official newsletter. The Curator said it was inspiring. The retired archaeologist Ken wrote: <em>"no mere computer game, but a serious piece of work that will be of great value to Historians and Archaeologists alike."</em></blockquote>
+      </div>
+    </article>
+
+    <!-- Row 5 -->
+    <article class="row" id="row-05">
+      <div class="row-bar">
+        <div class="row-bar-left">
+          <span class="row-num">Row 05</span>
+          <span class="row-area">IP <span class="dot">·</span> Communicate <span class="dot">·</span> Pride and enthusiasm</span>
+        </div>
+        <div class="row-bar-right">
+          <span class="row-speaker">Toby</span>
+          <span class="cv-chip cv-fun">Fun</span>
+        </div>
+      </div>
+      <div class="row-body">
+        <h3 class="row-title">Pride and enthusiasm.</h3>
+
+        <div class="exceeds">
+          <span class="exceeds-label">Exceeds when —</span>
+          <p class="exceeds-text">pride is visible across <strong>all 9 members, not just the presenter</strong>. Energy in voice, body language, eye contact.</p>
+        </div>
+
+        <div class="row-grid">
+          <div class="row-block">
+            <h4>Evidence</h4>
+            <ul class="evidence">
+              <li><strong>502+ hours</strong> across <strong>96+ team meeting sessions</strong></li>
+              <li>Never missed a Sunday</li>
+              <li><strong>"WE ARE LORD OF THE BRICKS!"</strong> collective closer</li>
+              <li>Friends since primary school</li>
+              <li>Birthdays, McDonald's, shared rituals</li>
+              <li>K-pop hook (if execution is sharp by 2 weeks before Korea)</li>
+            </ul>
+          </div>
+          <div class="row-block who-what">
+            <div>
+              <span class="label">Speaker</span>
+              <p class="body"><strong>Toby</strong> — current "Fun &amp; Team Pride" closer is the right slot.</p>
+            </div>
+            <div>
+              <span class="label">Artefact</span>
+              <p class="body"><strong>Team photo book</strong> (or 6-photo collage on a single page). <strong>Hours log.</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="exact-line">
+        <span class="label">The exact line</span>
+        <blockquote>For Unearthed, we worked for <strong>502 hours across 96 team meeting sessions</strong>. But it wasn't just 502 hours of hard work. We're nine friends brought together by robotics. Celebrating birthdays, going to McDonald's together. This season has been unforgettable. Thank you, FLL. <strong>WE ARE LORD OF THE BRICKS!</strong></blockquote>
+      </div>
+    </article>
+
+    <!-- Row 6 -->
+    <article class="row" id="row-06">
+      <div class="row-bar">
+        <div class="row-bar-left">
+          <span class="row-num">Row 06</span>
+          <span class="row-area">RD <span class="dot">·</span> Identify <span class="dot">·</span> Use of building and coding resources</span>
+        </div>
+        <div class="row-bar-right">
+          <span class="row-speaker">Arvin</span>
+          <span class="cv-chip cv-discovery">Discovery</span>
+        </div>
+      </div>
+      <div class="row-body">
+        <h3 class="row-title">Use of building and coding resources.</h3>
+
+        <div class="exceeds">
+          <span class="exceeds-label">Exceeds when —</span>
+          <p class="exceeds-text"><strong>variety of sources</strong>, each tied to a <strong>specific build decision</strong>.</p>
+        </div>
+
+        <div class="row-grid">
+          <div class="row-block">
+            <h4>Evidence</h4>
+            <ul class="evidence">
+              <li>SPIKE Prime official tutorials</li>
+              <li>Pybricks documentation</li>
+              <li><strong>Exploding Ketchup</strong> veteran team — taught us fail-safe mechanisms</li>
+              <li>YouTube research on gear ratios, torque, motor speed</li>
+              <li>Last year's robot as base (cited)</li>
+              <li><strong>3 years of accumulated learning</strong></li>
+              <li>Resources folder already part of script</li>
+            </ul>
+          </div>
+          <div class="row-block who-what">
+            <div>
+              <span class="label">Speaker</span>
+              <p class="body"><strong>Arvin</strong> — already does the Resources section.</p>
+            </div>
+            <div>
+              <span class="label">Artefact</span>
+              <p class="body"><strong>Resources printout / folder</strong> (already exists). Add: a single page comparing <strong>Pybricks vs SPIKE block coding</strong>, one line each on why we switched.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="exact-line">
+        <span class="label">The exact line · additive to current script</span>
+        <blockquote>We constantly sharpen our building and coding skills through resources like <strong>SPIKE Prime, Pybricks documentation</strong>, and YouTube on gear ratios and torque. And from veteran teams. <strong>Exploding Ketchup taught us the fail-safe concept</strong> that became central to our reliability strategy.</blockquote>
+      </div>
+    </article>
+
+    <!-- Row 7 -->
+    <article class="row" id="row-07">
+      <div class="row-bar">
+        <div class="row-bar-left">
+          <span class="row-num">Row 07</span>
+          <span class="row-area">RD <span class="dot">·</span> Design <span class="dot">·</span> All team members contributed ideas</span>
+        </div>
+        <div class="row-bar-right">
+          <span class="row-speaker">Alia</span>
+          <span class="cv-chip cv-inclusion">Inclusion</span>
+        </div>
+      </div>
+      <div class="row-body">
+        <h3 class="row-title">All team members contributed ideas.</h3>
+
+        <div class="exceeds">
+          <span class="exceeds-label">Exceeds when —</span>
+          <p class="exceeds-text">every one of <strong>9 has a named build or code contribution</strong>, including the 3 new members.</p>
+        </div>
+
+        <div class="row-grid">
+          <div class="row-block">
+            <h4>Evidence — named contributions</h4>
+            <ul class="evidence">
+              <li>3 sub-groups model (2 experts + 1 new member each)</li>
+              <li>Cross-training: new members rotated across all 3 groups</li>
+              <li><strong>Arvin + Guhan</strong> — led prompt engineering</li>
+              <li><strong>Sakthi + Esha</strong> — built the 50 Artifacts platformer</li>
+              <li><strong>Flossie</strong> — owns mission strategy + Key Stage 3 conversion</li>
+              <li><strong>Toby + Flossie</strong> — tested AI, suggested improvements</li>
+              <li><strong>Anaisa + Elliot</strong> — developed the blueprint</li>
+              <li><strong>Alia</strong> — presented at schools, led the table display at Nationals</li>
+            </ul>
+          </div>
+          <div class="row-block who-what">
+            <div>
+              <span class="label">Speaker</span>
+              <p class="body"><strong>Alia</strong> (team organising). Reinforce with named contributions across the presentation.</p>
+            </div>
+            <div>
+              <span class="label">Artefact</span>
+              <p class="body"><strong>Sub-group diagram</strong> — same one as Row 02, used here for the RD side.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="exact-line">
+        <span class="label">The exact line</span>
+        <blockquote><strong>Every one of the nine of us has a build or code contribution on World Dominator.</strong> Even the three new members. We slotted Alia, Anaisa and Arvin across all three expert groups so they were trained on every part of the robot at the same time.</blockquote>
+      </div>
+    </article>
+
+    <!-- Row 8 — HERO -->
+    <article class="row is-hero" id="row-08">
+      <div class="row-bar">
+        <div class="row-bar-left">
+          <span class="row-num">Row 08</span>
+          <span class="row-area">RD <span class="dot">·</span> Iterate <span class="dot">·</span> Improvements based on testing</span>
+        </div>
+        <div class="row-bar-right">
+          <span class="row-speaker">Elliot</span>
+          <span class="cv-chip cv-innovation">Innovation</span>
+          <span class="hero-flag">Hero row</span>
+        </div>
+      </div>
+      <div class="row-body">
+        <h3 class="row-title">Improvements based on testing.</h3>
+        <p class="body" style="margin: -0.6rem 0 1.2rem; color: var(--red); font-weight: 600;">
+          The single most powerful artefact in the entire kit lives here: the <strong>40% → 95% consistency curve</strong>.
+        </p>
+
+        <div class="exceeds">
+          <span class="exceeds-label">Exceeds when —</span>
+          <p class="exceeds-text"><strong>quantified improvements</strong> with <strong>specific failure-to-fix stories</strong>.</p>
+        </div>
+
+        <div class="row-grid">
+          <div class="row-block">
+            <h4>Evidence</h4>
+            <ul class="evidence">
+              <li><strong>220 individual run tests</strong> + <strong>100 full-match simulations</strong> this season</li>
+              <li><strong>50+ changes</strong> made after Regionals (where we scored 435)</li>
+              <li><strong>40% → 95% consistency</strong> across 4 years</li>
+              <li><strong>99% per-run consistency target</strong></li>
+              <li>Run 1 silo failure: tried deflector (failed) → built full <strong>wheel-cover system</strong> (works every time)</li>
+              <li>Switch from SPIKE blocks to Pybricks (specific reasoning)</li>
+              <li>Rubber tyres for grip (regional mat slippage story)</li>
+              <li>Low centre of gravity design</li>
+              <li>Custom gearboxes for speed-vs-torque balance</li>
+            </ul>
+          </div>
+          <div class="row-block who-what">
+            <div>
+              <span class="label">Speaker</span>
+              <p class="body"><strong>Elliot</strong> — already does Testing &amp; Iteration.</p>
+            </div>
+            <div>
+              <span class="label">Artefact · the hero</span>
+              <p class="body"><strong>The 40% → 95% consistency curve, printed large.</strong> Engineering journal / change log. Before/after photos of the wheel-cover fix. Run tracker sheets.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="exact-line">
+        <span class="label">The exact line · point to the graph as Elliot says "40% to 95%"</span>
+        <blockquote>Four years ago, our runs were <strong>40% consistent</strong>. Today they're at <strong>95%</strong>. That isn't luck. This season alone: <strong>220 individual run tests, 100 full-match simulations, and 50+ changes after Regionals</strong>. One example: in our final run, scattered Silo pieces were jamming our wheels. We tried a deflector. It wasn't reliable. So we built a <strong>full wheel-cover system</strong>. The path clears perfectly every time.</blockquote>
+      </div>
+    </article>
+
+    <!-- Row 9 -->
+    <article class="row" id="row-09">
+      <div class="row-bar">
+        <div class="row-bar-left">
+          <span class="row-num">Row 09</span>
+          <span class="row-area">RD <span class="dot">·</span> Communicate <span class="dot">·</span> Process and lessons learned</span>
+        </div>
+        <div class="row-bar-right">
+          <span class="row-speaker">Toby + Flossie</span>
+          <span class="cv-chip cv-impact">Impact</span>
+        </div>
+      </div>
+      <div class="row-body">
+        <h3 class="row-title">Process and lessons learned.</h3>
+
+        <div class="exceeds">
+          <span class="exceeds-label">Exceeds when —</span>
+          <p class="exceeds-text">explicit <strong>team-level lessons articulated</strong>, not just "we got better."</p>
+        </div>
+
+        <div class="row-grid">
+          <div class="row-block">
+            <h4>Five lessons</h4>
+            <ul class="evidence">
+              <li><strong>Lesson 1 —</strong> don't debate, test (rack-and-pinion vs passive rod)</li>
+              <li><strong>Lesson 2 —</strong> switch tools when the tool fights the work (Figma → Replit)</li>
+              <li><strong>Lesson 3 —</strong> combine missions by proximity and motor availability (Arvin's criteria)</li>
+              <li><strong>Lesson 4 —</strong> same-side gearbox decision (avoided doubling home-area time)</li>
+              <li><strong>Lesson 5 —</strong> structural integrity rules (2-pin minimum on short beams, 3–4 on long)</li>
+            </ul>
+          </div>
+          <div class="row-block who-what">
+            <div>
+              <span class="label">Speakers</span>
+              <p class="body"><strong>Toby</strong> — covers structural integrity already. Add <strong>Flossie's</strong> "don't debate, test" line as the team-level lesson.</p>
+            </div>
+            <div>
+              <span class="label">Artefact</span>
+              <p class="body">Single <strong>"lessons learned" page</strong> in the engineering journal.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="exact-line">
+        <span class="label">The exact line · Flossie or whoever lands the closer to the iterate block</span>
+        <blockquote>Our biggest lesson this year: <strong>don't debate, test</strong>. When we disagreed on rack-and-pinion versus a passive rod, we built both and ran them under identical conditions. The rack-and-pinion won on consistency. That decision became a team rule. <strong>We now test rather than argue.</strong></blockquote>
+      </div>
+    </article>
+
+    <!-- Row 10 -->
+    <article class="row" id="row-10">
+      <div class="row-bar">
+        <div class="row-bar-left">
+          <span class="row-num">Row 10</span>
+          <span class="row-area">RD <span class="dot">·</span> Communicate <span class="dot">·</span> Pride and enthusiasm</span>
+        </div>
+        <div class="row-bar-right">
+          <span class="row-speaker">Toby</span>
+          <span class="cv-chip cv-fun">Fun</span>
+        </div>
+      </div>
+      <div class="row-body">
+        <h3 class="row-title">Pride and enthusiasm.</h3>
+
+        <div class="exceeds">
+          <span class="exceeds-label">Exceeds when —</span>
+          <p class="exceeds-text">pride is visible across <strong>all 9, not just the presenter</strong>.</p>
+        </div>
+
+        <div class="row-grid">
+          <div class="row-block">
+            <h4>Evidence</h4>
+            <ul class="evidence">
+              <li><strong>4th-generation robot</strong>, 3 years of accumulated learning</li>
+              <li><strong>"World Dominator"</strong> name (team identity)</li>
+              <li>Collective closing chant</li>
+            </ul>
+          </div>
+          <div class="row-block who-what">
+            <div>
+              <span class="label">Speaker</span>
+              <p class="body"><strong>Toby</strong> — existing closer.</p>
+            </div>
+            <div>
+              <span class="label">Artefact</span>
+              <p class="body"><strong>The robot itself, scars and all.</strong> Hold it up. Say its name.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="exact-line">
+        <span class="label">The exact line</span>
+        <blockquote><strong>World Dominator isn't just a name.</strong> This is our fourth-generation robot, built on three years of mistakes we won't make again. We're proud of him. <strong>WE ARE LORD OF THE BRICKS!</strong></blockquote>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ THE 3 GP SCORES ============ -->
+<section class="sec" id="gp">
+  <div class="sec-head">
+    <h2>The 3 GP scores.</h2>
+    <span class="sec-meta">Observed at the event</span>
+  </div>
+  <p class="sec-lede">Not scored in the judging room. Scored by volunteers watching the team across the entire event.
+    Three observation zones — and one rule that decides whether we pick up the points.</p>
+
+  <div class="plays" style="grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+    <div class="play"><h3><span class="tag">GP1 of 3</span>Pit zone</h3><p style="margin: 0; color: var(--ink-2); line-height: 1.55; font-size: 0.94rem;">How the team behaves at its own station, with neighbours, with visitors.</p></div>
+    <div class="play"><h3><span class="tag">GP2 of 3</span>Table zone</h3><p style="margin: 0; color: var(--ink-2); line-height: 1.55; font-size: 0.94rem;">How the team behaves at the practice table and the competition table, between matches.</p></div>
+    <div class="play"><h3><span class="tag">GP3 of 3</span>Common areas</h3><p style="margin: 0; color: var(--ink-2); line-height: 1.55; font-size: 0.94rem;">Lunch, queues, opening &amp; closing ceremonies, with volunteers and referees.</p></div>
+  </div>
+
+  <div class="callout" style="margin-top: 1.2rem;">
+    <span class="eyebrow">The rule</span>
+    <h3>Telling the pay-it-forward story to the judges does <em>not</em> score these 3 points.</h3>
+    <p><strong class="hot">The team has to do it visibly.</strong> If a volunteer watches us help a younger team, we score it. If we describe it eloquently in the room, we don't.</p>
+  </div>
+</section>
+
+<!-- ============ GP PLAYBOOK FOR KOREA ============ -->
+<section class="sec" id="playbook">
+  <div class="sec-head">
+    <h2>GP playbook · Korea.</h2>
+    <span class="sec-meta">Day 1 morning is the highest-leverage hour</span>
+  </div>
+
+  <div class="play" style="margin-bottom: 1rem;">
+    <h3><span class="tag">Day 1 morning · highest leverage</span>Within the first hour of pit setup.</h3>
+    <ol>
+      <li><strong>Walk the pit.</strong> Identify 2–3 teams that look the youngest or most nervous.</li>
+      <li><strong>Approach one team.</strong> Lead with a specific compliment (their robot colour, their team shirt, something concrete).</li>
+      <li><strong>Offer one small, useful thing</strong> — a sticker, a UK-themed pin, a snack to share.</li>
+      <li><strong>Ask one question</strong> about their season. Listen.</li>
+      <li><strong>Make a return visit</strong> later in the day.</li>
+    </ol>
+  </div>
+
+  <div class="plays">
+    <div class="play">
+      <h3><span class="tag">Daily standing rules</span>Every day, all day.</h3>
+      <ul>
+        <li>Read every volunteer and referee name tag. Use their name.</li>
+        <li>Thank every volunteer at every interaction. Even the obvious ones.</li>
+        <li>Cheer at the practice table for at least one non-UK team every day.</li>
+        <li>If something goes wrong with your robot at the table — never blame. Always thank the referee.</li>
+        <li>Wait quietly for queue. Never crowd another team's practice table.</li>
+        <li>Pick up trash that isn't yours, at least once a day, where volunteers can see.</li>
+      </ul>
+    </div>
+    <div class="play">
+      <h3><span class="tag">Specific Korea moves</span>Drilled before departure.</h3>
+      <ul>
+        <li>Carry small UK gifts to exchange with Korean teams (London postcards, UK-flag pins, small Lego figures).</li>
+        <li>If the K-pop hook is 100% sharp by 2 weeks out — perform it as a friendship gesture for the team next door on Day 1.</li>
+        <li>If it isn't sharp — scrap the dance, keep the slogan chant.</li>
+        <li>Drill the 5 Korean phrases below until every kid can say them clean.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="play" style="margin-top: 1rem;">
+    <h3><span class="tag">5 Korean phrases · drill before departure</span>Every kid can say these clean.</h3>
+    <div class="phrases">
+      <div class="phr"><span class="han">안녕하세요</span><span class="romaji">Annyeonghaseyo</span><span class="gloss">Hello</span></div>
+      <div class="phr"><span class="han">감사합니다</span><span class="romaji">Gamsahamnida</span><span class="gloss">Thank you</span></div>
+      <div class="phr"><span class="han">화이팅</span><span class="romaji">Hwaiting</span><span class="gloss">Good luck / Go for it</span></div>
+      <div class="phr"><span class="han">축하해요</span><span class="romaji">Chukhahaeyo</span><span class="gloss">Congratulations</span></div>
+      <div class="phr"><span class="han">잘 했어요</span><span class="romaji">Jal haesseoyo</span><span class="gloss">You did great</span></div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top: 1rem;">
+    <span class="eyebrow">When volunteers ask why</span>
+    <h3>The quotable line.</h3>
+    <p style="font-family: var(--font-display); font-style: italic; font-size: 1.15rem; color: var(--white);">
+      "We were helped in our first year. Now in our fourth year, we pay it back. Especially to first-time teams."
+    </p>
+  </div>
+</section>
+
+<!-- ============ FINAL SHARE ============ -->
+<section class="sec" id="finalshare">
+  <div class="sec-head">
+    <h2>Final Share &amp; Feedback · 8 min.</h2>
+    <span class="sec-meta">The highest-leverage closing slot</span>
+  </div>
+  <p class="sec-lede">Most teams collapse here. Use it. <strong>5 blocks, 5 speakers, exact lines.</strong>
+    The full present-mode deck lives at <a href="../show/final-share.html" style="color: var(--red); border-bottom: 1px solid var(--red);">/show/final-share.html</a> — this page is for memorisation.</p>
+
+  <div class="fs-block">
+    <div class="fs-bar">
+      <span class="fs-num">Opening</span>
+      <span class="fs-time">0:30</span>
+      <span class="fs-speaker">Esha</span>
+    </div>
+    <h3>Open clean.</h3>
+    <blockquote>Thank you for letting us share our season. Before we finish, four things we want to leave you with.</blockquote>
+  </div>
+
+  <div class="fs-block">
+    <div class="fs-bar">
+      <span class="fs-num">Block 1 · Most proud of</span>
+      <span class="fs-time">2:00</span>
+      <span class="fs-speaker">Arvin or Alia (a new member)</span>
+    </div>
+    <h3>The pay-it-forward story.</h3>
+    <blockquote>What we're most proud of isn't on the table or in the AI. <strong>Three years ago, in our first FLL season, an older team came over to our table.</strong> They congratulated us. Then they showed us a few simple things. We doubled our score that day. This season at Regionals, we found a primary school team that had just scored 150 points. We went to their table. We congratulated them. We showed them the same things we'd been shown. We don't know their final score, but we know we <strong>closed a loop</strong>. We want to keep doing it. Especially here in Korea.</blockquote>
+  </div>
+
+  <div class="fs-block">
+    <div class="fs-bar">
+      <span class="fs-num">Block 2 · Toughest challenge</span>
+      <span class="fs-time">2:00</span>
+      <span class="fs-speaker">Anaisa or Elliot</span>
+    </div>
+    <h3>The decision-making process for the IP.</h3>
+    <blockquote>Our toughest challenge wasn't technical. <strong>It was deciding what problem to solve.</strong> We spent nearly half the season exploring options. LiDAR for site mapping. Social media for archaeology outreach. A funding portal for archaeologists. Each of us pitched. After two to three months of research, MVPs, and conversations, we made a simple choice: <strong>stop inventing, start listening.</strong> We asked the Kent Archaeological Society what their biggest problem actually was. Their answer became our project.</blockquote>
+  </div>
+
+  <div class="fs-block">
+    <div class="fs-bar">
+      <span class="fs-num">Block 3 · How the coaches helped</span>
+      <span class="fs-time">1:30</span>
+      <span class="fs-speaker">Sakthi or Toby</span>
+    </div>
+    <h3>Project managers, not engineers.</h3>
+    <blockquote>Our coaches are our parents. They are not engineers. They are project managers. They didn't write the code. They drove us to interviews. They hosted us every Sunday for the full season. They kept our schedule across 96 sessions. When we were stuck, they didn't give us answers. They helped us figure out how to find the answer ourselves. <strong>We built the AI. They built the environment.</strong></blockquote>
+  </div>
+
+  <div class="fs-block">
+    <div class="fs-bar">
+      <span class="fs-num">Block 4 · Conflicts</span>
+      <span class="fs-time">1:00</span>
+      <span class="fs-speaker">Flossie</span>
+    </div>
+    <h3>Test instead of debate.</h3>
+    <blockquote>We've been friends since primary school. We rarely disagree about people. <strong>We disagree about ideas.</strong> Our rule: test instead of debate. When we couldn't decide between a rack-and-pinion mechanism and a passive rod, we built both and tested under the same conditions. The data made the decision. That became our protocol for the rest of the season.</blockquote>
+  </div>
+
+  <div class="fs-block">
+    <div class="fs-bar">
+      <span class="fs-num">Block 5 · Closing identity</span>
+      <span class="fs-time">1:00</span>
+      <span class="fs-speaker">All 9</span>
+    </div>
+    <h3>Land it together.</h3>
+    <ul style="margin: 0 0 0.6rem 0; padding-left: 1.2rem; color: var(--ink-2); line-height: 1.7; font-size: 0.94rem;">
+      <li>Team slogan <span class="status is-draft" style="margin-left: 0.5rem;">TBC · Akash</span></li>
+      <li>Optional K-pop hook — <strong>only if 100% sharp</strong></li>
+      <li>Final chant, all together, eye contact with judges</li>
+    </ul>
+    <blockquote><strong>WE ARE LORD OF THE BRICKS!</strong></blockquote>
+    <p class="note" style="margin-top: 0.8rem;">Reserve last 30 sec for clarifying questions.</p>
+  </div>
+</section>
+
+<!-- ============ TEAM IDENTITY ============ -->
+<section class="sec" id="identity">
+  <div class="sec-head">
+    <h2>Team identity layer.</h2>
+    <span class="sec-meta">Lock the locked things, decide the TBCs</span>
+  </div>
+  <table class="t id-table">
+    <thead>
+      <tr><th>Element</th><th>Status</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="element">Closing chant</td><td><span class="status is-locked">Locked</span></td><td><em>"WE ARE LORD OF THE BRICKS!"</em> — already in current script.</td></tr>
+      <tr><td class="element">Robot name</td><td><span class="status is-locked">Locked</span></td><td>World Dominator.</td></tr>
+      <tr><td class="element">Team slogan</td><td><span class="status is-draft">TBC</span></td><td>Akash to provide exact words.</td></tr>
+      <tr><td class="element">K-pop hook</td><td><span class="status is-review">In dev</span></td><td>Decision rule: 2 weeks before Korea, if not 100% sharp, downgrade to chant only.</td></tr>
+      <tr><td class="element">Entry move</td><td><span class="status is-draft">TBC</span></td><td>Recommend: all 9 enter together, set up in coordinated silence for the first 30 sec of welcome time, then one person speaks first. Signals discipline.</td></tr>
+      <tr><td class="element">Korean phrases</td><td><span class="status is-review">In dev</span></td><td>5 phrases listed in the GP playbook. Drill before departure.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ STORY BANK ============ -->
+<section class="sec" id="stories">
+  <div class="sec-head">
+    <h2>Decision-making story bank.</h2>
+    <span class="sec-meta">If-then scaffold · no one is caught off-guard</span>
+  </div>
+
+  <div class="qa-pair">
+    <h3 class="q">Tell me about a conflict your team had.</h3>
+    <p class="a">"We've been friends since primary school. We rarely disagree on people. We disagree on ideas. Our rule: <strong>test instead of debate</strong>. Example: rack-and-pinion versus passive rod."</p>
+  </div>
+
+  <div class="qa-pair">
+    <h3 class="q">What was your biggest challenge?</h3>
+    <p class="a">"Deciding which problem to solve. We spent nearly half the season on it. LiDAR, social media, accessibility, funding portals. Eventually we <strong>stopped inventing and asked the archaeologists</strong> what their biggest problem actually was."</p>
+  </div>
+
+  <div class="qa-pair">
+    <h3 class="q">How did your coach help you this season?</h3>
+    <p class="a">"<strong>Project managers, not engineers.</strong> They drove us to meetings, hosted us every Sunday, kept the schedule across 96 sessions. We did the engineering."</p>
+  </div>
+
+  <div class="qa-pair">
+    <h3 class="q">What would you do with more time?</h3>
+    <p class="a">From the existing Q&amp;A doc: apprenticeships with tech companies, free pilots for 3 smaller societies, becoming social entrepreneurs to scale the blueprint.</p>
+  </div>
+
+  <div class="qa-pair">
+    <h3 class="q">What are you most proud of?</h3>
+    <p class="a"><strong>The pay-it-forward story</strong> (primary). The live KAS deployment (technical). The blueprint scalability (vision).</p>
+  </div>
+
+  <div class="qa-pair">
+    <h3 class="q">How does your team demonstrate Core Values?</h3>
+    <p class="a">"<strong>Inclusion:</strong> we gave the new members the domain nobody knew, so they led from Day 1. <strong>Teamwork:</strong> 3 sub-groups, 2 experts plus 1 new member each. <strong>Discovery:</strong> 9 individual research presentations, 8 hours with Ken, 3 meetings with KAS before we picked a problem. <strong>Innovation:</strong> RAG, AGUI, multi-persona prompting, the blueprint. <strong>Impact:</strong> live on KAS site, 10,000 visitors a month. <strong>Fun:</strong> 502 hours, never missed a Sunday."</p>
+  </div>
+
+  <div class="qa-pair">
+    <h3 class="q">Why did you choose KAS?</h3>
+    <p class="a">From the existing Q&amp;A doc: last year we had a great reach with microplastics but no long-term partner. This year we changed the strategy. <strong>We found a partner first.</strong> Direct impact, defined need, real collaboration.</p>
+  </div>
+</section>
+
+<!-- ============ ARTEFACT MAP ============ -->
+<section class="sec" id="artefacts">
+  <div class="sec-head">
+    <h2>Physical artefact map.</h2>
+    <span class="sec-meta">Curated · max 7 on the table</span>
+  </div>
+  <p class="sec-lede">The judging room is small. The table is small. Judges scan visually in the first 30 seconds and form a frame. <strong>Curate.</strong></p>
+
+  <div class="art-map">
+    <div class="art-col is-primary">
+      <h3><span class="tag">Top 7 · on the table</span>What the judges see immediately.</h3>
+      <ol>
+        <li><strong>The 40% → 95% consistency curve.</strong> Printed large. The single most important artefact in the kit.</li>
+        <li><strong>KAS newsletter feature</strong> — Jacob Scott + Andy Ward quotes highlighted.</li>
+        <li><strong>Prompt engineering printout</strong> (Persona / Scope / Guardrails / Chain of Thought).</li>
+        <li><strong>Blueprint one-pager</strong> — shows scalability to other societies.</li>
+        <li><strong>Engineering journal</strong> — open to a representative page showing the change log.</li>
+        <li><strong>Sub-group diagram</strong> — all 9 names, 3 groups, named contributions.</li>
+        <li><strong>Tablet or phone with the LIVE KAS AI loaded.</strong> Backup: a screenshot printout if Wi-Fi is unreliable.</li>
+      </ol>
+    </div>
+    <div class="art-col">
+      <h3><span class="tag">Backup · in the case</span>Pull on demand.</h3>
+      <ul>
+        <li>Full session logs (96 sessions worth)</li>
+        <li>All 9 individual research PPTs</li>
+        <li>Full code printouts</li>
+        <li>Photo book of birthdays + McDonald's <em>(Final Share Fun block only)</em></li>
+        <li>Ken's full letter <em>(IP impact block only)</em></li>
+      </ul>
+    </div>
+    <div class="art-col">
+      <h3><span class="tag">Never visible</span>Hidden behind props if needed.</h3>
+      <ul>
+        <li>Cheat sheets</li>
+        <li>Backup notes</li>
+      </ul>
+      <p>Per Seshan Brothers guidance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUTSTANDING ============ -->
+<section class="sec" id="outstanding">
+  <div class="sec-head">
+    <h2>Outstanding · what Akash still needs to provide.</h2>
+    <span class="sec-meta">5 blockers</span>
+  </div>
+  <p class="sec-lede">To finalise this brick we need these decisions locked. Once they land, the kit is done.</p>
+
+  <ol class="todo-list">
+    <li><span class="num">01</span><span class="what">The <strong>40% → 95% consistency data</strong> — raw numbers or the graph itself, so we can mock it up if needed for print.<em>Hero artefact depends on this.</em></span></li>
+    <li><span class="num">02</span><span class="what"><strong>Team slogan</strong> — exact words.<em>Goes in the closing identity block of Final Share.</em></span></li>
+    <li><span class="num">03</span><span class="what"><strong>K-pop plan</strong> — full song with dance, or 15-second hook? Who's leading choreography? <strong>Decision deadline: 2 weeks before Korea.</strong></span></li>
+    <li><span class="num">04</span><span class="what"><strong>Confirmation on Alia / Aliya spelling.</strong> Lock one for all printed materials.</span></li>
+    <li><span class="num">05</span><span class="what"><strong>Hours total</strong> — scripts say 502, Q&amp;A doc says 580. Lock one number.<em>Recommend 502 if that's the most recent meeting count.</em></span></li>
+  </ol>
+</section>
+
+<!-- ============ THE MATH ============ -->
+<section class="sec" id="math">
+  <div class="sec-head">
+    <h2>What this brick does to the Champion's Score.</h2>
+  </div>
+
+  <div class="math">
+    <h3>The compound effect.</h3>
+    <p>If we land:</p>
+    <ul>
+      <li><strong>8 of the 10 dual-marked rows at Exceeds</strong> (box 4)</li>
+      <li><strong>2 of the 10 at Accomplished</strong> (box 3)</li>
+      <li><strong>3 GP scores at the top</strong> of the observed range</li>
+    </ul>
+    <p style="margin-top: 1rem;">Core Values area rank should be <strong class="hot">1st or 2nd</strong>.</p>
+
+    <div class="math-grid" style="margin-top: 1.4rem;">
+      <div>
+        <p><strong>Plus the compounding —</strong> 5 of those 10 dual-marked rows also count toward the IP rank, and 5 toward the RD rank. <strong>Every Exceeds on this brick compounds across 2 area ranks.</strong></p>
+      </div>
+      <div>
+        <p>That is why Core Values gets built first.</p>
+        <p class="closer">It threads through everything else.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="note" style="margin-top: 1.2rem;">
+    Next bricks queued: Brick 02 · Innovation Project · 5-min deck + Q&amp;A · Brick 03 · Robot Design · 5-min deck + Q&amp;A · Brick 05 · Final Share script (locked from this brick) · Brick 07 · Judge psychology refinement · Brick 08 · Timing rehearsal protocol.
+  </p>
+</section>
+
+</div>
+</main>
+
+<footer class="kit-footer">
+  <span><a href="../index.html">← Mission Control</a></span>
+  <span>Brick 04 · Core Values Evidence Kit · Compounds across IP + RD</span>
+</footer>
+
+<script src="../_shared/base.js"></script>
+</body>
+</html>

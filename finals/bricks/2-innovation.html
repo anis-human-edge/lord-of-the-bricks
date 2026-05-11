@@ -1,0 +1,1161 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#0A1F44" />
+<meta name="robots" content="noindex, nofollow, noarchive" />
+<title>Brick 02 · Innovation Project Script · Lord of the Bricks</title>
+
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" />
+<link rel="stylesheet" href="../_shared/base.css" />
+
+<style>
+/* ---------- HERO ---------- */
+.brick-hero { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: clamp(1rem, 2vw, 2rem); }
+.brick-hero .crumb-num { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.2em; color: var(--red); }
+.brick-hero h1 { margin-top: 1rem; max-width: 18ch; }
+.hero-meta {
+  margin-top: 1.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  align-items: baseline;
+}
+.hero-meta strong { color: var(--ink); font-weight: 700; }
+.hero-meta .red { color: var(--red); }
+
+/* ---------- IN-PAGE NAV ---------- */
+.in-page-nav {
+  position: sticky; top: 49px; z-index: 40;
+  background: rgba(250, 248, 244, 0.96);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--rule);
+  border-top: 1px solid var(--ink);
+}
+.in-page-nav-row {
+  max-width: var(--max-w); margin: 0 auto; padding: 0.65rem var(--gutter);
+  display: flex; gap: 0.4rem; overflow-x: auto; scrollbar-width: none;
+}
+.in-page-nav-row::-webkit-scrollbar { display: none; }
+.in-page-nav a {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-muted);
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--rule);
+  background: var(--white);
+  transition: border-color .2s var(--ease), color .2s var(--ease);
+  white-space: nowrap;
+}
+.in-page-nav a:hover { color: var(--ink); border-color: var(--ink); }
+.in-page-nav a.is-active { color: var(--white); background: var(--ink); border-color: var(--ink); }
+
+/* ---------- SECTIONS ---------- */
+.sec { padding-block: clamp(2.5rem, 4vw, 4rem); scroll-margin-top: 100px; }
+.sec + .sec { border-top: 1px solid var(--rule); }
+.sec-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 0.6rem;
+  gap: 1rem; flex-wrap: wrap;
+}
+.sec-head h2 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  letter-spacing: -0.018em; margin: 0;
+}
+.sec-head .sec-meta {
+  font-family: var(--font-mono); font-size: 0.74rem;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted);
+}
+.sec-lede {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.4; color: var(--ink-muted);
+  max-width: 64ch; margin: 0 0 2rem;
+  text-wrap: pretty;
+}
+
+/* ---------- STRATEGIC FRAME ---------- */
+.frame-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+@media (max-width: 860px) { .frame-grid { grid-template-columns: 1fr; } }
+.frame-card {
+  background: var(--white); border: 1px solid var(--rule);
+  padding: 1.5rem 1.6rem; position: relative;
+}
+.frame-card .num {
+  font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--red);
+  display: block; margin-bottom: 0.4rem;
+}
+.frame-card h3 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.1rem; letter-spacing: -0.01em;
+  margin: 0 0 0.6rem; line-height: 1.2;
+}
+.frame-card p { margin: 0; color: var(--ink-2); line-height: 1.55; font-size: 0.94rem; }
+.frame-card p em { color: var(--red); font-style: italic; }
+
+.diag-strip {
+  background: var(--navy); color: var(--white);
+  padding: 1.4rem clamp(1.4rem, 3vw, 2rem); margin-top: 1rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+}
+@media (max-width: 760px) { .diag-strip { grid-template-columns: 1fr; } }
+.diag-strip h3 {
+  font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.6); margin: 0 0 0.6rem;
+}
+.diag-strip p { color: rgba(255,255,255,0.86); margin: 0 0 0.5rem; line-height: 1.6; }
+.diag-strip strong.hot { color: var(--red); }
+.diag-strip strong { color: var(--white); }
+.diag-strip em { color: rgba(255,255,255,0.7); font-style: italic; }
+
+/* ---------- TIMING TABLE ---------- */
+.timing-table th { white-space: nowrap; }
+.timing-table .num-col { text-align: center; width: 3rem; font-family: var(--font-mono); color: var(--red); font-weight: 700; }
+.timing-table .speaker-col { font-weight: 700; color: var(--ink); white-space: nowrap; }
+.timing-table .speaker-col em { color: var(--accent); font-style: normal; font-weight: 600; }
+.timing-table .time-col, .timing-table .words-col {
+  text-align: right; font-family: var(--font-mono);
+  font-size: 0.86rem; color: var(--ink-muted);
+  white-space: nowrap; width: 5rem;
+}
+.timing-table tr.is-winning td { background: rgba(200, 16, 46, 0.06); }
+.timing-table tr.is-winning .speaker-col { color: var(--red); }
+.timing-table tr.is-multi td { background: rgba(27, 79, 229, 0.05); }
+.timing-table tr.total td {
+  border-top: 2px solid var(--ink);
+  font-family: var(--font-mono); font-weight: 700;
+  color: var(--ink); text-transform: uppercase;
+  font-size: 0.78rem; letter-spacing: 0.14em;
+}
+
+.buffer-note {
+  margin-top: 1rem;
+  font-family: var(--font-mono); font-size: 0.78rem;
+  letter-spacing: 0.06em; color: var(--ink-muted);
+  background: var(--paper); border: 1px solid var(--rule);
+  padding: 0.7rem 1rem;
+}
+.buffer-note strong { color: var(--red); }
+.buffer-note + .buffer-note { margin-top: 0.4rem; }
+
+/* ---------- ARTEFACT TABLE ---------- */
+.art-table th { white-space: nowrap; }
+.art-table .a-name { font-weight: 700; color: var(--ink); }
+.art-table .a-when { color: var(--ink-2); }
+.art-table .a-who { font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); }
+
+/* ---------- SCRIPT SECTIONS ---------- */
+.script { display: grid; gap: 1rem; }
+.scene { background: var(--white); border: 1px solid var(--rule); scroll-margin-top: 110px; }
+.scene-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.85rem 1.4rem;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+  gap: 1rem; flex-wrap: wrap;
+}
+.scene-bar-left { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.scene-num {
+  font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--red);
+}
+.scene-title {
+  font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--ink); text-transform: uppercase;
+}
+.scene-bar-right {
+  display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-muted);
+}
+.scene-bar-right .speaker-tag {
+  background: var(--accent); color: var(--white);
+  padding: 0.22rem 0.55rem; letter-spacing: 0.16em;
+}
+.scene-bar-right .speaker-tag.is-second {
+  background: transparent; border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+.scene-body { padding: 1.6rem clamp(1.4rem, 3vw, 2rem); }
+.scene-name {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.25rem, 2.1vw, 1.7rem);
+  line-height: 1.1; letter-spacing: -0.014em;
+  margin: 0 0 1rem; color: var(--ink); max-width: 32ch;
+}
+.stage {
+  font-family: var(--font-mono); font-size: 0.74rem;
+  letter-spacing: 0.06em; color: var(--ink-muted);
+  margin: 0 0 1.2rem; padding: 0.6rem 0.85rem;
+  background: var(--paper);
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+}
+.stage::before { content: "STAGE — "; color: var(--red); font-weight: 700; letter-spacing: 0.16em; }
+
+.spoken {
+  background: var(--bone); padding: 1.6rem clamp(1.4rem, 3vw, 2rem);
+  border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
+  margin: 0 calc(-1 * clamp(1.4rem, 3vw, 2rem));
+}
+.spoken .label {
+  font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--red); display: block; margin-bottom: 0.7rem;
+}
+.spoken blockquote {
+  font-family: var(--font-display); font-style: italic; font-weight: 500;
+  font-size: clamp(1.05rem, 1.45vw, 1.3rem);
+  line-height: 1.45; color: var(--ink);
+  margin: 0; padding-left: 1.8rem;
+  position: relative; max-width: 70ch; text-wrap: pretty;
+}
+.spoken blockquote::before {
+  content: "\201C"; position: absolute;
+  left: 0; top: -0.32em;
+  font-size: 2.6em; line-height: 1;
+  color: var(--red); font-style: normal; font-weight: 700;
+}
+.spoken blockquote strong { font-style: normal; font-weight: 700; color: var(--red); }
+.spoken blockquote em { font-style: italic; color: var(--ink-muted); }
+
+/* Multi-voice spoken (slot 6 — three personas) */
+.spoken.is-multi blockquote { padding-left: 0; max-width: 80ch; }
+.spoken.is-multi blockquote::before { display: none; }
+.spoken.is-multi .voice {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-top: 1px dashed var(--rule-strong);
+  align-items: baseline;
+}
+.spoken.is-multi .voice:first-child { border-top: 0; padding-top: 0; }
+.spoken.is-multi .voice:last-child { padding-bottom: 0; }
+.spoken.is-multi .voice .who {
+  font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent);
+}
+.spoken.is-multi .voice .said {
+  font-family: var(--font-display); font-style: italic; font-weight: 500;
+  font-size: clamp(1rem, 1.35vw, 1.18rem);
+  line-height: 1.45; color: var(--ink);
+  position: relative; padding-left: 1.4rem;
+}
+.spoken.is-multi .voice .said::before {
+  content: "\201C"; position: absolute;
+  left: 0; top: -0.3em;
+  font-size: 2em; line-height: 1;
+  color: var(--red); font-style: normal; font-weight: 700;
+}
+
+.rubric-hits { padding-top: 1.4rem; }
+.rubric-hits h4 {
+  font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-muted); margin: 0 0 0.7rem;
+}
+.rubric-hits ul {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 0.4rem;
+}
+.rubric-hits li {
+  position: relative; padding-left: 1rem;
+  font-size: 0.92rem; color: var(--ink-2); line-height: 1.55;
+}
+.rubric-hits li::before {
+  content: "✓"; position: absolute; left: 0;
+  color: var(--red); font-weight: 700;
+}
+.rubric-hits li strong { color: var(--ink); font-weight: 700; }
+.rubric-hits li .chip-inline {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.14em; color: var(--white);
+  background: var(--accent); padding: 0.08rem 0.4rem;
+  margin-left: 0.3rem; text-transform: uppercase;
+}
+
+.beats-better {
+  margin-top: 1.4rem;
+  padding: 1rem 1.2rem;
+  background: var(--paper); border: 1px solid var(--rule);
+}
+.beats-better h4 {
+  font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--red); margin: 0 0 0.5rem;
+}
+.beats-better p { margin: 0; color: var(--ink-2); line-height: 1.55; font-size: 0.92rem; max-width: 65ch; }
+.beats-better p strong { color: var(--ink); font-weight: 700; }
+
+/* ---------- WINNING STROKE (Section 9) ---------- */
+.scene.is-winning { border: 2px solid var(--red); }
+.scene.is-winning .scene-bar { background: var(--navy); border-bottom-color: var(--navy); }
+.scene.is-winning .scene-bar .scene-num,
+.scene.is-winning .scene-bar .scene-title { color: var(--white); }
+.scene.is-winning .scene-bar-right { color: rgba(255,255,255,0.7); }
+.scene.is-winning .scene-bar-right .speaker-tag {
+  background: var(--red); color: var(--white);
+}
+.winning-flag {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 0.22rem 0.55rem;
+  background: var(--red); color: var(--white);
+  white-space: nowrap;
+}
+.scene.is-winning .scene-bar-right .winning-flag { background: var(--white); color: var(--red); }
+
+.parallel-callout {
+  margin: 1.2rem 0 0;
+  background: var(--paper); border: 1px solid var(--red);
+  padding: 1rem 1.3rem;
+  display: grid; grid-template-columns: 8rem 1fr;
+  gap: 1rem; align-items: baseline;
+}
+@media (max-width: 640px) { .parallel-callout { grid-template-columns: 1fr; gap: 0.4rem; } }
+.parallel-callout .lab {
+  font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--red);
+}
+.parallel-callout .text {
+  font-size: 0.95rem; color: var(--ink-2); line-height: 1.55;
+}
+.parallel-callout .text strong { color: var(--ink); }
+.parallel-callout .text a { color: var(--red); border-bottom: 1px solid var(--red); }
+
+.why-winning {
+  background: var(--navy); color: var(--white);
+  padding: 1.6rem clamp(1.4rem, 3vw, 2.2rem);
+  margin-top: 1.2rem;
+}
+.why-winning h4 {
+  color: var(--white);
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.15rem; margin: 0 0 1rem;
+  letter-spacing: -0.012em;
+}
+.why-winning ol {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 1rem; counter-reset: wins;
+}
+.why-winning ol li {
+  display: grid; grid-template-columns: 2.5rem 1fr;
+  gap: 1rem; color: rgba(255,255,255,0.86);
+  line-height: 1.55; font-size: 0.96rem;
+  counter-increment: wins;
+}
+.why-winning ol li::before {
+  content: counter(wins, decimal-leading-zero);
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.16em; color: var(--red);
+}
+.why-winning ol li strong { color: var(--white); font-weight: 700; }
+.why-winning .pull-line {
+  font-family: var(--font-display); font-style: italic; font-weight: 500;
+  font-size: 1.1rem; color: var(--red); margin: 0; padding: 0;
+}
+.why-winning ol li em { color: rgba(255,255,255,0.65); font-style: italic; }
+
+/* ---------- WHY THIS SCRIPT BLOWS JUDGES OFF ---------- */
+.mechanics { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.85rem; }
+@media (max-width: 1100px) { .mechanics { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .mechanics { grid-template-columns: 1fr; } }
+.mech {
+  background: var(--white); border: 1px solid var(--rule);
+  padding: 1.2rem 1.3rem;
+}
+.mech .num {
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--red);
+  display: block; margin-bottom: 0.5rem;
+}
+.mech h3 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1rem; letter-spacing: -0.008em;
+  margin: 0 0 0.5rem; line-height: 1.2;
+}
+.mech p { margin: 0; color: var(--ink-2); font-size: 0.86rem; line-height: 1.5; }
+.mech p strong { color: var(--ink); font-weight: 700; }
+
+/* ---------- RUBRIC SCORING MAP ---------- */
+.rubric-table th { white-space: nowrap; }
+.rubric-table .row-name { font-weight: 700; color: var(--ink); }
+.rubric-table .cv-cell .cv-inline {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.16rem 0.5rem;
+  color: var(--white); white-space: nowrap;
+}
+.rubric-table .cv-discovery { background: var(--accent); }
+.rubric-table .cv-teamwork { background: #6b3fc4; }
+.rubric-table .cv-innovation { background: var(--red); }
+.rubric-table .cv-impact { background: #1a8a52; }
+.rubric-table .cv-fun { background: #e08a18; }
+.rubric-table .where { color: var(--ink-2); }
+
+/* ---------- REHEARSAL ---------- */
+.rehearsal { display: grid; gap: 0.7rem; }
+.week {
+  background: var(--white); border: 1px solid var(--rule);
+  padding: 1.1rem 1.4rem;
+  display: grid; grid-template-columns: 7rem 1fr;
+  gap: 1.2rem; align-items: baseline;
+}
+@media (max-width: 640px) { .week { grid-template-columns: 1fr; gap: 0.4rem; } }
+.week .when {
+  font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--red);
+}
+.week .what { font-size: 0.96rem; color: var(--ink-2); line-height: 1.55; }
+.week .what strong { color: var(--ink); font-weight: 700; }
+.week.is-final { border-color: var(--red); border-width: 2px; }
+
+.special-focus {
+  background: var(--navy); color: var(--white);
+  padding: 1.4rem clamp(1.4rem, 3vw, 2rem);
+  margin-top: 1rem;
+}
+.special-focus h4 {
+  font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--red); margin: 0 0 0.6rem;
+}
+.special-focus h3 {
+  color: var(--white); font-family: var(--font-display); font-weight: 700;
+  font-size: 1.1rem; margin: 0 0 0.6rem; letter-spacing: -0.012em;
+}
+.special-focus p { color: rgba(255,255,255,0.86); margin: 0; line-height: 1.6; max-width: 64ch; }
+.special-focus p strong { color: var(--white); }
+
+/* ---------- OUTSTANDING ---------- */
+.todo-list {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 0.6rem;
+}
+.todo-list li {
+  background: var(--white); border: 1px solid var(--rule);
+  padding: 1rem 1.2rem;
+  display: grid; grid-template-columns: 2.5rem 1fr;
+  gap: 1rem; align-items: baseline;
+}
+.todo-list .num {
+  font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--red);
+}
+.todo-list .what { color: var(--ink); font-size: 0.96rem; line-height: 1.55; }
+.todo-list .what strong { color: var(--red); font-weight: 700; }
+
+/* ---------- THE CLOSER ---------- */
+.closer-block {
+  background: var(--navy); color: var(--white);
+  padding: 2rem clamp(1.6rem, 3.5vw, 2.5rem);
+}
+.closer-block h3 {
+  color: var(--white); font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  margin: 0 0 1rem; letter-spacing: -0.014em;
+}
+.closer-block p { color: rgba(255,255,255,0.85); margin: 0 0 0.8rem; max-width: 60ch; line-height: 1.6; }
+.closer-block strong { color: var(--white); }
+.closer-block .hot { color: var(--red); }
+.closer-block ul {
+  margin: 0.6rem 0 0; padding-left: 1.2rem;
+  color: rgba(255,255,255,0.85); line-height: 1.7; font-size: 0.96rem;
+}
+.closer-block .closer-line {
+  margin-top: 1.4rem; padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  font-family: var(--font-display); font-style: italic;
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  color: var(--white); max-width: 60ch;
+}
+</style>
+</head>
+<body>
+
+<header class="kit-header">
+  <div class="kit-header-row">
+    <div class="kit-crumbs">
+      <span class="kit-mark"><span></span><span></span><span></span><span></span></span>
+      <a href="../index.html">Mission Control</a>
+      <span class="sep">/</span>
+      <span>Brick 02</span>
+      <span class="sep">/</span>
+      <span class="here">Innovation Project · Script</span>
+    </div>
+    <div class="kit-meta">
+      <span><span class="lock-dot"></span>Internal kit</span>
+      <a class="outstanding-pill" href="#open">Outstanding · <span class="count">7</span></a>
+      <span class="tminus" data-tminus>T−DAYS</span>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="shell brick-hero">
+  <span class="crumb-num">Brick 02 · Innovation Project Script · Korea Edition</span>
+  <h1 class="h-display">Innovation Project.</h1>
+  <p class="h-sub" style="margin-top: 1rem;">
+    A 5-minute script. <strong>9 speakers, 9 sections.</strong> The crown jewel.
+    The Harrogate version read like a project report — this rebuild turns it into a story
+    with a contrarian thesis: <em>"We stopped inventing. We started listening."</em>
+    Aaliya closes at slot 9 with the blueprint reveal.
+  </p>
+  <div class="hero-meta">
+    <span><span class="red">Slot —</span> <strong>5 minutes</strong></span>
+    <span><span class="red">Total —</span> <strong>~4:20</strong></span>
+    <span><span class="red">Buffer —</span> <strong>40 sec</strong></span>
+    <span><span class="red">Words —</span> <strong>520</strong></span>
+    <span><span class="red">Speakers —</span> <strong>All 9 · Esha + Elliot have 2 slots</strong></span>
+  </div>
+</section>
+</main>
+
+<nav class="in-page-nav" id="ipNav">
+  <div class="in-page-nav-row">
+    <div class="nav-cluster">
+      <a href="#frame">Strategic frame</a>
+      <a href="#schedule">Speaker schedule</a>
+      <a href="#artefacts">Artefact map</a>
+    </div>
+    <span class="nav-sep" aria-hidden="true"></span>
+    <div class="nav-cluster">
+      <a href="#script">The full script</a>
+      <a href="#mechanics">Why it lands</a>
+      <a href="#rubric">Rubric map</a>
+    </div>
+    <span class="nav-sep" aria-hidden="true"></span>
+    <div class="nav-cluster">
+      <a href="#rehearsal">Rehearsal · 6 wk</a>
+      <a href="#open">Open items</a>
+      <a href="#closer">Final note</a>
+    </div>
+    <span class="nav-position" id="navPosition"><span class="pos-current">01</span><span class="pos-divider">/</span><span class="pos-total">09</span></span>
+  </div>
+</nav>
+
+<main>
+<div class="shell">
+
+<!-- ============ STRATEGIC FRAME ============ -->
+<section class="sec" id="frame">
+  <div class="sec-head">
+    <h2>Strategic frame.</h2>
+    <span class="sec-meta">3 things change vs Harrogate</span>
+  </div>
+  <p class="sec-lede">The Innovation Project is the crown jewel. The current Harrogate script reads like a project report.
+    This rebuild turns it into a <strong>story with a contrarian thesis</strong> that judges remember 30 minutes later.</p>
+
+  <div class="frame-grid">
+    <div class="frame-card">
+      <span class="num">Change 01</span>
+      <h3>Contrarian frame.</h3>
+      <p><em>"We stopped inventing. We started listening."</em> Most teams brag about what they invented. We lead with what we chose <strong>not</strong> to invent. <strong>Earns judge attention in the first 20 seconds.</strong></p>
+    </div>
+    <div class="frame-card">
+      <span class="num">Change 02</span>
+      <h3>Technical depth visible.</h3>
+      <p>RAG, AGUI, 4-part prompt engineering (Persona, Scope, Guardrails, Chain of Thought). <strong>Differentiates us from every team that says "we used ChatGPT."</strong></p>
+    </div>
+    <div class="frame-card">
+      <span class="num">Change 03</span>
+      <h3>The Aaliya blueprint reveal.</h3>
+      <p>Parallel structure to her <a href="3-robot-design.html" style="color: var(--red); border-bottom: 1px solid var(--red);">Robot Design winning stroke</a>. Both reveals follow the same pattern: <em>"Our X isn't our best Y. Our Z is."</em> <strong>Aaliya becomes the team's signature voice.</strong></p>
+    </div>
+  </div>
+
+  <div class="diag-strip">
+    <div>
+      <h3>What we cut</h3>
+      <p><strong>The Duncan/Ri skit is cut.</strong> Skits are risky and most teams overact them. Replaced with a clean before/after sentence in Arvin's section.</p>
+      <p><em>Lower performance risk, sharper landing.</em></p>
+    </div>
+    <div>
+      <h3>The bar</h3>
+      <p>If this is delivered cleanly, <strong>Innovation Project rank should be top 3.</strong></p>
+      <p>Combined with Robot Design (top 3–5), Core Values weave, and championship-grade Robot Performance — the Champion's Score moves into <strong class="hot">striking distance of 1st or 2nd in South Korea</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPEAKER SCHEDULE ============ -->
+<section class="sec" id="schedule">
+  <div class="sec-head">
+    <h2>Speaker assignment &amp; timing.</h2>
+    <span class="sec-meta">All 9 speak · 9 sections · ~4:20</span>
+  </div>
+
+  <table class="t timing-table">
+    <thead>
+      <tr><th>#</th><th>Speaker</th><th>Section</th><th>Time</th><th>Words</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="num-col">1</td><td class="speaker-col">Esha</td><td>Opening · the listening thesis</td><td class="time-col">25 sec</td><td class="words-col">50</td></tr>
+      <tr><td class="num-col">2</td><td class="speaker-col">Anaisa</td><td>Research approach</td><td class="time-col">25 sec</td><td class="words-col">50</td></tr>
+      <tr><td class="num-col">3</td><td class="speaker-col">Guhan</td><td>8 ideas, 1 problem</td><td class="time-col">30 sec</td><td class="words-col">60</td></tr>
+      <tr><td class="num-col">4</td><td class="speaker-col">Arvin</td><td>The Information Gap</td><td class="time-col">25 sec</td><td class="words-col">50</td></tr>
+      <tr><td class="num-col">5</td><td class="speaker-col">Sakthi</td><td>Solution unveiled + live demo</td><td class="time-col">25 sec</td><td class="words-col">50</td></tr>
+      <tr class="is-multi"><td class="num-col">6</td><td class="speaker-col">Toby + Elliot + Esha <em>#2</em></td><td>Three personas (8 sec each)</td><td class="time-col">25 sec</td><td class="words-col">50</td></tr>
+      <tr><td class="num-col">7</td><td class="speaker-col">Flossie</td><td>Technical innovation · RAG · AGUI · Prompt Eng</td><td class="time-col">40 sec</td><td class="words-col">80</td></tr>
+      <tr><td class="num-col">8</td><td class="speaker-col">Elliot <em>#2</em></td><td>Live deployment + expert validation</td><td class="time-col">30 sec</td><td class="words-col">60</td></tr>
+      <tr class="is-winning"><td class="num-col">9</td><td class="speaker-col">Aaliya</td><td>The blueprint reveal + closer</td><td class="time-col">35 sec</td><td class="words-col">70</td></tr>
+      <tr class="total"><td colspan="3">Total</td><td class="time-col">~4:20</td><td class="words-col">520</td></tr>
+    </tbody>
+  </table>
+
+  <div class="buffer-note"><strong>Buffer:</strong> 40 seconds for handoffs, demo movements, and natural pauses.</div>
+  <div class="buffer-note"><strong>Inclusion is structurally guaranteed</strong> — all 9 members speak. Esha and Elliot each take a second slot to balance the 25-sec-per-speaker average.</div>
+</section>
+
+<!-- ============ ARTEFACT MAP ============ -->
+<section class="sec" id="artefacts">
+  <div class="sec-head">
+    <h2>Artefact map.</h2>
+    <span class="sec-meta">7 artefacts · who handles each</span>
+  </div>
+
+  <table class="t art-table">
+    <thead>
+      <tr><th>Artefact</th><th>When used</th><th>Speaker</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="a-name">Phone or tablet — live AI on KAS site</td><td class="a-when">Solution unveil + technical demo</td><td class="a-who">Sakthi + Flossie</td></tr>
+      <tr><td class="a-name">Prompt engineering 4-part printout</td><td class="a-when">Handed to judges during technical section</td><td class="a-who">Flossie / Anaisa</td></tr>
+      <tr><td class="a-name">KAS newsletter feature (printed)</td><td class="a-when">Handed to judges during deployment section</td><td class="a-who">Elliot</td></tr>
+      <tr><td class="a-name">Ken's letter (printed)</td><td class="a-when">Referenced during deployment section</td><td class="a-who">Elliot</td></tr>
+      <tr><td class="a-name">Blueprint one-pager</td><td class="a-when">Handed to judges during winning stroke</td><td class="a-who">Aaliya</td></tr>
+      <tr><td class="a-name">List of iterations and improvements</td><td class="a-when">Handed to judges during deployment section</td><td class="a-who">Elliot</td></tr>
+      <tr><td class="a-name">Three personas screenshot (3 panels)</td><td class="a-when">Held up during personas section</td><td class="a-who">Toby / Elliot / Esha</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ THE FULL SCRIPT ============ -->
+<section class="sec" id="script">
+  <div class="sec-head">
+    <h2>The full script.</h2>
+    <span class="sec-meta">Stage · Spoken line · Rubric hits</span>
+  </div>
+  <p class="sec-lede">The spoken line is the contract. Stage direction is the choreography. Rubric hits at the bottom of each scene tell us why it's there.</p>
+
+  <div class="script">
+
+    <!-- Scene 01 — ESHA -->
+    <article class="scene" id="s-01">
+      <div class="scene-bar">
+        <div class="scene-bar-left">
+          <span class="scene-num">Scene 01</span>
+          <span class="scene-title">Opening · the listening thesis</span>
+        </div>
+        <div class="scene-bar-right">
+          <span class="speaker-tag">Esha</span>
+          <span>25 sec</span>
+          <span>50 words</span>
+        </div>
+      </div>
+      <div class="scene-body">
+        <h3 class="scene-name">Flip every other team's opener in 3 sentences.</h3>
+        <div class="spoken">
+          <span class="label">Spoken</span>
+          <blockquote>Annyeong-haseyo. We are <strong>Lord of the Bricks</strong>. Two-time UK regional champions. Last season, our innovation reached <strong>3,000 people</strong>. We were proud. This season, we tried something different. <strong>We stopped inventing solutions. We started listening for problems.</strong> That changed everything.</blockquote>
+        </div>
+        <div class="rubric-hits">
+          <h4>Rubric hits</h4>
+          <ul>
+            <li>Sets up <strong>IP CREATE</strong> (innovation) by inverting the typical claim.</li>
+            <li><strong>Plants Year-over-year arc</strong> with the 3,000-people anchor from last season.</li>
+            <li>Korean greeting signals respect without forcing it.</li>
+          </ul>
+        </div>
+        <div class="beats-better">
+          <h4>Why this opens differently</h4>
+          <p>The "3,000 people last year" anchors credibility with a <strong>number</strong>, not an adjective. The contrarian thesis flips every other team's opener. <strong>Judges sit forward.</strong></p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Scene 02 — ANAISA -->
+    <article class="scene" id="s-02">
+      <div class="scene-bar">
+        <div class="scene-bar-left">
+          <span class="scene-num">Scene 02</span>
+          <span class="scene-title">Research approach</span>
+        </div>
+        <div class="scene-bar-right">
+          <span class="speaker-tag">Anaisa</span>
+          <span>25 sec</span>
+          <span>50 words</span>
+        </div>
+      </div>
+      <div class="scene-body">
+        <h3 class="scene-name">9 presentations. 8 hours. Then the meeting.</h3>
+        <div class="spoken">
+          <span class="label">Spoken</span>
+          <blockquote>Six of us had three FLL seasons behind us. Three of us were brand new. None of us knew archaeology. So we did <strong>9 individual research presentations</strong>. Each of us picked one of the 5 innovation prompts and taught the rest of the team. Then <strong>8 hours with Ken</strong>, a retired archaeologist. By the time we met the Kent Archaeological Society, <strong>we could speak their language</strong>.</blockquote>
+        </div>
+        <div class="rubric-hits">
+          <h4>Rubric hits</h4>
+          <ul>
+            <li><strong>IP IDENTIFY</strong> (dual-marked Core Values · Discovery) — research from a variety of sources. 9 presentations + Ken + KAS. <span class="chip-inline">Exceeds candidate</span></li>
+            <li><strong>IP DESIGN</strong> (dual-marked Core Values · Teamwork) — development process involved all team members. New members named, structurally framed.</li>
+          </ul>
+        </div>
+        <div class="beats-better">
+          <h4>Why this beats Harrogate</h4>
+          <p>The old version used <em>"brains about to pop like popcorn."</em> Cut. New version surfaces the <strong>structural commitment</strong>: 9 presentations, 8 hours, then the meeting. <strong>Numbers &gt; metaphors.</strong></p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Scene 03 — GUHAN -->
+    <article class="scene" id="s-03">
+      <div class="scene-bar">
+        <div class="scene-bar-left">
+          <span class="scene-num">Scene 03</span>
+          <span class="scene-title">8 ideas, 1 problem</span>
+        </div>
+        <div class="scene-bar-right">
+          <span class="speaker-tag">Guhan</span>
+          <span>30 sec</span>
+          <span>60 words</span>
+        </div>
+      </div>
+      <div class="scene-body">
+        <h3 class="scene-name">Name all 8. Show the listening in action.</h3>
+        <div class="spoken">
+          <span class="label">Spoken</span>
+          <blockquote>We came to KAS with <strong>8 ideas</strong>. Soil colour sensors. Funding portals. LiDAR mapping. Pottery reconstruction tools. AI for storage. Annotation tools. Bone identification. Soil stratigraphy analysis. <strong>We pitched them all. They picked none.</strong> Instead, Jacob, Craig and Andy showed us 10,000 pages of unsearchable archives, and an email inbox they couldn't keep up with. <strong>That's when we stopped pitching, and started building.</strong></blockquote>
+        </div>
+        <div class="rubric-hits">
+          <h4>Rubric hits</h4>
+          <ul>
+            <li><strong>IP IDENTIFY</strong> — clearly defined problem.</li>
+            <li><strong>Decision quality made visible through what was rejected.</strong></li>
+          </ul>
+        </div>
+        <div class="beats-better">
+          <h4>Why this beats Harrogate</h4>
+          <p>Old version mentions "8 ideas" abstractly. New version <strong>names all 8</strong>. This proves serious exploration. The <em>"they picked none"</em> line is the listening thesis in action. <strong>Hits hard.</strong></p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Scene 04 — ARVIN -->
+    <article class="scene" id="s-04">
+      <div class="scene-bar">
+        <div class="scene-bar-left">
+          <span class="scene-num">Scene 04</span>
+          <span class="scene-title">The Information Gap</span>
+        </div>
+        <div class="scene-bar-right">
+          <span class="speaker-tag">Arvin</span>
+          <span>25 sec</span>
+          <span>50 words</span>
+        </div>
+      </div>
+      <div class="scene-body">
+        <h3 class="scene-name">Before us / after us — in one parallel sentence.</h3>
+        <div class="spoken">
+          <span class="label">Spoken</span>
+          <blockquote>Before us, a researcher looking for the Ringlemere Cup would dig through <strong>10,000 pages</strong> of journals, maps, blogs, and 150 years of newsletters. After us, they ask one question. They have the answer in seconds. <strong>150 years of research. 10,000 webpages. 10,000 visitors a month.</strong> All available. All unusable. <strong>That's the Information Gap.</strong></blockquote>
+        </div>
+        <div class="rubric-hits">
+          <h4>Rubric hits</h4>
+          <ul>
+            <li><strong>IP IDENTIFY</strong> — clearly defined problem with quantification.</li>
+            <li><strong>Sets up the Innovation reveal in slot 5.</strong></li>
+          </ul>
+        </div>
+        <div class="beats-better">
+          <h4>Why this beats Harrogate</h4>
+          <p>The Duncan/Ri skit is cut. The same before/after energy is delivered in 5 seconds through one parallel sentence. <strong>Lower performance risk, sharper landing.</strong></p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Scene 05 — SAKTHI -->
+    <article class="scene" id="s-05">
+      <div class="scene-bar">
+        <div class="scene-bar-left">
+          <span class="scene-num">Scene 05</span>
+          <span class="scene-title">Solution unveiled + live demo</span>
+        </div>
+        <div class="scene-bar-right">
+          <span class="speaker-tag">Sakthi</span>
+          <span>25 sec</span>
+          <span>50 words</span>
+        </div>
+      </div>
+      <div class="scene-body">
+        <h3 class="scene-name">The reveal. The live moment. The invitation.</h3>
+        <p class="stage">Holds up tablet, shows AI live on KAS website.</p>
+        <div class="spoken">
+          <span class="label">Spoken</span>
+          <blockquote>So we built the <strong>Multi-Persona AI Assistant</strong>. One AI. Three personas. Ten thousand pages, searched in seconds. <em>(holds up tablet, shows AI live on KAS website)</em> Right now, this is running on the Kent Archaeological Society website. <strong>Anyone in Korea can type kentarchaeology.org and use it tonight.</strong></blockquote>
+        </div>
+        <div class="rubric-hits">
+          <h4>Rubric hits</h4>
+          <ul>
+            <li><strong>IP CREATE</strong> — detailed model that represents the solution. <strong>Live deployment beats every prototype.</strong></li>
+            <li>Live demo grounds everything that follows.</li>
+          </ul>
+        </div>
+        <div class="beats-better">
+          <h4>Korea-specific</h4>
+          <p>The <em>"anyone in Korea can use it tonight"</em> line invites the judges to verify the team's claim themselves. <strong>Confidence + transparency.</strong></p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Scene 06 — THREE PERSONAS (multi-voice) -->
+    <article class="scene" id="s-06">
+      <div class="scene-bar">
+        <div class="scene-bar-left">
+          <span class="scene-num">Scene 06</span>
+          <span class="scene-title">Three personas · 3 voices in 25 sec</span>
+        </div>
+        <div class="scene-bar-right">
+          <span class="speaker-tag">Toby</span>
+          <span class="speaker-tag is-second">Elliot</span>
+          <span class="speaker-tag is-second">Esha #2</span>
+          <span>25 sec · ~8 each</span>
+        </div>
+      </div>
+      <div class="scene-body">
+        <h3 class="scene-name">Three voices. Three audiences. One AI.</h3>
+        <p class="stage">Toby → Elliot → Esha. Each makes eye contact, delivers, then looks to the next speaker. Drilled 50 times.</p>
+        <div class="spoken is-multi">
+          <span class="label">Spoken · 3 voices, sharp handoffs</span>
+          <div class="voice">
+            <span class="who">Toby</span>
+            <p class="said">For an archaeologist, the AI gives excavation reports, citations, structured statistics. <strong>Professional grade. Like a research partner.</strong></p>
+          </div>
+          <div class="voice">
+            <span class="who">Elliot</span>
+            <p class="said">For the public, it tells local stories. Roman roads, Saxon burials, medieval markets. <strong>Like a Kent museum in your pocket.</strong></p>
+          </div>
+          <div class="voice">
+            <span class="who">Esha</span>
+            <p class="said">For students, it plays. Quizzes, simple language. We built <strong>two games in G-Develop</strong> so children can learn through play.</p>
+          </div>
+        </div>
+        <div class="rubric-hits">
+          <h4>Rubric hits</h4>
+          <ul>
+            <li><strong>IP CREATE</strong> (dual-marked Core Values · Innovation) — detailed explanation of innovation in solution. 3 differentiated personas.</li>
+            <li><strong>Multiple voices = visible team contribution.</strong></li>
+            <li>Each persona gets one memorable line. Judges see the breadth of the persona engineering.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- Scene 07 — FLOSSIE -->
+    <article class="scene" id="s-07">
+      <div class="scene-bar">
+        <div class="scene-bar-left">
+          <span class="scene-num">Scene 07</span>
+          <span class="scene-title">Technical innovation · RAG · AGUI · Prompt Engineering</span>
+        </div>
+        <div class="scene-bar-right">
+          <span class="speaker-tag">Flossie</span>
+          <span>40 sec</span>
+          <span>80 words</span>
+        </div>
+      </div>
+      <div class="scene-body">
+        <h3 class="scene-name">The section that earns the Exceeds comment.</h3>
+        <p class="stage">Hands prompt engineering printout to judges.</p>
+        <div class="spoken">
+          <span class="label">Spoken</span>
+          <blockquote>We don't just use AI. <strong>We engineered it.</strong> Three innovations. <strong>First: RAG.</strong> Retrieval Augmented Generation. The AI fetches answers only from KAS data. Never from the open internet. <strong>Trustworthy by design.</strong> <strong>Second: AGUI.</strong> Advanced Graphical User Interface. Eliminates blank-screen waits. Users see real-time loading, not freezes. <strong>Third: 4-part prompt engineering.</strong> Persona. Scope. Guardrails. Chain of Thought. Every answer is structured, on-topic, and source-cited. <em>(hands prompt engineering printout to judges)</em> That's what separates our AI from a chatbot.</blockquote>
+        </div>
+        <div class="rubric-hits">
+          <h4>Rubric hits</h4>
+          <ul>
+            <li><strong>IP CREATE</strong> (dual-marked Core Values · Innovation) — <span class="chip-inline">Exceeds candidate</span></li>
+            <li><strong>IP CREATE</strong> — clear explanation of innovative attachments → 3 named innovations.</li>
+            <li><strong>This is the section that earns the comment box on the Exceeds column.</strong></li>
+          </ul>
+        </div>
+        <div class="beats-better">
+          <h4>Why this section is critical</h4>
+          <p>Lifts Innovation Project rank from <em>"good team that used AI"</em> to <strong>"team that engineered AI."</strong> Every judge will know teams that say "we used ChatGPT." Lord of the Bricks <strong>engineered the architecture</strong>.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Scene 08 — ELLIOT #2 -->
+    <article class="scene" id="s-08">
+      <div class="scene-bar">
+        <div class="scene-bar-left">
+          <span class="scene-num">Scene 08</span>
+          <span class="scene-title">Live deployment + expert validation</span>
+        </div>
+        <div class="scene-bar-right">
+          <span class="speaker-tag">Elliot #2</span>
+          <span>30 sec</span>
+          <span>60 words</span>
+        </div>
+      </div>
+      <div class="scene-body">
+        <h3 class="scene-name">Real-world impact, named recipients, direct quotes.</h3>
+        <p class="stage">Hands KAS newsletter printout to judges. Then iteration list.</p>
+        <div class="spoken">
+          <span class="label">Spoken</span>
+          <blockquote>This isn't a prototype. It's live on the Kent Archaeological Society website, serving <strong>10,000 visitors a month</strong>. <em>(hands KAS newsletter printout to judges)</em> The Society featured us in their official newsletter. Their Digital Manager, Jacob Scott, called our work <strong>'mind-boggling.'</strong> Their Curator, Andy Ward, called it inspiring. Ken, the retired archaeologist, wrote: <strong>'no mere computer game, but a serious piece of work.'</strong> <em>(hands iteration list to judges)</em> We made <strong>30+ improvements</strong> based on KAS feedback before launch.</blockquote>
+        </div>
+        <div class="rubric-hits">
+          <h4>Rubric hits</h4>
+          <ul>
+            <li><strong>IP ITERATE</strong> — clear evidence of improvements based on feedback. 30+ improvements.</li>
+            <li><strong>IP ITERATE</strong> — solution shared with multiple people/groups. KAS team, expert review, newsletter audience.</li>
+            <li><strong>IP COMMUNICATE</strong> (dual-marked Core Values · Impact) — real-world validated impact with named recipients and quotes. <span class="chip-inline">Exceeds candidate</span></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- Scene 09 — AALIYA — THE WINNING STROKE / CLOSER -->
+    <article class="scene is-winning" id="s-09">
+      <div class="scene-bar">
+        <div class="scene-bar-left">
+          <span class="scene-num">Scene 09</span>
+          <span class="scene-title">The blueprint reveal + closer</span>
+        </div>
+        <div class="scene-bar-right">
+          <span class="speaker-tag">Aaliya</span>
+          <span>35 sec</span>
+          <span>70 words</span>
+          <span class="winning-flag">Winning stroke</span>
+        </div>
+      </div>
+      <div class="scene-body">
+        <h3 class="scene-name">"Our AI isn't our best innovation. Our blueprint is."</h3>
+        <p class="stage">Aaliya holds up blueprint one-pager. After the chant, all 9 hold position with eye contact.</p>
+        <div class="spoken">
+          <span class="label">Spoken · the line judges write down</span>
+          <blockquote>You've heard about our AI assistant. <strong>Our AI isn't our best innovation. Our blueprint is.</strong> <em>(holds up blueprint one-pager)</em> Any historical society in the world can take what we built and adapt it for their own city. Three free pilots are already lined up. We didn't just digitise Kent's history. <strong>We built the system that can digitise any city's history.</strong> That's our innovation. Thank you for hearing our story. <em>Gamsahamnida.</em> <strong>[All 9 together, eye contact with judges]: WE ARE LORD OF THE BRICKS!</strong></blockquote>
+        </div>
+
+        <div class="parallel-callout">
+          <span class="lab">The Aaliya pattern</span>
+          <p class="text"><strong>Same speaker, same reframe structure as her <a href="3-robot-design.html">Robot Design winning stroke</a>:</strong> <em>"Our X isn't our best Y. Our Z is."</em> In Robot Design — robot vs team. In Innovation — AI vs blueprint. <strong>Two presentations, one signature voice.</strong> Judges remember Aaliya as the team's reveal artist.</p>
+        </div>
+
+        <div class="why-winning">
+          <h4>Why this is the winning stroke</h4>
+          <ol>
+            <li><div><strong>Parallel pattern to Robot Design.</strong> Two reveals, one signature voice. <em>The pattern is what wins.</em></div></li>
+            <li><div><strong>Reframes the entire presentation.</strong> Before this line: "great team, built an AI for Kent." After this line: <em>"great team, built a replicable system for civilisation."</em> The category of impact changes mid-sentence.</div></li>
+            <li><div><strong>Scalability is the rare innovation move.</strong> Most teams build a thing. Lord of the Bricks built <em>a thing that builds things</em>. <strong>Meta-engineering — almost never seen at this age group.</strong></div></li>
+            <li><div><strong>Three free pilots = proof not promise.</strong> Not "we hope to scale." <em>Already scaling.</em></div></li>
+            <li><div><strong>Korean gratitude + identity closer.</strong> <em>"Gamsahamnida"</em> reciprocates Esha's <em>Annyeong-haseyo</em> opening. The all-together close lands the team identity and the dual-marked Fun/Pride row.</div></li>
+          </ol>
+        </div>
+
+        <div class="rubric-hits">
+          <h4>Rubric hits</h4>
+          <ul>
+            <li><strong>IP CREATE</strong> (dual-marked Core Values · Innovation) — <span class="chip-inline">Exceeds</span></li>
+            <li><strong>IP COMMUNICATE</strong> (dual-marked Core Values · Impact) — scaling to other societies. <span class="chip-inline">Exceeds</span></li>
+            <li><strong>IP COMMUNICATE</strong> (dual-marked Core Values · Fun) — pride/enthusiasm visible across all 9 in closer. <span class="chip-inline">Exceeds candidate</span></li>
+            <li><strong>IP DESIGN</strong> (dual-marked Core Values · Teamwork) — visible "all 9" finale.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ WHY THIS SCRIPT BLOWS JUDGES OFF ============ -->
+<section class="sec" id="mechanics">
+  <div class="sec-head">
+    <h2>Why this script blows judges off.</h2>
+    <span class="sec-meta">5 mechanics most teams don't combine</span>
+  </div>
+
+  <div class="mechanics">
+    <div class="mech">
+      <span class="num">M1</span>
+      <h3>The contrarian opener.</h3>
+      <p><em>"We stopped inventing. We started listening."</em> Every other team's opener is a problem statement followed by their solution. We lead with a <strong>philosophical inversion</strong>. Judges remember this 30 minutes later.</p>
+    </div>
+    <div class="mech">
+      <span class="num">M2</span>
+      <h3>Named rejected ideas.</h3>
+      <p>8 ideas listed in Guhan's section. Most teams say <em>"we considered many ideas."</em> We name 8. <strong>Specificity is what makes decision quality credible.</strong></p>
+    </div>
+    <div class="mech">
+      <span class="num">M3</span>
+      <h3>Technical depth as differentiator.</h3>
+      <p>RAG, AGUI, 4-part prompt engineering. Every other team mentions ChatGPT or Claude. <strong>We explain the architecture.</strong> AI-literate judges notice immediately. Others are impressed by engineering vocabulary handled confidently by children.</p>
+    </div>
+    <div class="mech">
+      <span class="num">M4</span>
+      <h3>Live deployment over claims.</h3>
+      <p><em>"Right now, this is running. Anyone in Korea can type kentarchaeology.org and use it tonight."</em> Most teams show screenshots. <strong>We invite verification.</strong></p>
+    </div>
+    <div class="mech">
+      <span class="num">M5</span>
+      <h3>The Aaliya meta-reframe at the close.</h3>
+      <p>The blueprint reveal at the very end <strong>reframes everything the judges just heard</strong>. Combined with her Robot Design reveal, Aaliya becomes the signature voice. <em>That's a presentation pattern that wins.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RUBRIC SCORING MAP ============ -->
+<section class="sec" id="rubric">
+  <div class="sec-head">
+    <h2>Rubric scoring map.</h2>
+    <span class="sec-meta">Every dual-marked row · plus all 5 standard IP rows</span>
+  </div>
+  <p class="sec-lede">Dual-marked rows feed both Innovation Project rank <em>and</em> Core Values rank.
+    Every Exceeds here compounds across two area ranks.</p>
+
+  <h3 style="font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; margin: 1.6rem 0 0.6rem;">Dual-marked rows · Core Values</h3>
+  <table class="t rubric-table">
+    <thead>
+      <tr><th>Row</th><th>Core Value</th><th>Section that lands it</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="row-name">IP IDENTIFY · Research from a variety of sources</td><td class="cv-cell"><span class="cv-inline cv-discovery">Discovery</span></td><td class="where">Anaisa — 9 presentations + Ken + KAS</td></tr>
+      <tr><td class="row-name">IP DESIGN · Development involved all members</td><td class="cv-cell"><span class="cv-inline cv-teamwork">Teamwork</span></td><td class="where">Anaisa structurally + closer "all 9"</td></tr>
+      <tr><td class="row-name">IP CREATE · Innovation in solution</td><td class="cv-cell"><span class="cv-inline cv-innovation">Innovation</span></td><td class="where">Flossie (RAG / AGUI / Prompt Eng) + Aaliya (blueprint)</td></tr>
+      <tr><td class="row-name">IP COMMUNICATE · Solution's impact on others</td><td class="cv-cell"><span class="cv-inline cv-impact">Impact</span></td><td class="where">Elliot (newsletter, quotes, 10K/month) + Aaliya (scaling)</td></tr>
+      <tr><td class="row-name">IP COMMUNICATE · Pride &amp; enthusiasm</td><td class="cv-cell"><span class="cv-inline cv-fun">Fun</span></td><td class="where">All-together closer</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; margin: 2rem 0 0.6rem;">Standard IP rows · all 5 covered</h3>
+  <table class="t rubric-table">
+    <thead>
+      <tr><th>Row</th><th>Section</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="row-name">IDENTIFY · clearly defined problem</td><td class="where">Arvin — Information Gap with numbers</td></tr>
+      <tr><td class="row-name">DESIGN · project plan, all members involved</td><td class="where">Anaisa + Guhan — listening process</td></tr>
+      <tr><td class="row-name">CREATE · original idea + prototype</td><td class="where">Sakthi (live demo) + Flossie (architecture)</td></tr>
+      <tr><td class="row-name">ITERATE · shared with others + improved</td><td class="where">Elliot — KAS feedback, 30+ improvements</td></tr>
+      <tr><td class="row-name">COMMUNICATE · effective presentation + celebration</td><td class="where">Aaliya — closer + all together</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ REHEARSAL ============ -->
+<section class="sec" id="rehearsal">
+  <div class="sec-head">
+    <h2>Rehearsal protocol.</h2>
+    <span class="sec-meta">6 weeks · special focus on the personas section</span>
+  </div>
+  <p class="sec-lede">Memorise structure and key lines. Exact wording will move slightly between rehearsals — that's fine. Structure must not.</p>
+
+  <div class="rehearsal">
+    <div class="week">
+      <span class="when">Week 01</span>
+      <span class="what"><strong>Each speaker memorises their own section.</strong> Hit time targets within 3 sec.</span>
+    </div>
+    <div class="week">
+      <span class="when">Week 02</span>
+      <span class="what"><strong>Run the full script as a team.</strong> Practice handoffs and the 3-voice personas section (Toby → Elliot → Esha). Time the full thing.</span>
+    </div>
+    <div class="week">
+      <span class="when">Week 03</span>
+      <span class="what"><strong>Drill Aaliya's blueprint reveal in isolation 30 times.</strong> The line that anchors the entire impression. Pace, eye contact, pause before <em>"Our AI isn't our best innovation."</em></span>
+    </div>
+    <div class="week">
+      <span class="when">Week 04</span>
+      <span class="what"><strong>Full run with artefact movements:</strong> tablet demo, printout handoffs, blueprint reveal. <em>These transitions are where teams stumble.</em></span>
+    </div>
+    <div class="week">
+      <span class="when">Week 05</span>
+      <span class="what"><strong>Full run in front of external audience.</strong> Get feedback. Adjust.</span>
+    </div>
+    <div class="week is-final">
+      <span class="when">Week 06</span>
+      <span class="what"><strong>Polish only. No structural changes.</strong> Two full runs per day. <em>Last week before Korea.</em></span>
+    </div>
+  </div>
+
+  <div class="special-focus">
+    <h4>Special focus · Slot 6 — the personas</h4>
+    <h3>Three speakers in 25 seconds requires sharp handoffs.</h3>
+    <p>Each speaker should make eye contact with the judges, deliver, then look to the next speaker. <strong>Practice this 50 times.</strong></p>
+  </div>
+</section>
+
+<!-- ============ OPEN ITEMS ============ -->
+<section class="sec" id="open">
+  <div class="sec-head">
+    <h2>Open items.</h2>
+    <span class="sec-meta">7 production blockers</span>
+  </div>
+
+  <ol class="todo-list">
+    <li><span class="num">01</span><span class="what"><strong>Phone or tablet for the live AI demo.</strong> Confirmed device, charged battery. Wi-Fi backup at venue uncertain. Recommend <strong>cellular hotspot from a coach's phone</strong> as backup, plus screenshot printouts in case both fail.</span></li>
+    <li><span class="num">02</span><span class="what"><strong>Prompt engineering 4-part printout</strong> (Persona / Scope / Guardrails / Chain of Thought). Confirm exists or build.</span></li>
+    <li><span class="num">03</span><span class="what"><strong>KAS newsletter printout</strong> with Jacob Scott + Andy Ward quotes highlighted.</span></li>
+    <li><span class="num">04</span><span class="what"><strong>Blueprint one-pager.</strong> Single page showing how a society would adapt the system. <strong>This is the artefact Aaliya hands over during the winning stroke.</strong> Confirm exists or build.</span></li>
+    <li><span class="num">05</span><span class="what"><strong>Ken's letter</strong> in a presentable form (printed letter or framed quote).</span></li>
+    <li><span class="num">06</span><span class="what"><strong>List of 30+ improvements</strong> based on KAS feedback. Confirm exists.</span></li>
+    <li><span class="num">07</span><span class="what"><strong>Three persona screenshots</strong> (one per persona, on a single laminated card or A4 sheet).</span></li>
+  </ol>
+</section>
+
+<!-- ============ CLOSER ============ -->
+<section class="sec" id="closer">
+  <div class="sec-head">
+    <h2>Final note.</h2>
+  </div>
+  <div class="closer-block">
+    <h3>The Champion's Score moves into striking distance.</h3>
+    <p>If this is delivered cleanly, <strong>Innovation Project rank should be top 3.</strong> Combined with:</p>
+    <ul>
+      <li><strong>Robot Design</strong> (Brick 3) rebuilt for top 3 to top 5</li>
+      <li><strong>Core Values</strong> (Brick 4) running through both presentations + GP playbook for top 3</li>
+      <li><strong>Robot Performance</strong> already at championship level</li>
+    </ul>
+    <p style="margin-top: 1rem;">The Champion's Score moves into <strong class="hot">striking distance of 1st or 2nd in South Korea.</strong></p>
+    <p class="closer-line">The scripts are world-class. Execution and rehearsal are the only variables left.</p>
+  </div>
+  <p class="note" style="margin-top: 1rem;">
+    Next bricks queued: Brick 05 · Final Share script (drafted in Brick 4, needs polish) ·
+    Brick 06 · GP playbook for Korea (drafted in Brick 4, needs operationalising) ·
+    Brick 07 · Judge psychology refinement · Brick 08 · Timing rehearsal protocol.
+  </p>
+</section>
+
+</div>
+</main>
+
+<footer class="kit-footer">
+  <span><a href="../index.html">← Mission Control</a></span>
+  <span>Brick 02 · Innovation Project Script · Korea Edition</span>
+</footer>
+
+<script src="../_shared/base.js"></script>
+</body>
+</html>
