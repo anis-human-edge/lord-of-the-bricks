@@ -627,7 +627,14 @@
   border-top: 1px solid var(--rule);
 }
 .tier:first-of-type { border-top: 0; padding-top: 0; }
-@media (max-width: 640px) { .tier { grid-template-columns: 1fr; gap: 0.4rem; padding-bottom: 0.85rem; } }
+@media (max-width: 860px) {
+  .tier { grid-template-columns: 5rem 1fr; gap: 0.8rem 1rem; }
+  .tier .t-meaning { grid-column: 1 / -1; }
+}
+@media (max-width: 540px) {
+  .tier { grid-template-columns: 1fr; gap: 0.35rem; padding-bottom: 0.85rem; }
+  .tier .t-score { font-size: 2.2rem; }
+}
 .tier .t-label {
   font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
   letter-spacing: 0.18em; text-transform: uppercase;
@@ -724,16 +731,17 @@
 </head>
 <body>
 
-<header class="kit-header">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="kit-header" role="banner">
   <div class="kit-header-row">
-    <div class="kit-crumbs">
-      <span class="kit-mark"><span></span><span></span><span></span><span></span></span>
+    <nav class="kit-crumbs" aria-label="Breadcrumb">
+      <span class="kit-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
       <a href="../index.html">Mission Control</a>
-      <span class="sep">/</span>
+      <span class="sep" aria-hidden="true">/</span>
       <span>Brick 01</span>
-      <span class="sep">/</span>
-      <span class="here">Robot Game · Match Day Playbook</span>
-    </div>
+      <span class="sep" aria-hidden="true">/</span>
+      <span class="here" aria-current="page">Robot Game · Match Day Playbook</span>
+    </nav>
     <div class="kit-meta">
       <span><span class="lock-dot"></span>Internal kit</span>
       <a class="outstanding-pill" href="#open">Outstanding · <span class="count">9</span></a>
@@ -742,7 +750,7 @@
   </div>
 </header>
 
-<main>
+<main id="main">
 <section class="shell brick-hero">
   <span class="crumb-num">Brick 01 · Robot Game Match Day Playbook · Korea Edition</span>
   <h1 class="h-display">Robot Game.</h1>
@@ -778,12 +786,14 @@
 <nav class="in-page-nav" id="ipNav">
   <div class="in-page-nav-row">
     <div class="nav-cluster">
+      <span class="nav-cluster-label">Strategy</span>
       <a href="#frame">Frame</a>
       <a href="#runs">8-run plan</a>
       <a href="#matches">3-match math</a>
     </div>
     <span class="nav-sep" aria-hidden="true"></span>
     <div class="nav-cluster">
+      <span class="nav-cluster-label">Execution</span>
       <a href="#roles">Table roles</a>
       <a href="#tree">Decision tree</a>
       <a href="#prematch">Pre-match T−30</a>
@@ -791,6 +801,7 @@
     </div>
     <span class="nav-sep" aria-hidden="true"></span>
     <div class="nav-cluster">
+      <span class="nav-cluster-label">Prep</span>
       <a href="#korea">Korea variables</a>
       <a href="#kit">Equipment</a>
       <a href="#mental">Mental prep</a>
@@ -798,6 +809,7 @@
     </div>
     <span class="nav-sep" aria-hidden="true"></span>
     <div class="nav-cluster">
+      <span class="nav-cluster-label">Status</span>
       <a href="#open">Open items</a>
       <a href="#closer">Final note</a>
     </div>
@@ -805,7 +817,7 @@
   </div>
 </nav>
 
-<main>
+<div class="shell-wrap">
 <div class="shell">
 
 <!-- ============ FRAME ============ -->
@@ -1444,7 +1456,7 @@
 </section>
 
 </div>
-</main>
+</div>
 
 <footer class="kit-footer">
   <span><a href="../index.html">← Mission Control</a></span>

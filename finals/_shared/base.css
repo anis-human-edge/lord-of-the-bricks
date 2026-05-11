@@ -43,6 +43,25 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+/* Skip to main content — visible on focus */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  padding: 0.6rem 1rem;
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transform: translateY(-110%);
+  transition: transform .2s var(--ease);
+}
+.skip-link:focus { transform: translateY(0); }
 body {
   margin: 0;
   background: var(--bone);
@@ -362,6 +381,16 @@ body.is-locked footer { visibility: hidden; }
   flex-shrink: 0;
   align-items: center;
 }
+.nav-cluster-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding-right: 0.1rem;
+}
 .nav-sep {
   flex-shrink: 0;
   width: 1px;
@@ -548,6 +577,38 @@ body.is-locked footer { visibility: hidden; }
 }
 .chip.is-red { color: var(--red); border-color: var(--red); }
 .chip.is-accent { color: var(--accent); border-color: var(--accent); }
+
+/* =========================================================
+   MOBILE PASS
+   - sticky header gets tighter
+   - in-page nav cluster labels hide (chips alone do the work)
+   - nav-position drops below the chips on narrow widths
+   - outstanding pill stays in header but ellipses gracefully
+   - kit-crumbs hide intermediate breadcrumb on narrow
+   ========================================================= */
+@media (max-width: 760px) {
+  .kit-header-row {
+    padding: 0.5rem var(--gutter);
+    gap: 0.6rem;
+  }
+  .kit-meta { gap: 0.5rem; }
+  .kit-meta > span:first-child { display: none; }       /* drop "Internal kit" — pill carries the signal */
+  .kit-crumbs .sep + a { display: none; }                /* hide mid-breadcrumb on phone */
+  .kit-crumbs .sep + a + .sep { display: none; }
+
+  .in-page-nav-row {
+    padding: 0.5rem var(--gutter);
+    flex-wrap: nowrap;
+  }
+  .nav-cluster-label { display: none; }                  /* clusters still work via separators */
+  .nav-position { display: none; }                       /* counter lives in the kit-header outstanding context */
+}
+
+@media (max-width: 540px) {
+  .kit-header-row { padding: 0.45rem 0.85rem; }
+  .outstanding-pill { padding: 0.18rem 0.45rem; font-size: 0.62rem; }
+  .outstanding-pill .count { font-size: 1em; }
+}
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {

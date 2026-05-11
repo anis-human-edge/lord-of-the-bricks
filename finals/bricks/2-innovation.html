@@ -406,13 +406,11 @@
   font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700;
   letter-spacing: 0.14em; text-transform: uppercase;
   padding: 0.16rem 0.5rem;
-  color: var(--white); white-space: nowrap;
+  color: var(--red); background: transparent;
+  border: 1px solid var(--red);
+  white-space: nowrap;
 }
-.rubric-table .cv-discovery { background: var(--accent); }
-.rubric-table .cv-teamwork { background: #6b3fc4; }
-.rubric-table .cv-innovation { background: var(--red); }
-.rubric-table .cv-impact { background: #1a8a52; }
-.rubric-table .cv-fun { background: #e08a18; }
+/* cv-XXX variants removed — single bordered style applies to all Core Values */
 .rubric-table .where { color: var(--ink-2); }
 
 /* ---------- REHEARSAL ---------- */
@@ -495,16 +493,17 @@
 </head>
 <body>
 
-<header class="kit-header">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="kit-header" role="banner">
   <div class="kit-header-row">
-    <div class="kit-crumbs">
-      <span class="kit-mark"><span></span><span></span><span></span><span></span></span>
+    <nav class="kit-crumbs" aria-label="Breadcrumb">
+      <span class="kit-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
       <a href="../index.html">Mission Control</a>
-      <span class="sep">/</span>
+      <span class="sep" aria-hidden="true">/</span>
       <span>Brick 02</span>
-      <span class="sep">/</span>
-      <span class="here">Innovation Project · Script</span>
-    </div>
+      <span class="sep" aria-hidden="true">/</span>
+      <span class="here" aria-current="page">Innovation Project · Script</span>
+    </nav>
     <div class="kit-meta">
       <span><span class="lock-dot"></span>Internal kit</span>
       <a class="outstanding-pill" href="#open">Outstanding · <span class="count">7</span></a>
@@ -513,7 +512,7 @@
   </div>
 </header>
 
-<main>
+<main id="main">
 <section class="shell brick-hero">
   <span class="crumb-num">Brick 02 · Innovation Project Script · Korea Edition</span>
   <h1 class="h-display">Innovation Project.</h1>
@@ -536,18 +535,21 @@
 <nav class="in-page-nav" id="ipNav">
   <div class="in-page-nav-row">
     <div class="nav-cluster">
+      <span class="nav-cluster-label">Plan</span>
       <a href="#frame">Strategic frame</a>
       <a href="#schedule">Speaker schedule</a>
       <a href="#artefacts">Artefact map</a>
     </div>
     <span class="nav-sep" aria-hidden="true"></span>
     <div class="nav-cluster">
+      <span class="nav-cluster-label">Script</span>
       <a href="#script">The full script</a>
       <a href="#mechanics">Why it lands</a>
       <a href="#rubric">Rubric map</a>
     </div>
     <span class="nav-sep" aria-hidden="true"></span>
     <div class="nav-cluster">
+      <span class="nav-cluster-label">Drill</span>
       <a href="#rehearsal">Rehearsal · 6 wk</a>
       <a href="#open">Open items</a>
       <a href="#closer">Final note</a>
@@ -556,7 +558,7 @@
   </div>
 </nav>
 
-<main>
+<div class="shell-wrap">
 <div class="shell">
 
 <!-- ============ STRATEGIC FRAME ============ -->
@@ -1149,7 +1151,7 @@
 </section>
 
 </div>
-</main>
+</div>
 
 <footer class="kit-footer">
   <span><a href="../index.html">← Mission Control</a></span>

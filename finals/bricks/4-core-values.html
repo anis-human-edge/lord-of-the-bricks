@@ -176,8 +176,15 @@
   padding: 0.85rem 1.4rem;
   border-bottom: 1px solid var(--rule);
   background: var(--paper);
-  gap: 1rem;
+  gap: 0.8rem;
   flex-wrap: wrap;
+}
+@media (max-width: 540px) {
+  .row-bar { padding: 0.7rem 1rem; gap: 0.5rem; }
+  .row-area { font-size: 0.66rem; line-height: 1.35; }
+  .row-body { padding: 1.1rem 1rem; }
+  .exact-line { padding: 1.1rem 1rem; }
+  .exceeds { padding: 0.85rem 1rem; }
 }
 .row-bar-left {
   display: flex;
@@ -344,7 +351,7 @@
 }
 .exact-line blockquote strong { font-style: normal; font-weight: 700; color: var(--red); }
 
-/* CV chip — bold, distinct */
+/* CV chip — single bordered style, no color rainbow */
 .cv-chip {
   display: inline-flex;
   align-items: center;
@@ -355,11 +362,12 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   padding: 0.22rem 0.55rem;
-  background: var(--accent);
-  color: var(--white);
+  background: transparent;
+  color: var(--red);
+  border: 1px solid var(--red);
   white-space: nowrap;
 }
-.cv-chip::before { content: "CV"; opacity: 0.65; font-weight: 700; }
+.cv-chip::before { content: "CV"; opacity: 0.55; font-weight: 700; }
 
 .row-bar-right .hero-flag {
   display: inline-flex;
@@ -594,7 +602,16 @@
   border: 1px solid var(--rule);
   padding: 1.4rem 1.5rem;
 }
-.art-col.is-primary { border: 2px solid var(--red); }
+.art-col.is-primary {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+.art-col.is-primary h3 { color: var(--white); }
+.art-col.is-primary h3 .tag { color: var(--red); }
+.art-col.is-primary ol, .art-col.is-primary ul { color: rgba(255,255,255,0.86); }
+.art-col.is-primary li strong { color: var(--white); }
+.art-col.is-primary p { color: rgba(255,255,255,0.55); }
 .art-col h3 {
   font-family: var(--font-display);
   font-weight: 700;
@@ -694,27 +711,22 @@
   max-width: 60ch;
 }
 
-/* ---------- CV chip backgrounds (one per Core Value) ---------- */
-.cv-chip.cv-discovery { background: var(--accent); }
-.cv-chip.cv-teamwork  { background: #6b3fc4; }
-.cv-chip.cv-innovation { background: var(--red); }
-.cv-chip.cv-impact    { background: #1a8a52; }
-.cv-chip.cv-fun       { background: #e08a18; }
-.cv-chip.cv-inclusion { background: var(--navy); }
+/* CV chip variants removed — single bordered style applied above for all Core Values */
 </style>
 </head>
 <body>
 
-<header class="kit-header">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="kit-header" role="banner">
   <div class="kit-header-row">
-    <div class="kit-crumbs">
-      <span class="kit-mark"><span></span><span></span><span></span><span></span></span>
+    <nav class="kit-crumbs" aria-label="Breadcrumb">
+      <span class="kit-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
       <a href="../index.html">Mission Control</a>
-      <span class="sep">/</span>
+      <span class="sep" aria-hidden="true">/</span>
       <span>Brick 04</span>
-      <span class="sep">/</span>
-      <span class="here">Core Values · Evidence Kit</span>
-    </div>
+      <span class="sep" aria-hidden="true">/</span>
+      <span class="here" aria-current="page">Core Values · Evidence Kit</span>
+    </nav>
     <div class="kit-meta">
       <span><span class="lock-dot"></span>Internal kit</span>
       <a class="outstanding-pill" href="#outstanding">Outstanding · <span class="count">5</span></a>
@@ -724,7 +736,7 @@
 </header>
 
 <!-- Hero -->
-<main>
+<main id="main">
 <section class="shell brick-hero">
   <span class="crumb-num">Brick 04 · Core Values Evidence Kit</span>
   <h1 class="h-display">Core Values.</h1>
@@ -747,23 +759,27 @@
 <nav class="in-page-nav" id="ipNav">
   <div class="in-page-nav-row">
     <div class="nav-cluster">
+      <span class="nav-cluster-label">Score</span>
       <a href="#scoring">Scoring</a>
       <a href="#rows">10 dual-marked rows</a>
       <a href="#gp">3 GP scores</a>
     </div>
     <span class="nav-sep" aria-hidden="true"></span>
     <div class="nav-cluster">
+      <span class="nav-cluster-label">Perform</span>
       <a href="#playbook">GP playbook · Korea</a>
       <a href="#finalshare">Final Share · 8 min</a>
     </div>
     <span class="nav-sep" aria-hidden="true"></span>
     <div class="nav-cluster">
+      <span class="nav-cluster-label">Reference</span>
       <a href="#identity">Team identity</a>
       <a href="#stories">Story bank</a>
       <a href="#artefacts">Artefact map</a>
     </div>
     <span class="nav-sep" aria-hidden="true"></span>
     <div class="nav-cluster">
+      <span class="nav-cluster-label">Status</span>
       <a href="#outstanding">Outstanding</a>
       <a href="#math">The math</a>
     </div>
@@ -771,7 +787,7 @@
   </div>
 </nav>
 
-<main>
+<div class="shell-wrap">
 <div class="shell">
 
 <!-- ============ THE SCORING SURFACE ============ -->
@@ -828,7 +844,7 @@
         <h3 class="row-title">Research from a variety of sources.</h3>
 
         <div class="exceeds">
-          <span class="exceeds-label">Exceeds when —</span>
+          <span class="exceeds-label">What earns Exceeds</span>
           <p class="exceeds-text">judges see <strong>more than 3 distinct source types</strong> AND see that each <strong>meaningfully shaped the final solution</strong>.</p>
         </div>
 
@@ -880,7 +896,7 @@
         <h3 class="row-title">Development process involved all team members.</h3>
 
         <div class="exceeds">
-          <span class="exceeds-label">Exceeds when —</span>
+          <span class="exceeds-label">What earns Exceeds</span>
           <p class="exceeds-text">every one of <strong>9 has a visible, named contribution</strong>. Not "the team did X" but <strong>"Alia did X, Guhan did Y."</strong></p>
         </div>
 
@@ -929,7 +945,7 @@
         <h3 class="row-title">Innovation in solution.</h3>
 
         <div class="exceeds">
-          <span class="exceeds-label">Exceeds when —</span>
+          <span class="exceeds-label">What earns Exceeds</span>
           <p class="exceeds-text">explicit articulation of <strong>WHY it is innovative</strong>, with <strong>named technical components</strong> and a <strong>comparison to alternatives</strong>.</p>
         </div>
 
@@ -981,7 +997,7 @@
         <h3 class="row-title">Solution's impact on others.</h3>
 
         <div class="exceeds">
-          <span class="exceeds-label">Exceeds when —</span>
+          <span class="exceeds-label">What earns Exceeds</span>
           <p class="exceeds-text"><strong>measurable, real-world impact</strong>, with <strong>named recipients</strong> and <strong>direct quotes</strong>.</p>
         </div>
 
@@ -1030,10 +1046,10 @@
         </div>
       </div>
       <div class="row-body">
-        <h3 class="row-title">Pride and enthusiasm.</h3>
+        <h3 class="row-title">Pride and enthusiasm · IP room.</h3>
 
         <div class="exceeds">
-          <span class="exceeds-label">Exceeds when —</span>
+          <span class="exceeds-label">What earns Exceeds</span>
           <p class="exceeds-text">pride is visible across <strong>all 9 members, not just the presenter</strong>. Energy in voice, body language, eye contact.</p>
         </div>
 
@@ -1083,7 +1099,7 @@
         <h3 class="row-title">Use of building and coding resources.</h3>
 
         <div class="exceeds">
-          <span class="exceeds-label">Exceeds when —</span>
+          <span class="exceeds-label">What earns Exceeds</span>
           <p class="exceeds-text"><strong>variety of sources</strong>, each tied to a <strong>specific build decision</strong>.</p>
         </div>
 
@@ -1134,7 +1150,7 @@
         <h3 class="row-title">All team members contributed ideas.</h3>
 
         <div class="exceeds">
-          <span class="exceeds-label">Exceeds when —</span>
+          <span class="exceeds-label">What earns Exceeds</span>
           <p class="exceeds-text">every one of <strong>9 has a named build or code contribution</strong>, including the 3 new members.</p>
         </div>
 
@@ -1190,7 +1206,7 @@
         </p>
 
         <div class="exceeds">
-          <span class="exceeds-label">Exceeds when —</span>
+          <span class="exceeds-label">What earns Exceeds</span>
           <p class="exceeds-text"><strong>quantified improvements</strong> with <strong>specific failure-to-fix stories</strong>.</p>
         </div>
 
@@ -1243,7 +1259,7 @@
         <h3 class="row-title">Process and lessons learned.</h3>
 
         <div class="exceeds">
-          <span class="exceeds-label">Exceeds when —</span>
+          <span class="exceeds-label">What earns Exceeds</span>
           <p class="exceeds-text">explicit <strong>team-level lessons articulated</strong>, not just "we got better."</p>
         </div>
 
@@ -1289,10 +1305,10 @@
         </div>
       </div>
       <div class="row-body">
-        <h3 class="row-title">Pride and enthusiasm.</h3>
+        <h3 class="row-title">Pride and enthusiasm · RD room.</h3>
 
         <div class="exceeds">
-          <span class="exceeds-label">Exceeds when —</span>
+          <span class="exceeds-label">What earns Exceeds</span>
           <p class="exceeds-text">pride is visible across <strong>all 9, not just the presenter</strong>.</p>
         </div>
 
@@ -1641,7 +1657,7 @@
 </section>
 
 </div>
-</main>
+</div>
 
 <footer class="kit-footer">
   <span><a href="../index.html">← Mission Control</a></span>

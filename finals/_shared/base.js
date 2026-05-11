@@ -33,18 +33,21 @@ function mountGate() {
   const g = document.createElement("div");
   g.id = "kitGate";
   g.className = "gate";
+  g.setAttribute("role", "dialog");
+  g.setAttribute("aria-modal", "true");
+  g.setAttribute("aria-labelledby", "kitGateTitle");
   g.innerHTML = `
     <div class="gate-card">
       <span class="eyebrow is-red">Lord of the Bricks · Internal kit</span>
-      <h1>Mission Control is locked.</h1>
+      <h1 id="kitGateTitle">Mission Control is locked.</h1>
       <p>This is the team's working space for the Korea Open Invitational.
         Enter the team passphrase to continue.</p>
       <form class="gate-form" id="kitGateForm" autocomplete="off">
-        <input type="password" id="kitGateInput" placeholder="passphrase" aria-label="Passphrase" autofocus />
+        <input type="password" id="kitGateInput" placeholder="Enter passphrase" aria-label="Passphrase" autofocus />
         <button type="submit">Enter</button>
       </form>
-      <div class="gate-error" id="kitGateError" aria-live="polite"></div>
-      <div class="gate-foot">UI gate only — not encrypted. Don't share publicly.</div>
+      <div class="gate-error" id="kitGateError" aria-live="polite" role="status"></div>
+      <div class="gate-foot">UI gate only · not encrypted · don't share publicly</div>
     </div>
   `;
   document.body.appendChild(g);
@@ -142,7 +145,11 @@ function initNavSpy() {
     }
     if (activeIdx === lastActive) return;
     lastActive = activeIdx;
-    links.forEach((l, i) => l.classList.toggle("is-active", i === activeIdx));
+    links.forEach((l, i) => {
+      l.classList.toggle("is-active", i === activeIdx);
+      if (i === activeIdx) l.setAttribute("aria-current", "location");
+      else l.removeAttribute("aria-current");
+    });
     if (positionEl) {
       const cur = positionEl.querySelector(".pos-current");
       if (cur) cur.textContent = String(activeIdx + 1).padStart(2, "0");
