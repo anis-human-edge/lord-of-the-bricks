@@ -619,6 +619,117 @@
   color: var(--white);
   max-width: 60ch;
 }
+
+/* ---------- V2 ADDITIONS ---------- */
+
+/* Backup speaker chip (outlined vs filled lead chip) */
+.scene-bar-right .speaker-tag.is-backup {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+/* EXCEEDS-TRIGGER callout — the loud red moment per scene */
+.scene-exceeds {
+  background: var(--red);
+  color: var(--white);
+  padding: 1.4rem clamp(1.4rem, 3vw, 2rem);
+  margin: 1.4rem calc(-1 * clamp(1.4rem, 3vw, 2rem)) 0;
+}
+.scene-exceeds .label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.78);
+  margin-bottom: 0.7rem;
+}
+.scene-exceeds blockquote {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+  line-height: 1.35;
+  color: var(--white);
+  margin: 0;
+  padding: 0;
+  max-width: 64ch;
+  text-wrap: pretty;
+}
+.scene-exceeds blockquote::before { display: none; }
+.scene-exceeds .lead-attribution {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  margin-top: 0.85rem;
+  display: block;
+}
+
+/* Two-up: What's shown · Folder evidence */
+.scene-deck {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.4rem;
+}
+@media (max-width: 760px) { .scene-deck { grid-template-columns: 1fr; } }
+.scene-deck-block {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 1rem 1.2rem;
+}
+.scene-deck-block h4 {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin: 0 0 0.6rem;
+}
+.scene-deck-block p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.scene-deck-block ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.scene-deck-block li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.9rem;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+.scene-deck-block li::before {
+  content: "▢";
+  position: absolute;
+  left: 0;
+  color: var(--red);
+  font-size: 0.85em;
+}
+.scene-deck-block li strong { color: var(--ink); font-weight: 700; }
+
+/* Rubric-aligned scene bar — clearer rubric label */
+.scene-bar .scene-rubric {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--red);
+  text-transform: uppercase;
+  margin-right: 0.6rem;
+}
 </style>
 </head>
 <body>
@@ -636,7 +747,7 @@
     </nav>
     <div class="kit-meta">
       <span><span class="lock-dot"></span>Internal kit</span>
-      <a class="outstanding-pill" href="#open"><span class="lab">Outstanding · </span><span class="count">6</span></a>
+      <a class="outstanding-pill" href="#open"><span class="lab">Outstanding · </span><span class="count">10</span></a>
       <span class="tminus" data-tminus>T−DAYS</span>
     </div>
   </div>
@@ -647,16 +758,18 @@
   <span class="crumb-num">Brick 03 · Robot Design Script · Korea Edition</span>
   <h1 class="h-display">Robot Design.</h1>
   <p class="h-sub" style="margin-top: 1rem;">
-    A 5-minute script. <strong>9 speakers, 9 sections.</strong> The script is now world-class —
-    execution is the only variable left. Aaliya at <strong>slot 8 lands the winning stroke</strong>:
+    A 5-minute script restructured around the <strong>5 FLL rubric areas</strong> —
+    Identify · Design · Create · Iterate · Communicate.
+    All 9 of us speak (lead + backup per scene), with one <strong>Exceeds-trigger line</strong> per rubric
+    designed to force the judge to write a comment. Aaliya at <strong>slot 5 lands the winning stroke</strong>:
     <em>"Our robot isn't our best engineering. We are."</em>
   </p>
   <div class="hero-meta">
     <span><span class="red">Slot —</span> <strong>5 minutes</strong></span>
-    <span><span class="red">Total —</span> <strong>~4:42</strong></span>
-    <span><span class="red">Buffer —</span> <strong>18 sec</strong></span>
-    <span><span class="red">Words —</span> <strong>560</strong></span>
-    <span><span class="red">Speakers —</span> <strong>All 9</strong></span>
+    <span><span class="red">Scenes —</span> <strong>5 rubric areas</strong></span>
+    <span><span class="red">Target —</span> <strong>~4:30 (30 sec buffer)</strong></span>
+    <span><span class="red">Speakers —</span> <strong>All 9 · lead + backup per scene</strong></span>
+    <span><span class="red">Exceeds attempts —</span> <strong>5 of 5</strong></span>
   </div>
 </section>
 </main>
@@ -683,7 +796,7 @@
       <a href="#open">Open items</a>
       <a href="#closer">Final note</a>
     </div>
-    <span class="nav-position" id="navPosition"><span class="pos-current">01</span><span class="pos-divider">/</span><span class="pos-total">09</span></span>
+    <span class="nav-position" id="navPosition"><span class="pos-current">01</span><span class="pos-divider">/</span><span class="pos-total">09</span></span><!-- auto-updated by initNavSpy() -->
     <button class="collapse-toggle" id="collapseAllBtn" type="button" aria-pressed="false" data-label-open="Collapse scenes" data-label-closed="Expand scenes"><span class="icon" aria-hidden="true">⇅</span><span class="label">Collapse scenes</span></button>
   </div>
 </nav>
@@ -695,27 +808,27 @@
 <section class="sec" id="frame">
   <div class="sec-head">
     <h2>Strategic frame.</h2>
-    <span class="sec-meta">3 things change vs Harrogate</span>
+    <span class="sec-meta">v2 · 3 decisions from the 12 May team call</span>
   </div>
-  <p class="sec-lede">UK Nationals: Robot Performance award won, but Robot Design judging didn't put us top 10.
-    The robot is <strong>championship-grade</strong>, the script communication was mid-tier.
-    This rebuild fixes that gap.</p>
+  <p class="sec-lede">The v1 script was structured around <strong>9 speakers across 9 scenes</strong>.
+    For v2 we restructured around the <strong>5 rubric areas judges actually score on</strong> — so they can match
+    our content to their scoring sheet line by line. The 12 May team call locked the changes below.</p>
 
   <div class="frame-grid">
     <div class="frame-card">
-      <span class="num">Change 01</span>
-      <h3>Year-over-year arc.</h3>
-      <p>Every section references the <strong>4-year evolution</strong>. Most teams talk about this season only. We can talk about 4.</p>
+      <span class="num">Decision 01</span>
+      <h3>9 → 5 restructure.</h3>
+      <p>Judges tick <strong>5 rubric scores</strong>, not 9. The new spine is one scene per rubric (Identify · Design · Create · Iterate · Communicate). All 9 of us still speak — distributed 1–2 per scene with <strong>lead + backup</strong> coverage.</p>
     </div>
     <div class="frame-card">
-      <span class="num">Change 02</span>
-      <h3>Decision-quality language.</h3>
-      <p>Every section names a <strong>choice</strong>, a <strong>rejected alternative</strong>, and a <strong>reason</strong>. That's what "process" scoring rewards.</p>
+      <span class="num">Decision 02</span>
+      <h3>Exceeds-trigger strategy.</h3>
+      <p>Score 4 = "Exceeds" <strong>requires a written judge comment</strong>. Every scene now has one quotable line so memorable the judge can't help writing it. Target: <strong>3 of 5 at Exceeds</strong>. Stretch: all 5.</p>
     </div>
     <div class="frame-card">
-      <span class="num">Change 03</span>
-      <h3>The Aaliya reveal.</h3>
-      <p>A <strong>meta-insight at slot 8</strong> that reframes the entire presentation. <em>No other team will land this.</em></p>
+      <span class="num">Decision 03</span>
+      <h3>Five physical evidence folders.</h3>
+      <p>Inspired by last year's Malaysian winners. One A4 folder per rubric, handed to judges so they have proof in hand <em>while scoring that rubric</em>. Recommended timing: one folder per scene (5 micro-handovers).</p>
     </div>
   </div>
 
@@ -724,12 +837,12 @@
       <h3>The diagnosis</h3>
       <p>Robot Performance: <strong>UK National award.</strong></p>
       <p>Robot Design judging at Nationals: <strong class="hot">not top 10.</strong></p>
-      <p>Conclusion: <strong>communication gap, not engineering gap.</strong></p>
+      <p>Conclusion: <strong>communication gap, not engineering gap.</strong> Rubric-aligned structure closes it.</p>
     </div>
     <div>
       <h3>The bar</h3>
-      <p>If this is delivered cleanly, Robot Design rank should be <strong class="hot">top 5 minimum, top 3 likely</strong>.</p>
-      <p>Combined with the Robot Performance score that already wins, <strong>Robot Design ceases to be a weak link in the Champion's Score.</strong></p>
+      <p>If we land <strong>3+ Exceeds</strong> out of 5, Robot Design rank should be <strong class="hot">top 3 minimum, top 1 likely</strong>.</p>
+      <p>Combined with the Robot Performance score that already wins, <strong>Robot Design becomes the Champion's Score multiplier — not the gap.</strong></p>
     </div>
   </div>
 </section>
@@ -738,53 +851,56 @@
 <section class="sec" id="schedule">
   <div class="sec-head">
     <h2>Speaker assignment &amp; timing.</h2>
-    <span class="sec-meta">9 speakers · 9 sections · ~4:42</span>
+    <span class="sec-meta">5 scenes · lead + backup · ~4:30</span>
   </div>
 
   <table class="t timing-table">
     <thead>
-      <tr><th>#</th><th>Speaker</th><th>Section</th><th>Time</th><th>Words</th></tr>
+      <tr><th>#</th><th>Rubric</th><th>Lead</th><th>Backup</th><th>Time</th><th>Words</th></tr>
     </thead>
     <tbody>
-      <tr><td class="num-col">1</td><td class="speaker-col">Esha</td><td>Opening + Year-4 frame</td><td class="time-col">30 sec</td><td class="words-col">60</td></tr>
-      <tr><td class="num-col">2</td><td class="speaker-col">Arvin</td><td>Resources (3 buckets)</td><td class="time-col">25 sec</td><td class="words-col">50</td></tr>
-      <tr><td class="num-col">3</td><td class="speaker-col">Flossie</td><td>Mission strategy (5 strategies, 4 rejected)</td><td class="time-col">65 sec</td><td class="words-col">130</td></tr>
-      <tr><td class="num-col">4</td><td class="speaker-col">Anaisa</td><td>Robot architecture (4 generations)</td><td class="time-col">30 sec</td><td class="words-col">60</td></tr>
-      <tr><td class="num-col">5</td><td class="speaker-col">Guhan</td><td>Attachments (5 mechanisms reveal)</td><td class="time-col">30 sec</td><td class="words-col">55</td></tr>
-      <tr><td class="num-col">6</td><td class="speaker-col">Sakthi</td><td>Programming (Pybricks architecture)</td><td class="time-col">25 sec</td><td class="words-col">50</td></tr>
-      <tr><td class="num-col">7</td><td class="speaker-col">Elliot</td><td>Testing (40% to 95% curve)</td><td class="time-col">30 sec</td><td class="words-col">60</td></tr>
-      <tr class="is-winning"><td class="num-col">8</td><td class="speaker-col">Aaliya</td><td>The winning stroke</td><td class="time-col">27 sec</td><td class="words-col">55</td></tr>
-      <tr><td class="num-col">9</td><td class="speaker-col">Toby</td><td>Closer (Fun + Pride + Korea respect)</td><td class="time-col">20 sec</td><td class="words-col">40</td></tr>
-      <tr class="total"><td colspan="3">Total</td><td class="time-col">~4:42</td><td class="words-col">560</td></tr>
+      <tr><td class="num-col">1</td><td>Identify · Mission strategy + resources</td><td class="speaker-col">Anaisa</td><td class="speaker-col"><em>Arvin</em></td><td class="time-col">60 sec</td><td class="words-col">120</td></tr>
+      <tr><td class="num-col">2</td><td>Design · 5-generation robot evolution</td><td class="speaker-col">Anaisa</td><td class="speaker-col"><em>Elliot</em></td><td class="time-col">60 sec</td><td class="words-col">120</td></tr>
+      <tr><td class="num-col">3</td><td>Create · Attachments + code</td><td class="speaker-col">Guhan</td><td class="speaker-col"><em>Sakthi</em></td><td class="time-col">60 sec</td><td class="words-col">120</td></tr>
+      <tr><td class="num-col">4</td><td>Iterate · Testing + improvements</td><td class="speaker-col">Elliot</td><td class="speaker-col"><em>Flossie</em></td><td class="time-col">60 sec</td><td class="words-col">120</td></tr>
+      <tr class="is-winning"><td class="num-col">5</td><td>Communicate · Lessons + pride + winning stroke</td><td class="speaker-col">Aaliya</td><td class="speaker-col"><em>Toby</em></td><td class="time-col">60 sec</td><td class="words-col">120</td></tr>
+      <tr class="total"><td colspan="4">Total</td><td class="time-col">~4:30</td><td class="words-col">~600</td></tr>
     </tbody>
   </table>
 
-  <div class="buffer-note">Built-in buffer: <strong>18 seconds</strong>. Tight but achievable with rehearsal.</div>
+  <div class="buffer-note">Built-in buffer: <strong>30 seconds</strong>. The backup speaker per scene is the redundancy: if the lead misses the Exceeds-trigger line, the backup catches it.</div>
+  <div class="buffer-note"><strong>Esha + Arvin's slots from v1 fold into Identify and Design.</strong> The Korean greeting opening (Esha) moves into the 2-min team welcome <em>before</em> the timed script, pending RealTechBot confirmation that the welcome slot exists.</div>
 </section>
 
 <!-- ============ ARTEFACT MAP ============ -->
 <section class="sec" id="artefacts">
   <div class="sec-head">
-    <h2>Artefact map.</h2>
-    <span class="sec-meta">What's in the room · when each is referenced</span>
+    <h2>Artefact map · 5 evidence folders + 5 visuals.</h2>
+    <span class="sec-meta">One per rubric · handed at the start of each scene</span>
   </div>
+  <p class="sec-lede">Five A4 ring-bound folders, each titled with its rubric name (inspired by last year's Malaysian winners).
+    Plus five simple animated visuals behind the speakers — one per scene.
+    <strong>Recommended handover timing:</strong> the relevant folder is handed at the <em>start of each scene</em> (5 micro-handovers),
+    so it's never disruptive and the judge has the evidence in hand while scoring that rubric. <em>Verify with RealTechBot before locking.</em></p>
 
   <table class="t art-table">
     <thead>
-      <tr><th>Artefact</th><th>When used</th><th>Speaker</th></tr>
+      <tr><th>Folder</th><th>Contents</th><th>Visual behind speaker</th></tr>
     </thead>
     <tbody>
-      <tr><td class="a-name">World Dominator robot</td><td class="a-when">Throughout</td><td class="a-who">Esha hands off · Anaisa demonstrates</td></tr>
-      <tr><td class="a-name">Resources folder (3 buckets)</td><td class="a-when">Hand to judges at start</td><td class="a-who">Arvin · Anaisa hands over</td></tr>
-      <tr><td class="a-name">Animated mission map (8 runs)</td><td class="a-when">During strategy explanation</td><td class="a-who">Flossie points</td></tr>
-      <tr><td class="a-name">Attachments (8 modular)</td><td class="a-when">During attachments section</td><td class="a-who">Guhan + others demonstrate</td></tr>
-      <tr><td class="a-name">Custom menu screen</td><td class="a-when">During programming section</td><td class="a-who">Sakthi shows</td></tr>
-      <tr><td class="a-name">Mechanical aligners + jigs</td><td class="a-when">During programming section</td><td class="a-who">Other team member shows</td></tr>
-      <tr class="is-hero"><td class="a-name">40% to 95% consistency curve</td><td class="a-when">During testing section</td><td class="a-who">Elliot points</td></tr>
-      <tr><td class="a-name">List of 50+ changes / engineering journal</td><td class="a-when">Hand to judges</td><td class="a-who">Anaisa</td></tr>
-      <tr><td class="a-name">List of all coding</td><td class="a-when">Hand to judges</td><td class="a-who">Anaisa</td></tr>
+      <tr><td class="a-name">1 · Identify</td><td class="a-when">Mission analysis sheet (15 × 4 criteria) · 8-run plan · 4 rejected strategies one-pager · resources list (5 teams + tutorials)</td><td class="a-who">Animated 15→8 mission strategy map · 4 rejected strategies fade below</td></tr>
+      <tr><td class="a-name">2 · Design</td><td class="a-when">5-generation evolution chart with pros/cons · current robot specs · wheel-cover before/after · boat-pushing one-pager</td><td class="a-who">5 robots in a row, pros/cons + tick/cross per generation</td></tr>
+      <tr><td class="a-name">3 · Create</td><td class="a-when">5-mechanism map · 8 attachment photos · Pybricks-vs-SPIKE one-pager · custom menu screenshot · annotated code snippet · aligner photos</td><td class="a-who">Left: 5 mechanism icons. Right: custom menu screen + the one line of code that decides</td></tr>
+      <tr class="is-hero"><td class="a-name">4 · Iterate</td><td class="a-when">220-run test log · 100-match-sim log · 50+ changes log · wheel-cover before/after · 4 testing sheets · wheel comparison</td><td class="a-who">The 40% → 95% consistency curve printed large · nothing else on screen</td></tr>
+      <tr><td class="a-name">5 · Communicate</td><td class="a-when">Sub-group diagram (all 9 names + contributions) · 5 lessons-learned page · 502/96 hours log · team photo collage · closing chant card</td><td class="a-who">Sub-group diagram + 502-hours / 96-sessions overlay</td></tr>
     </tbody>
   </table>
+
+  <p class="note" style="margin-top: 1.2rem;">
+    <strong>The hero artefact</strong> across all 5 folders is the <strong class="hot">40% → 95% consistency curve</strong>.
+    Lives in Folder 4 (Iterate) but referenced in Scene 5 (Aaliya's closer) and Scene 1 (the Identify Exceeds-trigger line).
+    The curve is what the judges see <em>and</em> hear twice — peak-and-end recall.
+  </p>
 </section>
 
 <!-- ============ GLOSSARY ============ -->
@@ -806,295 +922,307 @@
 <!-- ============ THE FULL SCRIPT ============ -->
 <section class="sec" id="script">
   <div class="sec-head">
-    <h2>The full script.</h2>
-    <span class="sec-meta">Stage · Spoken line · Rubric hits</span>
+    <h2>The full script · 5 rubric scenes.</h2>
+    <span class="sec-meta">v2 · drafts — team to refine</span>
   </div>
-  <p class="sec-lede">Don't memorise verbatim. Memorise structure + key lines. The spoken line is the contract — the stage direction is the choreography. Rubric hits at the bottom of each scene tell us why it's there.</p>
+  <p class="sec-lede">One scene per rubric. Each has a <strong>lead</strong> + <strong>backup</strong> speaker, a draft spoken section, an
+    <strong>Exceeds-trigger line</strong> in the red callout (the quotable comment we're forcing the judge to write),
+    and a two-up showing what's on screen + what's in that scene's evidence folder. <strong>Draft content — team to edit directly.</strong></p>
 
   <div class="script">
 
-    <!-- 1. ESHA -->
+    <!-- SCENE 1 · IDENTIFY (Mission strategy + resources) -->
     <article class="scene" id="s-01">
       <div class="scene-bar">
         <div class="scene-bar-left">
           <span class="scene-num">Scene 01</span>
-          <span class="scene-title">Opening + Year-4 frame</span>
+          <span class="scene-rubric">Identify</span>
+          <span class="scene-title">Mission strategy + resources</span>
         </div>
         <div class="scene-bar-right">
-          <span class="speaker-tag">Esha</span>
-          <span>30 sec</span>
-          <span>60 words</span>
+          <span class="speaker-tag">Anaisa</span>
+          <span class="speaker-tag is-backup">Arvin · backup</span>
+          <span>60 sec</span>
+          <span>120 words</span>
         </div>
       </div>
       <div class="scene-body">
-        <h3 class="scene-name">Open with humility, plant the curve.</h3>
-        <p class="stage">Esha holds up World Dominator, then hands to Anaisa.</p>
+        <h3 class="scene-name">Five strategies. Four rejected. 8-run plan adopted.</h3>
+        <p class="stage">Anaisa points to the animated mission strategy map as she names the rejected strategies. Arvin hands Folder 1 (Identify) to the judges at the start.</p>
         <div class="spoken">
-          <span class="label">Spoken</span>
-          <blockquote>Annyeong-haseyo. We are <strong>Lord of the Bricks</strong>, from Kent, United Kingdom. Three years ago, we didn't know how to code. This is our fourth year. This is our fourth-generation robot. <strong>World Dominator</strong>. Run consistency, Year 1 to Year 4: <strong>40% to 95%</strong>. Today we'll show you how we got here.</blockquote>
+          <span class="label">Spoken · draft</span>
+          <blockquote>We had <strong>27 tasks. 15 missions.</strong> Two objectives: minimise runs, maximise points, lowest failure probability. We considered <strong>5 strategies. We rejected 4.</strong> One run for all 15 missions — rejected, one failure loses all 545 points. 15 individual runs — rejected, too much time in Home. 5 to 6 runs with bigger attachments — rejected, attachments destabilised the robot. Group purely by proximity — rejected, efficient on path, slow on missions. We chose <strong>8 runs grouped by three factors: proximity, sector sweeping (left-to-right so Kilo pieces don't block our path), and similar attachments together.</strong> To get here we followed five teams — Exploding Kettles, RailTech, Bricks and Biscuits, FLL Tutorials, Spike Prime Lessons — plus SPIKE Prime tutorials, Pybricks documentation, and YouTube on gear ratios and torque. <em>(points to the animated 15→8 map)</em> That's our 8-run plan.</blockquote>
         </div>
+
+        <div class="scene-exceeds">
+          <span class="label">★ Exceeds-trigger line</span>
+          <blockquote>"Five strategies. Four rejected with reasons. We went from <strong>40% to 95% consistency over four years.</strong>"</blockquote>
+          <span class="lead-attribution">Lead: Anaisa · Backup: Arvin</span>
+        </div>
+
+        <div class="scene-deck">
+          <div class="scene-deck-block">
+            <h4>What's shown</h4>
+            <p>Animated 15-mission map collapsing into 8 grouped runs, each labelled with its grouping criterion (proximity / sector / attachment). The 4 rejected strategies fade in below as ghost cards with red strikethrough.</p>
+          </div>
+          <div class="scene-deck-block">
+            <h4>Folder 1 · Identify · evidence</h4>
+            <ul>
+              <li>Mission analysis sheet — 15 × 4 criteria (from Notion)</li>
+              <li>8-run plan with per-run mission list</li>
+              <li>4 rejected strategies one-pager with reasons</li>
+              <li>Resources list — 5 teams + tutorials + docs</li>
+            </ul>
+          </div>
+        </div>
+
         <div class="rubric-hits">
           <h4>Rubric hits</h4>
           <ul>
-            <li>Opens with <strong>humility</strong> — Year 1 we knew nothing.</li>
-            <li><strong>Plants the 40% → 95% stat</strong> that Elliot will pay off later.</li>
-            <li>Korean greeting signals <strong>respect without forcing it</strong>.</li>
+            <li><strong>RD IDENTIFY · mission strategy</strong> — 5 strategies named, 4 rejected with reasons. <span class="chip-inline">Exceeds target</span></li>
+            <li><strong>RD IDENTIFY · resources</strong> — 5 teams + 2 toolkits named (dual-marked Core Values · Discovery).</li>
+            <li><strong>Decision-quality language</strong> demonstrated — process scoring rewards this.</li>
           </ul>
         </div>
       </div>
     </article>
 
-    <!-- 2. ARVIN -->
+    <!-- SCENE 2 · DESIGN (5 generations of robot) -->
     <article class="scene" id="s-02">
       <div class="scene-bar">
         <div class="scene-bar-left">
           <span class="scene-num">Scene 02</span>
-          <span class="scene-title">Resources · 3 buckets</span>
+          <span class="scene-rubric">Design</span>
+          <span class="scene-title">5-generation robot evolution</span>
         </div>
         <div class="scene-bar-right">
-          <span class="speaker-tag">Arvin</span>
-          <span>25 sec</span>
-          <span>50 words</span>
+          <span class="speaker-tag">Anaisa</span>
+          <span class="speaker-tag is-backup">Elliot · backup</span>
+          <span>60 sec</span>
+          <span>120 words</span>
         </div>
       </div>
       <div class="scene-body">
-        <h3 class="scene-name">Three categories. Five teams named.</h3>
-        <p class="stage">Anaisa hands resources folder to judges.</p>
+        <h3 class="scene-name">Five robots. Each one fixed the one before.</h3>
+        <p class="stage">Anaisa walks left-to-right pointing at the 5-robot slide, holding up the current World Dominator on the right. Elliot hands Folder 2 (Design) to the judges.</p>
         <div class="spoken">
-          <span class="label">Spoken</span>
-          <blockquote>Learning never stops for us. We use three resource categories. <strong>Strategy:</strong> five teams we follow. Exploding Kettles, RailTech, Bricks and Biscuits, FLL Tutorials, Spike Prime Lessons. <strong>Building:</strong> SPIKE Prime tutorials, plus last year's Advanced Driving Base instructions. <strong>Coding:</strong> Pybricks documentation, and hours of YouTube on gear ratios and torque.</blockquote>
+          <span class="label">Spoken · draft</span>
+          <blockquote>World Dominator is our <strong>5th-generation robot</strong>. Each version fixed the previous one's failure mode. <em>(point left-to-right)</em> <strong>Generation 1</strong> — Spike Prime hub-only base. Simple, fast to iterate, but too basic. <strong>Generation 2</strong> — Spike Prime base with pinning attachments. First modular system, not robust enough. <strong>Generation 3</strong> — the yellow box robot. Closed wheel system, but wires got stuck inside and attachment parts fell into the box. We scrapped it after 3 weeks. <strong>Generation 4</strong> — TrackX wide version. Open wheel, modular attachments. Too wide for the boat-pushing mission — we had to drag the boat with a long-arm hook. <strong>Generation 5</strong> — World Dominator. Width-reduced TrackX, <strong>thick rubber tyres 62 millimetres by 20</strong>, low centre of gravity, gyro-controlled straight-line drive, four motors — two for driving, two for attachments — plus a <strong>wheel cover system</strong> built by the whole team after Submerged Run 8 jammed. One reliable system.</blockquote>
         </div>
+
+        <div class="scene-exceeds">
+          <span class="label">★ Exceeds-trigger line</span>
+          <blockquote>"Most teams show you one robot. <strong>We show you five.</strong> Each one fixed the one before."</blockquote>
+          <span class="lead-attribution">Lead: Anaisa · Backup: Elliot</span>
+        </div>
+
+        <div class="scene-deck">
+          <div class="scene-deck-block">
+            <h4>What's shown</h4>
+            <p>5 robots in a row, photos chronological. Under each: 2 pros + 1 con + tick/cross. Arrow flowing left-to-right showing evolution. Gen 5 gets a tick only.</p>
+          </div>
+          <div class="scene-deck-block">
+            <h4>Folder 2 · Design · evidence</h4>
+            <ul>
+              <li>5-generation evolution chart with pros/cons</li>
+              <li>Current robot specs sheet (62×20 wheels, 4 motors, gyro)</li>
+              <li>Wheel cover before/after photo pair</li>
+              <li>Boat-pushing mission one-pager (why we reduced width)</li>
+            </ul>
+          </div>
+        </div>
+
         <div class="rubric-hits">
           <h4>Rubric hits</h4>
           <ul>
-            <li><strong>RD IDENTIFY</strong> — clear use of building or coding resources to support mission strategy <span class="chip-inline">Exceeds candidate</span></li>
-            <li><strong>Core Values · Discovery</strong> (dual-marked) — 3 categories shows systematic learning. Beats most teams who name 1 source.</li>
+            <li><strong>RD DESIGN · all members contributed</strong> — wheel cover built by the whole team, named. <span class="chip-inline">Exceeds target</span></li>
+            <li><strong>RD DESIGN · failure-fix evolution</strong> — 5 generations of process evidence (dual-marked Core Values · Inclusion).</li>
+            <li><strong>Differentiator</strong> — most teams show one robot. We show five.</li>
           </ul>
         </div>
       </div>
     </article>
 
-    <!-- 3. FLOSSIE -->
+    <!-- SCENE 3 · CREATE (Attachments + code) -->
     <article class="scene" id="s-03">
       <div class="scene-bar">
         <div class="scene-bar-left">
           <span class="scene-num">Scene 03</span>
-          <span class="scene-title">Mission strategy · 5 strategies, 4 rejected</span>
+          <span class="scene-rubric">Create</span>
+          <span class="scene-title">Attachments + code</span>
         </div>
         <div class="scene-bar-right">
-          <span class="speaker-tag">Flossie</span>
-          <span>65 sec</span>
-          <span>130 words</span>
+          <span class="speaker-tag">Guhan</span>
+          <span class="speaker-tag is-backup">Sakthi · backup</span>
+          <span>60 sec</span>
+          <span>120 words</span>
         </div>
       </div>
       <div class="scene-body">
-        <h3 class="scene-name">An engineering problem, not a guess.</h3>
+        <h3 class="scene-name">15 missions sound like 15 problems. They're not.</h3>
+        <p class="stage">Guhan demonstrates with the modular attachments on the table. Sakthi shows the custom menu screen + hands Folder 3 (Create) to the judges.</p>
         <div class="spoken">
-          <span class="label">Spoken</span>
-          <blockquote>Our mission strategy was an engineering problem. <strong>27 tasks. 15 missions. Two objectives: minimise runs, maximise points, lowest failure probability.</strong> We evaluated 5 strategies. We rejected 4. <strong>Strategy 1</strong> — one run, all 15 missions. Rejected. One failure loses 545 points. <strong>Strategy 2</strong> — 15 individual runs. Rejected. Too much time in Home. <strong>Strategy 3</strong> — 5 to 6 runs with bigger attachments. Last year's approach. Attachments destabilised the robot. <strong>Strategy 4</strong> — group purely by proximity. We started this season with this. Three months in, it failed. Efficient on path, slow on missions. <strong>Strategy 5</strong> — 8 runs, grouped by attachment pattern. Adopted. <em>(points to animated map)</em> That's our 8-run plan.</blockquote>
+          <span class="label">Spoken · draft</span>
+          <blockquote>15 missions sound like 15 different problems. They're not. We tested every attachment we built and saw a pattern. <strong>Five mechanisms handle every mission.</strong> Grabbers. Push-pull arms. Rack-and-pinion. Dual-motor arms. Rubber band systems. <em>(demonstrates with the modular attachments)</em> We stopped engineering missions. <strong>We engineered mechanisms.</strong> One mechanism, multiple missions, predictable behaviour. For the code, we switched from SPIKE block coding to <strong>Pybricks for three reasons:</strong> precise distance control, custom wheel-diameter calibration (needed because we changed to 62×20mm wheels), and no Bluetooth lag. We built a custom menu that auto-increments runs — one button press loads the next. The gyro sensor handles straight-line drift, and our mechanical aligners and starting jigs make every launch <strong>fail-safe</strong>.</blockquote>
         </div>
+
+        <div class="scene-exceeds">
+          <span class="label">★ Exceeds-trigger line</span>
+          <blockquote>"15 missions sound like 15 problems. They're not. <strong>Five mechanisms handle every mission.</strong> We stopped engineering missions. We engineered mechanisms."</blockquote>
+          <span class="lead-attribution">Lead: Guhan · Backup: Sakthi</span>
+        </div>
+
+        <div class="scene-deck">
+          <div class="scene-deck-block">
+            <h4>What's shown</h4>
+            <p>Left half: 5 mechanism categories as labelled icons with 1–2 example attachments beneath each. Right half: tablet showing the custom menu running, with one printed code snippet beneath — "the one line that decides."</p>
+          </div>
+          <div class="scene-deck-block">
+            <h4>Folder 3 · Create · evidence</h4>
+            <ul>
+              <li>5-mechanism map (mechanism → attachments → missions)</li>
+              <li>Photos of all 8 attachments</li>
+              <li>Pybricks-vs-SPIKE one-pager (the 3 reasons)</li>
+              <li>Custom menu screenshot</li>
+              <li>Annotated code snippet (sensor → condition → action)</li>
+              <li>Mechanical aligner + jig photos</li>
+            </ul>
+          </div>
+        </div>
+
         <div class="rubric-hits">
           <h4>Rubric hits</h4>
           <ul>
-            <li><strong>RD IDENTIFY</strong> — clear evidence of mission strategy. 5 strategies named, 4 rejected with reason. <span class="chip-inline">Exceeds candidate</span></li>
-            <li><strong>RD ITERATE</strong> (dual-marked Core Values · Innovation) — Strategy 4 → Strategy 5 evolution shows mid-season course correction.</li>
-            <li>Decision quality clearly demonstrated. <strong>This is what robot design judging actually scores.</strong></li>
+            <li><strong>RD CREATE · attachments</strong> — 5 mechanism categories, abstraction layer no other team articulates. <span class="chip-inline">Exceeds target</span></li>
+            <li><strong>RD CREATE · code</strong> — 3-reason Pybricks switch + custom menu + gyro + fail-safe launches.</li>
+            <li><strong>Decision quality, not tool-naming</strong> — distinguishes us from teams that just say "we used SPIKE".</li>
           </ul>
         </div>
       </div>
     </article>
 
-    <!-- 4. ANAISA -->
+    <!-- SCENE 4 · ITERATE (Testing + improvements) -->
     <article class="scene" id="s-04">
       <div class="scene-bar">
         <div class="scene-bar-left">
           <span class="scene-num">Scene 04</span>
-          <span class="scene-title">Robot architecture · 4 generations</span>
-        </div>
-        <div class="scene-bar-right">
-          <span class="speaker-tag">Anaisa</span>
-          <span>30 sec</span>
-          <span>60 words</span>
-        </div>
-      </div>
-      <div class="scene-body">
-        <h3 class="scene-name">Four generations of failure-fix pairs.</h3>
-        <p class="stage">Demonstrates robot, points to each feature.</p>
-        <div class="spoken">
-          <span class="label">Spoken</span>
-          <blockquote>This is World Dominator. Fourth generation. Each version fixed a previous version's failure mode. <strong>Gen 1</strong> tipped over with heavy attachments. <strong>Gen 2</strong> slipped on the mat. <strong>Gen 3</strong> lost speed in long runs. <strong>Gen 4</strong> fixes all three. Thick rubber tyres. Low centre of gravity. Gyro-controlled straight-line drive. Four motors: two for driving, two for attachments. <strong>One reliable system.</strong></blockquote>
-        </div>
-        <div class="rubric-hits">
-          <h4>Rubric hits</h4>
-          <ul>
-            <li><strong>RD CREATE</strong> — clear explanation of innovative attachments. 4 generations of failure-fix pairs = process evidence.</li>
-            <li><strong>RD ITERATE</strong> — improvements based on testing visible across years.</li>
-            <li><strong>Differentiator —</strong> most teams show one robot. We show four.</li>
-          </ul>
-        </div>
-      </div>
-    </article>
-
-    <!-- 5. GUHAN -->
-    <article class="scene" id="s-05">
-      <div class="scene-bar">
-        <div class="scene-bar-left">
-          <span class="scene-num">Scene 05</span>
-          <span class="scene-title">Attachments · 5 mechanisms</span>
-        </div>
-        <div class="scene-bar-right">
-          <span class="speaker-tag">Guhan</span>
-          <span>30 sec</span>
-          <span>55 words</span>
-        </div>
-      </div>
-      <div class="scene-body">
-        <h3 class="scene-name">The abstraction layer no other team will articulate.</h3>
-        <p class="stage">Demonstrates with the modular attachments.</p>
-        <div class="spoken">
-          <span class="label">Spoken</span>
-          <blockquote>15 missions sound like 15 different problems. They're not. We tested every attachment we built and saw a pattern. <strong>Five mechanisms handle every mission.</strong> Grabbers. Push-pull arms. Rack-and-pinion. Dual-motor arms. Rubber band systems. <em>(demonstrates with the modular attachments)</em> We stopped engineering missions. <strong>We engineered mechanisms.</strong> One mechanism. Multiple missions. Predictable behaviour.</blockquote>
-        </div>
-        <div class="rubric-hits">
-          <h4>Rubric hits</h4>
-          <ul>
-            <li><strong>RD CREATE</strong> — clear explanation of innovative attachments and their purpose. 5 mechanism categories. <span class="chip-inline">Exceeds candidate</span></li>
-            <li><strong>The original engineering philosophy that no other team will articulate.</strong> Most teams describe attachments one by one. We describe the abstraction layer above.</li>
-          </ul>
-        </div>
-      </div>
-    </article>
-
-    <!-- 6. SAKTHI -->
-    <article class="scene" id="s-06">
-      <div class="scene-bar">
-        <div class="scene-bar-left">
-          <span class="scene-num">Scene 06</span>
-          <span class="scene-title">Programming · Pybricks architecture</span>
-        </div>
-        <div class="scene-bar-right">
-          <span class="speaker-tag">Sakthi</span>
-          <span>25 sec</span>
-          <span>50 words</span>
-        </div>
-      </div>
-      <div class="scene-body">
-        <h3 class="scene-name">A 3-reason switch, not a tool name.</h3>
-        <p class="stage">Team member shows custom menu and aligners.</p>
-        <div class="spoken">
-          <span class="label">Spoken</span>
-          <blockquote>We switched from SPIKE block coding to Pybricks for three reasons: <strong>precise distance control, custom wheel-diameter calibration, and no Bluetooth lag</strong>. We built a custom menu that auto-increments runs. One button press loads the next run. Gyro sensor handles straight-line drift. Mechanical aligners and starting jigs make every launch <strong>fail-safe</strong>.</blockquote>
-        </div>
-        <div class="rubric-hits">
-          <h4>Rubric hits</h4>
-          <ul>
-            <li><strong>RD CREATE</strong> — clear explanation of innovative code and/or sensor use.</li>
-            <li><strong>3-reason switch</strong> demonstrates decision quality, not tool naming.</li>
-          </ul>
-        </div>
-      </div>
-    </article>
-
-    <!-- 7. ELLIOT -->
-    <article class="scene" id="s-07">
-      <div class="scene-bar">
-        <div class="scene-bar-left">
-          <span class="scene-num">Scene 07</span>
-          <span class="scene-title">Testing · 40 → 95% curve</span>
+          <span class="scene-rubric">Iterate</span>
+          <span class="scene-title">Testing + improvements</span>
         </div>
         <div class="scene-bar-right">
           <span class="speaker-tag">Elliot</span>
-          <span>30 sec</span>
-          <span>60 words</span>
+          <span class="speaker-tag is-backup">Flossie · backup</span>
+          <span>60 sec</span>
+          <span>120 words</span>
         </div>
       </div>
       <div class="scene-body">
-        <h3 class="scene-name">Hero artefact deployed at the right moment.</h3>
-        <p class="stage">Points to the 40-to-95% curve.</p>
+        <h3 class="scene-name">Year 1: 40% consistent. Year 4: 95%. That isn't luck.</h3>
+        <p class="stage">Elliot points to the 40→95% consistency curve as he says the number. Flossie hands Folder 4 (Iterate) to the judges + holds up the wheel comparison.</p>
         <div class="spoken">
-          <span class="label">Spoken</span>
-          <blockquote>We test until we trust. <strong>200+ individual run tests this season. 100 full-match simulations.</strong> <em>(points to the 40-to-95% curve)</em> Year 1, our runs were <strong>40% consistent</strong>. Year 4, we're at <strong>95%</strong>. After Regionals, we made <strong>50+ changes</strong>. One example: Silo pieces were jamming our wheels. We tried a deflector. It failed. We built a <strong>full wheel-cover system</strong>. The path clears every time.</blockquote>
+          <span class="label">Spoken · draft</span>
+          <blockquote>We test until we trust. <strong>Year 1, our runs were 40% consistent. Year 4, we're at 95%.</strong> That isn't luck. This season alone: <strong>220 individual run tests, 100 full-match simulations, and 50+ changes after Regionals.</strong> <em>(points to the curve)</em> One example: at Regionals, scattered Silo pieces kept jamming our wheels. We tried a deflector — it failed. So we built a <strong>full wheel-cover system</strong> as a team. Every kid stood around the table that day. Now the path clears every time. We also chose our wheels carefully — <strong>62-millimetre by 20-millimetre rubber tyres</strong>. The SPIKE Prime blue wheels at Regionals were too wobbly. The robot was going mental. The thicker rubber gave us more friction, and our straight-line and 90-degree turning testing showed they were the right call. <em>(hands testing sheets to judges)</em></blockquote>
         </div>
+
+        <div class="scene-exceeds">
+          <span class="label">★ Exceeds-trigger line · the hero artefact moment</span>
+          <blockquote>"Year 1: <strong>40%</strong> consistent. Year 4: <strong>95%</strong>. That isn't luck. This season alone: <strong>220 individual run tests, 100 full-match simulations, and 50+ changes after Regionals.</strong>"</blockquote>
+          <span class="lead-attribution">Lead: Elliot · Backup: Flossie · point at curve as you say "40% to 95%"</span>
+        </div>
+
+        <div class="scene-deck">
+          <div class="scene-deck-block">
+            <h4>What's shown</h4>
+            <p>The <strong>40% → 95% consistency curve</strong> printed large. X-axis Year 1 to Year 4 (Submerged → Unearthed marked). Y-axis success rate. Red dot per year. <strong>Nothing else on screen</strong> — this curve is the page's signature artefact.</p>
+          </div>
+          <div class="scene-deck-block">
+            <h4>Folder 4 · Iterate · evidence</h4>
+            <ul>
+              <li><strong>40→95% consistency curve</strong> printed large (hero artefact)</li>
+              <li>220-run test log + 100-match-sim log</li>
+              <li>50+ changes after Regionals log (engineering journal)</li>
+              <li>Wheel-cover before/after photo pair</li>
+              <li>4 testing sheets: straight-line, 90°, speed, turn</li>
+              <li>SPIKE-blue vs 62×20mm-rubber wheel comparison</li>
+            </ul>
+          </div>
+        </div>
+
         <div class="rubric-hits">
           <h4>Rubric hits</h4>
           <ul>
-            <li><strong>RD ITERATE</strong> — clear evidence of repeated testing of robot and code. 220+ tests. <span class="chip-inline">Exceeds</span></li>
-            <li><strong>RD ITERATE</strong> (dual-marked Core Values · Innovation) — clear evidence of improvements based on testing. 50+ changes, named example. <span class="chip-inline">Exceeds</span></li>
-            <li>Hero artefact deployed at the right moment.</li>
+            <li><strong>RD ITERATE · repeated testing</strong> — 220+ tests, 100 sims. <span class="chip-inline">Exceeds target</span></li>
+            <li><strong>RD ITERATE · improvements based on testing</strong> — 50+ changes, named example (dual-marked Core Values · Innovation). <span class="chip-inline">Exceeds</span></li>
+            <li>Hero artefact deployed at the right moment, with the curve numbered live.</li>
           </ul>
         </div>
       </div>
     </article>
 
-    <!-- 8. AALIYA — THE WINNING STROKE -->
-    <article class="scene is-winning" id="s-08">
+    <!-- SCENE 5 · COMMUNICATE — winning stroke + closer -->
+    <article class="scene is-winning" id="s-05">
       <div class="scene-bar">
         <div class="scene-bar-left">
-          <span class="scene-num">Scene 08</span>
-          <span class="scene-title">The winning stroke</span>
+          <span class="scene-num">Scene 05</span>
+          <span class="scene-rubric">Communicate</span>
+          <span class="scene-title">Lessons + pride + the winning stroke</span>
         </div>
         <div class="scene-bar-right">
           <span class="speaker-tag">Aaliya</span>
-          <span>27 sec</span>
-          <span>55 words</span>
+          <span class="speaker-tag is-backup">Toby · backup</span>
+          <span>60 sec</span>
+          <span>120 words</span>
           <span class="winning-flag">Winning stroke</span>
         </div>
       </div>
       <div class="scene-body">
         <h3 class="scene-name">"Our robot isn't our best engineering. We are."</h3>
+        <p class="stage">Aaliya holds the team's gaze on the meta-reframe line. Toby steps in for the pride/closer. After the chant, all 9 hold position with eye contact. Aaliya hands Folder 5 (Communicate) to the judges.</p>
         <div class="spoken">
           <span class="label">Spoken · the line judges write down</span>
-          <blockquote>You've heard about World Dominator. <strong>Our robot isn't our best engineering. We are.</strong> Nine of us. Three sub-groups. Two experienced and one new member in each. The new members led research. The experienced led the build. Everyone built. Everyone tested. Everyone learned. We didn't just engineer a robot. <strong>We engineered the team that built it.</strong> That's how 40% became 95%.</blockquote>
+          <blockquote>You've heard about World Dominator. <strong>Our robot isn't our best engineering. We are.</strong> Nine of us. Three sub-groups. Two experienced and one new member in each. The new members led research. The experienced led the build. <strong>Everyone built. Everyone tested. Everyone learned.</strong> We learned five lessons this year — don't debate, test · switch tools when the tool fights the work · combine missions by proximity and motor availability · same-side gearbox saves home-area time · 2-pin minimum on short beams, 3–4 on long. <em>(Toby takes over)</em> <strong>502 hours. 96 sessions. Never missed a Sunday.</strong> Nine primary school friends who learned robotics together. Two-time UK regional champions. UK National Knockout Champions. Today we represent <strong>Team GB</strong> in Korea. Thank you for having us. <em>(all 9 together, eye contact)</em> <strong>WE ARE LORD OF THE BRICKS!</strong></blockquote>
+        </div>
+
+        <div class="scene-exceeds">
+          <span class="label">★ Exceeds-trigger line · the meta-reframe</span>
+          <blockquote><em>"Our robot isn't our best engineering. <strong>We are.</strong>"</em></blockquote>
+          <span class="lead-attribution">Lead: Aaliya · Backup: Toby · pause before "We are"</span>
         </div>
 
         <div class="why-winning">
           <h4>Why this is the winning stroke</h4>
           <ol>
-            <li><div><strong>Meta-reframe.</strong> Every other team will present their robot as their work. We present <em>the team</em> as the work. This is engineering maturity at its highest level.</div></li>
+            <li><div><strong>Meta-reframe.</strong> Every other team will present their robot as their work. We present <em>the team</em> as the work. Engineering maturity at its highest level.</div></li>
             <li><div><strong>Locks Inclusion as a dual-marked Exceeds row</strong> for Core Values without being preachy.</div></li>
-            <li><div><strong>Echoes the 40 → 95% curve</strong> Elliot just showed, but reframes its cause: not luck, not just iteration — but team design.</div></li>
+            <li><div><strong>Echoes the 40 → 95% curve</strong> from Scene 4, reframes its cause: not luck, not just iteration — but team design.</div></li>
             <li><div><strong>One memorable line.</strong> <span class="pull-line">"Our robot isn't our best engineering. We are."</span> This is what judges write in the rubric comment box.</div></li>
-            <li><div><strong>Positioned at slot 8 of 9.</strong> Last reveal before the emotional closer. Maximum recall.</div></li>
+            <li><div><strong>Positioned at slot 5 of 5</strong> — last reveal of the script. Maximum recall.</div></li>
           </ol>
         </div>
 
-        <div class="rubric-hits">
-          <h4>Rubric hits</h4>
-          <ul>
-            <li><strong>RD DESIGN</strong> (dual-marked Core Values · Inclusion) — clear evidence that all team members contributed ideas. <span class="chip-inline">Exceeds</span></li>
-            <li><strong>RD DESIGN</strong> — clear evidence of building and coding skills in all team members. <span class="chip-inline">Exceeds</span></li>
-            <li><strong>Halo effect</strong> on every other section: judges retroactively reframe everything they just heard.</li>
-          </ul>
+        <div class="scene-deck">
+          <div class="scene-deck-block">
+            <h4>What's shown</h4>
+            <p>Left half: sub-group diagram with all 9 names + 3 group circles + named contributions per kid. Right half: team photo collage with <strong>502 hours</strong> and <strong>96 sessions</strong> overlaid.</p>
+          </div>
+          <div class="scene-deck-block">
+            <h4>Folder 5 · Communicate · evidence</h4>
+            <ul>
+              <li>Sub-group diagram (all 9 names + contributions)</li>
+              <li>5 lessons-learned page</li>
+              <li>502-hour / 96-session log printout</li>
+              <li>Team photo book / 6-photo collage</li>
+              <li>Closing chant card: <em>"WE ARE LORD OF THE BRICKS!"</em></li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </article>
 
-    <!-- 9. TOBY -->
-    <article class="scene" id="s-09">
-      <div class="scene-bar">
-        <div class="scene-bar-left">
-          <span class="scene-num">Scene 09</span>
-          <span class="scene-title">Closer · Fun + Pride + Korea respect</span>
-        </div>
-        <div class="scene-bar-right">
-          <span class="speaker-tag">Toby</span>
-          <span>20 sec</span>
-          <span>40 words</span>
-        </div>
-      </div>
-      <div class="scene-body">
-        <h3 class="scene-name">Land it together. Eye contact.</h3>
-        <p class="stage">All 9 together at the chant. Eye contact with judges.</p>
-        <div class="spoken">
-          <span class="label">Spoken</span>
-          <blockquote>502 hours. 96 sessions. Never missed a Sunday. Nine primary school friends who learned robotics together. Today we represent <strong>Team GB in Korea</strong>. Thank you for having us. <strong>WE ARE LORD OF THE BRICKS!</strong></blockquote>
-        </div>
         <div class="rubric-hits">
           <h4>Rubric hits</h4>
           <ul>
-            <li><strong>RD COMMUNICATE</strong> (dual-marked Core Values · Fun) — team clearly shows pride or enthusiasm for their work. <span class="chip-inline">Exceeds candidate</span></li>
-            <li><strong>Korea respect closing bookends</strong> Esha's Korean greeting opening.</li>
-            <li><strong>Team GB pride lands without bragging.</strong></li>
+            <li><strong>RD COMMUNICATE · process &amp; lessons learned</strong> — 5 named lessons with concrete examples. <span class="chip-inline">Exceeds target</span></li>
+            <li><strong>RD COMMUNICATE · pride &amp; enthusiasm</strong> (dual-marked Core Values · Fun) — all-9 chant. <span class="chip-inline">Exceeds candidate</span></li>
+            <li><strong>Halo effect</strong> on every other section — the meta-reframe retroactively reframes everything the judges just heard.</li>
           </ul>
         </div>
       </div>
@@ -1113,28 +1241,28 @@
   <div class="mechanics">
     <div class="mech">
       <span class="num">M1</span>
-      <h3>Numbers anchor every section.</h3>
-      <p>27, 15, 545, 5, 4, 4, 5, 200, 50, 40 → 95, 502, 96. Korean judges, English second language — follow numbers faster than rhetoric.</p>
+      <h3>Rubric-aligned structure.</h3>
+      <p>5 scenes = 5 rubrics. The judge knows exactly which row they're scoring at any moment. Last year the Malaysian winners did this. <strong>It's not score-chasing — it's making the judge's job easier.</strong></p>
     </div>
     <div class="mech">
       <span class="num">M2</span>
-      <h3>Every section names a decision.</h3>
-      <p>Rejected Strategy 1 because X. Switched from SPIKE to Pybricks for 3 reasons. Tried deflector, failed, built wheel-cover. <strong>Process language.</strong> Robot Design judging is scored on process.</p>
+      <h3>One Exceeds-trigger line per scene.</h3>
+      <p>5 quotable lines, designed to force the judge's hand into the comment box. Most teams give judges nothing to write and get 2s and 3s. We give them the comment <strong>on a platter</strong>.</p>
     </div>
     <div class="mech">
       <span class="num">M3</span>
-      <h3>Year-over-year arc.</h3>
-      <p>Esha opens with it. Anaisa demonstrates 4 generations. Elliot proves it with the curve. Aaliya reframes it. Toby closes on it. <strong>Five reinforcements of a single story.</strong></p>
+      <h3>Numbers anchor every scene.</h3>
+      <p>27, 15, 545, 5, 4, 5, 4, 5, 220, 100, 50+, 40 → 95, 62×20, 502, 96. Korean judges, English second language — follow numbers faster than rhetoric.</p>
     </div>
     <div class="mech">
       <span class="num">M4</span>
-      <h3>The meta-reveal at slot 8.</h3>
-      <p>Aaliya's line is the moment that reframes everything. <strong>Engineering at the team-design level</strong> is rare even in adult engineering. From children, it's the line judges remember.</p>
+      <h3>Lead + backup speaker per scene.</h3>
+      <p>If the lead misses the Exceeds-trigger line, the backup catches it. <strong>9 kids covering 5 lines = redundancy</strong>. Every kid in a scene knows their scene's trigger line even if they're not the one saying it.</p>
     </div>
     <div class="mech">
       <span class="num">M5</span>
-      <h3>Cultural awareness without pandering.</h3>
-      <p>Korean greeting open. Team GB close. Each is one short sentence. Doesn't dominate. <strong>Signals you came here knowing where you are.</strong></p>
+      <h3>The meta-reframe at slot 5.</h3>
+      <p>Aaliya's <em>"Our robot isn't our best engineering. We are"</em> reframes everything the judges just heard. Engineering at the <strong>team-design level</strong> is rare even in adult engineering. From children, it's the line judges remember.</p>
     </div>
   </div>
 </section>
@@ -1142,39 +1270,60 @@
 <!-- ============ RUBRIC SCORING MAP ============ -->
 <section class="sec" id="rubric">
   <div class="sec-head">
-    <h2>Rubric scoring map.</h2>
-    <span class="sec-meta">Every dual-marked row · plus all standard RD rows</span>
+    <h2>Rubric scoring map · 5 Exceeds attempts.</h2>
+    <span class="sec-meta">Now 1:1 — one scene per rubric · one trigger line per scene</span>
   </div>
-  <p class="sec-lede">If the script delivers, the dual-marked rows feed both Robot Design <em>and</em> Core Values rank.
-    Every Exceeds here compounds across two area ranks.</p>
+  <p class="sec-lede">v2 maps 1:1 scene-to-rubric. Each scene's <strong>Exceeds-trigger line</strong> is the quotable comment we're giving the judge.
+    Hitting 4 (Exceeds) requires a written comment — these lines are designed to be the written comment.
+    <strong>Target: 3 of 5 at Exceeds. Stretch: all 5.</strong></p>
 
-  <h3 style="font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; margin: 1.6rem 0 0.6rem;">Dual-marked rows · Core Values</h3>
   <table class="t rubric-table">
     <thead>
-      <tr><th>Row</th><th>Core Value</th><th>Section that lands it</th></tr>
+      <tr><th>#</th><th>Rubric</th><th>The Exceeds-trigger line</th><th>Dual-marks CV</th><th>Tier</th></tr>
     </thead>
     <tbody>
-      <tr><td class="row-name">RD IDENTIFY · Building &amp; coding resources</td><td class="cv-cell"><span class="cv-inline cv-discovery">Discovery</span></td><td class="where">Arvin — 3 buckets, 5 teams named</td></tr>
-      <tr><td class="row-name">RD DESIGN · All team members contributed</td><td class="cv-cell"><span class="cv-inline cv-inclusion">Inclusion</span></td><td class="where">Aaliya — winning stroke</td></tr>
-      <tr><td class="row-name">RD ITERATE · Improvements based on testing</td><td class="cv-cell"><span class="cv-inline cv-innovation">Innovation</span></td><td class="where">Elliot (50+ changes) + Flossie (Strategy 4 → 5)</td></tr>
-      <tr><td class="row-name">RD COMMUNICATE · Process &amp; lessons learned</td><td class="cv-cell"><span class="cv-inline cv-impact">Impact</span></td><td class="where">Multiple — Anaisa Gen 1–4 · Sakthi Pybricks reasons · Guhan mechanisms insight</td></tr>
-      <tr><td class="row-name">RD COMMUNICATE · Pride &amp; enthusiasm</td><td class="cv-cell"><span class="cv-inline cv-fun">Fun</span></td><td class="where">Toby + all-together closer</td></tr>
+      <tr>
+        <td class="row-name">1</td>
+        <td class="row-name">RD IDENTIFY · Mission strategy + resources</td>
+        <td class="where">"Five strategies. Four rejected with reasons. We went from 40% to 95% consistency over four years."</td>
+        <td class="cv-cell"><span class="cv-inline">Discovery</span></td>
+        <td class="where"><strong>Stretch</strong></td>
+      </tr>
+      <tr>
+        <td class="row-name">2</td>
+        <td class="row-name">RD DESIGN · 5 robots, each fixed the one before</td>
+        <td class="where">"Most teams show you one robot. We show you five. Each one fixed the one before."</td>
+        <td class="cv-cell"><span class="cv-inline">Inclusion</span></td>
+        <td class="where"><strong class="hot">Target</strong></td>
+      </tr>
+      <tr>
+        <td class="row-name">3</td>
+        <td class="row-name">RD CREATE · 5 mechanisms · Pybricks switch</td>
+        <td class="where">"15 missions sound like 15 problems. They're not. Five mechanisms handle every mission. We engineered mechanisms, not missions."</td>
+        <td class="cv-cell"><span class="cv-inline">Innovation</span></td>
+        <td class="where"><strong class="hot">Target</strong></td>
+      </tr>
+      <tr class="is-hero-row">
+        <td class="row-name">4</td>
+        <td class="row-name">RD ITERATE · 220 tests, 50+ changes, 40→95 curve</td>
+        <td class="where">"Year 1: 40%. Year 4: 95%. 220 individual run tests. 100 full-match simulations. 50+ changes after Regionals."</td>
+        <td class="cv-cell"><span class="cv-inline">Innovation</span></td>
+        <td class="where"><strong class="hot">Target</strong> · hero</td>
+      </tr>
+      <tr>
+        <td class="row-name">5</td>
+        <td class="row-name">RD COMMUNICATE · lessons + pride + winning stroke</td>
+        <td class="where"><em>"Our robot isn't our best engineering. We are."</em></td>
+        <td class="cv-cell"><span class="cv-inline">Fun / Impact</span></td>
+        <td class="where"><strong>Stretch</strong> · meta-reframe</td>
+      </tr>
     </tbody>
   </table>
 
-  <h3 style="font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; margin: 2rem 0 0.6rem;">Standard RD rows · all 5 covered</h3>
-  <table class="t rubric-table">
-    <thead>
-      <tr><th>Row</th><th>Section</th></tr>
-    </thead>
-    <tbody>
-      <tr><td class="row-name">IDENTIFY · mission strategy</td><td class="where">Flossie</td></tr>
-      <tr><td class="row-name">DESIGN · all members contributed ideas</td><td class="where">Aaliya + structurally across sections</td></tr>
-      <tr><td class="row-name">CREATE · attachments and code</td><td class="where">Guhan + Sakthi</td></tr>
-      <tr><td class="row-name">ITERATE · repeated testing</td><td class="where">Elliot</td></tr>
-      <tr><td class="row-name">COMMUNICATE · process and lessons</td><td class="where">Anaisa + closing</td></tr>
-    </tbody>
-  </table>
+  <p class="note" style="margin-top: 1.2rem;">
+    <strong>Dual-marked propagation:</strong> every Exceeds we land in Robot Design also feeds the Core Values area rank.
+    All 5 rubrics dual-mark — meaning <strong>each Exceeds compounds across two area ranks</strong>. Five 4s = +5 to RD rank + +5 to CV rank in equivalent terms.
+  </p>
 </section>
 
 <!-- ============ REHEARSAL ============ -->
@@ -1216,17 +1365,30 @@
 <!-- ============ OPEN ITEMS ============ -->
 <section class="sec" id="open">
   <div class="sec-head">
-    <h2>Open items.</h2>
-    <span class="sec-meta">6 production blockers</span>
+    <h2>Open items · who delivers what.</h2>
+    <span class="sec-meta">From the 12 May team call · target 5–7 days</span>
   </div>
+  <p class="sec-lede">Every owner from the team call, with their TODOs. <strong>See <a href="../../docs/brick-3-robot-design-script-v2.md" style="color: var(--red); border-bottom: 1px solid var(--red);">docs/brick-3-robot-design-script-v2.md</a> for full editable content plan.</strong></p>
 
+  <h3 style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; margin: 1.4rem 0 0.6rem;">By owner</h3>
   <ol class="todo-list">
-    <li><span class="num">01</span><span class="what"><strong>Animated mission map</strong> for Flossie's section. Who's building it? When? Static map as backup is acceptable but <strong>animated is the 5/5 trigger</strong>.</span></li>
-    <li><span class="num">02</span><span class="what"><strong>40 → 95% consistency curve</strong> printed large. Single most important artefact. Confirm production.</span></li>
-    <li><span class="num">03</span><span class="what"><strong>Engineering journal</strong> open to a representative page during the explanation.</span></li>
-    <li><span class="num">04</span><span class="what"><strong>List of 50+ changes</strong> + <strong>list of all coding</strong> to hand to judges. Confirm both exist as physical printouts.</span></li>
-    <li><span class="num">05</span><span class="what"><strong>Custom menu screen</strong> displayed during Sakthi's section. Phone, tablet, or laptop. Confirm device.</span></li>
-    <li><span class="num">06</span><span class="what"><strong>The 5 teams named in Arvin's resources section</strong> need to be confirmed. Draft uses Exploding Kettles, RailTech, Bricks and Biscuits, FLL Tutorials, Spike Prime Lessons. Swap if you follow different teams.</span></li>
+    <li><span class="num">Flossie</span><span class="what">Build the <strong>5-robot slide</strong> with photos + pros/cons. Write the <strong>SPIKE-blue vs 62×20mm rubber wheel comparison</strong> one-pager.</span></li>
+    <li><span class="num">Lo</span><span class="what">Send 4 robot photos to Flossie. Help Anaisa write Rubric 1 script. Confirm the canonical 3–4 testing types. <strong>Verify the 2-min team intro slot with RealTechBot.</strong> Decide the folder handover model.</span></li>
+    <li><span class="num">Elliot</span><span class="what">Build the <strong>animated 15→8 mission strategy visual</strong> (keep it simple — if even slightly complex, judges switch off). Share Gen 2 + Gen 4 robot photos. Share the minecart video from Submerged.</span></li>
+    <li><span class="num">Anaisa</span><span class="what">Finalise Rubric 1 (Identify) 60-second script. Confirm if "carry artifacts at start" gets named as a 5th rejected strategy. <em>(Already in progress)</em> Get Miriam's (Exploding Kettles) international script as reference.</span></li>
+    <li><span class="num">Aaliya</span><span class="what">Re-run all 4 robot tests on the current robot. <strong>Create the testing sheets — none exist yet.</strong> Drill the winning-stroke line in isolation 30 times.</span></li>
+    <li><span class="num">Guhan</span><span class="what">Confirm the canonical <strong>5 mechanism categories</strong>. Map each of the 8 attachments to its mechanism. Map each mechanism to which missions it serves.</span></li>
+    <li><span class="num">Sakthi</span><span class="what">Write the <strong>Pybricks-vs-SPIKE one-pager</strong> (3 reasons). Capture the custom menu screenshot. Pick one key code snippet to print large + annotate. Confirm custom menu manual selection logic.</span></li>
+    <li><span class="num">Toby</span><span class="what">Confirm the 5 mechanism categories with Guhan. Confirm his closer wording (502 hours / 96 sessions / Team GB).</span></li>
+    <li><span class="num">Akash</span><span class="what">Provide the <strong>40-to-95% consistency raw data</strong> (or the graph itself). Extract 50+ changes log + journal pages. Extract mission analysis 4 criteria from Notion.</span></li>
+    <li><span class="num">Volunteer</span><span class="what"><strong>Rebuild Gen 1</strong> (Spike Prime hub-only preliminary) and photograph it. Photograph all 8 attachments in a clean shot. Photograph aligners + jigs. Extract 502/96 log + select photos for Folder 5.</span></li>
+  </ol>
+
+  <h3 style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; margin: 2rem 0 0.6rem;">Verification questions for RealTechBot</h3>
+  <ol class="todo-list">
+    <li><span class="num">Q1</span><span class="what">Does the <strong>2-minute team intro + setup</strong> count as part of the 5-minute presentation? Anis saw "2 minutes" on the judging sheet. Elliot says refs at UK Nationals were lenient. Need a definitive answer.</span></li>
+    <li><span class="num">Q2</span><span class="what">When should we hand the <strong>5 evidence folders</strong> — all upfront (Malaysian model), all at end, or one per scene (recommended)?</span></li>
+    <li><span class="num">Q3</span><span class="what">Is structuring the script obviously around the <strong>5 rubrics welcomed by judges</strong> or seen as score-chasing? The Malaysian winners did it. Need their opinion before we lock the v2.</span></li>
   </ol>
 </section>
 
@@ -1236,12 +1398,14 @@
     <h2>Final note.</h2>
   </div>
   <div class="closer-block">
-    <h3>The script is now world-class.</h3>
-    <p>If this is delivered cleanly, <strong>Robot Design rank should be top 5 minimum, top 3 likely.</strong>
-       Combined with the Robot Performance score that already wins, <strong class="hot">Robot Design ceases to be a weak link in the Champion's Score.</strong></p>
-    <p class="closer-line">Execution is the only variable left.</p>
+    <h3>v2 · structurally aligned to how judges score.</h3>
+    <p>5 scenes = 5 rubrics. 5 Exceeds-trigger lines, designed to force the judge to write the comment.
+       Lead + backup speaker per scene = redundancy. Five evidence folders, one per rubric.</p>
+    <p>If 3 of the 5 land Exceeds, <strong class="hot">Robot Design rank should be top 3 minimum, top 1 likely.</strong>
+       Stretch goal: all 5 at Exceeds. The script and the structure are now done. <strong>Content gaps from the 12 May call are listed above — once those fill in and RealTechBot answers the 3 verification questions, we lock v2.</strong></p>
+    <p class="closer-line">The structure is now the judge's friend, not the team's burden.</p>
   </div>
-  <p class="note" style="margin-top: 1rem;">Next brick queued: <strong>Brick 02 · Innovation Project script.</strong></p>
+  <p class="note" style="margin-top: 1rem;">v2 content plan: <a href="../../docs/brick-3-robot-design-script-v2.md" style="color: var(--red); border-bottom: 1px solid var(--red);">docs/brick-3-robot-design-script-v2.md</a> · v1 source preserved at <a href="../../docs/brick-3-robot-design-script.md" style="color: var(--ink-muted); border-bottom: 1px solid var(--rule-strong);">docs/brick-3-robot-design-script.md</a></p>
 </section>
 
 </div>
