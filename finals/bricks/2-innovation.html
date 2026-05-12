@@ -530,7 +530,7 @@
 </section>
 </main>
 
-<nav class="in-page-nav" id="ipNav">
+<nav class="in-page-nav" id="ipNav" aria-label="On this page">
   <div class="in-page-nav-row">
     <div class="nav-cluster">
       <span class="nav-cluster-label">Plan</span>
@@ -553,6 +553,7 @@
       <a href="#closer">Final note</a>
     </div>
     <span class="nav-position" id="navPosition"><span class="pos-current">01</span><span class="pos-divider">/</span><span class="pos-total">09</span></span>
+    <button class="collapse-toggle" id="collapseAllBtn" type="button" aria-pressed="false" data-label-open="Collapse scenes" data-label-closed="Expand scenes"><span class="icon" aria-hidden="true">⇅</span><span class="label">Collapse scenes</span></button>
   </div>
 </nav>
 
@@ -651,6 +652,24 @@
     </tbody>
   </table>
 </section>
+
+<!-- ============ GLOSSARY ============ -->
+<aside class="glossary" aria-label="Acronyms used on this page">
+  <div class="glossary-head">
+    <h3>Acronyms · quick reference</h3>
+    <span class="note">For parents and first-time judges</span>
+  </div>
+  <dl class="glossary-grid">
+    <div class="glossary-item"><dt>IP</dt><dd>Innovation Project — this presentation (the 5-min team presentation)</dd></div>
+    <div class="glossary-item"><dt>RD</dt><dd>Robot Design — the other 5-min presentation</dd></div>
+    <div class="glossary-item"><dt>RG</dt><dd>Robot Game — the actual 2:30 match runs on the table</dd></div>
+    <div class="glossary-item"><dt>CV</dt><dd>Core Values — the woven brick scored across IP + RD + behaviour</dd></div>
+    <div class="glossary-item"><dt>KAS</dt><dd>Kent Archaeological Society — our partner, live deployment of the AI</dd></div>
+    <div class="glossary-item"><dt>RAG</dt><dd>Retrieval Augmented Generation — fetches answers only from KAS data</dd></div>
+    <div class="glossary-item"><dt>AGUI</dt><dd>Advanced Graphical User Interface — eliminates blank-screen waits</dd></div>
+    <div class="glossary-item"><dt>Exceeds</dt><dd>Score 4 of 4 — top box on the rubric, requires written judge comment</dd></div>
+  </dl>
+</aside>
 
 <!-- ============ THE FULL SCRIPT ============ -->
 <section class="sec" id="script">

@@ -782,7 +782,7 @@
 </main>
 
 <!-- In-page nav -->
-<nav class="in-page-nav" id="ipNav">
+<nav class="in-page-nav" id="ipNav" aria-label="On this page">
   <div class="in-page-nav-row">
     <div class="nav-cluster">
       <span class="nav-cluster-label">Score</span>
@@ -810,6 +810,7 @@
       <a href="#math">The math</a>
     </div>
     <span class="nav-position" id="navPosition"><span class="pos-current">01</span><span class="pos-divider">/</span><span class="pos-total">10</span></span>
+    <button class="collapse-toggle" id="collapseAllBtn" type="button" aria-pressed="false" data-label-open="Collapse rows" data-label-closed="Expand rows"><span class="icon" aria-hidden="true">⇅</span><span class="label">Collapse rows</span></button>
   </div>
 </nav>
 
@@ -839,6 +840,24 @@
     </div>
   </div>
 </section>
+
+<!-- ============ GLOSSARY ============ -->
+<aside class="glossary" aria-label="Acronyms used on this page">
+  <div class="glossary-head">
+    <h3>Acronyms · quick reference</h3>
+    <span class="note">For parents and first-time judges</span>
+  </div>
+  <dl class="glossary-grid">
+    <div class="glossary-item"><dt>IP</dt><dd>Innovation Project — the 5-min team presentation about the problem solved</dd></div>
+    <div class="glossary-item"><dt>RD</dt><dd>Robot Design — the 5-min explanation of how the robot was designed and built</dd></div>
+    <div class="glossary-item"><dt>RG</dt><dd>Robot Game — the actual 2:30 match runs on the table</dd></div>
+    <div class="glossary-item"><dt>CV</dt><dd>Core Values — the brick this page is about; scored across IP + RD + behaviour</dd></div>
+    <div class="glossary-item"><dt>GP</dt><dd>Gracious Professionalism — behaviour scored in the pit, at tables, in common areas</dd></div>
+    <div class="glossary-item"><dt>Dual-marked</dt><dd>A rubric row that scores in two area ranks (IP/RD <em>and</em> CV)</dd></div>
+    <div class="glossary-item"><dt>Exceeds</dt><dd>Score 4 of 4 — the top box on the rubric, requires a written judge comment</dd></div>
+    <div class="glossary-item"><dt>KAS</dt><dd>Kent Archaeological Society — our partner organisation, deployed the AI live</dd></div>
+  </dl>
+</aside>
 
 <!-- ============ THE 10 DUAL-MARKED ROWS ============ -->
 <section class="sec" id="rows">

@@ -167,23 +167,27 @@ function initNavSpy() {
   compute();
 }
 
-/* ---------- MOBILE ROW ACCORDION ----------
-   On phones, each Brick-4 .row collapses to its bar by default.
-   Tap the bar to expand the body + exact-line. Desktop is unchanged.
+/* ---------- ACCORDION (row + scene) ----------
+   On phones (≤760px), .row and .scene cards collapse to their bar by default.
+   Tap the bar (or Enter/Space when focused) to expand body + quote/exact-line.
+   Wires aria-controls + body ids for screen readers.
 */
-function initRowAccordion() {
-  if (window.matchMedia("(min-width: 761px)").matches) return;
-  const rows = document.querySelectorAll(".row");
-  if (rows.length === 0) return;
-  rows.forEach((row) => {
-    const bar = row.querySelector(".row-bar");
-    if (!bar) return;
+function makeAccordion(cardSelector, barSelector, bodyClass, idSuffix) {
+  document.querySelectorAll(cardSelector).forEach((card, i) => {
+    const bar = card.querySelector(barSelector);
+    const body = card.querySelector("." + bodyClass);
+    if (!bar || !body) return;
+    const cardId = card.id || `${cardSelector.replace(/[.]/g, "")}-${i + 1}`;
+    if (!card.id) card.id = cardId;
+    const bodyId = `${cardId}${idSuffix}`;
+    body.id = bodyId;
     bar.setAttribute("role", "button");
     bar.setAttribute("tabindex", "0");
     bar.setAttribute("aria-expanded", "false");
+    bar.setAttribute("aria-controls", bodyId);
     bar.classList.add("is-tappable");
     const toggle = () => {
-      const open = row.classList.toggle("is-open");
+      const open = card.classList.toggle("is-open");
       bar.setAttribute("aria-expanded", open ? "true" : "false");
     };
     bar.addEventListener("click", toggle);
@@ -193,10 +197,62 @@ function initRowAccordion() {
   });
 }
 
+function initRowAccordion() {
+  if (document.querySelectorAll(".row").length === 0) return;
+  makeAccordion(".row", ".row-bar", "row-body", "-content");
+}
+
+function initSceneAccordion() {
+  if (document.querySelectorAll(".scene").length === 0) return;
+  makeAccordion(".scene", ".scene-bar", "scene-body", "-content");
+}
+
+/* ---------- SECTION ARIA-LABELLEDBY ----------
+   Auto-wire aria-labelledby on every <section class="sec">[id]
+   so screen readers can navigate by section name.
+*/
+function initSectionLabels() {
+  document.querySelectorAll("section.sec[id]").forEach((sec) => {
+    const heading = sec.querySelector("h2, h3");
+    if (!heading) return;
+    if (!heading.id) heading.id = `${sec.id}-h`;
+    sec.setAttribute("aria-labelledby", heading.id);
+  });
+}
+
+/* ---------- DESKTOP COLLAPSE-ALL ----------
+   Toggle button in the in-page nav. Collapses all .row and .scene
+   cards via a class on <main>. Works on desktop where the per-row
+   accordion isn't active.
+*/
+function initCollapseAll() {
+  const btn = document.getElementById("collapseAllBtn");
+  if (!btn) return;
+  let collapsed = false;
+  const update = () => {
+    document.body.classList.toggle("collapse-all", collapsed);
+    btn.setAttribute("aria-pressed", collapsed ? "true" : "false");
+    const labelOpen = btn.dataset.labelOpen || "Collapse rows";
+    const labelClosed = btn.dataset.labelClosed || "Expand rows";
+    btn.querySelector(".label").textContent = collapsed ? labelClosed : labelOpen;
+    if (collapsed) {
+      document.querySelectorAll(".row.is-open, .scene.is-open").forEach((c) => {
+        c.classList.remove("is-open");
+        const bar = c.querySelector(".row-bar, .scene-bar");
+        if (bar && bar.hasAttribute("aria-expanded")) bar.setAttribute("aria-expanded", "false");
+      });
+    }
+  };
+  btn.addEventListener("click", () => { collapsed = !collapsed; update(); });
+}
+
 /* ---------- BOOT ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   updateTminus();
+  initSectionLabels();
   initNavSpy();
   initRowAccordion();
+  initSceneAccordion();
+  initCollapseAll();
 });
