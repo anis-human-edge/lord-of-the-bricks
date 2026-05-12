@@ -13,6 +13,474 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" />
 <link rel="stylesheet" href="../_shared/base.css" />
 <link rel="stylesheet" href="../_shared/slides.css" />
+
+<style>
+/* =====================================================
+   SCENE 1 · IDENTIFY · Hyperframe — "Strategy elimination"
+   60-second auto-run, triggered by .slide.is-active.
+   Pure CSS keyframes. No JS timers.
+
+   Timeline:
+     0–7s   Phase 1 · Three big numbers count up (27 → 15 → 2)
+     7–8s   Phase 1 fades out, top-left badge fades in
+     8–9s   Phase 2 · Five strategy cards stagger in
+    12–25s  Cards 1–4 strike out one by one with rejection reasons
+    28s     Card 5 highlights ("Adopted")
+    32s     Phase 3 · Card 5 expands; cards 1–4 shrink to thumbs at top
+    34s     8-run grid fades in inside Card 5
+    38–46s  Three grouping factors light up sequentially
+    50s+    Hold final state with subtle pulse on Card 5 border
+   ===================================================== */
+
+/* ---------- Registered properties for count-up numbers ---------- */
+@property --n27 { syntax: "<integer>"; initial-value: 0; inherits: false; }
+@property --n15 { syntax: "<integer>"; initial-value: 0; inherits: false; }
+@property --n2  { syntax: "<integer>"; initial-value: 0; inherits: false; }
+
+/* ---------- Hyperframe shell ---------- */
+.hyperframe {
+  position: relative;
+  width: 100%;
+  margin-top: 1.4rem;
+  min-height: 56vh;
+}
+.hf-phase {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- Phase 1 · Big numbers (visible 0–7s, fades 7–8s) ---------- */
+.slide.is-active .hf-phase-1 { animation: hf-phase1 8s linear 0s forwards; }
+@keyframes hf-phase1 {
+  0%   { opacity: 1; transform: scale(1); }
+  87.5%{ opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.7); }
+}
+
+.hf-nums {
+  display: flex;
+  gap: clamp(2.4rem, 6vw, 5rem);
+  align-items: baseline;
+}
+.hf-num {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.hf-num .n {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(4rem, 9vw, 7.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  display: inline-block;
+  min-width: 2ch;
+  text-align: center;
+}
+.hf-num .lab {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 0.7rem;
+}
+
+.slide.is-active .hf-num:nth-child(1) { animation: hf-num-in 0.9s var(--ease) 0.4s forwards; }
+.slide.is-active .hf-num:nth-child(2) { animation: hf-num-in 0.9s var(--ease) 1.9s forwards; }
+.slide.is-active .hf-num:nth-child(3) { animation: hf-num-in 0.9s var(--ease) 3.4s forwards; }
+@keyframes hf-num-in {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: none; }
+}
+
+/* Count-up effect via animated registered property */
+.hf-count[data-target="27"] { counter-reset: hf var(--n27); }
+.hf-count[data-target="27"]::after { content: counter(hf); }
+.hf-count[data-target="15"] { counter-reset: hf var(--n15); }
+.hf-count[data-target="15"]::after { content: counter(hf); }
+.hf-count[data-target="2"]  { counter-reset: hf var(--n2);  }
+.hf-count[data-target="2"]::after  { content: counter(hf); }
+
+.slide.is-active .hf-count[data-target="27"] { animation: hf-count-27 0.85s var(--ease) 0.5s forwards; }
+.slide.is-active .hf-count[data-target="15"] { animation: hf-count-15 0.75s var(--ease) 2.0s forwards; }
+.slide.is-active .hf-count[data-target="2"]  { animation: hf-count-2  0.55s var(--ease) 3.5s forwards; }
+@keyframes hf-count-27 { to { --n27: 27; } }
+@keyframes hf-count-15 { to { --n15: 15; } }
+@keyframes hf-count-2  { to { --n2: 2; } }
+
+/* ---------- Top-left badge that holds the 27/15/2 once Phase 1 collapses ---------- */
+.hf-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--ink-muted);
+  opacity: 0;
+}
+.slide.is-active .hf-badge { animation: hf-badge-in 1s var(--ease) 8s forwards; }
+@keyframes hf-badge-in { to { opacity: 1; } }
+
+/* ---------- Phase 2 + 3 · Strategy cards ---------- */
+.slide.is-active .hf-phase-2 { animation: hf-phase2 0.001s linear 8s forwards; }
+@keyframes hf-phase2 { to { opacity: 1; pointer-events: auto; } }
+
+.hf-strats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.85rem;
+  width: 100%;
+  max-width: 1100px;
+  align-items: stretch;
+  transition: grid-template-columns 1.1s var(--ease);
+}
+
+/* Phase 3: layout shifts at 32s — 4 thumbs + Card 5 expands */
+.slide.is-active .hf-strats { animation: hf-grid-shift 1s var(--ease) 32s forwards; }
+@keyframes hf-grid-shift {
+  to { grid-template-columns: 78px 78px 78px 78px 1fr; }
+}
+
+.hf-card {
+  position: relative;
+  background: var(--bone);
+  border: 1px solid var(--ink-muted);
+  padding: 1.1rem 1rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  opacity: 0;
+  transform: translateY(20px);
+  min-height: 200px;
+  overflow: visible;
+  transition: padding 1s var(--ease);
+}
+.hf-card .card-num {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.hf-card .card-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* Cards stagger in at 8.2 / 8.4 / 8.6 / 8.8 / 9.0 */
+.slide.is-active .hf-card[data-strat="1"] {
+  animation: hf-card-in 0.7s var(--ease) 8.2s forwards,
+             hf-card-fade 0.7s var(--ease) 12s forwards,
+             hf-card-thumb 1s var(--ease) 32s forwards;
+}
+.slide.is-active .hf-card[data-strat="2"] {
+  animation: hf-card-in 0.7s var(--ease) 8.4s forwards,
+             hf-card-fade 0.7s var(--ease) 16s forwards,
+             hf-card-thumb 1s var(--ease) 32s forwards;
+}
+.slide.is-active .hf-card[data-strat="3"] {
+  animation: hf-card-in 0.7s var(--ease) 8.6s forwards,
+             hf-card-fade 0.7s var(--ease) 20s forwards,
+             hf-card-thumb 1s var(--ease) 32s forwards;
+}
+.slide.is-active .hf-card[data-strat="4"] {
+  animation: hf-card-in 0.7s var(--ease) 8.8s forwards,
+             hf-card-fade 0.7s var(--ease) 24s forwards,
+             hf-card-thumb 1s var(--ease) 32s forwards;
+}
+.slide.is-active .hf-card[data-strat="5"] {
+  animation: hf-card-in 0.7s var(--ease) 9.0s forwards,
+             hf-adopt-highlight 1s var(--ease) 28s forwards,
+             hf-adopt-pulse 1.6s ease-in-out 50s infinite;
+}
+
+@keyframes hf-card-in {
+  to { opacity: 1; transform: none; }
+}
+@keyframes hf-card-fade {
+  to { opacity: 0.3; }
+}
+@keyframes hf-card-thumb {
+  to {
+    padding: 0.5rem 0.5rem;
+    min-height: 78px;
+  }
+}
+@keyframes hf-adopt-highlight {
+  0%   { border-color: var(--ink-muted); transform: scale(1); }
+  50%  { border-color: var(--red); transform: scale(1.03); }
+  100% { border-color: var(--red); border-width: 2px; transform: scale(1.03); }
+}
+@keyframes hf-adopt-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200,16,46,0); }
+  50%      { box-shadow: 0 0 0 4px rgba(200,16,46,0.15); }
+}
+
+/* Strikethrough — diagonal red line */
+.hf-strike {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: var(--red);
+  transform: translateY(-50%) rotate(-12deg);
+  transform-origin: left center;
+  pointer-events: none;
+  z-index: 2;
+}
+.slide.is-active .hf-card[data-strat="1"] .hf-strike { animation: hf-strike 0.6s var(--ease) 12s forwards; }
+.slide.is-active .hf-card[data-strat="2"] .hf-strike { animation: hf-strike 0.6s var(--ease) 16s forwards; }
+.slide.is-active .hf-card[data-strat="3"] .hf-strike { animation: hf-strike 0.6s var(--ease) 20s forwards; }
+.slide.is-active .hf-card[data-strat="4"] .hf-strike { animation: hf-strike 0.6s var(--ease) 24s forwards; }
+@keyframes hf-strike { to { width: 110%; } }
+
+/* Reject reasons — appear with strike, fade out 2s later */
+.hf-card .card-reject {
+  position: absolute;
+  bottom: -1.8rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--red);
+  opacity: 0;
+  text-transform: lowercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.slide.is-active .hf-card[data-strat="1"] .card-reject { animation: hf-reject 2.5s var(--ease) 12s forwards; }
+.slide.is-active .hf-card[data-strat="2"] .card-reject { animation: hf-reject 2.5s var(--ease) 16s forwards; }
+.slide.is-active .hf-card[data-strat="3"] .card-reject { animation: hf-reject 2.5s var(--ease) 20s forwards; }
+.slide.is-active .hf-card[data-strat="4"] .card-reject { animation: hf-reject 2.5s var(--ease) 24s forwards; }
+@keyframes hf-reject {
+  0%   { opacity: 0; transform: translateY(-5px); }
+  20%  { opacity: 1; transform: none; }
+  85%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* "Adopted." flag above Card 5 */
+.hf-adopted-flag {
+  position: absolute;
+  top: -1.5rem;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red);
+  opacity: 0;
+}
+.slide.is-active .hf-card[data-strat="5"] .hf-adopted-flag { animation: hf-flag-in 1s var(--ease) 28s forwards; }
+@keyframes hf-flag-in {
+  0% { opacity: 0; transform: translateY(5px); }
+  100% { opacity: 1; transform: none; }
+}
+
+/* When cards 1-4 become thumbnails, hide their inner detail */
+.slide.is-active .hf-card[data-strat="1"] .card-reject,
+.slide.is-active .hf-card[data-strat="2"] .card-reject,
+.slide.is-active .hf-card[data-strat="3"] .card-reject,
+.slide.is-active .hf-card[data-strat="4"] .card-reject {
+  /* reject is animation-driven; once at opacity 0 it stays so */
+}
+.slide.is-active .hf-card[data-strat="1"] .card-title,
+.slide.is-active .hf-card[data-strat="2"] .card-title,
+.slide.is-active .hf-card[data-strat="3"] .card-title,
+.slide.is-active .hf-card[data-strat="4"] .card-title {
+  animation: hf-thumb-text 1s var(--ease) 32s forwards;
+}
+@keyframes hf-thumb-text {
+  to { font-size: 0.66rem; line-height: 1.15; }
+}
+
+/* ---------- Phase 3 · 8-run grid inside Card 5 ---------- */
+.hf-runs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.45rem;
+  margin-top: 1rem;
+  position: relative;
+  opacity: 0;
+}
+.slide.is-active .hf-card[data-strat="5"] .hf-runs { animation: hf-runs-in 0.5s var(--ease) 33.5s forwards; }
+@keyframes hf-runs-in { to { opacity: 1; } }
+
+.hf-run {
+  background: var(--bone);
+  border: 1px solid var(--rule);
+  padding: 0.6rem 0.4rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--red);
+  opacity: 0;
+  transform: scale(0.92);
+  transition: background .8s var(--ease), border-color .8s var(--ease);
+}
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(1) { animation: hf-run-in 0.5s var(--ease) 34.0s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(2) { animation: hf-run-in 0.5s var(--ease) 34.1s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(3) { animation: hf-run-in 0.5s var(--ease) 34.2s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(4) { animation: hf-run-in 0.5s var(--ease) 34.3s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(5) { animation: hf-run-in 0.5s var(--ease) 34.4s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(6) { animation: hf-run-in 0.5s var(--ease) 34.5s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(7) { animation: hf-run-in 0.5s var(--ease) 34.6s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(8) { animation: hf-run-in 0.5s var(--ease) 34.7s forwards; }
+@keyframes hf-run-in {
+  to { opacity: 1; transform: none; }
+}
+
+/* Factor 1 (Proximity) — runs 1, 2, 3 highlight navy at 38s, settle back */
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(1),
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(2),
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(3) {
+  animation: hf-run-in 0.5s var(--ease) 34.0s forwards,
+             hf-run-proximity 1.6s var(--ease) 38s forwards;
+}
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(2) {
+  animation: hf-run-in 0.5s var(--ease) 34.1s forwards,
+             hf-run-proximity 1.6s var(--ease) 38.1s forwards;
+}
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(3) {
+  animation: hf-run-in 0.5s var(--ease) 34.2s forwards,
+             hf-run-proximity 1.6s var(--ease) 38.2s forwards;
+}
+@keyframes hf-run-proximity {
+  0%, 100% { background: var(--bone); color: var(--red); }
+  40%, 70% { background: var(--navy); color: var(--bone); border-color: var(--navy); }
+}
+
+/* Factor 3 (Attachments) — runs 5+6 and 7+8 outline red briefly at 46s */
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(5),
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(6) {
+  animation: hf-run-in 0.5s var(--ease) 34.4s forwards,
+             hf-run-attach 1.6s var(--ease) 46s forwards;
+}
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(7),
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(8) {
+  animation: hf-run-in 0.5s var(--ease) 34.6s forwards,
+             hf-run-attach 1.6s var(--ease) 46.2s forwards;
+}
+@keyframes hf-run-attach {
+  0%, 100% { border-color: var(--rule); border-width: 1px; }
+  40%, 70% { border-color: var(--red); border-width: 2px; }
+}
+
+/* Sweep arrow SVG overlay */
+.hf-sweep-arrow {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0;
+}
+.hf-sweep-arrow path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+}
+.slide.is-active .hf-card[data-strat="5"] .hf-sweep-arrow { animation: hf-sweep-show 0.3s var(--ease) 42s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-sweep-arrow path { animation: hf-sweep-draw 1.2s var(--ease) 42s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-sweep-arrow polygon { animation: hf-sweep-show 0.3s var(--ease) 43s forwards; }
+@keyframes hf-sweep-show { to { opacity: 1; } }
+@keyframes hf-sweep-draw { to { stroke-dashoffset: 0; } }
+
+/* ---------- 3 grouping factor labels ---------- */
+.hf-factors {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.95rem;
+}
+.hf-factor {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  opacity: 0;
+}
+.hf-factor .dot {
+  width: 10px; height: 10px;
+  background: var(--navy);
+  display: inline-block;
+}
+.hf-factor .arrow { color: var(--red); font-family: var(--font-display); font-size: 1rem; line-height: 1; }
+.hf-factor .square {
+  width: 10px; height: 10px;
+  border: 2px solid var(--red);
+  display: inline-block;
+}
+.slide.is-active .hf-card[data-strat="5"] .hf-factor:nth-child(1) { animation: hf-factor-in 0.6s var(--ease) 38s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-factor:nth-child(2) { animation: hf-factor-in 0.6s var(--ease) 42s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-factor:nth-child(3) { animation: hf-factor-in 0.6s var(--ease) 46s forwards; }
+@keyframes hf-factor-in {
+  0% { opacity: 0; transform: translateX(-8px); }
+  100% { opacity: 1; transform: none; }
+}
+
+/* ---------- Reduced motion: jump straight to final state ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .slide.is-active .hf-phase-1 { animation: none; opacity: 0; }
+  .slide.is-active .hf-phase-2 { animation: none; opacity: 1; pointer-events: auto; }
+  .slide.is-active .hf-strats {
+    animation: none;
+    grid-template-columns: 78px 78px 78px 78px 1fr;
+  }
+  .slide.is-active .hf-card { animation: none; opacity: 1; transform: none; }
+  .slide.is-active .hf-card[data-strat="1"],
+  .slide.is-active .hf-card[data-strat="2"],
+  .slide.is-active .hf-card[data-strat="3"],
+  .slide.is-active .hf-card[data-strat="4"] { opacity: 0.3; padding: 0.5rem; min-height: 78px; }
+  .slide.is-active .hf-card[data-strat="1"] .card-title,
+  .slide.is-active .hf-card[data-strat="2"] .card-title,
+  .slide.is-active .hf-card[data-strat="3"] .card-title,
+  .slide.is-active .hf-card[data-strat="4"] .card-title { font-size: 0.66rem; }
+  .slide.is-active .hf-card[data-strat="5"] { border: 2px solid var(--red); transform: scale(1.03); }
+  .slide.is-active .hf-card[data-strat="5"] .hf-runs { opacity: 1; }
+  .slide.is-active .hf-card[data-strat="5"] .hf-run { opacity: 1; transform: none; }
+  .slide.is-active .hf-card[data-strat="5"] .hf-factor { opacity: 1; transform: none; }
+  .slide.is-active .hf-strike { width: 110%; }
+  .slide.is-active .hf-badge { opacity: 1; }
+  .slide.is-active .hf-adopted-flag { opacity: 1; }
+  .slide.is-active .hf-sweep-arrow,
+  .slide.is-active .hf-sweep-arrow polygon { opacity: 1; }
+  .slide.is-active .hf-sweep-arrow path { stroke-dashoffset: 0; }
+}
+
+/* The Identify slide gets its content area sized for the hyperframe */
+.slide--identify .slide-shell { padding-top: 1rem; }
+</style>
 </head>
 <body>
 
@@ -50,19 +518,84 @@
   </div>
 </section>
 
-<!-- 2 — IDENTIFY -->
-<section class="slide" data-slide="2">
+<!-- 2 — IDENTIFY (Scene 1 hyperframe) -->
+<section class="slide slide--identify" data-slide="2">
   <span class="slide-tag"><span class="num">02</span>Identify · Mission strategy + resources</span>
   <div class="slide-shell">
-    <span class="eyebrow r-fade">Scene 01 · Anaisa</span>
-    <h2 class="deck-h kinetic">
-      <span class="w" style="--i:0">Five</span>
-      <span class="w" style="--i:1">strategies.</span>
-      <span class="w" style="--i:2;color:var(--red)">Four</span>
-      <span class="w" style="--i:3;color:var(--red)">rejected.</span>
-    </h2>
-    <p class="sub-h r-up">27 tasks. 15 missions. <strong>8 runs grouped by 3 factors</strong> — proximity, sector sweeping, similar attachments.</p>
-    <p class="body-l r-up"><em>(animated 15→8 mission strategy map · 4 rejected strategies fade below as ghost cards)</em></p>
+    <span class="eyebrow r-fade">Scene 01 · Anaisa · 60 seconds</span>
+
+    <div class="hyperframe" data-scene="1">
+
+      <!-- Phase 1 · Three big numbers count up -->
+      <div class="hf-phase hf-phase-1">
+        <div class="hf-nums">
+          <div class="hf-num"><span class="n hf-count" data-target="27" aria-label="27"></span><span class="lab">tasks</span></div>
+          <div class="hf-num"><span class="n hf-count" data-target="15" aria-label="15"></span><span class="lab">missions</span></div>
+          <div class="hf-num"><span class="n hf-count" data-target="2" aria-label="2"></span><span class="lab">objectives</span></div>
+        </div>
+      </div>
+
+      <!-- Phase 2 + 3 · Strategy elimination + adopted plan -->
+      <div class="hf-phase hf-phase-2">
+        <div class="hf-strats">
+          <article class="hf-card" data-strat="1">
+            <span class="card-num">Strategy 01</span>
+            <h4 class="card-title">One run, all 15 missions</h4>
+            <span class="hf-strike" aria-hidden="true"></span>
+            <span class="card-reject">loses 545 pts on one fail</span>
+          </article>
+          <article class="hf-card" data-strat="2">
+            <span class="card-num">Strategy 02</span>
+            <h4 class="card-title">15 individual runs</h4>
+            <span class="hf-strike" aria-hidden="true"></span>
+            <span class="card-reject">too much time in Home</span>
+          </article>
+          <article class="hf-card" data-strat="3">
+            <span class="card-num">Strategy 03</span>
+            <h4 class="card-title">5–6 runs, big attachments</h4>
+            <span class="hf-strike" aria-hidden="true"></span>
+            <span class="card-reject">destabilised the robot</span>
+          </article>
+          <article class="hf-card" data-strat="4">
+            <span class="card-num">Strategy 04</span>
+            <h4 class="card-title">Group by proximity only</h4>
+            <span class="hf-strike" aria-hidden="true"></span>
+            <span class="card-reject">slow on missions</span>
+          </article>
+          <article class="hf-card" data-strat="5">
+            <span class="hf-adopted-flag" aria-hidden="true">Adopted.</span>
+            <span class="card-num">Strategy 05</span>
+            <h4 class="card-title">8 runs by attachment pattern</h4>
+
+            <div class="hf-runs" aria-label="8 runs">
+              <div class="hf-run">R1</div>
+              <div class="hf-run">R2</div>
+              <div class="hf-run">R3</div>
+              <div class="hf-run">R4</div>
+              <div class="hf-run">R5</div>
+              <div class="hf-run">R6</div>
+              <div class="hf-run">R7</div>
+              <div class="hf-run">R8</div>
+
+              <svg class="hf-sweep-arrow" viewBox="0 0 400 30" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M 5 15 L 395 15" stroke="#C8102E" stroke-width="2" fill="none" />
+                <polygon points="385,7 400,15 385,23" fill="#C8102E" />
+              </svg>
+            </div>
+
+            <div class="hf-factors" aria-label="Three grouping factors">
+              <span class="hf-factor"><span class="dot" aria-hidden="true"></span>Proximity</span>
+              <span class="hf-factor"><span class="arrow" aria-hidden="true">→</span>Sector sweep</span>
+              <span class="hf-factor"><span class="square" aria-hidden="true"></span>Similar attachments</span>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Top-left badge that holds 27/15/2 once Phase 1 collapses -->
+      <div class="hf-badge" aria-hidden="true">27 · 15 · 2</div>
+    </div>
+
     <div class="note-row"><strong>Exceeds-trigger line:</strong> "Five strategies. Four rejected with reasons. <strong>We went from 40% to 95% consistency over four years.</strong>"</div>
   </div>
 </section>
