@@ -167,9 +167,36 @@ function initNavSpy() {
   compute();
 }
 
+/* ---------- MOBILE ROW ACCORDION ----------
+   On phones, each Brick-4 .row collapses to its bar by default.
+   Tap the bar to expand the body + exact-line. Desktop is unchanged.
+*/
+function initRowAccordion() {
+  if (window.matchMedia("(min-width: 761px)").matches) return;
+  const rows = document.querySelectorAll(".row");
+  if (rows.length === 0) return;
+  rows.forEach((row) => {
+    const bar = row.querySelector(".row-bar");
+    if (!bar) return;
+    bar.setAttribute("role", "button");
+    bar.setAttribute("tabindex", "0");
+    bar.setAttribute("aria-expanded", "false");
+    bar.classList.add("is-tappable");
+    const toggle = () => {
+      const open = row.classList.toggle("is-open");
+      bar.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+    bar.addEventListener("click", toggle);
+    bar.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+    });
+  });
+}
+
 /* ---------- BOOT ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   updateTminus();
   initNavSpy();
+  initRowAccordion();
 });

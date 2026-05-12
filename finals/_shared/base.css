@@ -159,9 +159,7 @@ section { padding-block: var(--section-y); position: relative; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(250, 248, 244, 0.94);
-  -webkit-backdrop-filter: saturate(180%) blur(10px);
-  backdrop-filter: saturate(180%) blur(10px);
+  background: var(--bone);
   border-bottom: 1px solid var(--rule);
 }
 .kit-header-row {
@@ -606,8 +604,10 @@ body.is-locked footer { visibility: hidden; }
 
 @media (max-width: 540px) {
   .kit-header-row { padding: 0.45rem 0.85rem; }
-  .outstanding-pill { padding: 0.18rem 0.45rem; font-size: 0.62rem; }
-  .outstanding-pill .count { font-size: 1em; }
+  .outstanding-pill { padding: 0.22rem 0.5rem; font-size: 0.7rem; gap: 0.3rem; }
+  .outstanding-pill .lab { display: none; }
+  .outstanding-pill .count { font-weight: 700; }
+  .outstanding-pill::after { content: "outstanding"; font-size: 0.62rem; opacity: 0.65; letter-spacing: 0.12em; }
 }
 
 /* Reduced motion */

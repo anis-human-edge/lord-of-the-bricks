@@ -47,9 +47,7 @@
   position: sticky;
   top: 49px; /* sits below kit-header */
   z-index: 40;
-  background: rgba(250, 248, 244, 0.96);
-  -webkit-backdrop-filter: saturate(180%) blur(10px);
-  backdrop-filter: saturate(180%) blur(10px);
+  background: var(--bone);
   border-bottom: 1px solid var(--rule);
   border-top: 1px solid var(--ink);
 }
@@ -183,8 +181,35 @@
   .row-bar { padding: 0.7rem 1rem; gap: 0.5rem; }
   .row-area { font-size: 0.66rem; line-height: 1.35; }
   .row-body { padding: 1.1rem 1rem; }
-  .exact-line { padding: 1.1rem 1rem; }
+  .exact-line { padding: 1.4rem 1rem 1.6rem; }
   .exceeds { padding: 0.85rem 1rem; }
+}
+
+/* Mobile accordion: rows collapsed by default, tap bar to expand */
+@media (max-width: 760px) {
+  .row-bar.is-tappable {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .row-bar.is-tappable::after {
+    content: "+";
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--red);
+    margin-left: auto;
+    transition: transform .2s var(--ease);
+    line-height: 1;
+  }
+  .row.is-open .row-bar.is-tappable::after {
+    content: "−";
+  }
+  .row .row-body { display: none; }
+  .row .exact-line { display: none; }
+  .row.is-open .row-body { display: block; }
+  .row.is-open .exact-line { display: block; }
+  .row-bar-right { gap: 0.4rem; }
 }
 .row-bar-left {
   display: flex;
@@ -270,14 +295,15 @@
   padding-bottom: 0.35rem;
   border-bottom: 1px solid var(--rule);
 }
-.evidence { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.4rem; }
+.evidence { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.35rem; }
 .evidence li {
   position: relative;
-  padding-left: 1rem;
-  font-size: 0.92rem;
-  color: var(--ink-2);
+  padding-left: 0.95rem;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
   line-height: 1.5;
 }
+.evidence li strong { color: var(--ink-2); }
 .evidence li::before {
   content: "·";
   position: absolute;
@@ -288,7 +314,7 @@
   line-height: 1;
   top: -0.05em;
 }
-.evidence li strong { color: var(--ink); font-weight: 700; }
+/* evidence li strong handled above */
 
 .who-what { display: grid; gap: 1rem; }
 .who-what .label {
@@ -311,39 +337,39 @@
 
 .exact-line {
   background: var(--bone);
-  padding: 1.4rem clamp(1.2rem, 2.4vw, 1.8rem);
-  border-top: 1px solid var(--ink);
+  padding: 1.8rem clamp(1.4rem, 2.8vw, 2.2rem) 2rem;
+  border-top: 2px solid var(--ink);
   position: relative;
 }
 .exact-line .label {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--red);
   display: block;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.85rem;
 }
 .exact-line blockquote {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 500;
-  font-size: clamp(1rem, 1.3vw, 1.15rem);
-  line-height: 1.45;
+  font-size: clamp(1.3rem, 2vw, 1.75rem);
+  line-height: 1.35;
   color: var(--ink);
   margin: 0;
-  padding-left: 1.6rem;
+  padding-left: 2rem;
   position: relative;
-  max-width: 70ch;
+  max-width: 64ch;
   text-wrap: pretty;
 }
 .exact-line blockquote::before {
   content: "\201C";
   position: absolute;
   left: 0;
-  top: -0.3em;
-  font-size: 2.4em;
+  top: -0.35em;
+  font-size: 3em;
   line-height: 1;
   color: var(--red);
   font-style: normal;
@@ -729,7 +755,7 @@
     </nav>
     <div class="kit-meta">
       <span><span class="lock-dot"></span>Internal kit</span>
-      <a class="outstanding-pill" href="#outstanding">Outstanding · <span class="count">5</span></a>
+      <a class="outstanding-pill" href="#outstanding"><span class="lab">Outstanding · </span><span class="count">5</span></a>
       <span class="tminus" data-tminus>T−DAYS</span>
     </div>
   </div>
@@ -864,8 +890,8 @@
           </div>
           <div class="row-block who-what">
             <div>
-              <span class="label">Speaker</span>
-              <p class="body"><strong>Alia / Anaisa / Arvin</strong> — one of the new members. <em>Signals Inclusion at the same time.</em></p>
+              <span class="label">Why this speaker</span>
+              <p class="body">One of the new members. <em>Signals Inclusion at the same time.</em></p>
             </div>
             <div>
               <span class="label">Artefact</span>
@@ -913,8 +939,8 @@
           </div>
           <div class="row-block who-what">
             <div>
-              <span class="label">Speaker</span>
-              <p class="body"><strong>Alia</strong> — already has the team-organising slot in the current script.</p>
+              <span class="label">Why this speaker</span>
+              <p class="body">Already has the team-organising slot in the current script.</p>
             </div>
             <div>
               <span class="label">Artefact</span>
@@ -966,7 +992,7 @@
           <div class="row-block who-what">
             <div>
               <span class="label">Speakers</span>
-              <p class="body"><strong>Guhan</strong> — attachments + led prompt engineering with Arvin. <strong>Anaisa</strong> — lands the blueprint angle.</p>
+              <p class="body"><strong>Guhan</strong> covers attachments + led prompt engineering with Arvin. <strong>Anaisa</strong> lands the blueprint angle.</p>
             </div>
             <div>
               <span class="label">Artefact</span>
@@ -1017,8 +1043,8 @@
           </div>
           <div class="row-block who-what">
             <div>
-              <span class="label">Speaker</span>
-              <p class="body"><strong>Esha</strong> — opens, also closes the impact arc. Lands the recipient quotes.</p>
+              <span class="label">Why this speaker</span>
+              <p class="body">Opens, also closes the impact arc. Lands the recipient quotes.</p>
             </div>
             <div>
               <span class="label">Artefact</span>
@@ -1067,8 +1093,8 @@
           </div>
           <div class="row-block who-what">
             <div>
-              <span class="label">Speaker</span>
-              <p class="body"><strong>Toby</strong> — current "Fun &amp; Team Pride" closer is the right slot.</p>
+              <span class="label">Why this speaker</span>
+              <p class="body">Current "Fun &amp; Team Pride" closer is the right slot.</p>
             </div>
             <div>
               <span class="label">Artefact</span>
@@ -1118,8 +1144,8 @@
           </div>
           <div class="row-block who-what">
             <div>
-              <span class="label">Speaker</span>
-              <p class="body"><strong>Arvin</strong> — already does the Resources section.</p>
+              <span class="label">Why this speaker</span>
+              <p class="body">Already does the Resources section.</p>
             </div>
             <div>
               <span class="label">Artefact</span>
@@ -1170,8 +1196,8 @@
           </div>
           <div class="row-block who-what">
             <div>
-              <span class="label">Speaker</span>
-              <p class="body"><strong>Alia</strong> (team organising). Reinforce with named contributions across the presentation.</p>
+              <span class="label">Why this speaker</span>
+              <p class="body">Team organising. Reinforce with named contributions across the presentation.</p>
             </div>
             <div>
               <span class="label">Artefact</span>
@@ -1227,8 +1253,8 @@
           </div>
           <div class="row-block who-what">
             <div>
-              <span class="label">Speaker</span>
-              <p class="body"><strong>Elliot</strong> — already does Testing &amp; Iteration.</p>
+              <span class="label">Why this speaker</span>
+              <p class="body">Already does Testing &amp; Iteration.</p>
             </div>
             <div>
               <span class="label">Artefact · the hero</span>
@@ -1277,7 +1303,7 @@
           <div class="row-block who-what">
             <div>
               <span class="label">Speakers</span>
-              <p class="body"><strong>Toby</strong> — covers structural integrity already. Add <strong>Flossie's</strong> "don't debate, test" line as the team-level lesson.</p>
+              <p class="body"><strong>Toby</strong> covers structural integrity already. Add <strong>Flossie's</strong> "don't debate, test" line as the team-level lesson.</p>
             </div>
             <div>
               <span class="label">Artefact</span>
@@ -1323,8 +1349,8 @@
           </div>
           <div class="row-block who-what">
             <div>
-              <span class="label">Speaker</span>
-              <p class="body"><strong>Toby</strong> — existing closer.</p>
+              <span class="label">Why this speaker</span>
+              <p class="body">Existing closer.</p>
             </div>
             <div>
               <span class="label">Artefact</span>
