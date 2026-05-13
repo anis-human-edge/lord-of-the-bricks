@@ -480,6 +480,314 @@
 
 /* The Identify slide gets its content area sized for the hyperframe */
 .slide--identify .slide-shell { padding-top: 1rem; }
+
+/* =====================================================
+   SCENE 2 · DESIGN · Hyperframe — "5 generations of failure-fix"
+   60-second auto-run, triggered by .slide.is-active.
+
+   Timeline:
+     0–6s   Phase 1 · "5 generations · 4 years" headline
+     6s     Phase 2 · Gen 1 fades in (Hub-only base)
+    14s     Gen 2 fades in (Spike base + pinning) · Gen 1 failure struck
+    22s     Gen 3 fades in (Yellow box) · Gen 2 failure struck
+    30s     Gen 4 fades in (TrackX wide) · Gen 3 failure struck
+    38s     Gen 5 fades in (World Dominator) · Gen 4 failure struck
+    46s     Gen 5 highlights with red border + connecting arrows fade in
+    50s+    Hold final state with subtle pulse on Gen 5
+   ===================================================== */
+
+@property --n5 { syntax: "<integer>"; initial-value: 0; inherits: false; }
+
+.slide--design .slide-shell { padding-top: 1rem; }
+
+/* ---------- Phase 1 · "5 generations" headline ---------- */
+.slide.is-active .hyperframe[data-scene="2"] .hf-phase-1 {
+  animation: hf-phase1-s2 6s linear 0s forwards;
+}
+@keyframes hf-phase1-s2 {
+  0%   { opacity: 1; transform: scale(1); }
+  83%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.7); }
+}
+
+.hf-headline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.hf-big-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(5rem, 12vw, 10rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  opacity: 0;
+}
+.slide.is-active .hyperframe[data-scene="2"] .hf-big-num {
+  animation: hf-num-in 0.9s var(--ease) 0.5s forwards;
+}
+.hf-count[data-target="5"] { counter-reset: hf var(--n5); }
+.hf-count[data-target="5"]::after { content: counter(hf); }
+.slide.is-active .hyperframe[data-scene="2"] .hf-count[data-target="5"] {
+  animation: hf-count-5 0.6s var(--ease) 0.6s forwards;
+}
+@keyframes hf-count-5 { to { --n5: 5; } }
+
+.hf-big-lab {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  opacity: 0;
+}
+.slide.is-active .hyperframe[data-scene="2"] .hf-big-lab {
+  animation: hf-num-in 0.9s var(--ease) 1.2s forwards;
+}
+
+.hf-big-sublabel {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 0.5rem;
+  opacity: 0;
+}
+.slide.is-active .hyperframe[data-scene="2"] .hf-big-sublabel {
+  animation: hf-num-in 0.9s var(--ease) 1.8s forwards;
+}
+
+/* ---------- Phase 2 · Five generation cards ---------- */
+.slide.is-active .hyperframe[data-scene="2"] .hf-phase-2 {
+  animation: hf-phase2-s2 0.001s linear 6s forwards;
+}
+@keyframes hf-phase2-s2 { to { opacity: 1; pointer-events: auto; } }
+
+.hf-gens {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.7rem;
+  width: 100%;
+  max-width: 1100px;
+  align-items: stretch;
+}
+
+.hf-gen {
+  position: relative;
+  background: var(--bone);
+  border: 1px solid var(--ink-muted);
+  padding: 1rem 0.85rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  min-height: 220px;
+}
+.hf-gen .gen-num {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.hf-gen .gen-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* Robot shape — simple geometric primitive per generation */
+.gen-shape {
+  margin: 0.5rem auto;
+  background: transparent;
+  border: 1.5px solid var(--ink-muted);
+  position: relative;
+}
+.gen-shape-1 { width: 30px; height: 30px; }                                /* Hub-only — small square */
+.gen-shape-2 { width: 50px; height: 32px; }                                /* Spike base + pinning */
+.gen-shape-2::before, .gen-shape-2::after {
+  content: ""; position: absolute; top: -6px;
+  width: 4px; height: 6px; background: var(--ink-muted);
+}
+.gen-shape-2::before { left: 10px; }
+.gen-shape-2::after  { right: 10px; }
+.gen-shape-3 { width: 50px; height: 40px; background: rgba(232, 192, 92, 0.18); border-color: var(--ink-2); }   /* Yellow box */
+.gen-shape-4 { width: 72px; height: 36px; }                                /* TrackX wide */
+.gen-shape-4::before, .gen-shape-4::after {
+  content: ""; position: absolute; bottom: -8px;
+  width: 14px; height: 8px; border: 1.5px solid var(--ink-muted);
+  border-radius: 2px;
+}
+.gen-shape-4::before { left: 4px; }
+.gen-shape-4::after  { right: 4px; }
+.gen-shape-5 {
+  width: 56px; height: 38px; border-color: var(--red);
+}
+.gen-shape-5::before, .gen-shape-5::after {
+  content: ""; position: absolute; bottom: -10px;
+  width: 16px; height: 10px;
+  border: 2px solid var(--red);
+  background: var(--red);
+  border-radius: 3px;
+}
+.gen-shape-5::before { left: 3px; }
+.gen-shape-5::after  { right: 3px; }
+
+/* Failure label */
+.gen-fail {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--red);
+  margin-top: auto;
+  position: relative;
+  line-height: 1.3;
+}
+.gen-fail::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1.5px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* Success label (Gen 5 only) */
+.gen-success {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-top: auto;
+  opacity: 0;
+}
+.gen-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 0.4rem;
+  opacity: 0;
+}
+.gen-specs span {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.06em;
+}
+
+/* Generation cards stagger in at 6, 14, 22, 30, 38 seconds */
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="1"] {
+  animation: hf-gen-in 0.8s var(--ease) 6s forwards;
+}
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"] {
+  animation: hf-gen-in 0.8s var(--ease) 14s forwards;
+}
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"] {
+  animation: hf-gen-in 0.8s var(--ease) 22s forwards;
+}
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] {
+  animation: hf-gen-in 0.8s var(--ease) 30s forwards;
+}
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="5"] {
+  animation: hf-gen-in 0.8s var(--ease) 38s forwards,
+             hf-gen-current 1.2s var(--ease) 46s forwards,
+             hf-adopt-pulse 1.6s ease-in-out 50s infinite;
+}
+@keyframes hf-gen-in {
+  to { opacity: 1; transform: none; }
+}
+@keyframes hf-gen-current {
+  0%   { transform: none; }
+  100% { transform: scale(1.04); border-color: var(--red); border-width: 2px; }
+}
+
+/* Failures get struck out when NEXT generation appears (~1s after) */
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="1"] .gen-fail::after {
+  animation: hf-fail-strike 0.6s var(--ease) 15s forwards;
+}
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"] .gen-fail::after {
+  animation: hf-fail-strike 0.6s var(--ease) 23s forwards;
+}
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"] .gen-fail::after {
+  animation: hf-fail-strike 0.6s var(--ease) 31s forwards;
+}
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] .gen-fail::after {
+  animation: hf-fail-strike 0.6s var(--ease) 39s forwards;
+}
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="1"] .gen-fail,
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"] .gen-fail,
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"] .gen-fail,
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] .gen-fail {
+  animation: hf-fail-dim 1s var(--ease) 16s forwards;
+}
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"] .gen-fail { animation-delay: 24s; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"] .gen-fail { animation-delay: 32s; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] .gen-fail { animation-delay: 40s; }
+
+@keyframes hf-fail-strike { to { transform: scaleX(1); } }
+@keyframes hf-fail-dim    { to { color: var(--ink-faint); opacity: 0.65; } }
+
+/* Gen 5 success label + specs fade in at 46s */
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="5"] .gen-success,
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="5"] .gen-specs {
+  animation: hf-fade-in 1s var(--ease) 46s forwards;
+}
+@keyframes hf-fade-in { to { opacity: 1; } }
+
+/* Connecting arrows between generations (fade in at 47s) */
+.hf-arrows {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 calc(20% - 0.5rem);
+  pointer-events: none;
+  transform: translateY(-12px);
+}
+.hf-arrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--red);
+  opacity: 0;
+  line-height: 0;
+}
+.slide.is-active .hyperframe[data-scene="2"] .hf-arrow:nth-child(1) { animation: hf-fade-in 0.6s var(--ease) 47.0s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-arrow:nth-child(2) { animation: hf-fade-in 0.6s var(--ease) 47.4s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-arrow:nth-child(3) { animation: hf-fade-in 0.6s var(--ease) 47.8s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-arrow:nth-child(4) { animation: hf-fade-in 0.6s var(--ease) 48.2s forwards; }
+
+/* Reduced motion fallback */
+@media (prefers-reduced-motion: reduce) {
+  .slide.is-active .hyperframe[data-scene="2"] .hf-phase-1 { animation: none; opacity: 0; }
+  .slide.is-active .hyperframe[data-scene="2"] .hf-phase-2 { animation: none; opacity: 1; pointer-events: auto; }
+  .slide.is-active .hyperframe[data-scene="2"] .hf-gen { animation: none; opacity: 1; transform: none; }
+  .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="5"] { border: 2px solid var(--red); transform: scale(1.04); }
+  .slide.is-active .hyperframe[data-scene="2"] .hf-gen .gen-fail::after { transform: scaleX(1); }
+  .slide.is-active .hyperframe[data-scene="2"] .hf-gen .gen-fail { color: var(--ink-faint); opacity: 0.65; }
+  .slide.is-active .hyperframe[data-scene="2"] .gen-success,
+  .slide.is-active .hyperframe[data-scene="2"] .gen-specs { opacity: 1; }
+  .slide.is-active .hyperframe[data-scene="2"] .hf-arrow { opacity: 1; }
+}
 </style>
 </head>
 <body>
@@ -600,22 +908,73 @@
   </div>
 </section>
 
-<!-- 3 — DESIGN -->
-<section class="slide" data-slide="3">
+<!-- 3 — DESIGN (Scene 2 hyperframe · 5 generations of failure-fix) -->
+<section class="slide slide--design" data-slide="3">
   <span class="slide-tag"><span class="num">03</span>Design · 5 generations of robot</span>
   <div class="slide-shell">
-    <span class="eyebrow r-fade">Scene 02 · Anaisa</span>
-    <h2 class="deck-h kinetic">
-      <span class="w" style="--i:0">Most</span>
-      <span class="w" style="--i:1">teams</span>
-      <span class="w" style="--i:2">show</span>
-      <span class="w" style="--i:3">one.</span>
-      <span class="w" style="--i:4;color:var(--red)">We</span>
-      <span class="w" style="--i:5;color:var(--red)">show</span>
-      <span class="w" style="--i:6;color:var(--red)">five.</span>
-    </h2>
-    <p class="sub-h r-up">Five generations. <strong>Each one fixed the one before.</strong> Hub-only → Spike base → Yellow box → TrackX wide → World Dominator.</p>
-    <p class="body-l r-up"><em>(5 robots in a row, pros/cons + tick/cross per generation)</em></p>
+    <span class="eyebrow r-fade">Scene 02 · Anaisa · 60 seconds</span>
+
+    <div class="hyperframe" data-scene="2">
+
+      <!-- Phase 1 · "5 generations · 4 years" headline -->
+      <div class="hf-phase hf-phase-1">
+        <div class="hf-headline">
+          <span class="hf-big-num"><span class="hf-count" data-target="5" aria-label="5"></span></span>
+          <span class="hf-big-lab">generations</span>
+          <span class="hf-big-sublabel">4 years of failure-fix</span>
+        </div>
+      </div>
+
+      <!-- Phase 2 · Five generation cards -->
+      <div class="hf-phase hf-phase-2">
+        <div class="hf-gens">
+          <article class="hf-gen" data-gen="1">
+            <span class="gen-num">Gen 01</span>
+            <h4 class="gen-name">Hub-only base</h4>
+            <div class="gen-shape gen-shape-1" aria-hidden="true"></div>
+            <span class="gen-fail">Too basic. No structural support.</span>
+          </article>
+          <article class="hf-gen" data-gen="2">
+            <span class="gen-num">Gen 02</span>
+            <h4 class="gen-name">Spike base + pinning</h4>
+            <div class="gen-shape gen-shape-2" aria-hidden="true"></div>
+            <span class="gen-fail">First modular system. Not robust enough.</span>
+          </article>
+          <article class="hf-gen" data-gen="3">
+            <span class="gen-num">Gen 03</span>
+            <h4 class="gen-name">Yellow box robot</h4>
+            <div class="gen-shape gen-shape-3" aria-hidden="true"></div>
+            <span class="gen-fail">Wires got stuck inside. Parts fell in.</span>
+          </article>
+          <article class="hf-gen" data-gen="4">
+            <span class="gen-num">Gen 04</span>
+            <h4 class="gen-name">TrackX wide</h4>
+            <div class="gen-shape gen-shape-4" aria-hidden="true"></div>
+            <span class="gen-fail">Open wheels + modular. Too wide for boat-push.</span>
+          </article>
+          <article class="hf-gen" data-gen="5">
+            <span class="gen-num">Gen 05</span>
+            <h4 class="gen-name">World Dominator</h4>
+            <div class="gen-shape gen-shape-5" aria-hidden="true"></div>
+            <span class="gen-success">Adopted · current</span>
+            <div class="gen-specs">
+              <span>62 × 20 mm rubber tyres</span>
+              <span>Low CoG · gyro · 4 motors</span>
+              <span>Wheel-cover system</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- Connecting arrows that appear at 47s -->
+        <div class="hf-arrows" aria-hidden="true">
+          <span class="hf-arrow">→</span>
+          <span class="hf-arrow">→</span>
+          <span class="hf-arrow">→</span>
+          <span class="hf-arrow">→</span>
+        </div>
+      </div>
+    </div>
+
     <div class="note-row"><strong>Exceeds-trigger line:</strong> "Most teams show you one robot. <strong>We show you five.</strong> Each one fixed the one before."</div>
   </div>
 </section>
