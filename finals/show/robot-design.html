@@ -928,24 +928,26 @@
   to { border-color: var(--red); }
 }
 
-/* Tiles in each column fill at the same time as their cluster outline */
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile { animation: hf-tile-in 0.5s var(--ease) 6.0s forwards, hf-tile-fill 0.7s var(--ease) 14s forwards; }
+/* Tiles in each column fill at the same time as their cluster outline.
+   Using :nth-child(1/2/3) explicitly so specificity matches the earlier
+   fade-in-only rules; this rule comes later so it wins the cascade. */
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.0s forwards, hf-tile-fill 0.7s var(--ease) 14.0s forwards; }
 .slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.1s forwards, hf-tile-fill 0.7s var(--ease) 14.1s forwards; }
 .slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.2s forwards, hf-tile-fill 0.7s var(--ease) 14.2s forwards; }
 
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile { animation: hf-tile-in 0.5s var(--ease) 6.3s forwards, hf-tile-fill 0.7s var(--ease) 16s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.3s forwards, hf-tile-fill 0.7s var(--ease) 16.0s forwards; }
 .slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.4s forwards, hf-tile-fill 0.7s var(--ease) 16.1s forwards; }
 .slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.5s forwards, hf-tile-fill 0.7s var(--ease) 16.2s forwards; }
 
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile { animation: hf-tile-in 0.5s var(--ease) 6.6s forwards, hf-tile-fill 0.7s var(--ease) 18s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.6s forwards, hf-tile-fill 0.7s var(--ease) 18.0s forwards; }
 .slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.7s forwards, hf-tile-fill 0.7s var(--ease) 18.1s forwards; }
 .slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.8s forwards, hf-tile-fill 0.7s var(--ease) 18.2s forwards; }
 
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile { animation: hf-tile-in 0.5s var(--ease) 6.9s forwards, hf-tile-fill 0.7s var(--ease) 20s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.9s forwards, hf-tile-fill 0.7s var(--ease) 20.0s forwards; }
 .slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 7.0s forwards, hf-tile-fill 0.7s var(--ease) 20.1s forwards; }
 .slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 7.1s forwards, hf-tile-fill 0.7s var(--ease) 20.2s forwards; }
 
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile { animation: hf-tile-in 0.5s var(--ease) 7.2s forwards, hf-tile-fill 0.7s var(--ease) 22s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 7.2s forwards, hf-tile-fill 0.7s var(--ease) 22.0s forwards; }
 .slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 7.3s forwards, hf-tile-fill 0.7s var(--ease) 22.1s forwards; }
 .slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 7.4s forwards, hf-tile-fill 0.7s var(--ease) 22.2s forwards; }
 
@@ -1353,19 +1355,21 @@
   /* Outlined treatment kept */
 }
 
-/* All 9 tiles fade in staggered at 6.2-7.0s */
-.slide.is-active .hyperframe[data-scene="5"] .p-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.2s forwards; }
-.slide.is-active .hyperframe[data-scene="5"] .p-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.3s forwards; }
-.slide.is-active .hyperframe[data-scene="5"] .p-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.4s forwards; }
-.slide.is-active .hyperframe[data-scene="5"] .hf-subgroup:nth-child(2) .p-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.5s forwards; }
-.slide.is-active .hyperframe[data-scene="5"] .hf-subgroup:nth-child(2) .p-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.6s forwards; }
+/* All 9 tiles — fade in staggered, with fill animation chained for experienced members.
+   Using full subgroup + nth-child selectors so specificity matches across all 9 and
+   the cascade is deterministic. */
+/* Subgroup 1 — Elliot (exp) · Flossie (exp) · Aaliya (new) */
+.slide.is-active .hyperframe[data-scene="5"] .hf-subgroup:nth-child(1) .p-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.2s forwards, hf-tile-fill-team 0.7s var(--ease) 10.0s forwards; }
+.slide.is-active .hyperframe[data-scene="5"] .hf-subgroup:nth-child(1) .p-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.3s forwards, hf-tile-fill-team 0.7s var(--ease) 10.1s forwards; }
+.slide.is-active .hyperframe[data-scene="5"] .hf-subgroup:nth-child(1) .p-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.4s forwards; }
+/* Subgroup 2 — Toby (exp) · Guhan (exp) · Anaisa (new) */
+.slide.is-active .hyperframe[data-scene="5"] .hf-subgroup:nth-child(2) .p-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.5s forwards, hf-tile-fill-team 0.7s var(--ease) 10.2s forwards; }
+.slide.is-active .hyperframe[data-scene="5"] .hf-subgroup:nth-child(2) .p-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.6s forwards, hf-tile-fill-team 0.7s var(--ease) 10.3s forwards; }
 .slide.is-active .hyperframe[data-scene="5"] .hf-subgroup:nth-child(2) .p-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.7s forwards; }
-.slide.is-active .hyperframe[data-scene="5"] .hf-subgroup:nth-child(3) .p-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.8s forwards; }
-.slide.is-active .hyperframe[data-scene="5"] .hf-subgroup:nth-child(3) .p-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.9s forwards; }
+/* Subgroup 3 — Sakthi (exp) · Esha (exp) · Arvin (new) */
+.slide.is-active .hyperframe[data-scene="5"] .hf-subgroup:nth-child(3) .p-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.8s forwards, hf-tile-fill-team 0.7s var(--ease) 10.4s forwards; }
+.slide.is-active .hyperframe[data-scene="5"] .hf-subgroup:nth-child(3) .p-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.9s forwards, hf-tile-fill-team 0.7s var(--ease) 10.5s forwards; }
 .slide.is-active .hyperframe[data-scene="5"] .hf-subgroup:nth-child(3) .p-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 7.0s forwards; }
-
-/* Experienced tiles fill red at ~10s */
-.slide.is-active .hyperframe[data-scene="5"] .p-tile.is-experienced { animation: hf-tile-fill-team 0.7s var(--ease) 10s forwards; }
 @keyframes hf-tile-fill-team {
   to {
     background: var(--red);
