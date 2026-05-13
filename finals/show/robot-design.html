@@ -788,6 +788,239 @@
   .slide.is-active .hyperframe[data-scene="2"] .gen-specs { opacity: 1; }
   .slide.is-active .hyperframe[data-scene="2"] .hf-arrow { opacity: 1; }
 }
+
+/* =====================================================
+   SCENE 3 · CREATE · Hyperframe — "15 → 5 mechanisms"
+   60-second auto-run, triggered by .slide.is-active.
+
+   Timeline:
+     0–6s    Phase 1 · "15 missions" headline
+     6s      Phase 2 · 15 mission tiles fade in as 5×3 grey grid
+    12s      5 mechanism labels appear simultaneously above columns
+    14s      Column 1 (Grabbers) — tiles fill red + outline appears
+    16s      Column 2 (Push-pull arms) — fill + outline
+    18s      Column 3 (Rack-and-pinion) — fill + outline
+    20s      Column 4 (Dual-motor arms) — fill + outline
+    22s      Column 5 (Rubber band systems) — fill + outline
+    26s      The thesis line lands: "We engineered mechanisms. Not missions."
+    38s      Pybricks code footer fades in (3 reasons + custom menu + fail-safe)
+    50s+     Hold final state with subtle pulse on the thesis line
+   ===================================================== */
+
+@property --n15-2 { syntax: "<integer>"; initial-value: 0; inherits: false; }
+
+.slide--create .slide-shell { padding-top: 0.6rem; }
+
+/* ---------- Phase 1 · "15 missions" headline ---------- */
+.slide.is-active .hyperframe[data-scene="3"] .hf-phase-1 {
+  animation: hf-phase1-s3 6s linear 0s forwards;
+}
+@keyframes hf-phase1-s3 {
+  0%   { opacity: 1; transform: scale(1); }
+  83%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.7); }
+}
+
+.hyperframe[data-scene="3"] .hf-count[data-target="15"] { counter-reset: hf var(--n15-2); }
+.hyperframe[data-scene="3"] .hf-count[data-target="15"]::after { content: counter(hf); }
+.slide.is-active .hyperframe[data-scene="3"] .hf-count[data-target="15"] {
+  animation: hf-count-15-s3 0.8s var(--ease) 0.6s forwards;
+}
+@keyframes hf-count-15-s3 { to { --n15-2: 15; } }
+
+/* ---------- Phase 2 · Mechanism grid ---------- */
+.slide.is-active .hyperframe[data-scene="3"] .hf-phase-2 {
+  animation: hf-phase2-s3 0.001s linear 6s forwards;
+}
+@keyframes hf-phase2-s3 { to { opacity: 1; pointer-events: auto; } }
+
+.hyperframe[data-scene="3"] .hf-phase-2 {
+  flex-direction: column;
+  gap: 1.4rem;
+  padding-top: 0.5rem;
+}
+
+.hf-mech-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.7rem;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.hf-mech {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  padding: 0.6rem 0.4rem;
+  border: 1px solid transparent;
+  transition: border-color .8s var(--ease);
+}
+
+.mech-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  line-height: 1.15;
+  letter-spacing: -0.008em;
+  color: var(--ink);
+  text-align: center;
+  margin: 0;
+  min-height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+.mech-tiles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.m-tile {
+  background: var(--bone);
+  border: 1px solid var(--ink-muted);
+  padding: 0.55rem 0.3rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: background .7s var(--ease), color .7s var(--ease), border-color .7s var(--ease);
+}
+
+/* All 15 tiles fade in together at 6s, staggered slightly */
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.1s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.2s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.3s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.4s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.5s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.6s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.7s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.8s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.9s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 7.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 7.1s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 7.2s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 7.3s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 7.4s forwards; }
+
+@keyframes hf-tile-in { to { opacity: 1; transform: none; } }
+
+/* Mechanism names fade in together at 12s */
+.slide.is-active .hyperframe[data-scene="3"] .mech-name { animation: hf-mech-name-in 0.8s var(--ease) 12s forwards; }
+@keyframes hf-mech-name-in { to { opacity: 1; } }
+
+/* Each mechanism column fills (tiles turn red, border appears) at 14s, 16s, 18s, 20s, 22s */
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) { animation: hf-mech-frame 0.7s var(--ease) 14s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) { animation: hf-mech-frame 0.7s var(--ease) 16s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) { animation: hf-mech-frame 0.7s var(--ease) 18s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) { animation: hf-mech-frame 0.7s var(--ease) 20s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) { animation: hf-mech-frame 0.7s var(--ease) 22s forwards; }
+@keyframes hf-mech-frame {
+  to { border-color: var(--red); }
+}
+
+/* Tiles in each column fill at the same time as their cluster outline */
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile { animation: hf-tile-in 0.5s var(--ease) 6.0s forwards, hf-tile-fill 0.7s var(--ease) 14s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.1s forwards, hf-tile-fill 0.7s var(--ease) 14.1s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.2s forwards, hf-tile-fill 0.7s var(--ease) 14.2s forwards; }
+
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile { animation: hf-tile-in 0.5s var(--ease) 6.3s forwards, hf-tile-fill 0.7s var(--ease) 16s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.4s forwards, hf-tile-fill 0.7s var(--ease) 16.1s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.5s forwards, hf-tile-fill 0.7s var(--ease) 16.2s forwards; }
+
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile { animation: hf-tile-in 0.5s var(--ease) 6.6s forwards, hf-tile-fill 0.7s var(--ease) 18s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.7s forwards, hf-tile-fill 0.7s var(--ease) 18.1s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.8s forwards, hf-tile-fill 0.7s var(--ease) 18.2s forwards; }
+
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile { animation: hf-tile-in 0.5s var(--ease) 6.9s forwards, hf-tile-fill 0.7s var(--ease) 20s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 7.0s forwards, hf-tile-fill 0.7s var(--ease) 20.1s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 7.1s forwards, hf-tile-fill 0.7s var(--ease) 20.2s forwards; }
+
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile { animation: hf-tile-in 0.5s var(--ease) 7.2s forwards, hf-tile-fill 0.7s var(--ease) 22s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 7.3s forwards, hf-tile-fill 0.7s var(--ease) 22.1s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 7.4s forwards, hf-tile-fill 0.7s var(--ease) 22.2s forwards; }
+
+@keyframes hf-tile-fill {
+  to {
+    background: var(--red);
+    color: var(--white);
+    border-color: var(--red);
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- The thesis line ---------- */
+.hf-thesis {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 2.6vw, 2.1rem);
+  line-height: 1.2;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  text-align: center;
+  margin: 0.5rem 0 0;
+  opacity: 0;
+  max-width: 60ch;
+}
+.hf-thesis strong { color: var(--red); font-weight: 700; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-thesis {
+  animation: hf-thesis-in 1.2s var(--ease) 26s forwards,
+             hf-thesis-pulse 1.8s ease-in-out 50s infinite;
+}
+@keyframes hf-thesis-in {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes hf-thesis-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.82; }
+}
+
+/* ---------- Pybricks code footer ---------- */
+.hf-code-footer {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+  text-align: center;
+  opacity: 0;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--rule);
+  max-width: 70ch;
+}
+.hf-code-footer strong { color: var(--red); }
+.slide.is-active .hyperframe[data-scene="3"] .hf-code-footer {
+  animation: hf-fade-in 1s var(--ease) 38s forwards;
+}
+
+/* Reduced motion fallback */
+@media (prefers-reduced-motion: reduce) {
+  .slide.is-active .hyperframe[data-scene="3"] .hf-phase-1 { animation: none; opacity: 0; }
+  .slide.is-active .hyperframe[data-scene="3"] .hf-phase-2 { animation: none; opacity: 1; pointer-events: auto; }
+  .slide.is-active .hyperframe[data-scene="3"] .hf-mech { animation: none; border-color: var(--red); }
+  .slide.is-active .hyperframe[data-scene="3"] .mech-name { animation: none; opacity: 1; }
+  .slide.is-active .hyperframe[data-scene="3"] .m-tile {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    background: var(--red);
+    color: var(--white);
+    border-color: var(--red);
+  }
+  .slide.is-active .hyperframe[data-scene="3"] .hf-thesis { animation: none; opacity: 1; }
+  .slide.is-active .hyperframe[data-scene="3"] .hf-code-footer { animation: none; opacity: 1; }
+}
 </style>
 </head>
 <body>
@@ -979,20 +1212,77 @@
   </div>
 </section>
 
-<!-- 4 — CREATE -->
-<section class="slide" data-slide="4">
+<!-- 4 — CREATE (Scene 3 hyperframe · 15 → 5 mechanisms compression) -->
+<section class="slide slide--create" data-slide="4">
   <span class="slide-tag"><span class="num">04</span>Create · 5 mechanisms + Pybricks</span>
   <div class="slide-shell">
-    <span class="eyebrow r-fade">Scene 03 · Guhan</span>
-    <h2 class="deck-h kinetic">
-      <span class="w" style="--i:0">15</span>
-      <span class="w" style="--i:1">missions.</span>
-      <span class="w" style="--i:2;color:var(--red)">Five</span>
-      <span class="w" style="--i:3;color:var(--red)">mechanisms.</span>
-    </h2>
-    <p class="sub-h r-up">Grabbers. Push-pull arms. Rack-and-pinion. Dual-motor arms. Rubber band systems. <strong>We stopped engineering missions. We engineered mechanisms.</strong></p>
-    <p class="body-l r-up"><em>(5 mechanism icons left · custom menu screen + key code snippet right)</em></p>
-    <div class="note-row"><strong>Exceeds-trigger line:</strong> "15 missions sound like 15 problems. They're not. <strong>Five mechanisms handle every mission.</strong>"</div>
+    <span class="eyebrow r-fade">Scene 03 · Guhan · 60 seconds</span>
+
+    <div class="hyperframe" data-scene="3">
+
+      <!-- Phase 1 · "15 missions" headline -->
+      <div class="hf-phase hf-phase-1">
+        <div class="hf-headline">
+          <span class="hf-big-num"><span class="hf-count" data-target="15" aria-label="15"></span></span>
+          <span class="hf-big-lab">missions</span>
+          <span class="hf-big-sublabel">how many problems is that, really?</span>
+        </div>
+      </div>
+
+      <!-- Phase 2 · The compression: 15 tiles → 5 mechanism columns -->
+      <div class="hf-phase hf-phase-2">
+        <div class="hf-mech-grid">
+          <div class="hf-mech" data-mech="grabbers">
+            <h4 class="mech-name">Grabbers</h4>
+            <div class="mech-tiles">
+              <div class="m-tile">M1</div>
+              <div class="m-tile">M2</div>
+              <div class="m-tile">M3</div>
+            </div>
+          </div>
+          <div class="hf-mech" data-mech="push-pull">
+            <h4 class="mech-name">Push-pull arms</h4>
+            <div class="mech-tiles">
+              <div class="m-tile">M4</div>
+              <div class="m-tile">M5</div>
+              <div class="m-tile">M6</div>
+            </div>
+          </div>
+          <div class="hf-mech" data-mech="rack">
+            <h4 class="mech-name">Rack-and-pinion</h4>
+            <div class="mech-tiles">
+              <div class="m-tile">M7</div>
+              <div class="m-tile">M8</div>
+              <div class="m-tile">M9</div>
+            </div>
+          </div>
+          <div class="hf-mech" data-mech="dual">
+            <h4 class="mech-name">Dual-motor arms</h4>
+            <div class="mech-tiles">
+              <div class="m-tile">M10</div>
+              <div class="m-tile">M11</div>
+              <div class="m-tile">M12</div>
+            </div>
+          </div>
+          <div class="hf-mech" data-mech="rubber">
+            <h4 class="mech-name">Rubber band systems</h4>
+            <div class="mech-tiles">
+              <div class="m-tile">M13</div>
+              <div class="m-tile">M14</div>
+              <div class="m-tile">M15</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="hf-thesis">We engineered <strong>mechanisms</strong>. Not missions.</p>
+
+        <div class="hf-code-footer">
+          <strong>Code:</strong> Pybricks · precise distance · custom wheel calibration · no Bluetooth lag · auto-incrementing run menu · gyro-driven · fail-safe launches
+        </div>
+      </div>
+    </div>
+
+    <div class="note-row"><strong>Exceeds-trigger line:</strong> "15 missions sound like 15 problems. They're not. <strong>Five mechanisms handle every mission.</strong> We engineered mechanisms, not missions."</div>
   </div>
 </section>
 
