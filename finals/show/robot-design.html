@@ -121,14 +121,15 @@
 /* ---------- Top-left badge that holds the 27/15/2 once Phase 1 collapses ---------- */
 .hf-badge {
   position: absolute;
-  top: 0;
+  top: 14px;
   left: 0;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   color: var(--ink-muted);
   opacity: 0;
+  line-height: 1;
 }
 .slide.is-active .hf-badge { animation: hf-badge-in 1s var(--ease) 8s forwards; }
 @keyframes hf-badge-in { to { opacity: 1; } }
@@ -327,7 +328,10 @@
 .hf-card[data-strat="4"] .card-title,
 .hf-card[data-strat="5"] .card-title {
   font-size: 0.68rem;
+  text-wrap: balance;
+  max-width: 18ch;
 }
+.hf-card[data-strat="5"] .card-title { max-width: 22ch; }
 .slide.is-active .hf-card[data-strat="1"] .card-title { animation: hf-title-big 6.2s var(--ease) 8.0s forwards; }
 .slide.is-active .hf-card[data-strat="2"] .card-title { animation: hf-title-big 6.2s var(--ease) 13.0s forwards; }
 .slide.is-active .hf-card[data-strat="3"] .card-title { animation: hf-title-big 6.2s var(--ease) 18.0s forwards; }
@@ -692,16 +696,16 @@
   position: absolute;
   background: var(--bone);
   border: 1px solid var(--ink-muted);
-  padding: 0.5rem 0.6rem;
+  padding: 0.55rem 0.7rem;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.35rem;
   opacity: 0;
   overflow: hidden;
   box-sizing: border-box;
   /* default = thumb dimensions */
   bottom: 6px;
-  height: 130px;
+  height: 150px;
   width: 22%;
 }
 .hf-gen[data-gen="1"] { left: 4%; }
@@ -808,10 +812,10 @@
 @keyframes hf-gen-life-rejected {
   0% {
     opacity: 0;
-    bottom: 150px;
+    bottom: 170px;
     left: 4%;
     width: 92%;
-    height: calc(70vh - 160px);
+    height: calc(70vh - 190px);
     padding: 1.6rem 2rem;
     gap: 2rem;
     flex-direction: row;
@@ -819,10 +823,10 @@
   }
   8% {
     opacity: 1;
-    bottom: 150px;
+    bottom: 170px;
     left: 4%;
     width: 92%;
-    height: calc(70vh - 160px);
+    height: calc(70vh - 190px);
     padding: 1.6rem 2rem;
     gap: 2rem;
     flex-direction: row;
@@ -830,10 +834,10 @@
   }
   85% {
     opacity: 1;
-    bottom: 150px;
+    bottom: 170px;
     left: 4%;
     width: 92%;
-    height: calc(70vh - 160px);
+    height: calc(70vh - 190px);
     padding: 1.6rem 2rem;
     gap: 2rem;
     flex-direction: row;
@@ -951,10 +955,10 @@
 /* ---------- Gen 5 · World Dominator · final stage ----------
    No photo for Gen 5 — the text wrapper takes the full card area. */
 .hf-gen[data-gen="5"] {
-  bottom: 150px;
+  bottom: 170px;
   left: 4%;
   width: 92%;
-  height: calc(70vh - 160px);
+  height: calc(70vh - 190px);
   padding: 2rem 2.4rem;
   gap: 0;
   flex-direction: row;
@@ -1776,7 +1780,7 @@
             <span class="hf-strike" aria-hidden="true"></span>
           </article>
           <article class="hf-card" data-strat="5">
-            <span class="hf-adopted-flag" aria-hidden="true">Adopted.</span>
+            <span class="hf-adopted-flag" aria-hidden="true">Adopted</span>
             <span class="card-num">Strategy 05</span>
             <h4 class="card-title">8 runs by attachment pattern</h4>
 
