@@ -402,9 +402,13 @@
   opacity: 0;
 }
 .hf-sweep-arrow path {
+  stroke: var(--red);
+  stroke-width: 2;
+  fill: none;
   stroke-dasharray: 400;
   stroke-dashoffset: 400;
 }
+.hf-sweep-arrow polygon { fill: var(--red); }
 .slide.is-active .hf-card[data-strat="5"] .hf-sweep-arrow { animation: hf-sweep-show 0.3s var(--ease) 42s forwards; }
 .slide.is-active .hf-card[data-strat="5"] .hf-sweep-arrow path { animation: hf-sweep-draw 1.2s var(--ease) 42s forwards; }
 .slide.is-active .hf-card[data-strat="5"] .hf-sweep-arrow polygon { animation: hf-sweep-show 0.3s var(--ease) 43s forwards; }
@@ -970,6 +974,7 @@
   letter-spacing: -0.018em;
   color: var(--ink);
   text-align: center;
+  text-wrap: balance;
   margin: 0.5rem 0 0;
   opacity: 0;
   max-width: 60ch;
@@ -996,6 +1001,7 @@
   letter-spacing: 0.1em;
   color: var(--ink-muted);
   text-align: center;
+  text-wrap: balance;
   opacity: 0;
   padding-top: 0.6rem;
   border-top: 1px solid var(--rule);
@@ -1575,8 +1581,8 @@
               <div class="hf-run">R8</div>
 
               <svg class="hf-sweep-arrow" viewBox="0 0 400 30" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M 5 15 L 395 15" stroke="#C8102E" stroke-width="2" fill="none" />
-                <polygon points="385,7 400,15 385,23" fill="#C8102E" />
+                <path d="M 5 15 L 395 15" />
+                <polygon points="385,7 400,15 385,23" />
               </svg>
             </div>
 
@@ -1778,8 +1784,9 @@
             <text class="axis-label" x="250" y="305" text-anchor="middle">Year 2</text>
             <text class="axis-label" x="400" y="305" text-anchor="middle">Year 3</text>
             <text class="axis-label" x="550" y="305" text-anchor="middle">Year 4</text>
-            <!-- "40%" small label at Y1 -->
-            <text class="pct-start" x="115" y="170" text-anchor="start">40%</text>
+            <!-- "40%" small label at Y1 — mirrors "95%" placement: upper-corner of its dot,
+                 muted weight to defer to the heroic end-state number. -->
+            <text class="pct-start" x="78" y="160" text-anchor="end">40%</text>
             <!-- The data line -->
             <path class="data-line" d="M 100 176 L 250 124 L 400 72 L 550 33" />
             <!-- Data points -->

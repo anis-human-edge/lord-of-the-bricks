@@ -158,10 +158,9 @@
   padding: 1.4rem clamp(1.4rem, 3vw, 2rem);
   margin-top: 1rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
 }
-@media (max-width: 760px) { .diag-strip { grid-template-columns: 1fr; } }
 .diag-strip h3 {
   font-family: var(--font-mono);
   font-size: 0.74rem;
@@ -760,15 +759,16 @@
   <p class="h-sub" style="margin-top: 1rem;">
     A 5-minute script restructured around the <strong>5 FLL rubric areas</strong> —
     Identify · Design · Create · Iterate · Communicate.
-    All 9 of us speak (lead + backup per scene), with one <strong>Exceeds-trigger line</strong> per rubric
-    designed to force the judge to write a comment. Aaliya at <strong>slot 5 lands the winning stroke</strong>:
+    One <strong>Exceeds-trigger line</strong> per rubric, designed to force the judge to write a comment.
+    <strong>Slot 5 lands the winning stroke</strong>:
     <em>"Our robot isn't our best engineering. We are."</em>
+    Speaker allocation comes after we lock the 5 rubrics, the story, and the visuals.
   </p>
   <div class="hero-meta">
     <span><span class="red">Slot —</span> <strong>5 minutes</strong></span>
     <span><span class="red">Scenes —</span> <strong>5 rubric areas</strong></span>
     <span><span class="red">Target —</span> <strong>~4:30 (30 sec buffer)</strong></span>
-    <span><span class="red">Speakers —</span> <strong>All 9 · lead + backup per scene</strong></span>
+    <span><span class="red">Speakers —</span> <strong>TBD · divide after the story locks</strong></span>
     <span><span class="red">Exceeds attempts —</span> <strong>5 of 5</strong></span>
   </div>
 </section>
@@ -834,12 +834,6 @@
 
   <div class="diag-strip">
     <div>
-      <h3>The diagnosis</h3>
-      <p>Robot Performance: <strong>UK National award.</strong></p>
-      <p>Robot Design judging at Nationals: <strong class="hot">not top 10.</strong></p>
-      <p>Conclusion: <strong>communication gap, not engineering gap.</strong> Rubric-aligned structure closes it.</p>
-    </div>
-    <div>
       <h3>The bar</h3>
       <p>If we land <strong>3+ Exceeds</strong> out of 5, Robot Design rank should be <strong class="hot">top 3 minimum, top 1 likely</strong>.</p>
       <p>Combined with the Robot Performance score that already wins, <strong>Robot Design becomes the Champion's Score multiplier — not the gap.</strong></p>
@@ -859,17 +853,17 @@
       <tr><th>#</th><th>Rubric</th><th>Lead</th><th>Backup</th><th>Time</th><th>Words</th></tr>
     </thead>
     <tbody>
-      <tr><td class="num-col">1</td><td>Identify · Mission strategy + resources</td><td class="speaker-col">Anaisa</td><td class="speaker-col"><em>Arvin</em></td><td class="time-col">60 sec</td><td class="words-col">120</td></tr>
-      <tr><td class="num-col">2</td><td>Design · 5-generation robot evolution</td><td class="speaker-col">Anaisa</td><td class="speaker-col"><em>Elliot</em></td><td class="time-col">60 sec</td><td class="words-col">120</td></tr>
-      <tr><td class="num-col">3</td><td>Create · Attachments + code</td><td class="speaker-col">Guhan</td><td class="speaker-col"><em>Sakthi</em></td><td class="time-col">60 sec</td><td class="words-col">120</td></tr>
-      <tr><td class="num-col">4</td><td>Iterate · Testing + improvements</td><td class="speaker-col">Elliot</td><td class="speaker-col"><em>Flossie</em></td><td class="time-col">60 sec</td><td class="words-col">120</td></tr>
-      <tr class="is-winning"><td class="num-col">5</td><td>Communicate · Lessons + pride + winning stroke</td><td class="speaker-col">Aaliya</td><td class="speaker-col"><em>Toby</em></td><td class="time-col">60 sec</td><td class="words-col">120</td></tr>
+      <tr><td class="num-col">1</td><td>Identify · Mission strategy + resources</td><td class="speaker-col">TBD</td><td class="speaker-col"><em>TBD</em></td><td class="time-col">60 sec</td><td class="words-col">120</td></tr>
+      <tr><td class="num-col">2</td><td>Design · 5-generation robot evolution</td><td class="speaker-col">TBD</td><td class="speaker-col"><em>TBD</em></td><td class="time-col">60 sec</td><td class="words-col">120</td></tr>
+      <tr><td class="num-col">3</td><td>Create · Attachments + code</td><td class="speaker-col">TBD</td><td class="speaker-col"><em>TBD</em></td><td class="time-col">60 sec</td><td class="words-col">120</td></tr>
+      <tr><td class="num-col">4</td><td>Iterate · Testing + improvements</td><td class="speaker-col">TBD</td><td class="speaker-col"><em>TBD</em></td><td class="time-col">60 sec</td><td class="words-col">120</td></tr>
+      <tr class="is-winning"><td class="num-col">5</td><td>Communicate · Lessons + pride + winning stroke</td><td class="speaker-col">TBD</td><td class="speaker-col"><em>TBD</em></td><td class="time-col">60 sec</td><td class="words-col">120</td></tr>
       <tr class="total"><td colspan="4">Total</td><td class="time-col">~4:30</td><td class="words-col">~600</td></tr>
     </tbody>
   </table>
 
   <div class="buffer-note">Built-in buffer: <strong>30 seconds</strong>. The backup speaker per scene is the redundancy: if the lead misses the Exceeds-trigger line, the backup catches it.</div>
-  <div class="buffer-note"><strong>Esha + Arvin's slots from v1 fold into Identify and Design.</strong> The Korean greeting opening (Esha) moves into the 2-min team welcome <em>before</em> the timed script, pending RealTechBot confirmation that the welcome slot exists.</div>
+  <div class="buffer-note"><strong>The two extra v1 slots fold into Identify and Design.</strong> The Korean greeting opening moves into the 2-min team welcome <em>before</em> the timed script, pending RealTechBot confirmation that the welcome slot exists. <em>(Speaker allocation TBD — first the 5 rubrics, the story, and the visuals; then we divide.)</em></div>
 </section>
 
 <!-- ============ ARTEFACT MAP ============ -->
@@ -898,7 +892,7 @@
 
   <p class="note" style="margin-top: 1.2rem;">
     <strong>The hero artefact</strong> across all 5 folders is the <strong class="hot">40% → 95% consistency curve</strong>.
-    Lives in Folder 4 (Iterate) but referenced in Scene 5 (Aaliya's closer) and Scene 1 (the Identify Exceeds-trigger line).
+    Lives in Folder 4 (Iterate) but referenced in Scene 5 (the closer) and Scene 1 (the Identify Exceeds-trigger line).
     The curve is what the judges see <em>and</em> hear twice — peak-and-end recall.
   </p>
 </section>
@@ -940,15 +934,15 @@
           <span class="scene-title">Mission strategy + resources</span>
         </div>
         <div class="scene-bar-right">
-          <span class="speaker-tag">Anaisa</span>
-          <span class="speaker-tag is-backup">Arvin · backup</span>
+          <span class="speaker-tag">TBD</span>
+          <span class="speaker-tag is-backup">TBD · backup</span>
           <span>60 sec</span>
           <span>120 words</span>
         </div>
       </div>
       <div class="scene-body">
         <h3 class="scene-name">Five strategies. Four rejected. 8-run plan adopted.</h3>
-        <p class="stage">Anaisa points to the animated mission strategy map as she names the rejected strategies. Arvin hands Folder 1 (Identify) to the judges at the start.</p>
+        <p class="stage">Lead points to the animated mission strategy map as they name the rejected strategies. Backup hands Folder 1 (Identify) to the judges at the start.</p>
         <div class="spoken">
           <span class="label">Spoken · draft</span>
           <blockquote>We had <strong>27 tasks. 15 missions.</strong> Two objectives: minimise runs, maximise points, lowest failure probability. We considered <strong>5 strategies. We rejected 4.</strong> One run for all 15 missions — rejected, one failure loses all 545 points. 15 individual runs — rejected, too much time in Home. 5 to 6 runs with bigger attachments — rejected, attachments destabilised the robot. Group purely by proximity — rejected, efficient on path, slow on missions. We chose <strong>8 runs grouped by three factors: proximity, sector sweeping (left-to-right so Kilo pieces don't block our path), and similar attachments together.</strong> To get here we followed five teams — Exploding Kettles, RailTech, Bricks and Biscuits, FLL Tutorials, Spike Prime Lessons — plus SPIKE Prime tutorials, Pybricks documentation, and YouTube on gear ratios and torque. <em>(points to the animated 15→8 map)</em> That's our 8-run plan.</blockquote>
@@ -957,7 +951,7 @@
         <div class="scene-exceeds">
           <span class="label">★ Exceeds-trigger line</span>
           <blockquote>"Five strategies. Four rejected with reasons. We went from <strong>40% to 95% consistency over four years.</strong>"</blockquote>
-          <span class="lead-attribution">Lead: Anaisa · Backup: Arvin</span>
+          <span class="lead-attribution">Lead: TBD · Backup: TBD</span>
         </div>
 
         <div class="scene-deck">
@@ -996,15 +990,15 @@
           <span class="scene-title">5-generation robot evolution</span>
         </div>
         <div class="scene-bar-right">
-          <span class="speaker-tag">Anaisa</span>
-          <span class="speaker-tag is-backup">Elliot · backup</span>
+          <span class="speaker-tag">TBD</span>
+          <span class="speaker-tag is-backup">TBD · backup</span>
           <span>60 sec</span>
           <span>120 words</span>
         </div>
       </div>
       <div class="scene-body">
         <h3 class="scene-name">Five robots. Each one fixed the one before.</h3>
-        <p class="stage">Anaisa walks left-to-right pointing at the 5-robot slide, holding up the current World Dominator on the right. Elliot hands Folder 2 (Design) to the judges.</p>
+        <p class="stage">Lead walks left-to-right pointing at the 5-robot slide, holding up the current World Dominator on the right. Backup hands Folder 2 (Design) to the judges.</p>
         <div class="spoken">
           <span class="label">Spoken · draft</span>
           <blockquote>World Dominator is our <strong>5th-generation robot</strong>. Each version fixed the previous one's failure mode. <em>(point left-to-right)</em> <strong>Generation 1</strong> — Spike Prime hub-only base. Simple, fast to iterate, but too basic. <strong>Generation 2</strong> — Spike Prime base with pinning attachments. First modular system, not robust enough. <strong>Generation 3</strong> — the yellow box robot. Closed wheel system, but wires got stuck inside and attachment parts fell into the box. We scrapped it after 3 weeks. <strong>Generation 4</strong> — TrackX wide version. Open wheel, modular attachments. Too wide for the boat-pushing mission — we had to drag the boat with a long-arm hook. <strong>Generation 5</strong> — World Dominator. Width-reduced TrackX, <strong>thick rubber tyres 62 millimetres by 20</strong>, low centre of gravity, gyro-controlled straight-line drive, four motors — two for driving, two for attachments — plus a <strong>wheel cover system</strong> built by the whole team after Submerged Run 8 jammed. One reliable system.</blockquote>
@@ -1013,7 +1007,7 @@
         <div class="scene-exceeds">
           <span class="label">★ Exceeds-trigger line</span>
           <blockquote>"Most teams show you one robot. <strong>We show you five.</strong> Each one fixed the one before."</blockquote>
-          <span class="lead-attribution">Lead: Anaisa · Backup: Elliot</span>
+          <span class="lead-attribution">Lead: TBD · Backup: TBD</span>
         </div>
 
         <div class="scene-deck">
@@ -1052,15 +1046,15 @@
           <span class="scene-title">Attachments + code</span>
         </div>
         <div class="scene-bar-right">
-          <span class="speaker-tag">Guhan</span>
-          <span class="speaker-tag is-backup">Sakthi · backup</span>
+          <span class="speaker-tag">TBD</span>
+          <span class="speaker-tag is-backup">TBD · backup</span>
           <span>60 sec</span>
           <span>120 words</span>
         </div>
       </div>
       <div class="scene-body">
         <h3 class="scene-name">15 missions sound like 15 problems. They're not.</h3>
-        <p class="stage">Guhan demonstrates with the modular attachments on the table. Sakthi shows the custom menu screen + hands Folder 3 (Create) to the judges.</p>
+        <p class="stage">Lead demonstrates with the modular attachments on the table. Backup shows the custom menu screen + hands Folder 3 (Create) to the judges.</p>
         <div class="spoken">
           <span class="label">Spoken · draft</span>
           <blockquote>15 missions sound like 15 different problems. They're not. We tested every attachment we built and saw a pattern. <strong>Five mechanisms handle every mission.</strong> Grabbers. Push-pull arms. Rack-and-pinion. Dual-motor arms. Rubber band systems. <em>(demonstrates with the modular attachments)</em> We stopped engineering missions. <strong>We engineered mechanisms.</strong> One mechanism, multiple missions, predictable behaviour. For the code, we switched from SPIKE block coding to <strong>Pybricks for three reasons:</strong> precise distance control, custom wheel-diameter calibration (needed because we changed to 62×20mm wheels), and no Bluetooth lag. We built a custom menu that auto-increments runs — one button press loads the next. The gyro sensor handles straight-line drift, and our mechanical aligners and starting jigs make every launch <strong>fail-safe</strong>.</blockquote>
@@ -1069,7 +1063,7 @@
         <div class="scene-exceeds">
           <span class="label">★ Exceeds-trigger line</span>
           <blockquote>"15 missions sound like 15 problems. They're not. <strong>Five mechanisms handle every mission.</strong> We stopped engineering missions. We engineered mechanisms."</blockquote>
-          <span class="lead-attribution">Lead: Guhan · Backup: Sakthi</span>
+          <span class="lead-attribution">Lead: TBD · Backup: TBD</span>
         </div>
 
         <div class="scene-deck">
@@ -1110,15 +1104,15 @@
           <span class="scene-title">Testing + improvements</span>
         </div>
         <div class="scene-bar-right">
-          <span class="speaker-tag">Elliot</span>
-          <span class="speaker-tag is-backup">Flossie · backup</span>
+          <span class="speaker-tag">TBD</span>
+          <span class="speaker-tag is-backup">TBD · backup</span>
           <span>60 sec</span>
           <span>120 words</span>
         </div>
       </div>
       <div class="scene-body">
         <h3 class="scene-name">Year 1: 40% consistent. Year 4: 95%. That isn't luck.</h3>
-        <p class="stage">Elliot points to the 40→95% consistency curve as he says the number. Flossie hands Folder 4 (Iterate) to the judges + holds up the wheel comparison.</p>
+        <p class="stage">Lead points to the 40→95% consistency curve as they say the number. Backup hands Folder 4 (Iterate) to the judges + holds up the wheel comparison.</p>
         <div class="spoken">
           <span class="label">Spoken · draft</span>
           <blockquote>We test until we trust. <strong>Year 1, our runs were 40% consistent. Year 4, we're at 95%.</strong> That isn't luck. This season alone: <strong>220 individual run tests, 100 full-match simulations, and 50+ changes after Regionals.</strong> <em>(points to the curve)</em> One example: at Regionals, scattered Silo pieces kept jamming our wheels. We tried a deflector — it failed. So we built a <strong>full wheel-cover system</strong> as a team. Every kid stood around the table that day. Now the path clears every time. We also chose our wheels carefully — <strong>62-millimetre by 20-millimetre rubber tyres</strong>. The SPIKE Prime blue wheels at Regionals were too wobbly. The robot was going mental. The thicker rubber gave us more friction, and our straight-line and 90-degree turning testing showed they were the right call. <em>(hands testing sheets to judges)</em></blockquote>
@@ -1127,7 +1121,7 @@
         <div class="scene-exceeds">
           <span class="label">★ Exceeds-trigger line · the hero artefact moment</span>
           <blockquote>"Year 1: <strong>40%</strong> consistent. Year 4: <strong>95%</strong>. That isn't luck. This season alone: <strong>220 individual run tests, 100 full-match simulations, and 50+ changes after Regionals.</strong>"</blockquote>
-          <span class="lead-attribution">Lead: Elliot · Backup: Flossie · point at curve as you say "40% to 95%"</span>
+          <span class="lead-attribution">Lead: TBD · Backup: TBD · point at curve as you say "40% to 95%"</span>
         </div>
 
         <div class="scene-deck">
@@ -1168,8 +1162,8 @@
           <span class="scene-title">Lessons + pride + the winning stroke</span>
         </div>
         <div class="scene-bar-right">
-          <span class="speaker-tag">Aaliya</span>
-          <span class="speaker-tag is-backup">Toby · backup</span>
+          <span class="speaker-tag">TBD</span>
+          <span class="speaker-tag is-backup">TBD · backup</span>
           <span>60 sec</span>
           <span>120 words</span>
           <span class="winning-flag">Winning stroke</span>
@@ -1177,16 +1171,16 @@
       </div>
       <div class="scene-body">
         <h3 class="scene-name">"Our robot isn't our best engineering. We are."</h3>
-        <p class="stage">Aaliya holds the team's gaze on the meta-reframe line. Toby steps in for the pride/closer. After the chant, all 9 hold position with eye contact. Aaliya hands Folder 5 (Communicate) to the judges.</p>
+        <p class="stage">Lead holds the team's gaze on the meta-reframe line. Backup steps in for the pride/closer. After the chant, all 9 hold position with eye contact. Lead hands Folder 5 (Communicate) to the judges.</p>
         <div class="spoken">
           <span class="label">Spoken · the line judges write down</span>
-          <blockquote>You've heard about World Dominator. <strong>Our robot isn't our best engineering. We are.</strong> Nine of us. Three sub-groups. Two experienced and one new member in each. The new members led research. The experienced led the build. <strong>Everyone built. Everyone tested. Everyone learned.</strong> We learned five lessons this year — don't debate, test · switch tools when the tool fights the work · combine missions by proximity and motor availability · same-side gearbox saves home-area time · 2-pin minimum on short beams, 3–4 on long. <em>(Toby takes over)</em> <strong>502 hours. 96 sessions. Never missed a Sunday.</strong> Nine primary school friends who learned robotics together. Two-time UK regional champions. UK National Knockout Champions. Today we represent <strong>Team GB</strong> in Korea. Thank you for having us. <em>(all 9 together, eye contact)</em> <strong>WE ARE LORD OF THE BRICKS!</strong></blockquote>
+          <blockquote>You've heard about World Dominator. <strong>Our robot isn't our best engineering. We are.</strong> Nine of us. Three sub-groups. Two experienced and one new member in each. The new members led research. The experienced led the build. <strong>Everyone built. Everyone tested. Everyone learned.</strong> We learned five lessons this year — don't debate, test · switch tools when the tool fights the work · combine missions by proximity and motor availability · same-side gearbox saves home-area time · 2-pin minimum on short beams, 3–4 on long. <em>(backup takes over)</em> <strong>502 hours. 96 sessions. Never missed a Sunday.</strong> Nine primary school friends who learned robotics together. Two-time UK regional champions. UK National Knockout Champions. Today we represent <strong>Team GB</strong> in Korea. Thank you for having us. <em>(all 9 together, eye contact)</em> <strong>WE ARE LORD OF THE BRICKS!</strong></blockquote>
         </div>
 
         <div class="scene-exceeds">
           <span class="label">★ Exceeds-trigger line · the meta-reframe</span>
           <blockquote><em>"Our robot isn't our best engineering. <strong>We are.</strong>"</em></blockquote>
-          <span class="lead-attribution">Lead: Aaliya · Backup: Toby · pause before "We are"</span>
+          <span class="lead-attribution">Lead: TBD · Backup: TBD · pause before "We are"</span>
         </div>
 
         <div class="why-winning">
@@ -1262,7 +1256,7 @@
     <div class="mech">
       <span class="num">M5</span>
       <h3>The meta-reframe at slot 5.</h3>
-      <p>Aaliya's <em>"Our robot isn't our best engineering. We are"</em> reframes everything the judges just heard. Engineering at the <strong>team-design level</strong> is rare even in adult engineering. From children, it's the line judges remember.</p>
+      <p>The slot-5 line — <em>"Our robot isn't our best engineering. We are"</em> — reframes everything the judges just heard. Engineering at the <strong>team-design level</strong> is rare even in adult engineering. From children, it's the line judges remember.</p>
     </div>
   </div>
 </section>
@@ -1337,19 +1331,19 @@
   <div class="rehearsal">
     <div class="week">
       <span class="when">Week 01</span>
-      <span class="what"><strong>Each speaker memorises their own section.</strong> Practice in isolation. Hit time targets within 5 sec.</span>
+      <span class="what"><strong>Allocate speakers (lead + backup per scene), then each speaker memorises their own section.</strong> Practice in isolation. Hit time targets within 5 sec.</span>
     </div>
     <div class="week">
       <span class="when">Week 02</span>
-      <span class="what"><strong>Run the full script as a team.</strong> Focus on handoffs (Esha → Anaisa, Anaisa → Guhan, etc.). Time the full thing. Aim for 4:30 to 4:45.</span>
+      <span class="what"><strong>Run the full script as a team.</strong> Focus on scene-to-scene handoffs (lead → lead). Time the full thing. Aim for 4:30 to 4:45.</span>
     </div>
     <div class="week">
       <span class="when">Week 03</span>
-      <span class="what"><strong>Drill the Aaliya reveal in isolation 20 times.</strong> The line that has to land perfectly. Pace, eye contact, pause before <em>"We are."</em></span>
+      <span class="what"><strong>Drill the slot-5 reveal in isolation 20 times.</strong> The line that has to land perfectly. Pace, eye contact, pause before <em>"We are."</em></span>
     </div>
     <div class="week">
       <span class="when">Week 04</span>
-      <span class="what"><strong>Full run with artefact movements.</strong> Practice the awkward gear changes — Esha handing robot, Anaisa receiving. These are the moments where teams stumble visibly.</span>
+      <span class="what"><strong>Full run with artefact movements.</strong> Practice the awkward gear changes — robot handovers, folder handovers. These are the moments where teams stumble visibly.</span>
     </div>
     <div class="week">
       <span class="when">Week 05</span>
