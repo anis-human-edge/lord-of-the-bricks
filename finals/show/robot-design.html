@@ -1010,19 +1010,22 @@
 /* =====================================================
    SCENE 3 · CREATE · Hyperframe — "15 → 5 mechanisms"
    60-second auto-run, triggered by .slide.is-active.
+   Sequential blowup choreography mirroring Scenes 1 + 2:
+   each mechanism takes the full stage with a CSS-drawn icon and
+   M-tiles, then shrinks to a thumbnail in the top row. The thesis
+   card ("We engineered mechanisms. Not missions.") takes the final
+   stage with the Pybricks reasons revealing sequentially.
 
    Timeline:
      0–6s    Phase 1 · "15 missions" headline
-     6s      Phase 2 · 15 mission tiles fade in as 5×3 grey grid
-    12s      5 mechanism labels appear simultaneously above columns
-    14s      Column 1 (Grabbers) — tiles fill red + outline appears
-    16s      Column 2 (Push-pull arms) — fill + outline
-    18s      Column 3 (Rack-and-pinion) — fill + outline
-    20s      Column 4 (Dual-motor arms) — fill + outline
-    22s      Column 5 (Rubber band systems) — fill + outline
-    26s      The thesis line lands: "We engineered mechanisms. Not missions."
-    38s      Pybricks code footer fades in (3 reasons + custom menu + fail-safe)
-    50s+     Hold final state with subtle pulse on the thesis line
+     6s      Phase 1 collapses to badge top-left
+     6–11s   Mechanism 01 BIG · Grabbers
+    11–16s   Mechanism 02 BIG · Push-pull arms
+    16–21s   Mechanism 03 BIG · Rack-and-pinion
+    21–26s   Mechanism 04 BIG · Dual-motor arms
+    26–31s   Mechanism 05 BIG · Rubber band systems
+    31s+     Thesis card takes the stage; 4 reasons reveal at
+             34 / 37 / 40 / 43s; subtle pulse from 50s
    ===================================================== */
 
 @property --n15-2 { syntax: "<integer>"; initial-value: 0; inherits: false; }
@@ -1031,217 +1034,393 @@
 
 /* ---------- Phase 1 · "15 missions" headline ---------- */
 .slide.is-active .hyperframe[data-scene="3"] .hf-phase-1 {
-  animation: hf-phase1-s3 6s linear 0s forwards;
+  animation: hf-phase1-s3 5.5s linear 0s forwards;
 }
 @keyframes hf-phase1-s3 {
   0%   { opacity: 1; transform: scale(1); }
-  83%  { opacity: 1; transform: scale(1); }
+  82%  { opacity: 1; transform: scale(1); }
   100% { opacity: 0; transform: scale(0.7); }
 }
 
 .hyperframe[data-scene="3"] .hf-count[data-target="15"] { counter-reset: hf var(--n15-2); }
 .hyperframe[data-scene="3"] .hf-count[data-target="15"]::after { content: counter(hf); }
 .slide.is-active .hyperframe[data-scene="3"] .hf-count[data-target="15"] {
-  animation: hf-count-15-s3 0.8s var(--ease) 0.6s forwards;
+  animation: hf-count-15-s3 0.8s var(--ease) 0.5s forwards;
 }
 @keyframes hf-count-15-s3 { to { --n15-2: 15; } }
 
-/* ---------- Phase 2 · Mechanism grid ---------- */
+/* ---------- Badge after Phase 1 collapses ---------- */
+.hf-badge-s3 {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  opacity: 0;
+  line-height: 1;
+}
+.slide.is-active .hyperframe[data-scene="3"] .hf-badge-s3 {
+  animation: hf-badge-in 1s var(--ease) 5.5s forwards;
+}
+
+/* ---------- Phase 2 · Sequential mechanism blowup ---------- */
 .slide.is-active .hyperframe[data-scene="3"] .hf-phase-2 {
-  animation: hf-phase2-s3 0.001s linear 6s forwards;
+  animation: hf-phase2-s3 0.001s linear 5.5s forwards;
 }
 @keyframes hf-phase2-s3 { to { opacity: 1; pointer-events: auto; } }
 
-.hyperframe[data-scene="3"] .hf-phase-2 {
-  flex-direction: column;
-  gap: 1.4rem;
-  padding-top: 0.5rem;
-}
-
-.hf-mech-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.7rem;
-  width: 100%;
-  max-width: 1100px;
-}
-
-.hf-mech {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.hf-stage-s3 {
   position: relative;
-  padding: 0.6rem 0.4rem;
-  border: 1px solid transparent;
-  transition: border-color .8s var(--ease);
+  width: 100%;
+  min-height: 56vh;
 }
 
-.mech-name {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.85rem;
-  line-height: 1.15;
-  letter-spacing: -0.008em;
-  color: var(--ink);
-  text-align: center;
-  margin: 0;
-  min-height: 2.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-}
-
-.mech-tiles {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-}
-
-.m-tile {
+/* ---------- Mechanism card · default = thumb resting state ---------- */
+.hf-mech-card {
+  position: absolute;
   background: var(--bone);
   border: 1px solid var(--ink-muted);
-  padding: 0.55rem 0.3rem;
-  text-align: center;
+  padding: 0.55rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  opacity: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  /* default = thumb dimensions */
+  top: 6px;
+  height: 84px;
+  width: 180px;
+}
+.hf-mech-card[data-mech="1"] { left: 150px; }
+.hf-mech-card[data-mech="2"] { left: 342px; }
+.hf-mech-card[data-mech="3"] { left: 534px; }
+.hf-mech-card[data-mech="4"] { left: 726px; }
+.hf-mech-card[data-mech="5"] { left: 918px; }
+
+.hf-mech-card .mech-num {
   font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red);
+  line-height: 1;
+}
+.hf-mech-card .mech-title {
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 0.7rem;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: balance;
+  max-width: 22ch;
+}
+.hf-mech-card .mech-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--ink-muted);
   opacity: 0;
-  transform: translateY(8px);
-  transition: background .7s var(--ease), color .7s var(--ease), border-color .7s var(--ease);
 }
 
-/* All 15 tiles fade in together at 6s, staggered slightly */
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.0s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.1s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.2s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.3s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.4s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.5s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.6s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.7s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.8s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.9s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 7.0s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 7.1s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 7.2s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 7.3s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 7.4s forwards; }
-
-@keyframes hf-tile-in { to { opacity: 1; transform: none; } }
-
-/* Mechanism names fade in together at 12s */
-.slide.is-active .hyperframe[data-scene="3"] .mech-name { animation: hf-mech-name-in 0.8s var(--ease) 12s forwards; }
-@keyframes hf-mech-name-in { to { opacity: 1; } }
-
-/* Each mechanism column fills (tiles turn red, border appears) at 14s, 16s, 18s, 20s, 22s */
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) { animation: hf-mech-frame 0.7s var(--ease) 14s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) { animation: hf-mech-frame 0.7s var(--ease) 16s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) { animation: hf-mech-frame 0.7s var(--ease) 18s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) { animation: hf-mech-frame 0.7s var(--ease) 20s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) { animation: hf-mech-frame 0.7s var(--ease) 22s forwards; }
-@keyframes hf-mech-frame {
-  to { border-color: var(--red); }
+/* ---------- The mission tiles inside the BIG card ---------- */
+.mech-tiles-row {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  margin-top: 0.4rem;
+}
+.m-tile {
+  background: var(--red);
+  border: 2px solid var(--red);
+  color: var(--white);
+  padding: 1rem 1.6rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: clamp(1.4rem, 2.4vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  min-width: 96px;
 }
 
-/* Tiles in each column fill at the same time as their cluster outline.
-   Using :nth-child(1/2/3) explicitly so specificity matches the earlier
-   fade-in-only rules; this rule comes later so it wins the cascade. */
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.0s forwards, hf-tile-fill 0.7s var(--ease) 14.0s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.1s forwards, hf-tile-fill 0.7s var(--ease) 14.1s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(1) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.2s forwards, hf-tile-fill 0.7s var(--ease) 14.2s forwards; }
+/* ---------- The icon · CSS-drawn per mechanism ---------- */
+.mech-icon {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  width: 96px;
+  height: 96px;
+  color: var(--red);
+  opacity: 0;
+}
+.mech-icon svg { width: 100%; height: 100%; display: block; }
 
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.3s forwards, hf-tile-fill 0.7s var(--ease) 16.0s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.4s forwards, hf-tile-fill 0.7s var(--ease) 16.1s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(2) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.5s forwards, hf-tile-fill 0.7s var(--ease) 16.2s forwards; }
+/* In thumb state, hide tiles + tag; show a tiny icon in corner */
+.hf-mech-card[data-mech="1"] .mech-icon,
+.hf-mech-card[data-mech="2"] .mech-icon,
+.hf-mech-card[data-mech="3"] .mech-icon,
+.hf-mech-card[data-mech="4"] .mech-icon,
+.hf-mech-card[data-mech="5"] .mech-icon {
+  /* default = thumb icon */
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+}
 
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.6s forwards, hf-tile-fill 0.7s var(--ease) 18.0s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 6.7s forwards, hf-tile-fill 0.7s var(--ease) 18.1s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(3) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 6.8s forwards, hf-tile-fill 0.7s var(--ease) 18.2s forwards; }
-
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 6.9s forwards, hf-tile-fill 0.7s var(--ease) 20.0s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 7.0s forwards, hf-tile-fill 0.7s var(--ease) 20.1s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(4) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 7.1s forwards, hf-tile-fill 0.7s var(--ease) 20.2s forwards; }
-
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile:nth-child(1) { animation: hf-tile-in 0.5s var(--ease) 7.2s forwards, hf-tile-fill 0.7s var(--ease) 22.0s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile:nth-child(2) { animation: hf-tile-in 0.5s var(--ease) 7.3s forwards, hf-tile-fill 0.7s var(--ease) 22.1s forwards; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-mech:nth-child(5) .m-tile:nth-child(3) { animation: hf-tile-in 0.5s var(--ease) 7.4s forwards, hf-tile-fill 0.7s var(--ease) 22.2s forwards; }
-
-@keyframes hf-tile-fill {
-  to {
-    background: var(--red);
-    color: var(--white);
+/* ---------- BIG lifecycle keyframe (mechs 1-4 shrink, 5 also shrinks) ---------- */
+@keyframes hf-mech-life {
+  0% {
+    opacity: 0;
+    top: 110px;
+    left: 4%;
+    width: 92%;
+    height: calc(56vh - 130px);
+    padding: 1.6rem 2.4rem;
+    gap: 1.6rem;
+    justify-content: center;
     border-color: var(--red);
+    border-width: 2px;
+  }
+  8% {
     opacity: 1;
-    transform: none;
+    top: 110px;
+    left: 4%;
+    width: 92%;
+    height: calc(56vh - 130px);
+    padding: 1.6rem 2.4rem;
+    gap: 1.6rem;
+    justify-content: center;
+    border-color: var(--red);
+    border-width: 2px;
+  }
+  85% {
+    opacity: 1;
+    top: 110px;
+    left: 4%;
+    width: 92%;
+    height: calc(56vh - 130px);
+    padding: 1.6rem 2.4rem;
+    gap: 1.6rem;
+    justify-content: center;
+    border-color: var(--red);
+    border-width: 2px;
+  }
+  100% {
+    opacity: 0.55;
+    padding: 0.55rem 0.7rem;
+    gap: 0.3rem;
+    justify-content: flex-start;
+    border-color: var(--ink-muted);
+    border-width: 1px;
   }
 }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="1"] { animation: hf-mech-life 6.5s var(--ease) 6.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="2"] { animation: hf-mech-life 6.5s var(--ease) 11.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="3"] { animation: hf-mech-life 6.5s var(--ease) 16.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="4"] { animation: hf-mech-life 6.5s var(--ease) 21.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="5"] { animation: hf-mech-life 6.5s var(--ease) 26.0s forwards; }
 
-/* ---------- The thesis line ---------- */
+/* Inner text scaling keyframes */
+@keyframes hf-mech-num-life {
+  0%, 8%   { font-size: clamp(1.1rem, 1.6vw, 1.5rem); letter-spacing: 0.22em; }
+  85%      { font-size: clamp(1.1rem, 1.6vw, 1.5rem); letter-spacing: 0.22em; }
+  100%     { font-size: 0.6rem; letter-spacing: 0.16em; }
+}
+@keyframes hf-mech-title-life {
+  0%, 8%   { font-size: clamp(3rem, 5.6vw, 5rem); line-height: 1.05; }
+  85%      { font-size: clamp(3rem, 5.6vw, 5rem); line-height: 1.05; }
+  100%     { font-size: 0.7rem; line-height: 1.15; }
+}
+@keyframes hf-mech-tiles-life {
+  0%, 12%  { opacity: 0; transform: translateY(8px); }
+  22%      { opacity: 1; transform: none; }
+  85%      { opacity: 1; transform: none; }
+  100%     { opacity: 0; }
+}
+@keyframes hf-mech-tag-life {
+  0%, 18%  { opacity: 0; }
+  28%      { opacity: 1; font-size: clamp(1rem, 1.6vw, 1.4rem); letter-spacing: 0.16em; }
+  85%      { opacity: 1; font-size: clamp(1rem, 1.6vw, 1.4rem); letter-spacing: 0.16em; }
+  100%     { opacity: 0; font-size: 0.6rem; }
+}
+@keyframes hf-mech-icon-life {
+  0%, 8%   { opacity: 1; top: 1.4rem; right: 1.4rem; width: 96px; height: 96px; }
+  85%      { opacity: 1; top: 1.4rem; right: 1.4rem; width: 96px; height: 96px; }
+  100%     { opacity: 0.7; top: 8px; right: 8px; width: 28px; height: 28px; }
+}
+
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="1"] .mech-num     { animation: hf-mech-num-life     6.5s var(--ease) 6.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="1"] .mech-title   { animation: hf-mech-title-life   6.5s var(--ease) 6.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="1"] .mech-tiles-row { animation: hf-mech-tiles-life 6.5s var(--ease) 6.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="1"] .mech-tag     { animation: hf-mech-tag-life     6.5s var(--ease) 6.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="1"] .mech-icon    { animation: hf-mech-icon-life    6.5s var(--ease) 6.0s forwards; }
+
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="2"] .mech-num     { animation: hf-mech-num-life     6.5s var(--ease) 11.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="2"] .mech-title   { animation: hf-mech-title-life   6.5s var(--ease) 11.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="2"] .mech-tiles-row { animation: hf-mech-tiles-life 6.5s var(--ease) 11.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="2"] .mech-tag     { animation: hf-mech-tag-life     6.5s var(--ease) 11.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="2"] .mech-icon    { animation: hf-mech-icon-life    6.5s var(--ease) 11.0s forwards; }
+
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="3"] .mech-num     { animation: hf-mech-num-life     6.5s var(--ease) 16.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="3"] .mech-title   { animation: hf-mech-title-life   6.5s var(--ease) 16.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="3"] .mech-tiles-row { animation: hf-mech-tiles-life 6.5s var(--ease) 16.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="3"] .mech-tag     { animation: hf-mech-tag-life     6.5s var(--ease) 16.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="3"] .mech-icon    { animation: hf-mech-icon-life    6.5s var(--ease) 16.0s forwards; }
+
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="4"] .mech-num     { animation: hf-mech-num-life     6.5s var(--ease) 21.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="4"] .mech-title   { animation: hf-mech-title-life   6.5s var(--ease) 21.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="4"] .mech-tiles-row { animation: hf-mech-tiles-life 6.5s var(--ease) 21.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="4"] .mech-tag     { animation: hf-mech-tag-life     6.5s var(--ease) 21.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="4"] .mech-icon    { animation: hf-mech-icon-life    6.5s var(--ease) 21.0s forwards; }
+
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="5"] .mech-num     { animation: hf-mech-num-life     6.5s var(--ease) 26.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="5"] .mech-title   { animation: hf-mech-title-life   6.5s var(--ease) 26.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="5"] .mech-tiles-row { animation: hf-mech-tiles-life 6.5s var(--ease) 26.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="5"] .mech-tag     { animation: hf-mech-tag-life     6.5s var(--ease) 26.0s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .hf-mech-card[data-mech="5"] .mech-icon    { animation: hf-mech-icon-life    6.5s var(--ease) 26.0s forwards; }
+
+/* ---------- Thesis card · the final stage ---------- */
+.hf-thesis-card {
+  position: absolute;
+  top: 110px;
+  left: 4%;
+  width: 92%;
+  height: calc(56vh - 130px);
+  background: var(--bone);
+  border: 1px solid var(--ink-muted);
+  padding: 2rem 2.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.4rem;
+  opacity: 0;
+}
+.thesis-label {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 1.6vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  line-height: 1;
+}
 .hf-thesis {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.3rem, 2.6vw, 2.1rem);
-  line-height: 1.2;
-  letter-spacing: -0.018em;
+  font-size: clamp(2.8rem, 5.4vw, 4.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   color: var(--ink);
-  text-align: center;
   text-wrap: balance;
-  margin: 0.5rem 0 0;
+  margin: 0;
+  max-width: 24ch;
   opacity: 0;
-  max-width: 60ch;
 }
-.hf-thesis strong { color: var(--red); font-weight: 700; }
-.slide.is-active .hyperframe[data-scene="3"] .hf-thesis {
-  animation: hf-thesis-in 1.2s var(--ease) 26s forwards,
+.hf-thesis strong { color: var(--red); }
+
+.hf-code-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  opacity: 0;
+}
+.code-lede {
+  font-family: var(--font-mono);
+  font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.code-reasons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.code-reason {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 1.5vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  opacity: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+.code-reason::before {
+  content: counter(reason, decimal-leading-zero);
+  color: var(--red);
+  font-size: 0.85em;
+  letter-spacing: 0.18em;
+}
+.code-reasons { counter-reset: reason; }
+.code-reason { counter-increment: reason; }
+.code-extras {
+  font-family: var(--font-mono);
+  font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  opacity: 0;
+  margin-top: 0.4rem;
+}
+
+/* Thesis card timeline */
+.slide.is-active .hyperframe[data-scene="3"] .hf-thesis-card {
+  animation: hf-thesis-card-in 1s var(--ease) 31.5s forwards,
              hf-thesis-pulse 1.8s ease-in-out 50s infinite;
+}
+.slide.is-active .hyperframe[data-scene="3"] .hf-thesis {
+  animation: hf-thesis-in 1s var(--ease) 32s forwards;
+}
+.slide.is-active .hyperframe[data-scene="3"] .hf-code-footer {
+  animation: hf-fade-in 1s var(--ease) 33.5s forwards;
+}
+.slide.is-active .hyperframe[data-scene="3"] .code-reason:nth-child(1) { animation: hf-fade-in 0.7s var(--ease) 34.5s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .code-reason:nth-child(2) { animation: hf-fade-in 0.7s var(--ease) 37s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .code-reason:nth-child(3) { animation: hf-fade-in 0.7s var(--ease) 39.5s forwards; }
+.slide.is-active .hyperframe[data-scene="3"] .code-extras { animation: hf-fade-in 0.8s var(--ease) 42s forwards; }
+
+@keyframes hf-thesis-card-in {
+  0%   { opacity: 0; transform: scale(0.97); border-color: var(--ink-muted); }
+  100% { opacity: 1; transform: scale(1); border-color: var(--red); border-width: 2px; }
 }
 @keyframes hf-thesis-in {
   0% { opacity: 0; transform: translateY(8px); }
   100% { opacity: 1; transform: none; }
 }
 @keyframes hf-thesis-pulse {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.82; }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200,16,46,0); }
+  50%      { box-shadow: 0 0 0 6px rgba(200,16,46,0.12); }
 }
-
-/* ---------- Pybricks code footer ---------- */
-.hf-code-footer {
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--ink-muted);
-  text-align: center;
-  text-wrap: balance;
-  opacity: 0;
-  padding-top: 0.6rem;
-  border-top: 1px solid var(--rule);
-  max-width: 70ch;
-}
-.hf-code-footer strong { color: var(--red); }
-.slide.is-active .hyperframe[data-scene="3"] .hf-code-footer {
-  animation: hf-fade-in 1s var(--ease) 38s forwards;
-}
+@keyframes hf-fade-in { to { opacity: 1; } }
 
 /* Reduced motion fallback */
 @media (prefers-reduced-motion: reduce) {
   .slide.is-active .hyperframe[data-scene="3"] .hf-phase-1 { animation: none; opacity: 0; }
   .slide.is-active .hyperframe[data-scene="3"] .hf-phase-2 { animation: none; opacity: 1; pointer-events: auto; }
-  .slide.is-active .hyperframe[data-scene="3"] .hf-mech { animation: none; border-color: var(--red); }
-  .slide.is-active .hyperframe[data-scene="3"] .mech-name { animation: none; opacity: 1; }
-  .slide.is-active .hyperframe[data-scene="3"] .m-tile {
-    animation: none;
-    opacity: 1;
-    transform: none;
-    background: var(--red);
-    color: var(--white);
-    border-color: var(--red);
-  }
-  .slide.is-active .hyperframe[data-scene="3"] .hf-thesis { animation: none; opacity: 1; }
-  .slide.is-active .hyperframe[data-scene="3"] .hf-code-footer { animation: none; opacity: 1; }
+  .slide.is-active .hyperframe[data-scene="3"] .hf-badge-s3 { opacity: 1; }
+  .slide.is-active .hyperframe[data-scene="3"] .hf-mech-card { animation: none; opacity: 0.55; }
+  .slide.is-active .hyperframe[data-scene="3"] .hf-mech-card .mech-tiles-row,
+  .slide.is-active .hyperframe[data-scene="3"] .hf-mech-card .mech-tag { opacity: 0; }
+  .slide.is-active .hyperframe[data-scene="3"] .hf-thesis-card { animation: none; opacity: 1; border: 2px solid var(--red); }
+  .slide.is-active .hyperframe[data-scene="3"] .hf-thesis,
+  .slide.is-active .hyperframe[data-scene="3"] .hf-code-footer,
+  .slide.is-active .hyperframe[data-scene="3"] .code-reason,
+  .slide.is-active .hyperframe[data-scene="3"] .code-extras { opacity: 1; }
 }
 
 /* =====================================================
@@ -1908,56 +2087,97 @@
         </div>
       </div>
 
-      <!-- Phase 2 · The compression: 15 tiles → 5 mechanism columns -->
+      <!-- Phase 2 · Sequential mechanism blowup + thesis finale -->
       <div class="hf-phase hf-phase-2">
-        <div class="hf-mech-grid">
-          <div class="hf-mech" data-mech="grabbers">
-            <h4 class="mech-name">Grabbers</h4>
-            <div class="mech-tiles">
+        <div class="hf-stage-s3">
+
+          <article class="hf-mech-card" data-mech="1">
+            <span class="mech-num">Mechanism 01</span>
+            <h4 class="mech-title">Grabbers</h4>
+            <span class="mech-icon" aria-hidden="true">
+              <svg viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"><path d="M 20 20 L 50 60 L 80 20"/><path d="M 50 60 L 50 88"/></g></svg>
+            </span>
+            <div class="mech-tiles-row" aria-label="3 missions">
               <div class="m-tile">M1</div>
               <div class="m-tile">M2</div>
               <div class="m-tile">M3</div>
             </div>
-          </div>
-          <div class="hf-mech" data-mech="push-pull">
-            <h4 class="mech-name">Push-pull arms</h4>
-            <div class="mech-tiles">
+            <span class="mech-tag">3 missions · lift, hold, drop</span>
+          </article>
+
+          <article class="hf-mech-card" data-mech="2">
+            <span class="mech-num">Mechanism 02</span>
+            <h4 class="mech-title">Push-pull arms</h4>
+            <span class="mech-icon" aria-hidden="true">
+              <svg viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M 14 50 L 86 50"/><path d="M 14 50 L 28 36 M 14 50 L 28 64"/><path d="M 86 50 L 72 36 M 86 50 L 72 64"/></g></svg>
+            </span>
+            <div class="mech-tiles-row" aria-label="3 missions">
               <div class="m-tile">M4</div>
               <div class="m-tile">M5</div>
               <div class="m-tile">M6</div>
             </div>
-          </div>
-          <div class="hf-mech" data-mech="rack">
-            <h4 class="mech-name">Rack-and-pinion</h4>
-            <div class="mech-tiles">
+            <span class="mech-tag">3 missions · pivot, slide, release</span>
+          </article>
+
+          <article class="hf-mech-card" data-mech="3">
+            <span class="mech-num">Mechanism 03</span>
+            <h4 class="mech-title">Rack-and-pinion</h4>
+            <span class="mech-icon" aria-hidden="true">
+              <svg viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><circle cx="34" cy="50" r="20"/><path d="M 34 30 L 34 22 M 34 70 L 34 78 M 14 50 L 6 50 M 54 50 L 62 50 M 20 36 L 14 30 M 48 64 L 54 70 M 20 64 L 14 70 M 48 36 L 54 30"/><path d="M 64 80 L 92 80 M 66 80 L 66 74 M 72 80 L 72 74 M 78 80 L 78 74 M 84 80 L 84 74 M 90 80 L 90 74"/></g></svg>
+            </span>
+            <div class="mech-tiles-row" aria-label="3 missions">
               <div class="m-tile">M7</div>
               <div class="m-tile">M8</div>
               <div class="m-tile">M9</div>
             </div>
-          </div>
-          <div class="hf-mech" data-mech="dual">
-            <h4 class="mech-name">Dual-motor arms</h4>
-            <div class="mech-tiles">
+            <span class="mech-tag">3 missions · convert rotation to linear travel</span>
+          </article>
+
+          <article class="hf-mech-card" data-mech="4">
+            <span class="mech-num">Mechanism 04</span>
+            <h4 class="mech-title">Dual-motor arms</h4>
+            <span class="mech-icon" aria-hidden="true">
+              <svg viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="22" r="6" fill="currentColor"/><circle cx="70" cy="22" r="6" fill="currentColor"/><path d="M 30 28 L 30 86"/><path d="M 70 28 L 70 86"/><path d="M 22 86 L 38 86 M 62 86 L 78 86"/></g></svg>
+            </span>
+            <div class="mech-tiles-row" aria-label="3 missions">
               <div class="m-tile">M10</div>
               <div class="m-tile">M11</div>
               <div class="m-tile">M12</div>
             </div>
-          </div>
-          <div class="hf-mech" data-mech="rubber">
-            <h4 class="mech-name">Rubber band systems</h4>
-            <div class="mech-tiles">
+            <span class="mech-tag">3 missions · two motors, one synchronised motion</span>
+          </article>
+
+          <article class="hf-mech-card" data-mech="5">
+            <span class="mech-num">Mechanism 05</span>
+            <h4 class="mech-title">Rubber-band systems</h4>
+            <span class="mech-icon" aria-hidden="true">
+              <svg viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M 8 50 L 22 30 L 36 70 L 50 30 L 64 70 L 78 30 L 92 50"/></g></svg>
+            </span>
+            <div class="mech-tiles-row" aria-label="3 missions">
               <div class="m-tile">M13</div>
               <div class="m-tile">M14</div>
               <div class="m-tile">M15</div>
             </div>
-          </div>
+            <span class="mech-tag">3 missions · stored energy, single trigger</span>
+          </article>
+
+          <!-- Thesis finale card -->
+          <article class="hf-thesis-card">
+            <span class="thesis-label">Thesis</span>
+            <h4 class="hf-thesis">We engineered <strong>mechanisms.</strong><br/>Not missions.</h4>
+            <div class="hf-code-footer">
+              <span class="code-lede">Pybricks · 3 reasons</span>
+              <div class="code-reasons">
+                <span class="code-reason">Precise distance control</span>
+                <span class="code-reason">Custom wheel-diameter calibration</span>
+                <span class="code-reason">No Bluetooth lag</span>
+              </div>
+              <span class="code-extras">+ auto-incrementing run menu · gyro-driven straight line · fail-safe launches</span>
+            </div>
+          </article>
         </div>
 
-        <p class="hf-thesis">We engineered <strong>mechanisms</strong>. Not missions.</p>
-
-        <div class="hf-code-footer">
-          <strong>Code:</strong> Pybricks · precise distance · custom wheel calibration · no Bluetooth lag · auto-incrementing run menu · gyro-driven · fail-safe launches
-        </div>
+        <div class="hf-badge-s3" aria-hidden="true">15 missions</div>
       </div>
     </div>
 
