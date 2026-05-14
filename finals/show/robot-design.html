@@ -133,208 +133,305 @@
 .slide.is-active .hf-badge { animation: hf-badge-in 1s var(--ease) 8s forwards; }
 @keyframes hf-badge-in { to { opacity: 1; } }
 
-/* ---------- Phase 2 + 3 · Strategy cards ---------- */
+/* ---------- Phase 2 · Sequential strategy blowup ----------
+   Each strategy takes the full stage for ~5s, then shrinks to a thumbnail
+   pinned to the top row beside the 27·15·2 badge. Strategy 5 (adopted)
+   holds the stage from 28s onward with 8-run grid + factors + sweep.
+
+   Slot timing (relative to slide-active=0):
+     t=8.0   Phase 2 wrapper activates
+     t=8.0   Strategy 01 fades in BIG
+     t=11.5  Strategy 01 strike + reject reason
+     t=12.8  Strategy 01 shrinks to thumb slot 1
+     t=13.0  Strategy 02 fades in BIG
+     t=16.5  Strategy 02 strike + reject reason
+     t=17.8  Strategy 02 shrinks to thumb slot 2
+     t=18.0  Strategy 03 fades in BIG
+     t=21.5  Strategy 03 strike + reject reason
+     t=22.8  Strategy 03 shrinks to thumb slot 3
+     t=23.0  Strategy 04 fades in BIG
+     t=26.5  Strategy 04 strike + reject reason
+     t=27.8  Strategy 04 shrinks to thumb slot 4
+     t=28.0  Strategy 05 fades in BIG with Adopted flag
+     t=29.5  8-run grid renders inside Strategy 05
+     t=34s   Proximity factor highlights runs 1-3
+     t=38s   Sector-sweep arrow draws across
+     t=44s   Attachment factor outlines runs 5-8
+     t=50s+  Final pulse on Strategy 05 holds to 60s
+---------------------------------------------------- */
 .slide.is-active .hf-phase-2 { animation: hf-phase2 0.001s linear 8s forwards; }
 @keyframes hf-phase2 { to { opacity: 1; pointer-events: auto; } }
 
-.hf-strats {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.85rem;
-  width: 100%;
-  max-width: 1100px;
-  align-items: stretch;
-  transition: grid-template-columns 1.1s var(--ease);
-}
-
-/* Phase 3: layout shifts at 32s — 4 thumbs + Card 5 expands */
-.slide.is-active .hf-strats { animation: hf-grid-shift 1s var(--ease) 32s forwards; }
-@keyframes hf-grid-shift {
-  to { grid-template-columns: 78px 78px 78px 78px 1fr; }
-}
-
-.hf-card {
+/* Stage — relative container for absolutely-positioned BIG/THUMB cards */
+.hf-stage {
   position: relative;
+  width: 100%;
+  min-height: 56vh;
+}
+
+/* Card base — defaults to the THUMB resting state in the top row.
+   When a card animates "in BIG", overrides put it center-stage huge.
+   Thumb slots 1..4 use top:6px + per-card left offsets. */
+.hf-card {
+  position: absolute;
   background: var(--bone);
   border: 1px solid var(--ink-muted);
-  padding: 1.1rem 1rem 1.4rem;
+  padding: 0.55rem 0.7rem;
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.25rem;
   opacity: 0;
-  transform: translateY(20px);
-  min-height: 200px;
   overflow: visible;
-  transition: padding 1s var(--ease);
+  box-sizing: border-box;
+  /* default = thumb dimensions; in-BIG animation overrides */
+  top: 6px;
+  height: 70px;
+  width: 150px;
 }
+.hf-card[data-strat="1"] { left: 170px; }
+.hf-card[data-strat="2"] { left: 332px; }
+.hf-card[data-strat="3"] { left: 494px; }
+.hf-card[data-strat="4"] { left: 656px; }
 .hf-card .card-num {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--red);
+  line-height: 1;
 }
 .hf-card .card-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1rem;
-  line-height: 1.2;
+  font-size: 0.68rem;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
   color: var(--ink);
   margin: 0;
 }
 
-/* Cards stagger in at 8.2 / 8.4 / 8.6 / 8.8 / 9.0 */
-.slide.is-active .hf-card[data-strat="1"] {
-  animation: hf-card-in 0.7s var(--ease) 8.2s forwards,
-             hf-card-fade 0.7s var(--ease) 12s forwards,
-             hf-card-thumb 1s var(--ease) 32s forwards;
-}
-.slide.is-active .hf-card[data-strat="2"] {
-  animation: hf-card-in 0.7s var(--ease) 8.4s forwards,
-             hf-card-fade 0.7s var(--ease) 16s forwards,
-             hf-card-thumb 1s var(--ease) 32s forwards;
-}
-.slide.is-active .hf-card[data-strat="3"] {
-  animation: hf-card-in 0.7s var(--ease) 8.6s forwards,
-             hf-card-fade 0.7s var(--ease) 20s forwards,
-             hf-card-thumb 1s var(--ease) 32s forwards;
-}
-.slide.is-active .hf-card[data-strat="4"] {
-  animation: hf-card-in 0.7s var(--ease) 8.8s forwards,
-             hf-card-fade 0.7s var(--ease) 24s forwards,
-             hf-card-thumb 1s var(--ease) 32s forwards;
-}
-.slide.is-active .hf-card[data-strat="5"] {
-  animation: hf-card-in 0.7s var(--ease) 9.0s forwards,
-             hf-adopt-highlight 1s var(--ease) 28s forwards,
-             hf-adopt-pulse 1.6s ease-in-out 50s infinite;
-}
-
-@keyframes hf-card-in {
-  to { opacity: 1; transform: none; }
-}
-@keyframes hf-card-fade {
-  to { opacity: 0.3; }
-}
-@keyframes hf-card-thumb {
-  to {
-    padding: 0.5rem 0.5rem;
-    min-height: 78px;
+/* BIG state — applied via animation to each card during its slot.
+   Each card runs one master "life" animation that handles fade-in BIG,
+   hold, and shrink-to-thumb. Card 5 has no shrink. */
+@keyframes hf-strat-life-rejected {
+  /* 0%  -> just appeared (BIG, opacity 0 → 1) */
+  /* 8%  -> fully BIG, just before strike */
+  /* 70% -> BIG, struck through, reject reason shown */
+  /* 80% -> begin shrink to thumb */
+  /* 100% -> thumb resting state */
+  0% {
+    opacity: 0;
+    top: 110px;
+    left: 5%;
+    width: 90%;
+    height: calc(56vh - 130px);
+    padding: clamp(1.6rem, 3vw, 2.6rem) clamp(2rem, 4vw, 3.4rem);
+    gap: 1rem;
+  }
+  8% {
+    opacity: 1;
+    top: 110px;
+    left: 5%;
+    width: 90%;
+    height: calc(56vh - 130px);
+    padding: clamp(1.6rem, 3vw, 2.6rem) clamp(2rem, 4vw, 3.4rem);
+    gap: 1rem;
+  }
+  78% {
+    opacity: 1;
+    top: 110px;
+    left: 5%;
+    width: 90%;
+    height: calc(56vh - 130px);
+    padding: clamp(1.6rem, 3vw, 2.6rem) clamp(2rem, 4vw, 3.4rem);
+    gap: 1rem;
+  }
+  100% {
+    opacity: 0.45;
+    /* top/left fall back to declared per-strat defaults */
+    padding: 0.55rem 0.7rem;
+    gap: 0.25rem;
   }
 }
+
+.slide.is-active .hf-card[data-strat="1"] {
+  animation: hf-strat-life-rejected 6.2s var(--ease) 8.0s forwards;
+}
+.slide.is-active .hf-card[data-strat="2"] {
+  animation: hf-strat-life-rejected 6.2s var(--ease) 13.0s forwards;
+}
+.slide.is-active .hf-card[data-strat="3"] {
+  animation: hf-strat-life-rejected 6.2s var(--ease) 18.0s forwards;
+}
+.slide.is-active .hf-card[data-strat="4"] {
+  animation: hf-strat-life-rejected 6.2s var(--ease) 23.0s forwards;
+}
+
+/* Strategy 5 — never shrinks. Fades in BIG and stays. */
+.hf-card[data-strat="5"] {
+  /* No thumb slot; default is the BIG centered footprint, hidden */
+  top: 110px;
+  left: 5%;
+  width: 90%;
+  height: calc(56vh - 130px);
+  padding: clamp(1.6rem, 3vw, 2.6rem) clamp(2rem, 4vw, 3.4rem);
+  gap: 1rem;
+}
+.slide.is-active .hf-card[data-strat="5"] {
+  animation:
+    hf-strat-5-in 0.9s var(--ease) 28.0s forwards,
+    hf-adopt-highlight 1s var(--ease) 29.0s forwards,
+    hf-adopt-pulse 1.8s ease-in-out 50s infinite;
+}
+@keyframes hf-strat-5-in {
+  0%   { opacity: 0; transform: scale(0.97); }
+  100% { opacity: 1; transform: scale(1); }
+}
 @keyframes hf-adopt-highlight {
-  0%   { border-color: var(--ink-muted); transform: scale(1); }
-  50%  { border-color: var(--red); transform: scale(1.03); }
-  100% { border-color: var(--red); border-width: 2px; transform: scale(1.03); }
+  0%   { border-color: var(--ink-muted); }
+  100% { border-color: var(--red); border-width: 2px; }
 }
 @keyframes hf-adopt-pulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(200,16,46,0); }
-  50%      { box-shadow: 0 0 0 4px rgba(200,16,46,0.15); }
+  50%      { box-shadow: 0 0 0 6px rgba(200,16,46,0.12); }
 }
 
-/* Strikethrough — diagonal red line */
+/* Inside the BIG card: scale up text so judges 20ft away can read it.
+   When the card shrinks (strat 1-4), the same animation shrinks the
+   inner text in lockstep. */
+.hf-card[data-strat="1"] .card-num,
+.hf-card[data-strat="2"] .card-num,
+.hf-card[data-strat="3"] .card-num,
+.hf-card[data-strat="4"] .card-num,
+.hf-card[data-strat="5"] .card-num {
+  font-size: 0.6rem; /* thumb resting size */
+}
+.slide.is-active .hf-card[data-strat="1"] .card-num { animation: hf-num-big 6.2s var(--ease) 8.0s forwards; }
+.slide.is-active .hf-card[data-strat="2"] .card-num { animation: hf-num-big 6.2s var(--ease) 13.0s forwards; }
+.slide.is-active .hf-card[data-strat="3"] .card-num { animation: hf-num-big 6.2s var(--ease) 18.0s forwards; }
+.slide.is-active .hf-card[data-strat="4"] .card-num { animation: hf-num-big 6.2s var(--ease) 23.0s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .card-num { animation: hf-num-big-stay 1s var(--ease) 28.0s forwards; }
+@keyframes hf-num-big {
+  0%, 8%   { font-size: clamp(1.1rem, 1.8vw, 1.6rem); letter-spacing: 0.22em; }
+  78%      { font-size: clamp(1.1rem, 1.8vw, 1.6rem); letter-spacing: 0.22em; }
+  100%     { font-size: 0.6rem; letter-spacing: 0.18em; }
+}
+@keyframes hf-num-big-stay {
+  to { font-size: clamp(1.1rem, 1.8vw, 1.6rem); letter-spacing: 0.22em; }
+}
+
+.hf-card[data-strat="1"] .card-title,
+.hf-card[data-strat="2"] .card-title,
+.hf-card[data-strat="3"] .card-title,
+.hf-card[data-strat="4"] .card-title,
+.hf-card[data-strat="5"] .card-title {
+  font-size: 0.68rem;
+}
+.slide.is-active .hf-card[data-strat="1"] .card-title { animation: hf-title-big 6.2s var(--ease) 8.0s forwards; }
+.slide.is-active .hf-card[data-strat="2"] .card-title { animation: hf-title-big 6.2s var(--ease) 13.0s forwards; }
+.slide.is-active .hf-card[data-strat="3"] .card-title { animation: hf-title-big 6.2s var(--ease) 18.0s forwards; }
+.slide.is-active .hf-card[data-strat="4"] .card-title { animation: hf-title-big 6.2s var(--ease) 23.0s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .card-title { animation: hf-title-big-stay 1s var(--ease) 28.0s forwards; }
+@keyframes hf-title-big {
+  0%, 8%   { font-size: clamp(3rem, 6vw, 5.6rem); line-height: 1.05; }
+  78%      { font-size: clamp(3rem, 6vw, 5.6rem); line-height: 1.05; }
+  100%     { font-size: 0.68rem; line-height: 1.15; }
+}
+@keyframes hf-title-big-stay {
+  to { font-size: clamp(2.4rem, 5vw, 4.6rem); line-height: 1.05; }
+}
+
+/* Strikethrough — diagonal red line, animates only on rejected cards
+   roughly 70% through their life (i.e. at slot_start + ~4.3s) */
 .hf-strike {
   position: absolute;
   top: 50%;
   left: 0;
   width: 0;
-  height: 4px;
+  height: 6px;
   background: var(--red);
-  transform: translateY(-50%) rotate(-12deg);
+  transform: translateY(-50%) rotate(-8deg);
   transform-origin: left center;
   pointer-events: none;
   z-index: 2;
+  opacity: 0;
 }
-.slide.is-active .hf-card[data-strat="1"] .hf-strike { animation: hf-strike 0.6s var(--ease) 12s forwards; }
-.slide.is-active .hf-card[data-strat="2"] .hf-strike { animation: hf-strike 0.6s var(--ease) 16s forwards; }
-.slide.is-active .hf-card[data-strat="3"] .hf-strike { animation: hf-strike 0.6s var(--ease) 20s forwards; }
-.slide.is-active .hf-card[data-strat="4"] .hf-strike { animation: hf-strike 0.6s var(--ease) 24s forwards; }
-@keyframes hf-strike { to { width: 110%; } }
+.slide.is-active .hf-card[data-strat="1"] .hf-strike { animation: hf-strike 0.7s var(--ease) 12.3s forwards; }
+.slide.is-active .hf-card[data-strat="2"] .hf-strike { animation: hf-strike 0.7s var(--ease) 17.3s forwards; }
+.slide.is-active .hf-card[data-strat="3"] .hf-strike { animation: hf-strike 0.7s var(--ease) 22.3s forwards; }
+.slide.is-active .hf-card[data-strat="4"] .hf-strike { animation: hf-strike 0.7s var(--ease) 27.3s forwards; }
+@keyframes hf-strike {
+  0%   { width: 0; opacity: 1; }
+  85%  { width: 95%; opacity: 1; }
+  100% { width: 95%; opacity: 0.55; }
+}
 
-/* Reject reasons — appear with strike, fade out 2s later */
+/* Reject reasons — huge text under the title while BIG, hidden when thumb */
 .hf-card .card-reject {
-  position: absolute;
-  bottom: -1.8rem;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.005em;
   color: var(--red);
   opacity: 0;
-  text-transform: lowercase;
-  white-space: nowrap;
-  pointer-events: none;
+  margin: 0;
+  /* When BIG the card-reject is enlarged via its own animation; thumb hides it */
+  font-size: 0.65rem;
+  line-height: 1.2;
 }
-.slide.is-active .hf-card[data-strat="1"] .card-reject { animation: hf-reject 2.5s var(--ease) 12s forwards; }
-.slide.is-active .hf-card[data-strat="2"] .card-reject { animation: hf-reject 2.5s var(--ease) 16s forwards; }
-.slide.is-active .hf-card[data-strat="3"] .card-reject { animation: hf-reject 2.5s var(--ease) 20s forwards; }
-.slide.is-active .hf-card[data-strat="4"] .card-reject { animation: hf-reject 2.5s var(--ease) 24s forwards; }
-@keyframes hf-reject {
-  0%   { opacity: 0; transform: translateY(-5px); }
-  20%  { opacity: 1; transform: none; }
-  85%  { opacity: 1; }
-  100% { opacity: 0; }
+.slide.is-active .hf-card[data-strat="1"] .card-reject { animation: hf-reject-big 6.2s var(--ease) 8.0s forwards; }
+.slide.is-active .hf-card[data-strat="2"] .card-reject { animation: hf-reject-big 6.2s var(--ease) 13.0s forwards; }
+.slide.is-active .hf-card[data-strat="3"] .card-reject { animation: hf-reject-big 6.2s var(--ease) 18.0s forwards; }
+.slide.is-active .hf-card[data-strat="4"] .card-reject { animation: hf-reject-big 6.2s var(--ease) 23.0s forwards; }
+@keyframes hf-reject-big {
+  0%   { opacity: 0; font-size: clamp(1.4rem, 2.6vw, 2.4rem); }
+  40%  { opacity: 0; font-size: clamp(1.4rem, 2.6vw, 2.4rem); }
+  /* 50% = mid-life, ~5.1s after start → strike already firing */
+  55%  { opacity: 1; font-size: clamp(1.4rem, 2.6vw, 2.4rem); }
+  78%  { opacity: 1; font-size: clamp(1.4rem, 2.6vw, 2.4rem); }
+  100% { opacity: 0; font-size: 0.65rem; }
 }
 
 /* "Adopted." flag above Card 5 */
 .hf-adopted-flag {
   position: absolute;
-  top: -1.5rem;
-  left: 0;
+  top: 1rem;
+  right: 1.4rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--red);
   opacity: 0;
+  padding: 0.35rem 0.7rem;
+  border: 2px solid var(--red);
 }
-.slide.is-active .hf-card[data-strat="5"] .hf-adopted-flag { animation: hf-flag-in 1s var(--ease) 28s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-adopted-flag { animation: hf-flag-in 1s var(--ease) 28.6s forwards; }
 @keyframes hf-flag-in {
-  0% { opacity: 0; transform: translateY(5px); }
+  0%   { opacity: 0; transform: translateY(-5px) scale(0.95); }
   100% { opacity: 1; transform: none; }
 }
 
-/* When cards 1-4 become thumbnails, hide their inner detail */
-.slide.is-active .hf-card[data-strat="1"] .card-reject,
-.slide.is-active .hf-card[data-strat="2"] .card-reject,
-.slide.is-active .hf-card[data-strat="3"] .card-reject,
-.slide.is-active .hf-card[data-strat="4"] .card-reject {
-  /* reject is animation-driven; once at opacity 0 it stays so */
-}
-.slide.is-active .hf-card[data-strat="1"] .card-title,
-.slide.is-active .hf-card[data-strat="2"] .card-title,
-.slide.is-active .hf-card[data-strat="3"] .card-title,
-.slide.is-active .hf-card[data-strat="4"] .card-title {
-  animation: hf-thumb-text 1s var(--ease) 32s forwards;
-}
-@keyframes hf-thumb-text {
-  to { font-size: 0.66rem; line-height: 1.15; }
-}
-
-/* ---------- Phase 3 · 8-run grid inside Card 5 ---------- */
+/* ---------- 8-run grid inside Card 5 ---------- */
 .hf-runs {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0.45rem;
-  margin-top: 1rem;
+  gap: 0.7rem;
+  margin-top: 1.2rem;
   position: relative;
   opacity: 0;
 }
-.slide.is-active .hf-card[data-strat="5"] .hf-runs { animation: hf-runs-in 0.5s var(--ease) 33.5s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-runs { animation: hf-runs-in 0.5s var(--ease) 29.5s forwards; }
 @keyframes hf-runs-in { to { opacity: 1; } }
 
 .hf-run {
   background: var(--bone);
-  border: 1px solid var(--rule);
-  padding: 0.6rem 0.4rem;
+  border: 1.5px solid var(--rule);
+  padding: 1rem 0.6rem;
   text-align: center;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: clamp(1.1rem, 1.8vw, 1.6rem);
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--red);
@@ -342,52 +439,24 @@
   transform: scale(0.92);
   transition: background .8s var(--ease), border-color .8s var(--ease);
 }
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(1) { animation: hf-run-in 0.5s var(--ease) 34.0s forwards; }
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(2) { animation: hf-run-in 0.5s var(--ease) 34.1s forwards; }
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(3) { animation: hf-run-in 0.5s var(--ease) 34.2s forwards; }
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(4) { animation: hf-run-in 0.5s var(--ease) 34.3s forwards; }
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(5) { animation: hf-run-in 0.5s var(--ease) 34.4s forwards; }
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(6) { animation: hf-run-in 0.5s var(--ease) 34.5s forwards; }
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(7) { animation: hf-run-in 0.5s var(--ease) 34.6s forwards; }
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(8) { animation: hf-run-in 0.5s var(--ease) 34.7s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(1) { animation: hf-run-in 0.5s var(--ease) 30.0s forwards, hf-run-proximity 1.8s var(--ease) 34.0s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(2) { animation: hf-run-in 0.5s var(--ease) 30.1s forwards, hf-run-proximity 1.8s var(--ease) 34.1s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(3) { animation: hf-run-in 0.5s var(--ease) 30.2s forwards, hf-run-proximity 1.8s var(--ease) 34.2s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(4) { animation: hf-run-in 0.5s var(--ease) 30.3s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(5) { animation: hf-run-in 0.5s var(--ease) 30.4s forwards, hf-run-attach 1.8s var(--ease) 44.0s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(6) { animation: hf-run-in 0.5s var(--ease) 30.5s forwards, hf-run-attach 1.8s var(--ease) 44.1s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(7) { animation: hf-run-in 0.5s var(--ease) 30.6s forwards, hf-run-attach 1.8s var(--ease) 44.2s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(8) { animation: hf-run-in 0.5s var(--ease) 30.7s forwards, hf-run-attach 1.8s var(--ease) 44.3s forwards; }
 @keyframes hf-run-in {
   to { opacity: 1; transform: none; }
-}
-
-/* Factor 1 (Proximity) — runs 1, 2, 3 highlight navy at 38s, settle back */
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(1),
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(2),
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(3) {
-  animation: hf-run-in 0.5s var(--ease) 34.0s forwards,
-             hf-run-proximity 1.6s var(--ease) 38s forwards;
-}
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(2) {
-  animation: hf-run-in 0.5s var(--ease) 34.1s forwards,
-             hf-run-proximity 1.6s var(--ease) 38.1s forwards;
-}
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(3) {
-  animation: hf-run-in 0.5s var(--ease) 34.2s forwards,
-             hf-run-proximity 1.6s var(--ease) 38.2s forwards;
 }
 @keyframes hf-run-proximity {
   0%, 100% { background: var(--bone); color: var(--red); }
   40%, 70% { background: var(--navy); color: var(--bone); border-color: var(--navy); }
 }
-
-/* Factor 3 (Attachments) — runs 5+6 and 7+8 outline red briefly at 46s */
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(5),
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(6) {
-  animation: hf-run-in 0.5s var(--ease) 34.4s forwards,
-             hf-run-attach 1.6s var(--ease) 46s forwards;
-}
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(7),
-.slide.is-active .hf-card[data-strat="5"] .hf-run:nth-child(8) {
-  animation: hf-run-in 0.5s var(--ease) 34.6s forwards,
-             hf-run-attach 1.6s var(--ease) 46.2s forwards;
-}
 @keyframes hf-run-attach {
-  0%, 100% { border-color: var(--rule); border-width: 1px; }
-  40%, 70% { border-color: var(--red); border-width: 2px; }
+  0%, 100% { border-color: var(--rule); border-width: 1.5px; }
+  40%, 70% { border-color: var(--red); border-width: 2.5px; }
 }
 
 /* Sweep arrow SVG overlay */
@@ -403,31 +472,33 @@
 }
 .hf-sweep-arrow path {
   stroke: var(--red);
-  stroke-width: 2;
+  stroke-width: 3;
   fill: none;
   stroke-dasharray: 400;
   stroke-dashoffset: 400;
 }
 .hf-sweep-arrow polygon { fill: var(--red); }
-.slide.is-active .hf-card[data-strat="5"] .hf-sweep-arrow { animation: hf-sweep-show 0.3s var(--ease) 42s forwards; }
-.slide.is-active .hf-card[data-strat="5"] .hf-sweep-arrow path { animation: hf-sweep-draw 1.2s var(--ease) 42s forwards; }
-.slide.is-active .hf-card[data-strat="5"] .hf-sweep-arrow polygon { animation: hf-sweep-show 0.3s var(--ease) 43s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-sweep-arrow { animation: hf-sweep-show 0.3s var(--ease) 38s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-sweep-arrow path { animation: hf-sweep-draw 1.4s var(--ease) 38s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-sweep-arrow polygon { animation: hf-sweep-show 0.3s var(--ease) 39.2s forwards; }
 @keyframes hf-sweep-show { to { opacity: 1; } }
 @keyframes hf-sweep-draw { to { stroke-dashoffset: 0; } }
 
 /* ---------- 3 grouping factor labels ---------- */
 .hf-factors {
   display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  margin-top: 0.95rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.2rem 2rem;
+  margin-top: 1.2rem;
+  align-items: center;
 }
 .hf-factor {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.7rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: clamp(0.9rem, 1.3vw, 1.2rem);
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -435,19 +506,19 @@
   opacity: 0;
 }
 .hf-factor .dot {
-  width: 10px; height: 10px;
+  width: 16px; height: 16px;
   background: var(--navy);
   display: inline-block;
 }
-.hf-factor .arrow { color: var(--red); font-family: var(--font-display); font-size: 1rem; line-height: 1; }
+.hf-factor .arrow { color: var(--red); font-family: var(--font-display); font-size: 1.4rem; line-height: 1; }
 .hf-factor .square {
-  width: 10px; height: 10px;
-  border: 2px solid var(--red);
+  width: 16px; height: 16px;
+  border: 3px solid var(--red);
   display: inline-block;
 }
-.slide.is-active .hf-card[data-strat="5"] .hf-factor:nth-child(1) { animation: hf-factor-in 0.6s var(--ease) 38s forwards; }
-.slide.is-active .hf-card[data-strat="5"] .hf-factor:nth-child(2) { animation: hf-factor-in 0.6s var(--ease) 42s forwards; }
-.slide.is-active .hf-card[data-strat="5"] .hf-factor:nth-child(3) { animation: hf-factor-in 0.6s var(--ease) 46s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-factor:nth-child(1) { animation: hf-factor-in 0.6s var(--ease) 34s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-factor:nth-child(2) { animation: hf-factor-in 0.6s var(--ease) 38s forwards; }
+.slide.is-active .hf-card[data-strat="5"] .hf-factor:nth-child(3) { animation: hf-factor-in 0.6s var(--ease) 44s forwards; }
 @keyframes hf-factor-in {
   0% { opacity: 0; transform: translateX(-8px); }
   100% { opacity: 1; transform: none; }
@@ -457,24 +528,34 @@
 @media (prefers-reduced-motion: reduce) {
   .slide.is-active .hf-phase-1 { animation: none; opacity: 0; }
   .slide.is-active .hf-phase-2 { animation: none; opacity: 1; pointer-events: auto; }
-  .slide.is-active .hf-strats {
-    animation: none;
-    grid-template-columns: 78px 78px 78px 78px 1fr;
-  }
   .slide.is-active .hf-card { animation: none; opacity: 1; transform: none; }
   .slide.is-active .hf-card[data-strat="1"],
   .slide.is-active .hf-card[data-strat="2"],
   .slide.is-active .hf-card[data-strat="3"],
-  .slide.is-active .hf-card[data-strat="4"] { opacity: 0.3; padding: 0.5rem; min-height: 78px; }
+  .slide.is-active .hf-card[data-strat="4"] { opacity: 0.45; }
+  .slide.is-active .hf-card[data-strat="1"] .card-num,
+  .slide.is-active .hf-card[data-strat="2"] .card-num,
+  .slide.is-active .hf-card[data-strat="3"] .card-num,
+  .slide.is-active .hf-card[data-strat="4"] .card-num,
+  .slide.is-active .hf-card[data-strat="5"] .card-num { font-size: 0.6rem; letter-spacing: 0.18em; }
+  .slide.is-active .hf-card[data-strat="5"] .card-num { font-size: clamp(1.1rem, 1.8vw, 1.6rem); letter-spacing: 0.22em; }
   .slide.is-active .hf-card[data-strat="1"] .card-title,
   .slide.is-active .hf-card[data-strat="2"] .card-title,
   .slide.is-active .hf-card[data-strat="3"] .card-title,
-  .slide.is-active .hf-card[data-strat="4"] .card-title { font-size: 0.66rem; }
-  .slide.is-active .hf-card[data-strat="5"] { border: 2px solid var(--red); transform: scale(1.03); }
+  .slide.is-active .hf-card[data-strat="4"] .card-title { font-size: 0.68rem; line-height: 1.15; }
+  .slide.is-active .hf-card[data-strat="5"] .card-title { font-size: clamp(2.4rem, 5vw, 4.6rem); line-height: 1.05; }
+  .slide.is-active .hf-card[data-strat="5"] { border: 2px solid var(--red); }
   .slide.is-active .hf-card[data-strat="5"] .hf-runs { opacity: 1; }
   .slide.is-active .hf-card[data-strat="5"] .hf-run { opacity: 1; transform: none; }
   .slide.is-active .hf-card[data-strat="5"] .hf-factor { opacity: 1; transform: none; }
-  .slide.is-active .hf-strike { width: 110%; }
+  .slide.is-active .hf-card[data-strat="1"] .hf-strike,
+  .slide.is-active .hf-card[data-strat="2"] .hf-strike,
+  .slide.is-active .hf-card[data-strat="3"] .hf-strike,
+  .slide.is-active .hf-card[data-strat="4"] .hf-strike { width: 95%; opacity: 0.55; }
+  .slide.is-active .hf-card[data-strat="1"] .card-reject,
+  .slide.is-active .hf-card[data-strat="2"] .card-reject,
+  .slide.is-active .hf-card[data-strat="3"] .card-reject,
+  .slide.is-active .hf-card[data-strat="4"] .card-reject { opacity: 0; }
   .slide.is-active .hf-badge { opacity: 1; }
   .slide.is-active .hf-adopted-flag { opacity: 1; }
   .slide.is-active .hf-sweep-arrow,
@@ -488,16 +569,23 @@
 /* =====================================================
    SCENE 2 · DESIGN · Hyperframe — "5 generations of failure-fix"
    60-second auto-run, triggered by .slide.is-active.
+   Sequential blowup choreography: each generation takes the full stage
+   with its actual photo, then shrinks to a thumbnail in the evolution
+   trail at the bottom. Gen 5 (World Dominator) has no photo — it stays
+   text-only with specs and the "Adopted · current" callout.
 
    Timeline:
-     0–6s   Phase 1 · "5 generations · 4 years" headline
-     6s     Phase 2 · Gen 1 fades in (Hub-only base)
-    14s     Gen 2 fades in (Spike base + pinning) · Gen 1 failure struck
-    22s     Gen 3 fades in (Yellow box) · Gen 2 failure struck
-    30s     Gen 4 fades in (TrackX wide) · Gen 3 failure struck
-    38s     Gen 5 fades in (World Dominator) · Gen 4 failure struck
-    46s     Gen 5 highlights with red border + connecting arrows fade in
-    50s+    Hold final state with subtle pulse on Gen 5
+     0–5s    Phase 1 · "5 generations · 4 years" headline
+     5–6s    Phase 1 collapses to badge top-left
+     6–13s   Gen 1 PHOTO BIG · failure strikes at 11.5s
+    13–14s   Gen 1 → thumb slot 1 (bottom-left)
+    14–21s   Gen 2 PHOTO BIG · failure strikes at 19.5s
+    21–22s   Gen 2 → thumb slot 2
+    22–29s   Gen 3 PHOTO BIG · failure strikes at 27.5s
+    29–30s   Gen 3 → thumb slot 3
+    30–37s   Gen 4 PHOTO BIG · failure strikes at 35.5s
+    37–38s   Gen 4 → thumb slot 4
+    38–60s   Gen 5 takes stage (specs, adopted highlight, pulse)
    ===================================================== */
 
 @property --n5 { syntax: "<integer>"; initial-value: 0; inherits: false; }
@@ -506,11 +594,11 @@
 
 /* ---------- Phase 1 · "5 generations" headline ---------- */
 .slide.is-active .hyperframe[data-scene="2"] .hf-phase-1 {
-  animation: hf-phase1-s2 6s linear 0s forwards;
+  animation: hf-phase1-s2 5.5s linear 0s forwards;
 }
 @keyframes hf-phase1-s2 {
   0%   { opacity: 1; transform: scale(1); }
-  83%  { opacity: 1; transform: scale(1); }
+  82%  { opacity: 1; transform: scale(1); }
   100% { opacity: 0; transform: scale(0.7); }
 }
 
@@ -530,12 +618,12 @@
   opacity: 0;
 }
 .slide.is-active .hyperframe[data-scene="2"] .hf-big-num {
-  animation: hf-num-in 0.9s var(--ease) 0.5s forwards;
+  animation: hf-num-in 0.9s var(--ease) 0.4s forwards;
 }
 .hf-count[data-target="5"] { counter-reset: hf var(--n5); }
 .hf-count[data-target="5"]::after { content: counter(hf); }
 .slide.is-active .hyperframe[data-scene="2"] .hf-count[data-target="5"] {
-  animation: hf-count-5 0.6s var(--ease) 0.6s forwards;
+  animation: hf-count-5 0.5s var(--ease) 0.5s forwards;
 }
 @keyframes hf-count-5 { to { --n5: 5; } }
 
@@ -546,117 +634,132 @@
   letter-spacing: -0.018em;
   color: var(--ink);
   opacity: 0;
+  text-wrap: balance;
 }
 .slide.is-active .hyperframe[data-scene="2"] .hf-big-lab {
-  animation: hf-num-in 0.9s var(--ease) 1.2s forwards;
+  animation: hf-num-in 0.9s var(--ease) 1.0s forwards;
 }
 
 .hf-big-sublabel {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink-muted);
   margin-top: 0.5rem;
   opacity: 0;
+  text-wrap: balance;
 }
 .slide.is-active .hyperframe[data-scene="2"] .hf-big-sublabel {
-  animation: hf-num-in 0.9s var(--ease) 1.8s forwards;
+  animation: hf-num-in 0.9s var(--ease) 1.6s forwards;
 }
 
-/* ---------- Phase 2 · Five generation cards ---------- */
-.slide.is-active .hyperframe[data-scene="2"] .hf-phase-2 {
-  animation: hf-phase2-s2 0.001s linear 6s forwards;
-}
-@keyframes hf-phase2-s2 { to { opacity: 1; pointer-events: auto; } }
-
-.hf-gens {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.7rem;
-  width: 100%;
-  max-width: 1100px;
-  align-items: stretch;
-}
-
-.hf-gen {
-  position: relative;
-  background: var(--bone);
-  border: 1px solid var(--ink-muted);
-  padding: 1rem 0.85rem 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  opacity: 0;
-  transform: translateY(20px);
-  min-height: 220px;
-}
-.hf-gen .gen-num {
+/* ---------- Scene 2 badge (after Phase 1 collapse) ---------- */
+.hf-badge-s2 {
+  position: absolute;
+  top: 0;
+  left: 0;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  color: var(--ink-muted);
+  opacity: 0;
+}
+.slide.is-active .hyperframe[data-scene="2"] .hf-badge-s2 {
+  animation: hf-badge-in 1s var(--ease) 5.5s forwards;
+}
+
+/* ---------- Phase 2 · Sequential generation blowup ---------- */
+.slide.is-active .hyperframe[data-scene="2"] .hf-phase-2 {
+  animation: hf-phase2-s2 0.001s linear 5.5s forwards;
+}
+@keyframes hf-phase2-s2 { to { opacity: 1; pointer-events: auto; } }
+
+.hf-stage-s2 {
+  position: relative;
+  width: 100%;
+  min-height: 56vh;
+}
+
+/* Gen card — default = thumb resting state at bottom of stage.
+   Each card uses flex-direction: row in BIG (photo dominates left,
+   text stacked right) and flex-direction: column in THUMB (photo on
+   top, text below). The animation swaps direction discretely. */
+.hf-gen {
+  position: absolute;
+  background: var(--bone);
+  border: 1px solid var(--ink-muted);
+  padding: 0.5rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  opacity: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  /* default = thumb dimensions */
+  bottom: 6px;
+  height: 130px;
+  width: 22%;
+}
+.hf-gen[data-gen="1"] { left: 4%; }
+.hf-gen[data-gen="2"] { left: 27.5%; }
+.hf-gen[data-gen="3"] { left: 51%; }
+.hf-gen[data-gen="4"] { left: 74.5%; }
+
+.hf-gen .gen-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.hf-gen .gen-num {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--red);
+  line-height: 1;
 }
 .hf-gen .gen-name {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.95rem;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  font-size: 0.7rem;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
   color: var(--ink);
   margin: 0;
 }
 
-/* Robot shape — simple geometric primitive per generation */
-.gen-shape {
-  margin: 0.5rem auto;
-  background: transparent;
-  border: 1.5px solid var(--ink-muted);
-  position: relative;
+/* Photo holder — sized for thumb by default; BIG anim grows it. */
+.gen-photo {
+  flex: 1;
+  background: var(--bone);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 0;
 }
-.gen-shape-1 { width: 30px; height: 30px; }                                /* Hub-only — small square */
-.gen-shape-2 { width: 50px; height: 32px; }                                /* Spike base + pinning */
-.gen-shape-2::before, .gen-shape-2::after {
-  content: ""; position: absolute; top: -6px;
-  width: 4px; height: 6px; background: var(--ink-muted);
-}
-.gen-shape-2::before { left: 10px; }
-.gen-shape-2::after  { right: 10px; }
-.gen-shape-3 { width: 50px; height: 40px; background: rgba(232, 192, 92, 0.18); border-color: var(--ink-2); }   /* Yellow box */
-.gen-shape-4 { width: 72px; height: 36px; }                                /* TrackX wide */
-.gen-shape-4::before, .gen-shape-4::after {
-  content: ""; position: absolute; bottom: -8px;
-  width: 14px; height: 8px; border: 1.5px solid var(--ink-muted);
-  border-radius: 2px;
-}
-.gen-shape-4::before { left: 4px; }
-.gen-shape-4::after  { right: 4px; }
-.gen-shape-5 {
-  width: 56px; height: 38px; border-color: var(--red);
-}
-.gen-shape-5::before, .gen-shape-5::after {
-  content: ""; position: absolute; bottom: -10px;
-  width: 16px; height: 10px;
-  border: 2px solid var(--red);
-  background: var(--red);
-  border-radius: 3px;
-}
-.gen-shape-5::before { left: 3px; }
-.gen-shape-5::after  { right: 3px; }
+.gen-photo-1 { background-image: url("https://jqpwucwzacqrpeazqbmd.supabase.co/storage/v1/object/public/public-assets/LOFB/Robo%20versions/v1%20robo%20design.jpeg"); }
+.gen-photo-2 { background-image: url("https://jqpwucwzacqrpeazqbmd.supabase.co/storage/v1/object/public/public-assets/LOFB/Robo%20versions/v2%20robo%20design.jpeg"); }
+.gen-photo-3 { background-image: url("https://jqpwucwzacqrpeazqbmd.supabase.co/storage/v1/object/public/public-assets/LOFB/Robo%20versions/v3%20robo%20design.jpeg"); }
+.gen-photo-4 { background-image: url("https://jqpwucwzacqrpeazqbmd.supabase.co/storage/v1/object/public/public-assets/LOFB/Robo%20versions/v4%20robo%20design.jpeg"); }
 
 /* Failure label */
 .gen-fail {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   color: var(--red);
-  margin-top: auto;
   position: relative;
   line-height: 1.3;
+  opacity: 0;
+  margin-top: auto;
 }
 .gen-fail::after {
   content: "";
@@ -664,7 +767,7 @@
   left: 0;
   right: 0;
   top: 50%;
-  height: 1.5px;
+  height: 2.5px;
   background: var(--red);
   transform: scaleX(0);
   transform-origin: left center;
@@ -673,124 +776,231 @@
 /* Success label (Gen 5 only) */
 .gen-success {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: clamp(1rem, 1.4vw, 1.4rem);
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--red);
-  margin-top: auto;
   opacity: 0;
+  padding: 0.35rem 0.7rem;
+  border: 2px solid var(--red);
+  align-self: flex-start;
+  margin-top: 0.5rem;
 }
 .gen-specs {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
-  margin-top: 0.4rem;
+  gap: 0.55rem;
+  margin-top: 1.2rem;
   opacity: 0;
 }
 .gen-specs span {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--ink-muted);
+  font-size: clamp(1.1rem, 1.6vw, 1.6rem);
+  font-weight: 700;
+  color: var(--ink);
   letter-spacing: 0.06em;
 }
 
-/* Generation cards stagger in at 6, 14, 22, 30, 38 seconds */
+/* Each Gen 1-4 has the same life: fade in BIG → hold → strike → shrink.
+   BIG = flex-direction: row, photo left (55%), text right (45%).
+   THUMB = flex-direction: column (default). */
+@keyframes hf-gen-life-rejected {
+  0% {
+    opacity: 0;
+    bottom: 150px;
+    left: 4%;
+    width: 92%;
+    height: calc(70vh - 160px);
+    padding: 1.6rem 2rem;
+    gap: 2rem;
+    flex-direction: row;
+    align-items: stretch;
+  }
+  8% {
+    opacity: 1;
+    bottom: 150px;
+    left: 4%;
+    width: 92%;
+    height: calc(70vh - 160px);
+    padding: 1.6rem 2rem;
+    gap: 2rem;
+    flex-direction: row;
+    align-items: stretch;
+  }
+  85% {
+    opacity: 1;
+    bottom: 150px;
+    left: 4%;
+    width: 92%;
+    height: calc(70vh - 160px);
+    padding: 1.6rem 2rem;
+    gap: 2rem;
+    flex-direction: row;
+    align-items: stretch;
+  }
+  100% {
+    opacity: 0.55;
+    /* bottom/left/width/height fall back to declared per-gen defaults
+       via interpolation, since the next state is the thumb resting style.
+       flex-direction snaps back to column at this keyframe. */
+    padding: 0.5rem 0.6rem;
+    gap: 0.3rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Photo dominates the row in BIG state — gets 58% of card width */
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="1"] .gen-photo,
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"] .gen-photo,
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"] .gen-photo,
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] .gen-photo {
+  flex: 1;
+}
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="1"] .gen-photo { animation: hf-gen-photo-flex 8s var(--ease) 6s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"] .gen-photo { animation: hf-gen-photo-flex 8s var(--ease) 14s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"] .gen-photo { animation: hf-gen-photo-flex 8s var(--ease) 22s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] .gen-photo { animation: hf-gen-photo-flex 8s var(--ease) 30s forwards; }
+@keyframes hf-gen-photo-flex {
+  0%, 85% { flex: 0 0 58%; }
+  100%    { flex: 1 1 auto; }
+}
+
+/* Text wrapper in BIG: takes remaining 42%, vertically centred */
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="1"] .gen-text { animation: hf-gen-text-flex 8s var(--ease) 6s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"] .gen-text { animation: hf-gen-text-flex 8s var(--ease) 14s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"] .gen-text { animation: hf-gen-text-flex 8s var(--ease) 22s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] .gen-text { animation: hf-gen-text-flex 8s var(--ease) 30s forwards; }
+@keyframes hf-gen-text-flex {
+  0%, 85% { flex: 0 0 42%; justify-content: center; gap: 1.2rem; }
+  100%    { flex: 1 1 auto; justify-content: flex-start; gap: 0.3rem; }
+}
 .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="1"] {
-  animation: hf-gen-in 0.8s var(--ease) 6s forwards;
+  animation: hf-gen-life-rejected 8s var(--ease) 6s forwards;
 }
 .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"] {
-  animation: hf-gen-in 0.8s var(--ease) 14s forwards;
+  animation: hf-gen-life-rejected 8s var(--ease) 14s forwards;
 }
 .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"] {
-  animation: hf-gen-in 0.8s var(--ease) 22s forwards;
+  animation: hf-gen-life-rejected 8s var(--ease) 22s forwards;
 }
 .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] {
-  animation: hf-gen-in 0.8s var(--ease) 30s forwards;
-}
-.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="5"] {
-  animation: hf-gen-in 0.8s var(--ease) 38s forwards,
-             hf-gen-current 1.2s var(--ease) 46s forwards,
-             hf-adopt-pulse 1.6s ease-in-out 50s infinite;
-}
-@keyframes hf-gen-in {
-  to { opacity: 1; transform: none; }
-}
-@keyframes hf-gen-current {
-  0%   { transform: none; }
-  100% { transform: scale(1.04); border-color: var(--red); border-width: 2px; }
+  animation: hf-gen-life-rejected 8s var(--ease) 30s forwards;
 }
 
-/* Failures get struck out when NEXT generation appears (~1s after) */
+/* Inner text scales BIG during slot, shrinks back at end */
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="1"] .gen-num { animation: hf-gen-num-big 8s var(--ease) 6s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"] .gen-num { animation: hf-gen-num-big 8s var(--ease) 14s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"] .gen-num { animation: hf-gen-num-big 8s var(--ease) 22s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] .gen-num { animation: hf-gen-num-big 8s var(--ease) 30s forwards; }
+@keyframes hf-gen-num-big {
+  0%, 8%   { font-size: clamp(1.1rem, 1.6vw, 1.5rem); letter-spacing: 0.22em; }
+  85%      { font-size: clamp(1.1rem, 1.6vw, 1.5rem); letter-spacing: 0.22em; }
+  100%     { font-size: 0.6rem; letter-spacing: 0.16em; }
+}
+
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="1"] .gen-name { animation: hf-gen-name-big 8s var(--ease) 6s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"] .gen-name { animation: hf-gen-name-big 8s var(--ease) 14s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"] .gen-name { animation: hf-gen-name-big 8s var(--ease) 22s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] .gen-name { animation: hf-gen-name-big 8s var(--ease) 30s forwards; }
+@keyframes hf-gen-name-big {
+  0%, 8%   { font-size: clamp(2.2rem, 4.4vw, 4rem); line-height: 1.05; }
+  85%      { font-size: clamp(2.2rem, 4.4vw, 4rem); line-height: 1.05; }
+  100%     { font-size: 0.66rem; line-height: 1.15; }
+}
+
+/* Failure reason — appears mid-slot, gets struck out near end */
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="1"] .gen-fail { animation: hf-gen-fail-big 8s var(--ease) 6s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"] .gen-fail { animation: hf-gen-fail-big 8s var(--ease) 14s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"] .gen-fail { animation: hf-gen-fail-big 8s var(--ease) 22s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] .gen-fail { animation: hf-gen-fail-big 8s var(--ease) 30s forwards; }
+@keyframes hf-gen-fail-big {
+  0%, 50%  { opacity: 0; font-size: clamp(1.1rem, 1.8vw, 1.7rem); }
+  60%      { opacity: 1; font-size: clamp(1.1rem, 1.8vw, 1.7rem); }
+  85%      { opacity: 1; font-size: clamp(1.1rem, 1.8vw, 1.7rem); }
+  100%     { opacity: 0; font-size: 0.6rem; }
+}
+
+/* Strike fires at ~5.5s into slot (11.5s, 19.5s, 27.5s, 35.5s) */
 .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="1"] .gen-fail::after {
-  animation: hf-fail-strike 0.6s var(--ease) 15s forwards;
+  animation: hf-fail-strike 0.7s var(--ease) 11.5s forwards;
 }
 .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"] .gen-fail::after {
-  animation: hf-fail-strike 0.6s var(--ease) 23s forwards;
+  animation: hf-fail-strike 0.7s var(--ease) 19.5s forwards;
 }
 .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"] .gen-fail::after {
-  animation: hf-fail-strike 0.6s var(--ease) 31s forwards;
+  animation: hf-fail-strike 0.7s var(--ease) 27.5s forwards;
 }
 .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] .gen-fail::after {
-  animation: hf-fail-strike 0.6s var(--ease) 39s forwards;
+  animation: hf-fail-strike 0.7s var(--ease) 35.5s forwards;
 }
-.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="1"] .gen-fail,
-.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"] .gen-fail,
-.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"] .gen-fail,
-.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] .gen-fail {
-  animation: hf-fail-dim 1s var(--ease) 16s forwards;
-}
-.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"] .gen-fail { animation-delay: 24s; }
-.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"] .gen-fail { animation-delay: 32s; }
-.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] .gen-fail { animation-delay: 40s; }
-
 @keyframes hf-fail-strike { to { transform: scaleX(1); } }
-@keyframes hf-fail-dim    { to { color: var(--ink-faint); opacity: 0.65; } }
 
-/* Gen 5 success label + specs fade in at 46s */
+/* Photo opacity dims when shrunk to thumb */
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="1"] .gen-photo { animation: hf-gen-photo-life 8s var(--ease) 6s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"] .gen-photo { animation: hf-gen-photo-life 8s var(--ease) 14s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"] .gen-photo { animation: hf-gen-photo-life 8s var(--ease) 22s forwards; }
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] .gen-photo { animation: hf-gen-photo-life 8s var(--ease) 30s forwards; }
+@keyframes hf-gen-photo-life {
+  0%, 8%   { opacity: 1; }
+  85%      { opacity: 1; }
+  100%     { opacity: 0.7; }
+}
+
+/* ---------- Gen 5 · World Dominator · final stage ----------
+   No photo for Gen 5 — the text wrapper takes the full card area. */
+.hf-gen[data-gen="5"] {
+  bottom: 150px;
+  left: 4%;
+  width: 92%;
+  height: calc(70vh - 160px);
+  padding: 2rem 2.4rem;
+  gap: 0;
+  flex-direction: row;
+  align-items: center;
+}
+.hf-gen[data-gen="5"] .gen-text--solo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  justify-content: center;
+}
+.hf-gen[data-gen="5"] .gen-num { font-size: clamp(1.1rem, 1.6vw, 1.5rem); letter-spacing: 0.22em; }
+.hf-gen[data-gen="5"] .gen-name { font-size: clamp(2.4rem, 4.8vw, 4.4rem); line-height: 1.05; }
+
+.slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="5"] {
+  animation:
+    hf-gen-5-in 1s var(--ease) 38s forwards,
+    hf-adopt-highlight 1s var(--ease) 39s forwards,
+    hf-adopt-pulse 1.8s ease-in-out 50s infinite;
+}
+@keyframes hf-gen-5-in {
+  0%   { opacity: 0; transform: scale(0.97); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
 .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="5"] .gen-success,
 .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="5"] .gen-specs {
-  animation: hf-fade-in 1s var(--ease) 46s forwards;
+  animation: hf-fade-in 1s var(--ease) 39.5s forwards;
 }
 @keyframes hf-fade-in { to { opacity: 1; } }
-
-/* Connecting arrows between generations (fade in at 47s) */
-.hf-arrows {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 0;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 calc(20% - 0.5rem);
-  pointer-events: none;
-  transform: translateY(-12px);
-}
-.hf-arrow {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.3rem;
-  color: var(--red);
-  opacity: 0;
-  line-height: 0;
-}
-.slide.is-active .hyperframe[data-scene="2"] .hf-arrow:nth-child(1) { animation: hf-fade-in 0.6s var(--ease) 47.0s forwards; }
-.slide.is-active .hyperframe[data-scene="2"] .hf-arrow:nth-child(2) { animation: hf-fade-in 0.6s var(--ease) 47.4s forwards; }
-.slide.is-active .hyperframe[data-scene="2"] .hf-arrow:nth-child(3) { animation: hf-fade-in 0.6s var(--ease) 47.8s forwards; }
-.slide.is-active .hyperframe[data-scene="2"] .hf-arrow:nth-child(4) { animation: hf-fade-in 0.6s var(--ease) 48.2s forwards; }
 
 /* Reduced motion fallback */
 @media (prefers-reduced-motion: reduce) {
   .slide.is-active .hyperframe[data-scene="2"] .hf-phase-1 { animation: none; opacity: 0; }
   .slide.is-active .hyperframe[data-scene="2"] .hf-phase-2 { animation: none; opacity: 1; pointer-events: auto; }
-  .slide.is-active .hyperframe[data-scene="2"] .hf-gen { animation: none; opacity: 1; transform: none; }
-  .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="5"] { border: 2px solid var(--red); transform: scale(1.04); }
-  .slide.is-active .hyperframe[data-scene="2"] .hf-gen .gen-fail::after { transform: scaleX(1); }
-  .slide.is-active .hyperframe[data-scene="2"] .hf-gen .gen-fail { color: var(--ink-faint); opacity: 0.65; }
+  .slide.is-active .hyperframe[data-scene="2"] .hf-gen { animation: none; opacity: 1; }
+  .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="5"] { border: 2px solid var(--red); }
+  .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="1"],
+  .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="2"],
+  .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="3"],
+  .slide.is-active .hyperframe[data-scene="2"] .hf-gen[data-gen="4"] { opacity: 0.55; }
+  .slide.is-active .hyperframe[data-scene="2"] .hf-gen .gen-fail { opacity: 0; }
   .slide.is-active .hyperframe[data-scene="2"] .gen-success,
   .slide.is-active .hyperframe[data-scene="2"] .gen-specs { opacity: 1; }
-  .slide.is-active .hyperframe[data-scene="2"] .hf-arrow { opacity: 1; }
+  .slide.is-active .hyperframe[data-scene="2"] .hf-badge-s2 { opacity: 1; }
 }
 
 /* =====================================================
@@ -1538,32 +1748,32 @@
         </div>
       </div>
 
-      <!-- Phase 2 + 3 · Strategy elimination + adopted plan -->
+      <!-- Phase 2 · Sequential strategy blowup · 5 cards on a stage -->
       <div class="hf-phase hf-phase-2">
-        <div class="hf-strats">
+        <div class="hf-stage">
           <article class="hf-card" data-strat="1">
             <span class="card-num">Strategy 01</span>
             <h4 class="card-title">One run, all 15 missions</h4>
+            <span class="card-reject">Loses 545 pts on a single fail.</span>
             <span class="hf-strike" aria-hidden="true"></span>
-            <span class="card-reject">loses 545 pts on one fail</span>
           </article>
           <article class="hf-card" data-strat="2">
             <span class="card-num">Strategy 02</span>
             <h4 class="card-title">15 individual runs</h4>
+            <span class="card-reject">Too much time in Home.</span>
             <span class="hf-strike" aria-hidden="true"></span>
-            <span class="card-reject">too much time in Home</span>
           </article>
           <article class="hf-card" data-strat="3">
             <span class="card-num">Strategy 03</span>
             <h4 class="card-title">5–6 runs, big attachments</h4>
+            <span class="card-reject">Attachments destabilised the robot.</span>
             <span class="hf-strike" aria-hidden="true"></span>
-            <span class="card-reject">destabilised the robot</span>
           </article>
           <article class="hf-card" data-strat="4">
             <span class="card-num">Strategy 04</span>
             <h4 class="card-title">Group by proximity only</h4>
+            <span class="card-reject">Slow on the missions themselves.</span>
             <span class="hf-strike" aria-hidden="true"></span>
-            <span class="card-reject">slow on missions</span>
           </article>
           <article class="hf-card" data-strat="5">
             <span class="hf-adopted-flag" aria-hidden="true">Adopted.</span>
@@ -1620,53 +1830,56 @@
         </div>
       </div>
 
-      <!-- Phase 2 · Five generation cards -->
+      <!-- Phase 2 · Sequential generation blowup -->
       <div class="hf-phase hf-phase-2">
-        <div class="hf-gens">
+        <div class="hf-stage-s2">
           <article class="hf-gen" data-gen="1">
-            <span class="gen-num">Gen 01</span>
-            <h4 class="gen-name">Hub-only base</h4>
-            <div class="gen-shape gen-shape-1" aria-hidden="true"></div>
-            <span class="gen-fail">Too basic. No structural support.</span>
+            <div class="gen-photo gen-photo-1" role="img" aria-label="First-generation robot — Spike Prime hub-only base"></div>
+            <div class="gen-text">
+              <span class="gen-num">Gen 01</span>
+              <h4 class="gen-name">Hub-only base</h4>
+              <span class="gen-fail">Too basic. No structural support.</span>
+            </div>
           </article>
           <article class="hf-gen" data-gen="2">
-            <span class="gen-num">Gen 02</span>
-            <h4 class="gen-name">Spike base + pinning</h4>
-            <div class="gen-shape gen-shape-2" aria-hidden="true"></div>
-            <span class="gen-fail">First modular system. Not robust enough.</span>
+            <div class="gen-photo gen-photo-2" role="img" aria-label="Second-generation robot — Spike base with pinning attachments"></div>
+            <div class="gen-text">
+              <span class="gen-num">Gen 02</span>
+              <h4 class="gen-name">Spike base + pinning</h4>
+              <span class="gen-fail">First modular system. Not robust enough.</span>
+            </div>
           </article>
           <article class="hf-gen" data-gen="3">
-            <span class="gen-num">Gen 03</span>
-            <h4 class="gen-name">Yellow box robot</h4>
-            <div class="gen-shape gen-shape-3" aria-hidden="true"></div>
-            <span class="gen-fail">Wires got stuck inside. Parts fell in.</span>
+            <div class="gen-photo gen-photo-3" role="img" aria-label="Third-generation robot — closed-wheel yellow box design"></div>
+            <div class="gen-text">
+              <span class="gen-num">Gen 03</span>
+              <h4 class="gen-name">Yellow box robot</h4>
+              <span class="gen-fail">Wires got stuck inside. Parts fell in.</span>
+            </div>
           </article>
           <article class="hf-gen" data-gen="4">
-            <span class="gen-num">Gen 04</span>
-            <h4 class="gen-name">TrackX wide</h4>
-            <div class="gen-shape gen-shape-4" aria-hidden="true"></div>
-            <span class="gen-fail">Open wheels + modular. Too wide for boat-push.</span>
+            <div class="gen-photo gen-photo-4" role="img" aria-label="Fourth-generation robot — TrackX wide with open wheels"></div>
+            <div class="gen-text">
+              <span class="gen-num">Gen 04</span>
+              <h4 class="gen-name">TrackX wide</h4>
+              <span class="gen-fail">Open wheels + modular. Too wide for boat-push.</span>
+            </div>
           </article>
           <article class="hf-gen" data-gen="5">
-            <span class="gen-num">Gen 05</span>
-            <h4 class="gen-name">World Dominator</h4>
-            <div class="gen-shape gen-shape-5" aria-hidden="true"></div>
-            <span class="gen-success">Adopted · current</span>
-            <div class="gen-specs">
-              <span>62 × 20 mm rubber tyres</span>
-              <span>Low CoG · gyro · 4 motors</span>
-              <span>Wheel-cover system</span>
+            <div class="gen-text gen-text--solo">
+              <span class="gen-num">Gen 05</span>
+              <h4 class="gen-name">World Dominator</h4>
+              <span class="gen-success">Adopted · current</span>
+              <div class="gen-specs">
+                <span>62 × 20 mm rubber tyres · low centre of gravity</span>
+                <span>4 motors · gyro-controlled straight-line drive</span>
+                <span>Full wheel-cover system · built by the whole team</span>
+              </div>
             </div>
           </article>
         </div>
 
-        <!-- Connecting arrows that appear at 47s -->
-        <div class="hf-arrows" aria-hidden="true">
-          <span class="hf-arrow">→</span>
-          <span class="hf-arrow">→</span>
-          <span class="hf-arrow">→</span>
-          <span class="hf-arrow">→</span>
-        </div>
+        <div class="hf-badge-s2" aria-hidden="true">5 generations · 4 years</div>
       </div>
     </div>
 
