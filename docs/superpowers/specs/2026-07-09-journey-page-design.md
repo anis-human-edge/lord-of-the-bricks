@@ -31,6 +31,10 @@ per-event gallery.
 
 - Folders: `media/journey/00-hero/`, `01-regionals/`, `02-nationals/`, `03-practice/`,
   `04-jeonju/`, `05-team/`, `06-coaches/`, `07-robot/`, `08-innovation/`, `09-film/`.
+- Update 2026-07-09: media actually lives in Supabase public storage
+  (`…/public-assets/LOFB/Jeonju Final Images/`, `…/Jeonju Final Videos/`), matching the
+  homepage convention. The manifest takes any reachable URL as `src`, so Supabase and local
+  paths mix freely; `dir` records where each event's folder lives.
 - Anis drops photos/videos into the folders; the manifest is regenerated (by hand or a
   one-liner) listing each file. **The first item in an event's `items[]` is the sample** shown
   on journey.html — reorder to choose a different sample.

@@ -1,0 +1,1322 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#0A1F44" />
+<title>The Journey — 540 out of 545 | Lord of the Bricks</title>
+<meta name="description" content="Eight kids. Six schools. Coached by parents. Silver for Great Britain. The story of Lord of the Bricks&rsquo; 2025-26 season, from Kent Regionals to the FIRST LEGO League Korea Open in Jeonju." />
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="alternate icon" type="image/png" sizes="180x180" href="apple-touch-icon.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+<link rel="mask-icon" href="favicon.svg" color="#C8102E" />
+
+<!-- Open Graph / Facebook / LinkedIn / Slack -->
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Lord of the Bricks" />
+<meta property="og:url" content="https://anis-human-edge.github.io/lord-of-the-bricks/journey.html" />
+<meta property="og:title" content="The Journey — 540 out of 545" />
+<meta property="og:description" content="Eight kids. Six schools. Coached by parents. Silver for Great Britain at the FIRST LEGO League Korea Open, Jeonju." />
+<meta property="og:image" content="https://anis-human-edge.github.io/lord-of-the-bricks/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Lord of the Bricks — silver for Great Britain, FIRST LEGO League Korea Open 2026" />
+<meta property="og:locale" content="en_GB" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="The Journey — 540 out of 545" />
+<meta name="twitter:description" content="Eight kids. Six schools. Coached by parents. Silver for Great Britain at the FIRST LEGO League Korea Open, Jeonju." />
+<meta name="twitter:image" content="https://anis-human-edge.github.io/lord-of-the-bricks/og-image.png" />
+<meta name="twitter:image:alt" content="Lord of the Bricks — silver for Great Britain, FIRST LEGO League Korea Open 2026" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" />
+
+<style>
+/* =========================================================
+   LORD OF THE BRICKS — DESIGN TOKENS
+   Shared with index.html. White / Navy / Red / Team Blue.
+   ========================================================= */
+
+:root {
+  /* Palette */
+  --white: #ffffff;
+  --bone:  #faf8f4;
+  --rule:  #e6e4dd;
+  --rule-strong: #c9c6bd;
+  --ink:        #0a0a0a;
+  --ink-2:      #1f2937;
+  --ink-muted:  #6b7280;
+  --navy:       #0a1f44;
+  --navy-deep:  #061434;
+  --red:        #c8102e;          /* Pantone 186 — UK red */
+  --red-deep:   #98101f;
+  --accent:     #1b4fe5;
+  --accent-deep:#0c2db8;
+
+  /* Type */
+  --font-display: "Space Grotesk", "Inter Tight", system-ui, -apple-system, sans-serif;
+  --font-body:    "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Spacing */
+  --gutter: clamp(1.25rem, 3.5vw, 3rem);
+  --section-y: clamp(6rem, 13vw, 11rem);
+  --max-w: 1280px;
+
+  /* Motion */
+  --ease: cubic-bezier(.2,.7,.2,1);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+section[id] { scroll-margin-top: 5.5rem; }
+
+/* ---------- Type scale ---------- */
+.h-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 6vw, 5.25rem);
+  line-height: 1;
+  letter-spacing: -0.024em;
+  text-wrap: balance;
+}
+.h-section {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.85rem, 4.2vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+  margin: 0;
+}
+.h-sub {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: var(--ink-muted);
+  margin: 0;
+  max-width: 56ch;
+  text-wrap: pretty;
+}
+.body-lg { font-size: clamp(1rem, 1.05vw, 1.075rem); line-height: 1.7; max-width: 58ch; color: var(--ink-2); text-wrap: pretty; }
+.body { color: var(--ink-2); max-width: 62ch; line-height: 1.7; text-wrap: pretty; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--ink-2);
+}
+.eyebrow.is-red::before { background: var(--red); }
+.eyebrow.is-accent::before { background: var(--accent); }
+
+/* ---------- Layout primitives ---------- */
+.shell { width: 100%; max-width: var(--max-w); margin: 0 auto; padding-inline: var(--gutter); }
+section { padding-block: var(--section-y); position: relative; }
+.section-bone { background: var(--bone); }
+.rule-thick { height: 4px; background: var(--ink); width: 80px; margin: 0; }
+.rule-thick.is-red { background: var(--red); }
+.rule-thick.is-accent { background: var(--accent); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.4rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
+  transition: transform .25s var(--ease), background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--ink); color: var(--white); }
+.btn-primary:hover { background: var(--navy); }
+.btn-red { background: var(--red); color: var(--white); }
+.btn-red:hover { background: var(--red-deep); }
+.btn-ghost { color: var(--ink); border-color: var(--ink); background: transparent; }
+.btn-ghost:hover { background: var(--ink); color: var(--white); }
+.btn .arrow { transition: transform .25s var(--ease); }
+.btn:hover .arrow { transform: translateX(3px); }
+
+/* =========================================================
+   NAV
+   ========================================================= */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 80;
+  background: rgba(255,255,255,.86);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s var(--ease), background .3s var(--ease);
+}
+.nav.is-scrolled { border-bottom-color: var(--rule); }
+.nav-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  padding-block: 0.95rem;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.005em;
+}
+.brand .mark {
+  width: 22px; height: 22px;
+  background: var(--ink);
+  position: relative;
+  border-radius: 2px;
+}
+.brand .mark::before, .brand .mark::after {
+  content: ""; position: absolute; background: var(--white);
+}
+.brand .mark::before { left: 4px; right: 4px; top: 4px; height: 4px; border-radius: 1px; }
+.brand .mark::after  { left: 4px; right: 4px; top: 12px; height: 2px; border-radius: 1px; }
+.brand .pip {
+  width: 8px; height: 8px; background: var(--red); border-radius: 50%;
+  margin-left: 4px;
+}
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.6rem;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+.nav-links a:hover { color: var(--red); }
+.nav-cta { justify-self: end; }
+@media (max-width: 880px) {
+  .nav-links { display: none; }
+}
+@media (max-width: 540px) {
+  .nav-row { gap: 0.6rem; padding-block: 0.7rem; }
+  .brand .brand-text { display: none; }
+  .brand .pip { width: 7px; height: 7px; }
+  .nav-cta.btn {
+    padding: 0.7rem 0.85rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+}
+
+/* =========================================================
+   PHOTO PLACEHOLDER (honest, intentional)
+   Same convention as index.html — the frame switches itself
+   off as soon as the manifest lists real media.
+   ========================================================= */
+.ph {
+  position: relative;
+  width: 100%;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0 18px,
+      rgba(10,31,68,.04) 18px 19px
+    ),
+    var(--bone);
+  border: 1px solid var(--rule-strong);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+.ph[data-ratio="16x9"]  { aspect-ratio: 16/9; }
+.ph[data-ratio="3x4"]   { aspect-ratio: 3/4; }
+.ph[data-ratio="4x5"]   { aspect-ratio: 4/5; }
+.ph[data-ratio="1x1"]   { aspect-ratio: 1/1; }
+.ph[data-ratio="21x9"]  { aspect-ratio: 21/9; }
+.ph .ph-tag {
+  position: absolute;
+  top: 14px; left: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  padding: 0.3rem 0.55rem;
+  background: rgba(255,255,255,.7);
+  border: 1px solid var(--rule);
+}
+.ph .ph-body {
+  text-align: center;
+  padding: 1rem;
+  max-width: 60ch;
+}
+.ph .ph-body .label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  letter-spacing: -0.005em;
+  color: var(--ink-2);
+  margin-bottom: 0.4rem;
+}
+.ph .ph-body .desc {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  line-height: 1.45;
+}
+.ph .ph-body .filename {
+  margin-top: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 480px) {
+  .ph .ph-body { padding: 0.7rem; overflow: hidden; }
+  .ph .ph-body .filename { display: none; }
+  .ph .ph-body .desc { font-size: 0.78rem; }
+  .ph .ph-tag { font-size: 0.62rem; padding: 0.22rem 0.45rem; }
+}
+
+/* =========================================================
+   MEDIA SLOTS — hydrated from media/journey/manifest.js
+   ========================================================= */
+.media-figure {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  background: var(--navy-deep);
+  border: 1px solid var(--rule-strong);
+}
+.media-figure[data-ratio="16x9"] { aspect-ratio: 16/9; }
+.media-figure[data-ratio="21x9"] { aspect-ratio: 21/9; }
+.media-figure[data-ratio="4x5"]  { aspect-ratio: 4/5; }
+.media-figure[data-ratio="1x1"]  { aspect-ratio: 1/1; }
+.media-figure img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.media-figure video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  background: var(--navy-deep);
+}
+
+/* =========================================================
+   HERO — full-width Jeonju photo, then the score
+   ========================================================= */
+.journey-hero { padding-top: clamp(6rem, 11vw, 9rem); padding-bottom: 0; }
+.hero-frame { position: relative; }
+.hero-frame .ph,
+.hero-frame .media-figure {
+  aspect-ratio: auto;
+  height: clamp(340px, 62vh, 720px);
+}
+.hero-frame .stamp {
+  position: absolute;
+  left: 18px; bottom: 18px;
+  z-index: 3;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--white);
+  padding: 0.5rem 0.8rem;
+  background: rgba(10,31,68,0.78);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.hero-frame .stamp--right {
+  left: auto; right: 18px;
+  background: rgba(200,16,46,0.9);
+  border-color: rgba(255,255,255,0.25);
+}
+@media (max-width: 600px) {
+  .hero-frame .stamp { font-size: 0.6rem; padding: 0.4rem 0.6rem; letter-spacing: 0.14em; }
+  .hero-frame .stamp:not(.stamp--right) { display: none; }
+}
+.hero-title {
+  padding-block: clamp(3rem, 7vw, 5.5rem) 0;
+  text-align: center;
+}
+.hero-title h1 { margin: 0 0 1.2rem; }
+.hero-title .strap {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  line-height: 1.35;
+  letter-spacing: -0.008em;
+  color: var(--ink-2);
+  margin: 0 auto;
+  max-width: 40ch;
+  text-wrap: balance;
+}
+.hero-title .strap .accent { color: var(--red); }
+.hero-title .rule-thick { margin: 1.8rem auto 0; }
+
+/* =========================================================
+   THE NUMBERS — ruled editorial rows, not stat cards
+   ========================================================= */
+.numbers {
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  border-top: 1px solid var(--rule-strong);
+}
+.numbers .num-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 220px) 1fr;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: baseline;
+  padding-block: clamp(0.9rem, 1.6vw, 1.3rem);
+  border-bottom: 1px solid var(--rule);
+}
+.numbers dt {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.8vw, 2.3rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+.numbers dd {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+.numbers .num-row.is-red dt { color: var(--red); }
+@media (max-width: 560px) {
+  .numbers .num-row { grid-template-columns: 1fr; gap: 0.25rem; }
+}
+
+/* =========================================================
+   THE SEASON — four chapters, one sample each
+   ========================================================= */
+.chapter {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+.chapter + .chapter { border-top: 1px solid var(--rule); }
+.chapter h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.8vw, 2.3rem);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  margin: 1rem 0 1.1rem;
+}
+.chapter .body { margin: 0; }
+.chapter .chapter-actions { margin-top: 1.6rem; }
+@media (max-width: 880px) {
+  .chapter { grid-template-columns: 1fr; gap: 1.5rem; }
+  .chapter .chapter-media { order: 2; }
+  .chapter .chapter-text  { order: 1; }
+  .chapter .chapter-actions { margin-top: 1.2rem; }
+}
+
+/* =========================================================
+   ROSTER — eight names, six schools
+   ========================================================= */
+.roster {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 clamp(2rem, 4vw, 4rem);
+}
+@media (max-width: 640px) { .roster { grid-template-columns: 1fr; } }
+.roster-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  border-top: 1px solid var(--rule);
+  padding-block: 0.85rem;
+}
+.roster-item .name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.005em;
+}
+.roster-item .role {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  text-align: right;
+}
+
+/* =========================================================
+   SPLIT — header + body two-column (from index.html)
+   ========================================================= */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(3rem, 6vw, 6.5rem);
+  align-items: start;
+}
+@media (max-width: 960px) { .split { grid-template-columns: 1fr; gap: 2.5rem; } }
+.split-head { display: flex; flex-direction: column; gap: 1.75rem; }
+.split-body { display: flex; flex-direction: column; gap: 1.5rem; }
+.split-body p { margin: 0; }
+
+/* =========================================================
+   QUOTES — In their words
+   ========================================================= */
+.quote-list {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--rule);
+}
+.quote {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.quote:last-child { border-bottom: 0; }
+.quote .qmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 3vw, 3rem);
+  color: var(--red);
+  line-height: 1;
+}
+.quote blockquote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.quote cite {
+  display: block;
+  margin-top: 0.85rem;
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+/* =========================================================
+   THE LESSON — letter-close scale
+   ========================================================= */
+.lesson-inner {
+  max-width: 62ch;
+  margin: 0 auto;
+  text-align: center;
+}
+.lesson-body {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+  line-height: 1.3;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  margin: 0;
+  text-wrap: pretty;
+}
+.em-line {
+  position: relative;
+  display: inline-block;
+}
+.em-line::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -0.14em;
+  height: 3px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s var(--ease) 0.6s;
+}
+.reveal.is-in .em-line::after { transform: scaleX(1); }
+
+/* =========================================================
+   FILL-IN MARKS — brackets still to fill before launch
+   grep for data-fill to find every one
+   ========================================================= */
+mark.fill {
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  color: var(--ink-muted);
+  border-bottom: 1px dashed var(--rule-strong);
+  padding: 0 0.08em;
+  white-space: normal;
+}
+mark.fill::before { content: "[ "; color: var(--red); font-weight: 600; }
+mark.fill::after  { content: " ]"; color: var(--red); font-weight: 600; }
+
+/* =========================================================
+   UTILITIES
+   ========================================================= */
+.lede { font-size: clamp(1.05rem, 1.25vw, 1.22rem); line-height: 1.55; max-width: 50ch; color: var(--ink); text-wrap: pretty; }
+.note { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; color: var(--ink-muted); }
+.section-index {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  position: absolute;
+  top: clamp(1.5rem, 3vw, 2.5rem);
+  right: var(--gutter);
+}
+@media (max-width: 720px) { .section-index { display: none; } }
+
+/* Reveal-on-scroll — gated on the .js root class so content is
+   never hidden when scripting is unavailable */
+.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.js .reveal.is-in { opacity: 1; transform: none; }
+
+/* Visually hidden (screen readers only) */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link — visible on focus only */
+.skip-link {
+  position: fixed;
+  top: 0.6rem; left: 0.6rem;
+  z-index: 90;
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  padding: 0.7rem 1rem;
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible { transform: none; }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer.site-footer {
+  background: var(--ink);
+  color: var(--white);
+  padding-block: clamp(4rem, 8vw, 6rem) 2rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+@media (max-width: 880px) { .footer-grid { grid-template-columns: 1fr; } }
+footer.site-footer h2 {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  margin: 0 0 1.25rem;
+}
+footer.site-footer .col-1 p {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 1.4vw, 1.25rem);
+  line-height: 1.45;
+  color: var(--white);
+  margin: 0;
+  max-width: 30ch;
+}
+footer.site-footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+footer.site-footer ul a:hover { color: var(--red); }
+footer.site-footer .base {
+  margin-top: clamp(3rem, 5vw, 4rem);
+  border-top: 1px solid rgba(255,255,255,.16);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,.55);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- =========================================================
+     NAV
+     ========================================================= -->
+<nav class="nav" id="nav" aria-label="Primary">
+  <div class="shell nav-row">
+    <a href="index.html" class="brand" aria-label="Lord of the Bricks home">
+      <span class="mark" aria-hidden="true"></span>
+      <span class="brand-text">Lord of the Bricks</span>
+      <span class="pip" aria-hidden="true"></span>
+    </a>
+    <div class="nav-links">
+      <a href="#story">The Story</a>
+      <a href="#season">The Season</a>
+      <a href="#team">The Team</a>
+      <a href="#robot">The Robot</a>
+      <a href="#innovation">The AI</a>
+      <a href="#watch">Watch</a>
+      <a href="#media">Media</a>
+    </div>
+    <a href="partners.html" class="btn btn-red nav-cta">
+      Back the team <span class="arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- =========================================================
+     HERO — PHOTO 1 full width, then the score
+     ========================================================= -->
+<section id="top" class="journey-hero">
+  <div class="hero-frame" data-media-slot="hero" data-fit="cover">
+    <div class="ph" data-ratio="21x9">
+      <span class="ph-tag">Photo 01 &middot; Hero</span>
+      <div class="ph-body">
+        <div class="label">The eight in GB kit, medals on, Jeonju</div>
+        <div class="desc">Full-width hero. Landscape, the whole team in frame, medals visible.</div>
+        <div class="filename">media/journey/00-hero/</div>
+      </div>
+    </div>
+    <span class="stamp">Jeonju &middot; South Korea &middot; July 2026</span>
+    <span class="stamp stamp--right">Silver &middot; Great Britain</span>
+  </div>
+
+  <div class="shell hero-title">
+    <h1 class="h-display reveal">540 out of 545</h1>
+    <p class="strap reveal">Eight kids. Six schools. Coached by parents. <span class="accent">Silver for Great Britain.</span></p>
+    <div class="rule-thick is-red reveal"></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     01 — THE STORY IN 100 WORDS
+     ========================================================= -->
+<section id="story">
+  <span class="section-index">01 / The story in 100 words</span>
+  <div class="shell split">
+    <div class="split-head reveal">
+      <span class="eyebrow">The short version</span>
+      <h2 class="h-section">The story<br/>in 100 words</h2>
+      <div class="rule-thick"></div>
+    </div>
+    <div class="split-body reveal">
+      <p class="body-lg">
+        Lord of the Bricks is a FIRST LEGO League team from Croydon. Eight children. Six schools.
+        No academy, no sponsor-built lab, no professional coaches. Two parents, a doctor and an IT
+        architect, ran every session. In the 2025&ndash;26 Unearthed season the team became Kent
+        Regional Champions, UK Knockout Challenge Champions, and took 2nd place in Robot Performance
+        at both the UK Nationals and the FIRST LEGO League Korea Open in Jeonju, South Korea,
+        representing Great Britain. Their score in Korea: 540 out of a possible 545. Along the way
+        they built a working AI assistant for the Kent Archaeological Society. It is live today.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     02 — THE NUMBERS
+     ========================================================= -->
+<section id="numbers" class="section-bone">
+  <span class="section-index">02 / The numbers</span>
+  <div class="shell">
+    <div class="reveal">
+      <span class="eyebrow is-red">The numbers</span>
+      <h2 class="h-section" style="margin-top:1rem;">One season, counted.</h2>
+    </div>
+    <dl class="numbers reveal">
+      <div class="num-row is-red"><dt>540/545</dt><dd>Five points off a perfect score, Jeonju</dd></div>
+      <div class="num-row"><dt>800+</dt><dd>hours across the season</dd></div>
+      <div class="num-row"><dt>50</dt><dd>Sundays together</dd></div>
+      <div class="num-row"><dt>8</dt><dd>kids</dd></div>
+      <div class="num-row"><dt>6</dt><dd>schools</dd></div>
+      <div class="num-row"><dt>27</dt><dd>tasks solved across 15 missions in 8 strategic runs</dd></div>
+      <div class="num-row"><dt>10,000</dt><dd>pages of archaeological records opened up by their AI</dd></div>
+      <div class="num-row"><dt>2</dt><dd>silver medals, and one lesson worth more than gold</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- =========================================================
+     03 — THE SEASON
+     ========================================================= -->
+<section id="season">
+  <span class="section-index">03 / The season</span>
+  <div class="shell">
+    <div class="reveal" style="max-width: 60ch;">
+      <span class="eyebrow">The season</span>
+      <h2 class="h-section" style="margin-top:1rem;">Kent &rarr; Harrogate &rarr; <span style="color:var(--red)">Jeonju</span>.</h2>
+      <div class="rule-thick is-red" style="margin-top:1.4rem;"></div>
+    </div>
+
+    <!-- Chapter 1 — Kent Regionals -->
+    <article class="chapter" style="margin-top: clamp(2rem, 4vw, 3rem);">
+      <div class="chapter-text reveal">
+        <span class="eyebrow">01 &middot; Kent Regionals &middot; <mark class="fill" data-fill="regionals-month">month</mark> 2026</span>
+        <h3>Champions.</h3>
+        <p class="body">
+          Regional champions for the second year running. The season&rsquo;s floor, not its ceiling.
+        </p>
+        <div class="chapter-actions">
+          <a class="btn btn-ghost" href="gallery.html#regionals" data-media-count="regionals">View all photos &amp; videos <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+      <div class="chapter-media reveal" data-media-slot="regionals">
+        <div class="ph" data-ratio="16x9">
+          <span class="ph-tag">Photo 02 &middot; Regionals</span>
+          <div class="ph-body">
+            <div class="label">Kent Regionals</div>
+            <div class="desc">One sample shows here once the folder lands. The rest go to the gallery.</div>
+            <div class="filename">media/journey/01-regionals/</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Chapter 2 — UK Nationals -->
+    <article class="chapter">
+      <div class="chapter-text reveal">
+        <span class="eyebrow">02 &middot; UK Nationals &middot; Harrogate &middot; <mark class="fill" data-fill="nationals-month">month</mark> 2026</span>
+        <h3>Knockout Champions.<br/>Robot Performance silver.</h3>
+        <p class="body">
+          1st Place UK Knockout Challenge Champions. Then 500 out of 545 in Robot Performance.
+          Second place. Close enough to touch first. Far enough to hurt.
+        </p>
+        <div class="chapter-actions">
+          <a class="btn btn-ghost" href="gallery.html#nationals" data-media-count="nationals">View all photos &amp; videos <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+      <div class="chapter-media reveal" data-media-slot="nationals">
+        <div class="ph" data-ratio="16x9">
+          <span class="ph-tag">Photo 03 &middot; Harrogate</span>
+          <div class="ph-body">
+            <div class="label">UK Nationals, Harrogate</div>
+            <div class="desc">One sample shows here once the folder lands. The rest go to the gallery.</div>
+            <div class="filename">media/journey/02-nationals/</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Chapter 3 — The two months between -->
+    <article class="chapter">
+      <div class="chapter-text reveal">
+        <span class="eyebrow is-red">03 &middot; Between Harrogate and Jeonju</span>
+        <h3>The two months between.</h3>
+        <p class="body">
+          This is the chapter that matters. Nobody would have blamed eight kids for banking a
+          national silver and taking the summer off. They went back to the table instead. 200 more
+          hours. Runs rebuilt, code rewritten, tests repeated until the failures ran out. They
+          found 40 more points.
+        </p>
+        <div class="chapter-actions">
+          <a class="btn btn-ghost" href="gallery.html#practice" data-media-count="practice">View all photos &amp; videos <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+      <div class="chapter-media reveal" data-media-slot="practice">
+        <div class="ph" data-ratio="16x9">
+          <span class="ph-tag">Photo 04 &middot; The practice table</span>
+          <div class="ph-body">
+            <div class="label">The practice table</div>
+            <div class="desc">One sample shows here once the folder lands. The rest go to the gallery.</div>
+            <div class="filename">media/journey/03-practice/</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Chapter 4 — Korea Open -->
+    <article class="chapter">
+      <div class="chapter-text reveal">
+        <span class="eyebrow is-red">04 &middot; FIRST LEGO League Korea Open &middot; Jeonju &middot; July 2026</span>
+        <h3>Robot Performance silver,<br/>representing Great Britain.</h3>
+        <p class="body">
+          Against teams from dozens of countries: 540 out of 545. Second place, again.
+          Same colour medal. Not the same kids.
+        </p>
+        <div class="chapter-actions">
+          <a class="btn btn-ghost" href="gallery.html#jeonju" data-media-count="jeonju">View all photos &amp; videos <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+      <div class="chapter-media reveal" data-media-slot="jeonju">
+        <div class="ph" data-ratio="16x9">
+          <span class="ph-tag">Photo 05 &middot; Jeonju</span>
+          <div class="ph-body">
+            <div class="label">At the competition table, Jeonju</div>
+            <div class="desc">One sample shows here once the folder lands. The rest go to the gallery.</div>
+            <div class="filename">media/journey/04-jeonju/</div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- =========================================================
+     04 — THE TEAM
+     ========================================================= -->
+<section id="team" class="section-bone">
+  <span class="section-index">04 / The team</span>
+  <div class="shell">
+    <div class="split">
+      <div class="split-head reveal">
+        <span class="eyebrow">The team</span>
+        <h2 class="h-section">The robot is not<br/>their best build.<br/><span style="color:var(--red)">The team is.</span></h2>
+        <div class="rule-thick"></div>
+      </div>
+      <div class="split-body reveal">
+        <p class="body-lg">
+          Eight children from six schools, together every Sunday for a year.
+          As they tell every judging room: the robot is not their best build. The team is.
+        </p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: clamp(2.5rem, 5vw, 4rem);" data-media-slot="team">
+      <div class="ph" data-ratio="21x9">
+        <span class="ph-tag">Photo 06 &middot; The team</span>
+        <div class="ph-body">
+          <div class="label">Team group or individual grid</div>
+          <div class="desc">Wide group shot preferred; individual portraits go to the gallery.</div>
+          <div class="filename">media/journey/05-team/</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="roster reveal">
+      <div class="roster-item"><span class="name">Esha</span><span class="role">Captain</span></div>
+      <div class="roster-item"><span class="name">Sakthi</span><span class="role">Lead Programmer</span></div>
+      <div class="roster-item"><span class="name">Guhan</span><span class="role">Attachments</span></div>
+      <div class="roster-item"><span class="name">Arvin</span><span class="role">Research</span></div>
+      <div class="roster-item"><span class="name">Flossie</span><span class="role">Strategy</span></div>
+      <div class="roster-item"><span class="name">Elliot</span><span class="role"><mark class="fill" data-fill="role-elliot">role</mark></span></div>
+      <div class="roster-item"><span class="name">Anaisa</span><span class="role"><mark class="fill" data-fill="role-anaisa">role</mark></span></div>
+      <div class="roster-item"><span class="name">Aaliya</span><span class="role"><mark class="fill" data-fill="role-aaliya">role</mark></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     05 — THE COACHES
+     ========================================================= -->
+<section id="coaches">
+  <span class="section-index">05 / The coaches</span>
+  <div class="shell split">
+    <div class="split-head reveal">
+      <span class="eyebrow">The coaches</span>
+      <h2 class="h-section">On Sundays<br/>they are a <span style="color:var(--red)">pit crew</span>.</h2>
+      <div class="rule-thick is-red"></div>
+    </div>
+    <div class="split-body reveal">
+      <p class="body-lg">
+        Loge is a doctor. Karthicraja is an IT architect. On Sundays they are a pit crew.
+        Every hour volunteered, every session parent-run, four years and four generations of robot.
+      </p>
+      <div data-media-slot="coaches" style="margin-top: 1rem;">
+        <div class="ph" data-ratio="16x9">
+          <span class="ph-tag">Photo 07 &middot; The coaches</span>
+          <div class="ph-body">
+            <div class="label">Loge and Karthicraja at the table</div>
+            <div class="filename">media/journey/06-coaches/</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     06 — THE ROBOT
+     ========================================================= -->
+<section id="robot" class="section-bone">
+  <span class="section-index">06 / The robot</span>
+  <div class="shell split">
+    <div class="split-head reveal">
+      <span class="eyebrow">The robot</span>
+      <h2 class="h-section">World Dominator.<br/><span style="color:var(--red)">Fourth generation.</span></h2>
+      <div class="rule-thick"></div>
+    </div>
+    <div class="split-body reveal">
+      <p class="body-lg">
+        World Dominator. Fourth generation. Designed and built by the kids, coded by the kids
+        in Python. 27 tasks across 15 missions, compressed into 8 strategic runs of two and a
+        half minutes.
+      </p>
+      <div data-media-slot="robot" style="margin-top: 1rem;">
+        <div class="ph" data-ratio="16x9">
+          <span class="ph-tag">Photo 08 &middot; World Dominator</span>
+          <div class="ph-body">
+            <div class="label">World Dominator, close up</div>
+            <div class="filename">media/journey/07-robot/</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     07 — THE INNOVATION PROJECT
+     ========================================================= -->
+<section id="innovation">
+  <span class="section-index">07 / The Innovation Project</span>
+  <div class="shell split">
+    <div class="split-head reveal">
+      <span class="eyebrow is-accent">The Innovation Project</span>
+      <h2 class="h-section">While the robot trained,<br/>they built <span style="color:var(--accent)">an AI</span>.</h2>
+      <div class="rule-thick is-accent"></div>
+    </div>
+    <div class="split-body reveal">
+      <p class="body-lg">
+        While the robot trained for Korea, the same eight built something else: a live AI
+        assistant for the Kent Archaeological Society. 150 years of journals and excavation
+        records. 10,000 pages, searchable by almost no one. The assistant answers in three
+        voices: one for archaeologists, one for students, one for the public. Prompt-engineered
+        by the children, tested with the Society&rsquo;s own curators, and open-sourced so any
+        historical society can copy it.
+      </p>
+      <p class="body">
+        Try it here: <mark class="fill" data-fill="kas-link">link</mark>.
+        Built with thanks to Ken, Jacob Scott and Andy Ward.
+      </p>
+      <div data-media-slot="innovation" style="margin-top: 1rem;">
+        <div class="ph" data-ratio="16x9">
+          <span class="ph-tag">Photo 09 &middot; KAS</span>
+          <div class="ph-body">
+            <div class="label">The team with the Kent Archaeological Society</div>
+            <div class="desc">Or the assistant on screen.</div>
+            <div class="filename">media/journey/08-innovation/</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     08 — THE LESSON
+     ========================================================= -->
+<section id="lesson" class="section-bone">
+  <span class="section-index">08 / The lesson</span>
+  <div class="shell">
+    <div class="lesson-inner reveal">
+      <h2 class="sr-only">The lesson</h2>
+      <span class="eyebrow is-red" style="margin-bottom:1.6rem;" aria-hidden="true">The lesson</span>
+      <p class="lesson-body">
+        Two silvers. The gap between 500 and 540 was 200 hours of work. The gap between 540 and
+        545 is next season&rsquo;s fuel. Resilience never came from a poster or an assembly. It came
+        from a scoreboard, a long flight home, and a decision to
+        <span class="em-line">go back to the table</span>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     09 — WATCH
+     ========================================================= -->
+<section id="watch">
+  <span class="section-index">09 / Watch</span>
+  <div class="shell">
+    <div class="reveal" style="max-width: 60ch;">
+      <span class="eyebrow">Watch</span>
+      <h2 class="h-section" style="margin-top:1rem;">Straight<br/>from Jeonju.</h2>
+      <div class="rule-thick" style="margin-top:1.4rem;"></div>
+    </div>
+    <div class="reveal" style="margin-top: clamp(2rem, 4vw, 3rem);" data-media-slot="film">
+      <div class="ph" data-ratio="16x9">
+        <span class="ph-tag">Video &middot; 90-second film</span>
+        <div class="ph-body">
+          <div class="label">90-second film from Jeonju</div>
+          <div class="desc">MP4, H.264, with a poster frame.</div>
+          <div class="filename">media/journey/09-film/</div>
+        </div>
+      </div>
+    </div>
+    <div class="chapter-actions reveal" style="margin-top:1.6rem; display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap;">
+      <a class="btn btn-ghost" href="gallery.html#film" data-media-count="film">View all photos &amp; videos <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      <span class="note">Raw clips and broadcast-quality footage available on request.</span>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     10 — IN THEIR WORDS
+     ========================================================= -->
+<section id="words" class="section-bone">
+  <span class="section-index">10 / In their words</span>
+  <div class="shell">
+    <div class="reveal" style="max-width: 60ch;">
+      <span class="eyebrow">In their words</span>
+      <h2 class="h-section" style="margin-top:1rem;">In their words.</h2>
+      <div class="rule-thick" style="margin-top:1.4rem;"></div>
+    </div>
+
+    <div class="quote-list reveal">
+      <!-- data-fill (off-page): coach quote wording is adapted from Loge & Karthicraja's letter — get their nod before launch -->
+      <div class="quote">
+        <span class="qmark" aria-hidden="true">&ldquo;</span>
+        <div>
+          <blockquote>The 800+ hours we spent together were filled with researching, designing, debating, coding, testing, and pushing ourselves to the edge of perfection.</blockquote>
+          <cite>Loge and Karthicraja &middot; Coaches</cite>
+        </div>
+      </div>
+      <div class="quote">
+        <span class="qmark" aria-hidden="true">&ldquo;</span>
+        <div>
+          <blockquote><mark class="fill" data-fill="quote-team-member">one sentence from a team member about the moment the Korea score appeared</mark></blockquote>
+          <cite><mark class="fill" data-fill="quote-team-member-name">name</mark> &middot; Team member</cite>
+        </div>
+      </div>
+      <div class="quote">
+        <span class="qmark" aria-hidden="true">&ldquo;</span>
+        <div>
+          <blockquote><mark class="fill" data-fill="quote-parent">one sentence from a parent about the Sunday drives</mark></blockquote>
+          <cite><mark class="fill" data-fill="quote-parent-name">name</mark> &middot; Parent</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     11 — WHAT'S NEXT
+     ========================================================= -->
+<section id="next">
+  <span class="section-index">11 / What&rsquo;s next</span>
+  <div class="shell split">
+    <div class="split-head reveal">
+      <span class="eyebrow is-red">What&rsquo;s next</span>
+      <h2 class="h-section">The final chapter<br/>of <span style="color:var(--red)">FIRST LEGO League</span>.</h2>
+      <div class="rule-thick is-red"></div>
+    </div>
+    <div class="split-body reveal">
+      <p class="body-lg">
+        The 2026&ndash;27 season will be the last in FIRST LEGO League&rsquo;s near thirty-year
+        history. Lord of the Bricks will be there for the final chapter.
+      </p>
+      <p class="body">Organisations that want to back it:</p>
+      <div>
+        <a href="partners.html" class="btn btn-red">Back the final chapter <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     12 — MEDIA ENQUIRIES
+     ========================================================= -->
+<section id="media" class="section-bone">
+  <span class="section-index">12 / Media enquiries</span>
+  <div class="shell split">
+    <div class="split-head reveal">
+      <span class="eyebrow">Media enquiries</span>
+      <h2 class="h-section">Media enquiries</h2>
+      <div class="rule-thick"></div>
+    </div>
+    <div class="split-body reveal">
+      <p class="body-lg">
+        Interviews with the team, coaches and parents. Broadcast-quality video and hi-res
+        photography available.
+      </p>
+      <p class="body" style="font-family: var(--font-display); font-weight: 600; color: var(--ink);">
+        <mark class="fill" data-fill="media-contact-name">Name</mark> &middot;
+        <mark class="fill" data-fill="media-contact-email">email</mark> &middot;
+        <mark class="fill" data-fill="media-contact-phone">phone</mark>
+      </p>
+      <p class="note">All use of children&rsquo;s names and images has written parental consent on file.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+<footer class="site-footer">
+  <div class="shell footer-grid">
+    <div class="col-1">
+      <div class="brand" style="color:#fff;margin-bottom:1.25rem;">
+        <span class="mark" style="background:#fff;" aria-hidden="true"></span>
+        Lord of the Bricks
+        <span class="pip" aria-hidden="true"></span>
+      </div>
+      <p>
+        Eight kids from six schools, coached by two parents. Kent Regional Champions.
+        UK Knockout Challenge Champions. Robot Performance silver at the UK Nationals and
+        the FIRST LEGO League Korea Open 2026, representing Great Britain.
+      </p>
+    </div>
+    <div>
+      <h2>Quick links</h2>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">The Gallery</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="#media">Media enquiries</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Get in touch</h2>
+      <ul>
+        <li><a href="mailto:team@lordofthebricks.co.uk">team@lordofthebricks.co.uk</a></li>
+        <li><a href="https://lordofthebricks.co.uk">lordofthebricks.co.uk</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="shell base">
+    <span>&copy; 2026 Lord of the Bricks. Built with too much LEGO and not enough sleep.</span>
+    <span>Kent &middot; United Kingdom</span>
+  </div>
+</footer>
+
+<script src="media/journey/manifest.js"></script>
+<script>
+/* Sticky nav state */
+const nav = document.getElementById('nav');
+function onScroll() {
+  nav.classList.toggle('is-scrolled', window.scrollY > 8);
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+/* Reveal on scroll */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('is-in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* =========================================================
+   MEDIA HYDRATION — swap placeholder frames for real media
+   listed in media/journey/manifest.js. No items = frame stays.
+   ========================================================= */
+(function hydrateMedia() {
+  const events = window.JOURNEY_MEDIA || [];
+  const byId = {};
+  events.forEach(ev => { byId[ev.id] = ev; });
+
+  document.querySelectorAll('[data-media-slot]').forEach(slot => {
+    const ev = byId[slot.dataset.mediaSlot];
+    if (!ev || !Array.isArray(ev.items) || ev.items.length === 0) return;
+    const ph = slot.querySelector('.ph');
+    if (!ph) return;
+
+    const item = ev.items[0];
+    const fig = document.createElement('figure');
+    fig.className = 'media-figure';
+    if (ph.dataset.ratio) fig.dataset.ratio = ph.dataset.ratio;
+
+    if (item.type === 'video') {
+      const v = document.createElement('video');
+      v.src = item.src;
+      v.controls = true;
+      v.preload = 'metadata';
+      v.playsInline = true;
+      if (item.poster) v.poster = item.poster;
+      v.setAttribute('aria-label', item.alt || (ev.title + ' — video'));
+      fig.appendChild(v);
+    } else {
+      const img = document.createElement('img');
+      img.src = item.src;
+      img.alt = item.alt || ev.title;
+      img.loading = slot.dataset.mediaSlot === 'hero' ? 'eager' : 'lazy';
+      fig.appendChild(img);
+    }
+    ph.replaceWith(fig);
+  });
+
+  /* "View all" counts */
+  document.querySelectorAll('[data-media-count]').forEach(btn => {
+    const ev = byId[btn.dataset.mediaCount];
+    if (!ev || !Array.isArray(ev.items) || ev.items.length === 0) return;
+    const photos = ev.items.filter(i => i.type !== 'video').length;
+    const videos = ev.items.length - photos;
+    const parts = [];
+    if (photos) parts.push(photos + (photos === 1 ? ' photo' : ' photos'));
+    if (videos) parts.push(videos + (videos === 1 ? ' video' : ' videos'));
+    const arrow = btn.querySelector('.arrow');
+    btn.textContent = 'View all ' + parts.join(' & ') + ' ';
+    if (arrow) btn.appendChild(arrow);
+  });
+})();
+</script>
+
+</body>
+</html>
