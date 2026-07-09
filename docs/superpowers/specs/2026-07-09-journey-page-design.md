@@ -76,8 +76,9 @@ Section order is the user's copy, verbatim, top to bottom:
 Every bracketed item renders as a visible mark: JetBrains Mono, muted, red square brackets,
 dashed underline — `<mark class="fill" data-fill="<key>">…</mark>`. Pre-launch check:
 `grep -c data-fill journey.html` must be 0 (or each consciously resolved).
-Known fill-ins: 2 event dates, 3 roles (Elliot/Anaisa/Aaliya), KAS assistant link, 2 quotes,
+Known fill-ins: 2 event dates, KAS assistant link, 2 quotes,
 media contact (name/email/phone), coach-quote sign-off nod.
+(Update 2026-07-09: roles removed from the roster at Anis's request — names only.)
 
 ## gallery.html structure
 

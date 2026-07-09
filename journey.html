@@ -464,15 +464,11 @@ section { padding-block: var(--section-y); position: relative; }
 .roster {
   margin-top: clamp(2rem, 4vw, 3rem);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 clamp(2rem, 4vw, 4rem);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0 clamp(1.5rem, 3vw, 3rem);
 }
-@media (max-width: 640px) { .roster { grid-template-columns: 1fr; } }
+@media (max-width: 880px) { .roster { grid-template-columns: 1fr 1fr; } }
 .roster-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
   border-top: 1px solid var(--rule);
   padding-block: 0.85rem;
 }
@@ -481,14 +477,6 @@ section { padding-block: var(--section-y); position: relative; }
   font-weight: 700;
   font-size: 1.15rem;
   letter-spacing: -0.005em;
-}
-.roster-item .role {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-  text-align: right;
 }
 
 /* =========================================================
@@ -955,14 +943,14 @@ footer.site-footer .base {
     </div>
 
     <div class="roster reveal">
-      <div class="roster-item"><span class="name">Esha</span><span class="role">Captain</span></div>
-      <div class="roster-item"><span class="name">Sakthi</span><span class="role">Lead Programmer</span></div>
-      <div class="roster-item"><span class="name">Guhan</span><span class="role">Attachments</span></div>
-      <div class="roster-item"><span class="name">Arvin</span><span class="role">Research</span></div>
-      <div class="roster-item"><span class="name">Flossie</span><span class="role">Strategy</span></div>
-      <div class="roster-item"><span class="name">Elliot</span><span class="role"><mark class="fill" data-fill="role-elliot">role</mark></span></div>
-      <div class="roster-item"><span class="name">Anaisa</span><span class="role"><mark class="fill" data-fill="role-anaisa">role</mark></span></div>
-      <div class="roster-item"><span class="name">Aaliya</span><span class="role"><mark class="fill" data-fill="role-aaliya">role</mark></span></div>
+      <div class="roster-item"><span class="name">Esha</span></div>
+      <div class="roster-item"><span class="name">Sakthi</span></div>
+      <div class="roster-item"><span class="name">Guhan</span></div>
+      <div class="roster-item"><span class="name">Arvin</span></div>
+      <div class="roster-item"><span class="name">Flossie</span></div>
+      <div class="roster-item"><span class="name">Elliot</span></div>
+      <div class="roster-item"><span class="name">Anaisa</span></div>
+      <div class="roster-item"><span class="name">Aaliya</span></div>
     </div>
   </div>
 </section>
