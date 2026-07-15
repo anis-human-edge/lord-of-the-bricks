@@ -344,6 +344,10 @@ section { padding-block: var(--section-y); position: relative; }
   background: var(--navy-deep);
 }
 .media-figure video.is-ambient { object-fit: cover; }
+/* Hero crop: faces sit in the top quarter of the award footage, so
+   anchor the crop high — wide screens trim stage floor, not heads */
+.hero-frame .media-figure video.is-ambient,
+.hero-frame .media-figure img { object-position: 50% 12%; }
 .media-toggle {
   position: absolute;
   right: 18px; bottom: 18px;
