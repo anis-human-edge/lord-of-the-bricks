@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lordofthebricks.co.uk/sitemap.xml
