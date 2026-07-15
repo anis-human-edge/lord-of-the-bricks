@@ -13,25 +13,28 @@
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
 <link rel="mask-icon" href="favicon.svg" color="#C8102E" />
 
+<link rel="canonical" href="https://lordofthebricks.co.uk/journey" />
+
 <!-- Open Graph / Facebook / LinkedIn / Slack -->
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Lord of the Bricks" />
-<meta property="og:url" content="https://anis-human-edge.github.io/lord-of-the-bricks/journey.html" />
+<meta property="og:url" content="https://lordofthebricks.co.uk/journey" />
 <meta property="og:title" content="The Journey — 540 out of 545" />
 <meta property="og:description" content="Eight kids. Six schools. Coached by parents. Silver for Great Britain at the FIRST LEGO League Korea Open, Jeonju." />
-<meta property="og:image" content="https://anis-human-edge.github.io/lord-of-the-bricks/og-image.png" />
+<meta property="og:image" content="https://lordofthebricks.co.uk/media/journey/00-hero/og-journey.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Lord of the Bricks — silver for Great Britain, FIRST LEGO League Korea Open 2026" />
+<meta property="og:image:alt" content="The team on stage in Jeonju with medals and the Robot Performance Award 2nd Place certificate — silver for Great Britain" />
 <meta property="og:locale" content="en_GB" />
 
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="The Journey — 540 out of 545" />
 <meta name="twitter:description" content="Eight kids. Six schools. Coached by parents. Silver for Great Britain at the FIRST LEGO League Korea Open, Jeonju." />
-<meta name="twitter:image" content="https://anis-human-edge.github.io/lord-of-the-bricks/og-image.png" />
-<meta name="twitter:image:alt" content="Lord of the Bricks — silver for Great Britain, FIRST LEGO League Korea Open 2026" />
+<meta name="twitter:image" content="https://lordofthebricks.co.uk/media/journey/00-hero/og-journey.jpg" />
+<meta name="twitter:image:alt" content="The team on stage in Jeonju with medals and the Robot Performance Award 2nd Place certificate — silver for Great Britain" />
 
+<link rel="preconnect" href="https://jqpwucwzacqrpeazqbmd.supabase.co" crossorigin />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" />
@@ -323,8 +326,10 @@ section { padding-block: var(--section-y); position: relative; }
   background: var(--navy-deep);
   border: 1px solid var(--rule-strong);
 }
+.media-figure { aspect-ratio: 16/9; } /* default so a hydrated figure can never collapse */
 .media-figure[data-ratio="16x9"] { aspect-ratio: 16/9; }
 .media-figure[data-ratio="21x9"] { aspect-ratio: 21/9; }
+.media-figure[data-ratio="3x4"]  { aspect-ratio: 3/4; }
 .media-figure[data-ratio="4x5"]  { aspect-ratio: 4/5; }
 .media-figure[data-ratio="1x1"]  { aspect-ratio: 1/1; }
 .media-figure img {
@@ -337,6 +342,31 @@ section { padding-block: var(--section-y); position: relative; }
   width: 100%; height: 100%;
   object-fit: contain;
   background: var(--navy-deep);
+}
+.media-figure video.is-ambient { object-fit: cover; }
+.media-toggle {
+  position: absolute;
+  right: 18px; bottom: 18px;
+  z-index: 4;
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  background: rgba(10,31,68,0.78);
+  border: 1px solid rgba(255,255,255,0.25);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: background .2s var(--ease);
+}
+.media-toggle:hover { background: var(--red); }
+.media-toggle svg { display: block; }
+@media (max-width: 600px) {
+  .media-toggle { right: 12px; bottom: 12px; width: 40px; height: 40px; }
+}
+/* Hero: stamps own the bottom corners, so the pause control sits top-right */
+.hero-frame .media-toggle { top: 18px; right: 18px; bottom: auto; }
+@media (max-width: 600px) {
+  .hero-frame .media-toggle { top: 12px; right: 12px; }
 }
 
 /* =========================================================
@@ -692,6 +722,34 @@ footer.site-footer .base {
 }
 </style>
 <script>document.documentElement.classList.add('js');</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "The Journey — 540 out of 545",
+      "description": "Eight kids. Six schools. Coached by parents. Silver for Great Britain at the FIRST LEGO League Korea Open, Jeonju.",
+      "url": "https://lordofthebricks.co.uk/journey",
+      "image": "https://lordofthebricks.co.uk/media/journey/00-hero/og-journey.jpg",
+      "datePublished": "2026-07-15",
+      "inLanguage": "en-GB",
+      "author": { "@type": "Organization", "name": "Lord of the Bricks", "url": "https://lordofthebricks.co.uk" }
+    },
+    {
+      "@type": "VideoObject",
+      "name": "Robot Performance Award ceremony — silver for Great Britain, Jeonju 2026",
+      "description": "Lord of the Bricks receive the Robot Performance Award 2nd Place at the FIRST LEGO League Korea Open in Jeonju, South Korea, representing Great Britain.",
+      "contentUrl": "https://lordofthebricks.co.uk/media/journey/videos/jeonju-award-film.mp4",
+      "thumbnailUrl": "https://lordofthebricks.co.uk/media/journey/posters/jeonju-award-film.jpg",
+      "uploadDate": "2026-07-15",
+      "duration": "PT56S",
+      "inLanguage": "en-GB"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -730,10 +788,10 @@ footer.site-footer .base {
 <section id="top" class="journey-hero">
   <div class="hero-frame" data-media-slot="hero" data-fit="cover">
     <div class="ph" data-ratio="21x9">
-      <span class="ph-tag">Photo 01 &middot; Hero</span>
+      <span class="ph-tag">Hero &middot; The award moment</span>
       <div class="ph-body">
-        <div class="label">The eight in GB kit, medals on, Jeonju</div>
-        <div class="desc">Full-width hero. Landscape, the whole team in frame, medals visible.</div>
+        <div class="label">The team on stage in Jeonju, medals on</div>
+        <div class="desc">Ambient loop of the Robot Performance Award moment; still frame when motion is off.</div>
         <div class="filename">media/journey/00-hero/</div>
       </div>
     </div>
@@ -785,6 +843,7 @@ footer.site-footer .base {
     </div>
     <dl class="numbers reveal">
       <div class="num-row is-red"><dt>540/545</dt><dd>Five points off a perfect score, Jeonju</dd></div>
+      <div class="num-row"><dt>485 &rarr; 540</dt><dd>Harrogate to Jeonju in under two months &mdash; 55 points of rebuilding, retesting and refusing to settle</dd></div>
       <div class="num-row"><dt>800+</dt><dd>hours across the season</dd></div>
       <div class="num-row"><dt>50</dt><dd>Sundays together</dd></div>
       <div class="num-row"><dt>8</dt><dd>kids</dd></div>
@@ -838,7 +897,7 @@ footer.site-footer .base {
         <span class="eyebrow">02 &middot; UK Nationals &middot; Harrogate &middot; <mark class="fill" data-fill="nationals-month">month</mark> 2026</span>
         <h3>Knockout Champions.<br/>Robot Performance silver.</h3>
         <p class="body">
-          1st Place UK Knockout Challenge Champions. Then 500 out of 545 in Robot Performance.
+          1st Place UK Knockout Challenge Champions. Then 485 out of 545 in Robot Performance.
           Second place. Close enough to touch first. Far enough to hurt.
         </p>
         <div class="chapter-actions">
@@ -865,8 +924,8 @@ footer.site-footer .base {
         <p class="body">
           This is the chapter that matters. Nobody would have blamed eight kids for banking a
           national silver and taking the summer off. They went back to the table instead. 200 more
-          hours. Runs rebuilt, code rewritten, tests repeated until the failures ran out. They
-          found 40 more points.
+          hours. Runs rebuilt, code rewritten, tests repeated until the failures ran out. 485 in
+          Harrogate became 540 in Jeonju &mdash; 55 points found in under two months.
         </p>
         <div class="chapter-actions">
           <a class="btn btn-ghost" href="gallery.html#practice" data-media-count="practice">View all photos &amp; videos <span class="arrow" aria-hidden="true">&rarr;</span></a>
@@ -1035,7 +1094,8 @@ footer.site-footer .base {
         historical society can copy it.
       </p>
       <p class="body">
-        Try it here: <mark class="fill" data-fill="kas-link">link</mark>.
+        Try it here: <a href="https://www.kentarchaeology.org.uk/" target="_blank" rel="noopener"
+        style="color:var(--accent); font-weight:600; border-bottom:1px solid var(--accent);">kentarchaeology.org.uk</a>.
         Built with thanks to Ken, Jacob Scott and Andy Ward.
       </p>
       <div data-media-slot="innovation" style="margin-top: 1rem;">
@@ -1062,7 +1122,7 @@ footer.site-footer .base {
       <h2 class="sr-only">The lesson</h2>
       <span class="eyebrow is-red" style="margin-bottom:1.6rem;" aria-hidden="true">The lesson</span>
       <p class="lesson-body">
-        Two silvers. The gap between 500 and 540 was 200 hours of work. The gap between 540 and
+        Two silvers. The gap between 485 and 540 was 200 hours of work. The gap between 540 and
         545 is next season&rsquo;s fuel. Resilience never came from a poster or an assembly. It came
         from a scoreboard, a long flight home, and a decision to
         <span class="em-line">go back to the table</span>.
@@ -1082,19 +1142,23 @@ footer.site-footer .base {
       <h2 class="h-section" style="margin-top:1rem;">Straight<br/>from Jeonju.</h2>
       <div class="rule-thick" style="margin-top:1.4rem;"></div>
     </div>
+    <p class="body-lg reveal" style="margin-top:1.4rem;">
+      The award ceremony in full: the announcement, the walk up, the medals,
+      the Union Jack. Fifty-five seconds, sound on.
+    </p>
     <div class="reveal" style="margin-top: clamp(2rem, 4vw, 3rem);" data-media-slot="film">
       <div class="ph" data-ratio="16x9">
-        <span class="ph-tag">Video &middot; 90-second film</span>
+        <span class="ph-tag">Video &middot; The award ceremony</span>
         <div class="ph-body">
-          <div class="label">90-second film from Jeonju</div>
+          <div class="label">The Robot Performance Award ceremony, Jeonju</div>
           <div class="desc">MP4, H.264, with a poster frame.</div>
-          <div class="filename">media/journey/09-film/</div>
+          <div class="filename">media/journey/videos/</div>
         </div>
       </div>
     </div>
     <div class="chapter-actions reveal" style="margin-top:1.6rem; display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap;">
       <a class="btn btn-ghost" href="gallery.html#film" data-media-count="film">View all photos &amp; videos <span class="arrow" aria-hidden="true">&rarr;</span></a>
-      <span class="note">Raw clips and broadcast-quality footage available on request.</span>
+      <span class="note">Raw 4K footage and broadcast-quality clips available on request.</span>
     </div>
   </div>
 </section>
@@ -1112,7 +1176,9 @@ footer.site-footer .base {
     </div>
 
     <div class="quote-list reveal">
-      <!-- data-fill (off-page): coach quote wording is adapted from Loge & Karthicraja's letter — get their nod before launch -->
+      <!-- data-fill (off-page): quote 1 is adapted from Loge & Karthicraja's letter; quotes 2-5 are
+           DRAFTS written for each speaker — get each person's sign-off (or their own words) before launch.
+           A team-member quote about the moment the 540 appeared would complete the set. -->
       <div class="quote">
         <span class="qmark" aria-hidden="true">&ldquo;</span>
         <div>
@@ -1123,15 +1189,29 @@ footer.site-footer .base {
       <div class="quote">
         <span class="qmark" aria-hidden="true">&ldquo;</span>
         <div>
-          <blockquote><mark class="fill" data-fill="quote-team-member">one sentence from a team member about the moment the Korea score appeared</mark></blockquote>
-          <cite><mark class="fill" data-fill="quote-team-member-name">name</mark> &middot; Team member</cite>
+          <blockquote>Eight children watched 485 go up on the scoreboard, flew eleven hours home, and asked one question: when is the next practice? You cannot teach that in an assembly. You build it, Sunday by Sunday.</blockquote>
+          <cite>Loge &middot; Coach</cite>
         </div>
       </div>
       <div class="quote">
         <span class="qmark" aria-hidden="true">&ldquo;</span>
         <div>
-          <blockquote><mark class="fill" data-fill="quote-parent">one sentence from a parent about the Sunday drives</mark></blockquote>
-          <cite><mark class="fill" data-fill="quote-parent-name">name</mark> &middot; Parent</cite>
+          <blockquote>We treated 485 like an engineering problem, not a disappointment. Every mission root-caused, every run rebuilt, every fix tested until the failures ran out. Fifty-five points in eight weeks &mdash; and the children did the engineering.</blockquote>
+          <cite>Karthicraja &middot; Coach</cite>
+        </div>
+      </div>
+      <div class="quote">
+        <span class="qmark" aria-hidden="true">&ldquo;</span>
+        <div>
+          <blockquote>Fifty Sundays, six schools, one table. Long before the medal in Jeonju, the win was already in the room.</blockquote>
+          <cite>Anis &middot; Parent mentor</cite>
+        </div>
+      </div>
+      <div class="quote">
+        <span class="qmark" aria-hidden="true">&ldquo;</span>
+        <div>
+          <blockquote>Every Sunday drive, every late night, every rebuilt run &mdash; they never once asked whether it was worth it. The silver answered a question the children had stopped asking.</blockquote>
+          <cite>Ashma &middot; Parent mentor</cite>
         </div>
       </div>
     </div>
@@ -1179,9 +1259,9 @@ footer.site-footer .base {
         photography available.
       </p>
       <p class="body" style="font-family: var(--font-display); font-weight: 600; color: var(--ink);">
-        <mark class="fill" data-fill="media-contact-name">Name</mark> &middot;
-        <mark class="fill" data-fill="media-contact-email">email</mark> &middot;
-        <mark class="fill" data-fill="media-contact-phone">phone</mark>
+        Mohamed Anis &middot;
+        <a href="mailto:anis@stepup.one" style="color:var(--accent);">anis@stepup.one</a> &middot;
+        <a href="tel:+447795642256" style="color:var(--accent);">+44 7795 642256</a>
       </p>
       <p class="note">All use of children&rsquo;s names and images has written parental consent on file.</p>
     </div>
@@ -1257,9 +1337,71 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
    ========================================================= */
 (function hydrateMedia() {
   const events = window.JOURNEY_MEDIA || [];
+  const mediaURL = window.JOURNEY_MEDIA_URL || function (ev, item) { return item.src; };
   const byId = {};
   events.forEach(ev => { byId[ev.id] = ev; });
 
+  const prefersStill =
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+    (navigator.connection && navigator.connection.saveData);
+
+  /* Sized rendition failed → retry once with the original object URL */
+  function attachFallback(img, ev, item) {
+    img.addEventListener('error', function onErr() {
+      img.removeEventListener('error', onErr);
+      const full = mediaURL(ev, item, 'full');
+      if (img.src !== full) img.src = full;
+    });
+  }
+
+  const PAUSE_ICON = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>';
+  const PLAY_ICON  = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg>';
+
+  /* Ambient hero — muted loop of the award moment, still frame when
+     the visitor prefers reduced motion or has Save-Data on */
+  function buildAmbient(fig, ev, item) {
+    if (prefersStill) {
+      const img = document.createElement('img');
+      img.src = item.poster;
+      img.alt = item.alt || ev.title;
+      img.setAttribute('fetchpriority', 'high');
+      fig.appendChild(img);
+      return;
+    }
+    const v = document.createElement('video');
+    v.className = 'is-ambient';
+    v.muted = true;
+    v.setAttribute('muted', '');
+    v.loop = true;
+    v.playsInline = true;
+    v.setAttribute('playsinline', '');
+    v.autoplay = true;
+    v.preload = 'auto';
+    if (item.poster) v.poster = item.poster;
+    const small = window.matchMedia('(max-width: 720px)').matches;
+    v.src = (small && item.srcSmall) ? item.srcSmall : item.src;
+    v.setAttribute('aria-label', item.alt || (ev.title + ' — background video'));
+    fig.appendChild(v);
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'media-toggle';
+    function setState(playing) {
+      btn.innerHTML = playing ? PAUSE_ICON : PLAY_ICON;
+      btn.setAttribute('aria-label', playing ? 'Pause background video' : 'Play background video');
+    }
+    setState(true);
+    btn.addEventListener('click', () => {
+      if (v.paused) { v.play(); setState(true); }
+      else { v.pause(); setState(false); }
+    });
+    fig.appendChild(btn);
+
+    const p = v.play();
+    if (p && p.catch) p.catch(() => setState(false)); // autoplay blocked → offer play
+  }
+
+  function hydrateSlots() {
   document.querySelectorAll('[data-media-slot]').forEach(slot => {
     const ev = byId[slot.dataset.mediaSlot];
     if (!ev || !Array.isArray(ev.items) || ev.items.length === 0) return;
@@ -1271,26 +1413,31 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     fig.className = 'media-figure';
     if (ph.dataset.ratio) fig.dataset.ratio = ph.dataset.ratio;
 
-    if (item.type === 'video') {
+    if (item.type === 'video' && item.ambient) {
+      buildAmbient(fig, ev, item);
+    } else if (item.type === 'video') {
       const v = document.createElement('video');
-      v.src = item.src;
+      v.src = mediaURL(ev, item, 'full');
       v.controls = true;
-      v.preload = 'metadata';
+      v.preload = item.poster ? 'none' : 'metadata';
       v.playsInline = true;
       if (item.poster) v.poster = item.poster;
       v.setAttribute('aria-label', item.alt || (ev.title + ' — video'));
       fig.appendChild(v);
     } else {
       const img = document.createElement('img');
-      img.src = item.src;
+      img.src = mediaURL(ev, item, 'large');
       img.alt = item.alt || ev.title;
       img.loading = slot.dataset.mediaSlot === 'hero' ? 'eager' : 'lazy';
+      attachFallback(img, ev, item);
       fig.appendChild(img);
     }
     ph.replaceWith(fig);
   });
+  }
 
   /* "View all" counts */
+  function updateCounts() {
   document.querySelectorAll('[data-media-count]').forEach(btn => {
     const ev = byId[btn.dataset.mediaCount];
     if (!ev || !Array.isArray(ev.items) || ev.items.length === 0) return;
@@ -1302,6 +1449,16 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     const arrow = btn.querySelector('.arrow');
     btn.textContent = 'View all ' + parts.join(' & ') + ' ';
     if (arrow) btn.appendChild(arrow);
+  });
+  }
+
+  /* Curated media paints immediately; once storage auto-discovery
+     answers, refresh the counts (and any slot that was empty). */
+  hydrateSlots();
+  updateCounts();
+  (window.JOURNEY_MEDIA_READY || Promise.resolve()).then(() => {
+    hydrateSlots();
+    updateCounts();
   });
 })();
 </script>

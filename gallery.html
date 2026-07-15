@@ -13,22 +13,27 @@
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
 <link rel="mask-icon" href="favicon.svg" color="#C8102E" />
 
+<link rel="canonical" href="https://lordofthebricks.co.uk/gallery" />
+
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Lord of the Bricks" />
-<meta property="og:url" content="https://anis-human-edge.github.io/lord-of-the-bricks/gallery.html" />
+<meta property="og:url" content="https://lordofthebricks.co.uk/gallery" />
 <meta property="og:title" content="The Gallery — Lord of the Bricks" />
 <meta property="og:description" content="Every photo and video from the 2025-26 season, event by event." />
-<meta property="og:image" content="https://anis-human-edge.github.io/lord-of-the-bricks/og-image.png" />
+<meta property="og:image" content="https://lordofthebricks.co.uk/media/journey/00-hero/og-journey.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="The team on stage in Jeonju with medals and the Robot Performance Award 2nd Place certificate — silver for Great Britain" />
 <meta property="og:locale" content="en_GB" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="The Gallery — Lord of the Bricks" />
 <meta name="twitter:description" content="Every photo and video from the 2025-26 season, event by event." />
-<meta name="twitter:image" content="https://anis-human-edge.github.io/lord-of-the-bricks/og-image.png" />
+<meta name="twitter:image" content="https://lordofthebricks.co.uk/media/journey/00-hero/og-journey.jpg" />
+<meta name="twitter:image:alt" content="The team on stage in Jeonju with medals and the Robot Performance Award 2nd Place certificate — silver for Great Britain" />
 
+<link rel="preconnect" href="https://jqpwucwzacqrpeazqbmd.supabase.co" crossorigin />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" />
@@ -453,6 +458,21 @@ footer.site-footer .base {
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
 .reveal.is-in { opacity: 1; transform: none; }
 
+/* Skip link — visible on focus only */
+.skip-link {
+  position: fixed;
+  top: 0.6rem; left: 0.6rem;
+  z-index: 90;
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  padding: 0.7rem 1rem;
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible { transform: none; }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   html { scroll-behavior: auto; }
@@ -460,6 +480,8 @@ footer.site-footer .base {
 </style>
 </head>
 <body>
+
+<a class="skip-link" href="#gallery">Skip to content</a>
 
 <!-- =========================================================
      NAV
@@ -576,11 +598,44 @@ window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
 /* =========================================================
-   RENDER — sections + chips from the manifest
+   RENDER — sections + chips from the manifest. Waits for
+   storage auto-discovery (JOURNEY_MEDIA_READY) so freshly
+   uploaded photos are included; renders curated items alone
+   if discovery hasn't answered within 4s.
    ========================================================= */
-const EVENTS = (window.JOURNEY_MEDIA || []).filter(ev => ev.onGalleryPage !== false);
+const mediaURL = window.JOURNEY_MEDIA_URL || function (ev, item) { return item.src; };
 const galleryEl = document.getElementById('gallery');
 const chipsEl = document.getElementById('chips');
+
+/* Sized rendition failed → retry once with the original object URL */
+function attachFallback(img, ev, item) {
+  img.addEventListener('error', function onErr() {
+    img.removeEventListener('error', onErr);
+    const full = mediaURL(ev, item, 'full');
+    if (img.src !== full) img.src = full;
+  });
+}
+
+/* Only one video plays at a time */
+document.addEventListener('play', (e) => {
+  if (e.target.tagName !== 'VIDEO') return;
+  document.querySelectorAll('video').forEach(v => { if (v !== e.target) v.pause(); });
+}, true);
+
+function pauseAllVideos() {
+  document.querySelectorAll('video').forEach(v => v.pause());
+}
+
+function renderGallery() {
+const EVENTS = (window.JOURNEY_MEDIA || []).filter(ev => ev.onGalleryPage !== false);
+
+if (!EVENTS.length) {
+  const p = document.createElement('p');
+  p.className = 'note';
+  p.style.paddingBlock = '3rem';
+  p.textContent = 'The media list failed to load. Please refresh, or head back to the Journey page.';
+  galleryEl.appendChild(p);
+}
 
 function countLine(items) {
   const photos = items.filter(i => i.type !== 'video').length;
@@ -590,6 +645,8 @@ function countLine(items) {
   if (videos) parts.push(videos + (videos === 1 ? ' video' : ' videos'));
   return parts.join(' · ');
 }
+
+let eagerBudget = 4; /* first tiles paint immediately; the rest lazy-load */
 
 EVENTS.forEach(ev => {
   const items = Array.isArray(ev.items) ? ev.items : [];
@@ -632,49 +689,61 @@ EVENTS.forEach(ev => {
   if (!items.length) {
     const ph = document.createElement('div');
     ph.className = 'ph';
-    ph.innerHTML =
-      '<div class="ph-body">' +
-        '<div class="label">' + ev.title + '</div>' +
-        '<div class="desc">Photos and videos land here as soon as the folder does.</div>' +
-        '<div class="filename">' + ev.dir + '</div>' +
-      '</div>';
+    const body = document.createElement('div');
+    body.className = 'ph-body';
+    const label = document.createElement('div');
+    label.className = 'label';
+    label.textContent = ev.title;
+    const desc = document.createElement('div');
+    desc.className = 'desc';
+    desc.textContent = 'Photos and videos land here as soon as the folder does.';
+    const fname = document.createElement('div');
+    fname.className = 'filename';
+    fname.textContent = ev.dir || '';
+    body.appendChild(label); body.appendChild(desc); body.appendChild(fname);
+    ph.appendChild(body);
     section.appendChild(ph);
   } else {
     const grid = document.createElement('div');
     grid.className = 'media-grid';
     const imageItems = items.filter(i => i.type !== 'video');
-    const videoItems = items.filter(i => i.type === 'video');
+    let imgIdx = 0, vidIdx = 0;
 
     items.forEach(item => {
       if (item.type === 'video') {
+        vidIdx += 1;
         const tile = document.createElement('div');
         tile.className = 'tile is-video';
         const tag = document.createElement('span');
         tag.className = 'tile-tag';
         tag.textContent = 'Video';
         const v = document.createElement('video');
-        v.src = item.src;
+        v.src = mediaURL(ev, item, 'full');
         v.controls = true;
-        v.preload = 'metadata';
+        v.preload = item.poster ? 'none' : 'metadata';
         v.playsInline = true;
         if (item.poster) v.poster = item.poster;
-        v.setAttribute('aria-label', item.alt || (ev.title + ' — video ' + (videoItems.indexOf(item) + 1)));
+        v.setAttribute('aria-label', item.alt || (ev.title + ' — video ' + vidIdx));
         tile.appendChild(tag);
         tile.appendChild(v);
         grid.appendChild(tile);
       } else {
-        const idx = imageItems.indexOf(item);
+        const idx = imgIdx;
+        imgIdx += 1;
         const name = item.alt || (ev.title + ' — photo ' + (idx + 1));
         const tile = document.createElement('button');
         tile.className = 'tile';
         tile.type = 'button';
         tile.setAttribute('aria-label', 'View larger: ' + name);
         const img = document.createElement('img');
-        img.src = item.src;
+        img.src = mediaURL(ev, item, 'thumb');
         img.alt = name;
-        img.loading = 'lazy';
+        if (eagerBudget > 0) { eagerBudget -= 1; }
+        else { img.loading = 'lazy'; }
+        img.decoding = 'async';
+        attachFallback(img, ev, item);
         tile.appendChild(img);
-        tile.addEventListener('click', () => openLightbox(imageItems, idx, tile, ev.title));
+        tile.addEventListener('click', () => openLightbox(imageItems, idx, tile, ev));
         grid.appendChild(tile);
       }
     });
@@ -686,15 +755,29 @@ EVENTS.forEach(ev => {
 
 /* Honour a #deep-link after dynamic render. Instant jump (smooth
    scroll gets cancelled by late layout), re-fired once images/fonts
-   have finished sizing the page. */
+   have finished sizing the page — but only while the visitor hasn't
+   taken over scrolling themselves. */
 if (location.hash) {
   const target = document.getElementById(location.hash.slice(1));
   if (target) {
-    const jump = () => target.scrollIntoView({ behavior: 'instant', block: 'start' });
+    let userScrolled = false;
+    ['wheel', 'touchstart', 'keydown'].forEach(evName =>
+      window.addEventListener(evName, () => { userScrolled = true; }, { passive: true, once: true }));
+    const jump = () => {
+      if (userScrolled) return;
+      try { target.scrollIntoView({ behavior: 'instant', block: 'start' }); }
+      catch (_) { target.scrollIntoView(true); }
+    };
     requestAnimationFrame(jump);
     window.addEventListener('load', () => requestAnimationFrame(jump));
   }
 }
+} /* end renderGallery */
+
+Promise.race([
+  window.JOURNEY_MEDIA_READY || Promise.resolve(),
+  new Promise(resolve => setTimeout(resolve, 4000)),
+]).then(renderGallery);
 
 /* =========================================================
    LIGHTBOX — images only; videos play in place
@@ -709,20 +792,23 @@ const lbNext = document.getElementById('lb-next');
 let lbList = [];
 let lbIndex = 0;
 let lbTrigger = null;
-let lbEventTitle = '';
+let lbEvent = null;
 
 function renderLightbox() {
   const item = lbList[lbIndex];
-  lbImg.src = item.src;
-  lbImg.alt = item.alt || lbEventTitle;
+  const title = lbEvent ? lbEvent.title : '';
+  lbImg.src = mediaURL(lbEvent, item, 'large');
+  attachFallback(lbImg, lbEvent, item);
+  lbImg.alt = item.alt || title;
   lbCaption.textContent = (item.alt ? item.alt + ' · ' : '') +
-    lbEventTitle + ' · ' + (lbIndex + 1) + ' / ' + lbList.length;
+    title + ' · ' + (lbIndex + 1) + ' / ' + lbList.length;
   const single = lbList.length < 2;
   lbPrev.style.display = single ? 'none' : '';
   lbNext.style.display = single ? 'none' : '';
-  /* Preload neighbours */
-  [lbIndex - 1, lbIndex + 1].forEach(i => {
-    if (i >= 0 && i < lbList.length) { new Image().src = lbList[i].src; }
+  /* Preload neighbours — with the same wrap-around step() uses */
+  const n = lbList.length;
+  [(lbIndex - 1 + n) % n, (lbIndex + 1) % n].forEach(i => {
+    if (i !== lbIndex) { new Image().src = mediaURL(lbEvent, lbList[i], 'large'); }
   });
 }
 
@@ -732,11 +818,12 @@ function setBackgroundInert(on) {
   });
 }
 
-function openLightbox(list, index, trigger, eventTitle) {
+function openLightbox(list, index, trigger, ev) {
   lbList = list;
   lbIndex = index;
   lbTrigger = trigger;
-  lbEventTitle = eventTitle;
+  lbEvent = ev;
+  pauseAllVideos();
   renderLightbox();
   lightbox.classList.add('is-open');
   document.documentElement.style.overflow = 'hidden';
@@ -748,7 +835,7 @@ function closeLightbox() {
   lightbox.classList.remove('is-open');
   document.documentElement.style.overflow = '';
   setBackgroundInert(false);
-  lbImg.src = '';
+  lbImg.removeAttribute('src');
   if (lbTrigger) { lbTrigger.focus(); lbTrigger = null; }
 }
 
